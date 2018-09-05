@@ -20,6 +20,12 @@
 		010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC282213D92C600530B2D /* HELG+UIColor.swift */; };
 		010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC284213D92F100530B2D /* LebensfitNavigation.swift */; };
 		0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0120D635213D982300B007E7 /* CustomAnchor.swift */; };
+		01462E45213FDA9600D4144B /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E44213FDA9600D4144B /* CalendarSettings.swift */; };
+		01462E49213FDE2E00D4144B /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E48213FDE2E00D4144B /* MonthView.swift */; };
+		01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4A213FF03000D4144B /* WeekdayView.swift */; };
+		01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4E213FF1E100D4144B /* CalendarView.swift */; };
+		01462E51213FF50300D4144B /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E50213FF50300D4144B /* DateCell.swift */; };
+		01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E52213FF5A000D4144B /* CalendarExtensions.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
 		016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* SignUpController.swift */; };
 		016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA89F213D777500ADAA65 /* Main.storyboard */; };
@@ -49,6 +55,12 @@
 		010BC282213D92C600530B2D /* HELG+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HELG+UIColor.swift"; sourceTree = "<group>"; };
 		010BC284213D92F100530B2D /* LebensfitNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitNavigation.swift; sourceTree = "<group>"; };
 		0120D635213D982300B007E7 /* CustomAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnchor.swift; sourceTree = "<group>"; };
+		01462E44213FDA9600D4144B /* CalendarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettings.swift; sourceTree = "<group>"; };
+		01462E48213FDE2E00D4144B /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		01462E4A213FF03000D4144B /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
+		01462E4E213FF1E100D4144B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		01462E50213FF50300D4144B /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		01462E52213FF5A000D4144B /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016BA89B213D777500ADAA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016BA89D213D777500ADAA65 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -150,7 +162,13 @@
 		0186103B213E6A1E0037DADB /* Kalender */ = {
 			isa = PBXGroup;
 			children = (
+				01462E48213FDE2E00D4144B /* MonthView.swift */,
+				01462E4E213FF1E100D4144B /* CalendarView.swift */,
+				01462E50213FF50300D4144B /* DateCell.swift */,
+				01462E52213FF5A000D4144B /* CalendarExtensions.swift */,
+				01462E4A213FF03000D4144B /* WeekdayView.swift */,
 				010BC273213D920800530B2D /* CalendarController.swift */,
+				01462E44213FDA9600D4144B /* CalendarSettings.swift */,
 			);
 			path = Kalender;
 			sourceTree = "<group>";
@@ -342,18 +360,24 @@
 				016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */,
 				010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */,
 				0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */,
+				01462E51213FF50300D4144B /* DateCell.swift in Sources */,
+				01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */,
 				01861043213E6E170037DADB /* UserStruct.swift in Sources */,
 				0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */,
 				010BC275213D920900530B2D /* MapController.swift in Sources */,
 				010BC27D213D926800530B2D /* BaseCell.swift in Sources */,
 				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
+				01462E45213FDA9600D4144B /* CalendarSettings.swift in Sources */,
+				01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
 				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
+				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* HomeController.swift in Sources */,
 				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
+				01462E49213FDE2E00D4144B /* MonthView.swift in Sources */,
 				0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */,
 				010BC277213D920900530B2D /* CalendarController.swift in Sources */,
 				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,

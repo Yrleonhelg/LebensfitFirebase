@@ -71,7 +71,11 @@ class ProfileController: UICollectionViewController, UICollectionViewDelegateFlo
     //MARK: - Collection View
     //MARK: Header
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -94,10 +98,4 @@ class ProfileController: UICollectionViewController, UICollectionViewDelegateFlo
             assert(false, "Unexpected element kind")
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
-    }
-    
-    //MARK: Bottom
 }

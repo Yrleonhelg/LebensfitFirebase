@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CustomAnchor {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: - View Loading
     override func viewDidLoad() {

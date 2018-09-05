@@ -54,7 +54,6 @@ class ProfileFooter: UICollectionViewCell, ReusableView, UICollectionViewDataSou
         return cell
     }
     
-    //Methods w
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }

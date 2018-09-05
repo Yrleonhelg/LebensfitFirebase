@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
+class ProfileHeader: BaseCell, ReusableView{
     
     //MARK: - Properties
     var user: User? {
@@ -50,11 +50,11 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
         return label
     }()
     
-    let postsLabel: UILabel = {
+    let ownedVideosLabel: UILabel = {
         let label = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Videos", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText = attributedText
         
         label.textAlignment = .center
@@ -62,11 +62,11 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
         return label
     }()
     
-    let followersLabel: UILabel = {
+    let tokensLabel: UILabel = {
         let label = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Token", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText = attributedText
         
         label.textAlignment = .center
@@ -74,17 +74,17 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
         return label
     }()
     
-    let followingLabel: UILabel = {
-        let label = UILabel()
-        
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]))
-        label.attributedText = attributedText
-        
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
-    }()
+    //    let followingLabel: UILabel = {
+    //        let label = UILabel()
+    //
+    //        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
+    //        attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]))
+    //        label.attributedText = attributedText
+    //
+    //        label.numberOfLines = 0
+    //        label.textAlignment = .center
+    //        return label
+    //    }()
     
     let editProfileButton: UIButton = {
         let button = UIButton(type: .system)
@@ -117,7 +117,7 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
     }()
     
     lazy var aboutStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
+        let sv = UIStackView(arrangedSubviews: [ownedVideosLabel, tokensLabel])
         sv.distribution = .fillEqually
         return sv
     }()
@@ -141,9 +141,11 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
     }
     
     override func confBounds() {
+        let paddingFromBorder: CGFloat = 15
+        
         //Profile Image
-        profileImageView.anchor(top: topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 80, height: 80)
-        profileImageView.layer.cornerRadius = 40
+        profileImageView.anchor(top: topAnchor, left: self.leftAnchor, bottom: nil, right: nil, paddingTop: paddingFromBorder, paddingLeft: paddingFromBorder, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        profileImageView.layer.cornerRadius = 50
         profileImageView.clipsToBounds = true
         
         //Control Stackview
@@ -152,13 +154,13 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
         bottomDividerView.anchor(top: controlStackView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
         //About Stackview
-        aboutStackView.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)
+        aboutStackView.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 6, paddingRight: paddingFromBorder, width: 0, height: 50)
         
         //Username
-        usernameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: controlStackView.topAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
+        usernameLabel.anchor(top: profileImageView.bottomAnchor, left: leftAnchor, bottom: controlStackView.topAnchor, right: rightAnchor, paddingTop: 4, paddingLeft: paddingFromBorder, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
         
         //Edit button
-        editProfileButton.anchor(top: aboutStackView.bottomAnchor, left: aboutStackView.leftAnchor, bottom: nil, right: aboutStackView.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
+        editProfileButton.anchor(top: aboutStackView.bottomAnchor, left: aboutStackView.leftAnchor, bottom: profileImageView.bottomAnchor, right: aboutStackView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 34)
         
     }
     
@@ -172,7 +174,7 @@ class ProfileHeader: BaseCell, ReusableView, CustomAnchor{
             //perhaps check for response status of 200 (HTTP OK)
             guard let data = data else { return }
             let image = UIImage(data: data)
-
+            
             DispatchQueue.main.async {
                 self.profileImageView.image = image
             }}.resume()

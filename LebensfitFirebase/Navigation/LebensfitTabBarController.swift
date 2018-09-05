@@ -1,0 +1,80 @@
+//
+//  PILATESTabBarController.swift
+//  PilatesTest
+//
+//  Created by Leon Helg on 29.08.18.
+//  Copyright © 2018 helgcreating. All rights reserved.
+//
+
+import UIKit
+import Firebase
+
+class LebensfitTabBarController: UITabBarController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Only let the user pass when they're logged in.
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                self.present(navController, animated: true, completion: nil)
+            }
+            return
+        }
+        
+        setupTabBar()
+        setupViewControllers()
+    }
+    
+    func setupTabBar() {
+        view.backgroundColor = .white
+        tabBar.autoresizesSubviews = true
+        tabBar.isTranslucent = true
+        self.tabBar.tintColor = UIColor.red
+        self.tabBar.unselectedItemTintColor = UIColor.gray
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
+        topBorder.backgroundColor = UIColor.rgb(229, 231, 235, 1).cgColor
+        
+        tabBar.layer.addSublayer(topBorder)
+        tabBar.clipsToBounds = true
+    }
+    
+    func setupViewControllers() {
+        //Images:
+        let calendarImage = UIImage(named: LebensfitSettings.UI.iconNames.calendar)
+        let homeImage = UIImage(named: LebensfitSettings.UI.iconNames.home)
+        let mapImage = UIImage(named: LebensfitSettings.UI.iconNames.map)
+        let aboutImage = UIImage(named: LebensfitSettings.UI.iconNames.menu)
+        
+        //Calendar
+        let calendarVC = CalendarController()
+        let calendarNavigationController = LebensfitNavigation(rootViewController: calendarVC)
+        calendarNavigationController.tabBarItem = UITabBarItem(title: "Kalender", image: calendarImage, tag: 0)
+        calendarNavigationController.title = "Kalender"
+        
+        //Home / videos
+        let homeController = HomeController(collectionViewLayout: UICollectionViewFlowLayout())
+        let homeNavigationController = LebensfitNavigation(rootViewController: homeController)
+        homeNavigationController.title = "Home"
+        homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: homeImage, tag: 0)
+        
+        //map
+        let mapController = MapController()
+        let mapNavigationController = LebensfitNavigation(rootViewController: mapController)
+        mapNavigationController.title = "Karte"
+        mapNavigationController.tabBarItem = UITabBarItem(title: "Karte", image: mapImage, tag: 0)
+        
+        //profile
+        let profileController = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        let profileNavigationController = LebensfitNavigation(rootViewController: profileController)
+        profileNavigationController.title = "Profil"
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: aboutImage, tag: 0)
+        
+        viewControllers = [calendarNavigationController, homeNavigationController, mapNavigationController, profileNavigationController]
+    }
+}
+

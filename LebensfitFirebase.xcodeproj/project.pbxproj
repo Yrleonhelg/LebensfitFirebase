@@ -7,23 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC26D213D914900530B2D /* LebensfitTabBarController.swift */; };
+		010BC274213D920900530B2D /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC270213D920800530B2D /* ProfileController.swift */; };
+		010BC275213D920900530B2D /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC271213D920800530B2D /* MapController.swift */; };
+		010BC276213D920900530B2D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC272213D920800530B2D /* HomeController.swift */; };
+		010BC277213D920900530B2D /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC273213D920800530B2D /* CalendarController.swift */; };
+		010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC278213D924A00530B2D /* LebensfitSettings.swift */; };
+		010BC27C213D926800530B2D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27A213D926800530B2D /* ActivityCell.swift */; };
+		010BC27D213D926800530B2D /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27B213D926800530B2D /* BaseCell.swift */; };
+		010BC280213D928E00530B2D /* ReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27E213D928E00530B2D /* ReuseableView.swift */; };
+		010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */; };
+		010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC282213D92C600530B2D /* HELG+UIColor.swift */; };
+		010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC284213D92F100530B2D /* LebensfitNavigation.swift */; };
+		0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0120D635213D982300B007E7 /* CustomAnchor.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
-		016BA89E213D777500ADAA65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* ViewController.swift */; };
+		016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* SignUpController.swift */; };
 		016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA89F213D777500ADAA65 /* Main.storyboard */; };
 		016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 016BA8A2213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld */; };
 		016BA8A6213D777600ADAA65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016BA8A5213D777600ADAA65 /* Assets.xcassets */; };
 		016BA8A9213D777600ADAA65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA8A7213D777600ADAA65 /* LaunchScreen.storyboard */; };
+		016BA8B1213D784500ADAA65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 016BA8B0213D784500ADAA65 /* GoogleService-Info.plist */; };
+		01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861040213E6AFE0037DADB /* ProfileHeader.swift */; };
+		01861043213E6E170037DADB /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861042213E6E170037DADB /* UserStruct.swift */; };
+		01861047213E9EC90037DADB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861046213E9EC90037DADB /* LoginController.swift */; };
+		0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104B213EA6BE0037DADB /* HELG+UIView.swift */; };
+		0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104D213ECAEC0037DADB /* ProfileFooter.swift */; };
+		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		010BC26D213D914900530B2D /* LebensfitTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitTabBarController.swift; sourceTree = "<group>"; };
+		010BC270213D920800530B2D /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		010BC271213D920800530B2D /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		010BC272213D920800530B2D /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		010BC273213D920800530B2D /* CalendarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		010BC278213D924A00530B2D /* LebensfitSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitSettings.swift; sourceTree = "<group>"; };
+		010BC27A213D926800530B2D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		010BC27B213D926800530B2D /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		010BC27E213D928E00530B2D /* ReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseableView.swift; sourceTree = "<group>"; };
+		010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseableViewCtr.swift; sourceTree = "<group>"; };
+		010BC282213D92C600530B2D /* HELG+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HELG+UIColor.swift"; sourceTree = "<group>"; };
+		010BC284213D92F100530B2D /* LebensfitNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitNavigation.swift; sourceTree = "<group>"; };
+		0120D635213D982300B007E7 /* CustomAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnchor.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016BA89B213D777500ADAA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		016BA89D213D777500ADAA65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		016BA89D213D777500ADAA65 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		016BA8A0213D777500ADAA65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		016BA8A3213D777500ADAA65 /* LebensfitFirebase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LebensfitFirebase.xcdatamodel; sourceTree = "<group>"; };
 		016BA8A5213D777600ADAA65 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		016BA8A8213D777600ADAA65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		016BA8AA213D777600ADAA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		016BA8B0213D784500ADAA65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		01861040213E6AFE0037DADB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		01861042213E6E170037DADB /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
+		01861046213E9EC90037DADB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		0186104B213EA6BE0037DADB /* HELG+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIView.swift"; sourceTree = "<group>"; };
+		0186104D213ECAEC0037DADB /* ProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooter.swift; sourceTree = "<group>"; };
+		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
+		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
+		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +73,53 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010165E0213D7A290025BB3F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				010BC282213D92C600530B2D /* HELG+UIColor.swift */,
+				0186104B213EA6BE0037DADB /* HELG+UIView.swift */,
+				010BC27E213D928E00530B2D /* ReuseableView.swift */,
+				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
+				010BC278213D924A00530B2D /* LebensfitSettings.swift */,
+				0120D635213D982300B007E7 /* CustomAnchor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		010BC26F213D91D900530B2D /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				0186103B213E6A1E0037DADB /* Kalender */,
+				0186103C213E6A250037DADB /* Home */,
+				0186103D213E6A2D0037DADB /* Karte */,
+				0186103E213E6A340037DADB /* Profil */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		0120D634213D97A000B007E7 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				010BC26D213D914900530B2D /* LebensfitTabBarController.swift */,
+				010BC284213D92F100530B2D /* LebensfitNavigation.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		016BA88F213D777500ADAA65 = {
 			isa = PBXGroup;
 			children = (
 				016BA89A213D777500ADAA65 /* LebensfitFirebase */,
 				016BA899213D777500ADAA65 /* Products */,
+				DED9122C82B3D5CE2EB70D3A /* Pods */,
+				B35E74DF060C89DA6DCEF440 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +134,90 @@
 		016BA89A213D777500ADAA65 /* LebensfitFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				0186103F213E6A8D0037DADB /* SystemFiles */,
+				0186104A213EA5480037DADB /* Login */,
+				0120D634213D97A000B007E7 /* Navigation */,
+				010BC26F213D91D900530B2D /* Tabs */,
+				010165E0213D7A290025BB3F /* Extensions */,
+				010BC27B213D926800530B2D /* BaseCell.swift */,
+				016BA8AA213D777600ADAA65 /* Info.plist */,
+				016BA8A2213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld */,
+				016BA8B0213D784500ADAA65 /* GoogleService-Info.plist */,
+			);
+			path = LebensfitFirebase;
+			sourceTree = "<group>";
+		};
+		0186103B213E6A1E0037DADB /* Kalender */ = {
+			isa = PBXGroup;
+			children = (
+				010BC273213D920800530B2D /* CalendarController.swift */,
+			);
+			path = Kalender;
+			sourceTree = "<group>";
+		};
+		0186103C213E6A250037DADB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				010BC272213D920800530B2D /* HomeController.swift */,
+				010BC27A213D926800530B2D /* ActivityCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0186103D213E6A2D0037DADB /* Karte */ = {
+			isa = PBXGroup;
+			children = (
+				010BC271213D920800530B2D /* MapController.swift */,
+			);
+			path = Karte;
+			sourceTree = "<group>";
+		};
+		0186103E213E6A340037DADB /* Profil */ = {
+			isa = PBXGroup;
+			children = (
+				010BC270213D920800530B2D /* ProfileController.swift */,
+				01861040213E6AFE0037DADB /* ProfileHeader.swift */,
+				0186104D213ECAEC0037DADB /* ProfileFooter.swift */,
+				01861042213E6E170037DADB /* UserStruct.swift */,
+			);
+			path = Profil;
+			sourceTree = "<group>";
+		};
+		0186103F213E6A8D0037DADB /* SystemFiles */ = {
+			isa = PBXGroup;
+			children = (
 				016BA89B213D777500ADAA65 /* AppDelegate.swift */,
-				016BA89D213D777500ADAA65 /* ViewController.swift */,
 				016BA89F213D777500ADAA65 /* Main.storyboard */,
 				016BA8A5213D777600ADAA65 /* Assets.xcassets */,
 				016BA8A7213D777600ADAA65 /* LaunchScreen.storyboard */,
-				016BA8AA213D777600ADAA65 /* Info.plist */,
-				016BA8A2213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld */,
 			);
-			path = LebensfitFirebase;
+			path = SystemFiles;
+			sourceTree = "<group>";
+		};
+		0186104A213EA5480037DADB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				01861046213E9EC90037DADB /* LoginController.swift */,
+				016BA89D213D777500ADAA65 /* SignUpController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B35E74DF060C89DA6DCEF440 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DED9122C82B3D5CE2EB70D3A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */,
+				5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +227,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 016BA8AD213D777600ADAA65 /* Build configuration list for PBXNativeTarget "LebensfitFirebase" */;
 			buildPhases = (
+				68C9D6F20A696AB9A2E7B80E /* [CP] Check Pods Manifest.lock */,
 				016BA894213D777500ADAA65 /* Sources */,
 				016BA895213D777500ADAA65 /* Frameworks */,
 				016BA896213D777500ADAA65 /* Resources */,
+				27E2C86D229DC83A0E8AE836 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016BA8A9213D777600ADAA65 /* LaunchScreen.storyboard in Resources */,
+				016BA8B1213D784500ADAA65 /* GoogleService-Info.plist in Resources */,
 				016BA8A6213D777600ADAA65 /* Assets.xcassets in Resources */,
 				016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */,
 			);
@@ -133,14 +289,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		27E2C86D229DC83A0E8AE836 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68C9D6F20A696AB9A2E7B80E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LebensfitFirebase-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		016BA894213D777500ADAA65 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016BA89E213D777500ADAA65 /* ViewController.swift in Sources */,
+				01861047213E9EC90037DADB /* LoginController.swift in Sources */,
+				010BC27C213D926800530B2D /* ActivityCell.swift in Sources */,
+				016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */,
+				010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */,
+				0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */,
+				01861043213E6E170037DADB /* UserStruct.swift in Sources */,
+				0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */,
+				010BC275213D920900530B2D /* MapController.swift in Sources */,
+				010BC27D213D926800530B2D /* BaseCell.swift in Sources */,
+				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
+				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
+				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
+				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
+				010BC276213D920900530B2D /* HomeController.swift in Sources */,
+				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
+				0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */,
+				010BC277213D920900530B2D /* CalendarController.swift in Sources */,
+				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,
+				010BC274213D920900530B2D /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +499,7 @@
 		};
 		016BA8AE213D777600ADAA65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +518,7 @@
 		};
 		016BA8AF213D777600ADAA65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

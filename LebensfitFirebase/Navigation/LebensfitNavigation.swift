@@ -22,7 +22,7 @@ extension UINavigationController {
         self.navigationBar.isTranslucent = false
         self.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationBar.tintColor = UIColor.red
+        self.navigationBar.tintColor = LebensfitSettings.Colors.darkRed
 
         
         let paragraph = NSMutableParagraphStyle()

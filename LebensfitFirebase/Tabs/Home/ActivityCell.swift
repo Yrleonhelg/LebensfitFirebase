@@ -13,7 +13,7 @@ class ActivityCell: BaseCell, ReusableView {
     //MARK: - GUI Objects
     let colorView: UIImageView = {
         let colview = UIImageView()
-        colview.backgroundColor = .red
+        colview.backgroundColor = LebensfitSettings.Colors.darkRed
         colview.clipsToBounds = true
         return colview
     }()

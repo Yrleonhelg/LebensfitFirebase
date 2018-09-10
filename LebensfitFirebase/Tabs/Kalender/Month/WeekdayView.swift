@@ -11,7 +11,7 @@ import UIKit
 class WeekdayView: UIView {
     
     //MARK: - GUI Objects
-    let myStackView: UIStackView = {
+    let stackView: UIStackView = {
         let sv = UIStackView()
         sv.distribution = .fillEqually
         return sv
@@ -28,21 +28,21 @@ class WeekdayView: UIView {
     
     //MARK: - Setup
     func setupViews() {
-        addSubview(myStackView)
+        addSubview(stackView)
     }
     
     func confBounds(){
-        myStackView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        stackView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     func setupValues() {
-        var daysArr = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+        var daysArr = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
         for i in 0..<7 {
             let lbl=UILabel()
             lbl.text=daysArr[i]
             lbl.textAlignment = .center
             lbl.textColor = CalendarSettings.Style.weekdaysLblColor
-            myStackView.addArrangedSubview(lbl)
+            stackView.addArrangedSubview(lbl)
         }
     }
     

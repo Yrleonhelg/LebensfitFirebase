@@ -12,7 +12,7 @@ protocol MonthViewDelegate: class {
     func didChangeMonth(monthIndex: Int, year: Int)
 }
 
-class MonthView: UIView {
+class MonthOverView: UIView {
     //MARK: - Properties & Variables
     var monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var currentMonthIndex = 0
@@ -20,39 +20,36 @@ class MonthView: UIView {
     var delegate: MonthViewDelegate?
     
     //MARK: - GUI Objects
-    let lblName: UILabel = {
-        let lbl=UILabel()
-        lbl.text="Default Month / Year"
+    let currentMonthLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Default Month / Year"
         lbl.textColor = CalendarSettings.Style.monthViewLblColor
         lbl.textAlignment = .center
-        lbl.font=UIFont.boldSystemFont(ofSize: 16)
-        lbl.translatesAutoresizingMaskIntoConstraints=false
+        lbl.font = UIFont.boldSystemFont(ofSize: 16)
         return lbl
     }()
     
-    let btnRight: UIButton = {
+    let nextMonthButton: UIButton = {
         let btn=UIButton()
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(CalendarSettings.Style.monthViewBtnRightColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
     }()
     
-    let btnLeft: UIButton = {
+    let previousMonthButton: UIButton = {
         let btn=UIButton()
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(CalendarSettings.Style.monthViewBtnLeftColor, for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints=false
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
-        btn.setTitleColor(UIColor.lightGray, for: .disabled)
+        btn.setTitleColor(CalendarSettings.Colors.disabled, for: .disabled)
         return btn
     }()
     
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor=UIColor.clear
+        self.backgroundColor = UIColor.clear
         setupViews()
         confBounds()
         setDefaultValues()
@@ -60,30 +57,29 @@ class MonthView: UIView {
     
     //MARK: - Setup
     func setupViews() {
-        addSubview(lblName)
-        addSubview(btnLeft)
-        addSubview(btnRight)
+        addSubview(currentMonthLabel)
+        addSubview(previousMonthButton)
+        addSubview(nextMonthButton)
     }
     
     func confBounds(){
-        lblName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
-        lblName.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
+        currentMonthLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
+        currentMonthLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
         
-        btnLeft.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 35)
-        
-        btnRight.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 35)
+        previousMonthButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 35)
+        nextMonthButton.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 35)
     }
     
     func setDefaultValues() {
         currentMonthIndex = Calendar.current.component(.month, from: Date()) - 1
         currentYear = Calendar.current.component(.year, from: Date())
-        btnLeft.isEnabled=false
-        lblName.text="\(monthsArr[currentMonthIndex]) \(currentYear)"
+        previousMonthButton.isEnabled=false
+        currentMonthLabel.text="\(monthsArr[currentMonthIndex]) \(currentYear)"
     }
     
     //MARK: - Methods
     @objc func btnLeftRightAction(sender: UIButton) {
-        if sender == btnRight {
+        if sender == nextMonthButton {
             currentMonthIndex += 1
             if currentMonthIndex > 11 {
                 currentMonthIndex = 0
@@ -96,7 +92,7 @@ class MonthView: UIView {
                 currentYear -= 1
             }
         }
-        lblName.text="\(monthsArr[currentMonthIndex]) \(currentYear)"
+        currentMonthLabel.text="\(monthsArr[currentMonthIndex]) \(currentYear)"
         delegate?.didChangeMonth(monthIndex: currentMonthIndex, year: currentYear)
     }
     

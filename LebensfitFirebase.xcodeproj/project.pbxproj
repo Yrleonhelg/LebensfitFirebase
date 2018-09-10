@@ -11,7 +11,7 @@
 		010BC274213D920900530B2D /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC270213D920800530B2D /* ProfileController.swift */; };
 		010BC275213D920900530B2D /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC271213D920800530B2D /* MapController.swift */; };
 		010BC276213D920900530B2D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC272213D920800530B2D /* HomeController.swift */; };
-		010BC277213D920900530B2D /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC273213D920800530B2D /* CalendarController.swift */; };
+		010BC277213D920900530B2D /* TerminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC273213D920800530B2D /* TerminController.swift */; };
 		010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC278213D924A00530B2D /* LebensfitSettings.swift */; };
 		010BC27C213D926800530B2D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27A213D926800530B2D /* ActivityCell.swift */; };
 		010BC27D213D926800530B2D /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27B213D926800530B2D /* BaseCell.swift */; };
@@ -21,11 +21,16 @@
 		010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC284213D92F100530B2D /* LebensfitNavigation.swift */; };
 		0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0120D635213D982300B007E7 /* CustomAnchor.swift */; };
 		01462E45213FDA9600D4144B /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E44213FDA9600D4144B /* CalendarSettings.swift */; };
-		01462E49213FDE2E00D4144B /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E48213FDE2E00D4144B /* MonthView.swift */; };
+		01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E48213FDE2E00D4144B /* MonthOverView.swift */; };
 		01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4A213FF03000D4144B /* WeekdayView.swift */; };
 		01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4E213FF1E100D4144B /* CalendarView.swift */; };
 		01462E51213FF50300D4144B /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E50213FF50300D4144B /* DateCell.swift */; };
 		01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E52213FF5A000D4144B /* CalendarExtensions.swift */; };
+		01462E562140285B00D4144B /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E552140285B00D4144B /* EventController.swift */; };
+		0153FAAE2140FE8600D1B5BB /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAAD2140FE8600D1B5BB /* EventCell.swift */; };
+		0153FAB021410F3E00D1B5BB /* EventSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAAF21410F3E00D1B5BB /* EventSettings.swift */; };
+		0153FAB22141437E00D1B5BB /* EventTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAB12141437E00D1B5BB /* EventTableController.swift */; };
+		0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAD82141781A00D1B5BB /* WeekView.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
 		016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* SignUpController.swift */; };
 		016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA89F213D777500ADAA65 /* Main.storyboard */; };
@@ -33,12 +38,19 @@
 		016BA8A6213D777600ADAA65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016BA8A5213D777600ADAA65 /* Assets.xcassets */; };
 		016BA8A9213D777600ADAA65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA8A7213D777600ADAA65 /* LaunchScreen.storyboard */; };
 		016BA8B1213D784500ADAA65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 016BA8B0213D784500ADAA65 /* GoogleService-Info.plist */; };
+		016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */; };
+		016DA582214272B100B07F69 /* POPShakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA581214272B100B07F69 /* POPShakeable.swift */; };
+		016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA583214275B700B07F69 /* WeekOverVIew.swift */; };
 		01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861040213E6AFE0037DADB /* ProfileHeader.swift */; };
 		01861043213E6E170037DADB /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861042213E6E170037DADB /* UserStruct.swift */; };
 		01861047213E9EC90037DADB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861046213E9EC90037DADB /* LoginController.swift */; };
 		0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104B213EA6BE0037DADB /* HELG+UIView.swift */; };
 		0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104D213ECAEC0037DADB /* ProfileFooter.swift */; };
+		0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319B2146696900E5A9C2 /* HELG+Tableview.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
+		FECC8FB32143306A007F3F3F /* POPMorse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* POPMorse.swift */; };
+		FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB421455430007F3F3F /* HELG+Date.swift */; };
+		FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB621455C46007F3F3F /* EventTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +58,7 @@
 		010BC270213D920800530B2D /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		010BC271213D920800530B2D /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		010BC272213D920800530B2D /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
-		010BC273213D920800530B2D /* CalendarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		010BC273213D920800530B2D /* TerminController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminController.swift; sourceTree = "<group>"; };
 		010BC278213D924A00530B2D /* LebensfitSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitSettings.swift; sourceTree = "<group>"; };
 		010BC27A213D926800530B2D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		010BC27B213D926800530B2D /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
@@ -56,11 +68,16 @@
 		010BC284213D92F100530B2D /* LebensfitNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitNavigation.swift; sourceTree = "<group>"; };
 		0120D635213D982300B007E7 /* CustomAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnchor.swift; sourceTree = "<group>"; };
 		01462E44213FDA9600D4144B /* CalendarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSettings.swift; sourceTree = "<group>"; };
-		01462E48213FDE2E00D4144B /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		01462E48213FDE2E00D4144B /* MonthOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthOverView.swift; sourceTree = "<group>"; };
 		01462E4A213FF03000D4144B /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
 		01462E4E213FF1E100D4144B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		01462E50213FF50300D4144B /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		01462E52213FF5A000D4144B /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
+		01462E552140285B00D4144B /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
+		0153FAAD2140FE8600D1B5BB /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		0153FAAF21410F3E00D1B5BB /* EventSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSettings.swift; sourceTree = "<group>"; };
+		0153FAB12141437E00D1B5BB /* EventTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableController.swift; sourceTree = "<group>"; };
+		0153FAD82141781A00D1B5BB /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016BA89B213D777500ADAA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016BA89D213D777500ADAA65 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -70,14 +87,21 @@
 		016BA8A8213D777600ADAA65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		016BA8AA213D777600ADAA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016BA8B0213D784500ADAA65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayHeader.swift; sourceTree = "<group>"; };
+		016DA581214272B100B07F69 /* POPShakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPShakeable.swift; sourceTree = "<group>"; };
+		016DA583214275B700B07F69 /* WeekOverVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekOverVIew.swift; sourceTree = "<group>"; };
 		01861040213E6AFE0037DADB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		01861042213E6E170037DADB /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
 		01861046213E9EC90037DADB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0186104B213EA6BE0037DADB /* HELG+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIView.swift"; sourceTree = "<group>"; };
 		0186104D213ECAEC0037DADB /* ProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooter.swift; sourceTree = "<group>"; };
+		0186319B2146696900E5A9C2 /* HELG+Tableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Tableview.swift"; sourceTree = "<group>"; };
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FECC8FB22143306A007F3F3F /* POPMorse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPMorse.swift; sourceTree = "<group>"; };
+		FECC8FB421455430007F3F3F /* HELG+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Date.swift"; sourceTree = "<group>"; };
+		FECC8FB621455C46007F3F3F /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +120,11 @@
 			isa = PBXGroup;
 			children = (
 				010BC282213D92C600530B2D /* HELG+UIColor.swift */,
+				0186319B2146696900E5A9C2 /* HELG+Tableview.swift */,
 				0186104B213EA6BE0037DADB /* HELG+UIView.swift */,
+				FECC8FB421455430007F3F3F /* HELG+Date.swift */,
+				016DA581214272B100B07F69 /* POPShakeable.swift */,
+				FECC8FB22143306A007F3F3F /* POPMorse.swift */,
 				010BC27E213D928E00530B2D /* ReuseableView.swift */,
 				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
 				010BC278213D924A00530B2D /* LebensfitSettings.swift */,
@@ -123,6 +151,39 @@
 				010BC284213D92F100530B2D /* LebensfitNavigation.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		01462E542140283B00D4144B /* Event_old */ = {
+			isa = PBXGroup;
+			children = (
+				01462E552140285B00D4144B /* EventController.swift */,
+				0153FAB12141437E00D1B5BB /* EventTableController.swift */,
+				0153FAAD2140FE8600D1B5BB /* EventCell.swift */,
+				0153FAAF21410F3E00D1B5BB /* EventSettings.swift */,
+			);
+			path = Event_old;
+			sourceTree = "<group>";
+		};
+		0153FAD62141778F00D1B5BB /* Month */ = {
+			isa = PBXGroup;
+			children = (
+				01462E48213FDE2E00D4144B /* MonthOverView.swift */,
+				01462E4A213FF03000D4144B /* WeekdayView.swift */,
+				01462E4E213FF1E100D4144B /* CalendarView.swift */,
+				01462E50213FF50300D4144B /* DateCell.swift */,
+			);
+			path = Month;
+			sourceTree = "<group>";
+		};
+		0153FAD7214177AE00D1B5BB /* Week */ = {
+			isa = PBXGroup;
+			children = (
+				016DA583214275B700B07F69 /* WeekOverVIew.swift */,
+				0153FAD82141781A00D1B5BB /* WeekView.swift */,
+				016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */,
+				FECC8FB621455C46007F3F3F /* EventTableCell.swift */,
+			);
+			path = Week;
 			sourceTree = "<group>";
 		};
 		016BA88F213D777500ADAA65 = {
@@ -162,13 +223,12 @@
 		0186103B213E6A1E0037DADB /* Kalender */ = {
 			isa = PBXGroup;
 			children = (
-				01462E48213FDE2E00D4144B /* MonthView.swift */,
-				01462E4E213FF1E100D4144B /* CalendarView.swift */,
-				01462E50213FF50300D4144B /* DateCell.swift */,
+				010BC273213D920800530B2D /* TerminController.swift */,
 				01462E52213FF5A000D4144B /* CalendarExtensions.swift */,
-				01462E4A213FF03000D4144B /* WeekdayView.swift */,
-				010BC273213D920800530B2D /* CalendarController.swift */,
 				01462E44213FDA9600D4144B /* CalendarSettings.swift */,
+				0153FAD62141778F00D1B5BB /* Month */,
+				0153FAD7214177AE00D1B5BB /* Week */,
+				01462E542140283B00D4144B /* Event_old */,
 			);
 			path = Kalender;
 			sourceTree = "<group>";
@@ -361,27 +421,39 @@
 				010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */,
 				0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */,
 				01462E51213FF50300D4144B /* DateCell.swift in Sources */,
+				0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */,
 				01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */,
 				01861043213E6E170037DADB /* UserStruct.swift in Sources */,
+				016DA582214272B100B07F69 /* POPShakeable.swift in Sources */,
 				0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */,
 				010BC275213D920900530B2D /* MapController.swift in Sources */,
 				010BC27D213D926800530B2D /* BaseCell.swift in Sources */,
+				016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */,
+				0153FAB021410F3E00D1B5BB /* EventSettings.swift in Sources */,
 				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
 				01462E45213FDA9600D4144B /* CalendarSettings.swift in Sources */,
 				01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
+				0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */,
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
 				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
+				FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */,
+				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* HomeController.swift in Sources */,
 				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
-				01462E49213FDE2E00D4144B /* MonthView.swift in Sources */,
+				01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */,
+				0153FAAE2140FE8600D1B5BB /* EventCell.swift in Sources */,
+				0153FAB22141437E00D1B5BB /* EventTableController.swift in Sources */,
 				0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */,
-				010BC277213D920900530B2D /* CalendarController.swift in Sources */,
+				010BC277213D920900530B2D /* TerminController.swift in Sources */,
 				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,
+				01462E562140285B00D4144B /* EventController.swift in Sources */,
 				010BC274213D920900530B2D /* ProfileController.swift in Sources */,
+				FECC8FB32143306A007F3F3F /* POPMorse.swift in Sources */,
+				016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

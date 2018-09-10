@@ -32,8 +32,8 @@ class LebensfitTabBarController: UITabBarController {
         view.backgroundColor = .white
         tabBar.autoresizesSubviews = true
         tabBar.isTranslucent = true
-        self.tabBar.tintColor = UIColor.red
-        self.tabBar.unselectedItemTintColor = UIColor.gray
+        self.tabBar.tintColor = LebensfitSettings.Colors.darkRed
+        self.tabBar.unselectedItemTintColor = LebensfitSettings.Colors.darkGray
         
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
@@ -51,7 +51,7 @@ class LebensfitTabBarController: UITabBarController {
         let aboutImage = UIImage(named: LebensfitSettings.UI.iconNames.menu)
         
         //Calendar
-        let calendarVC = CalendarController()
+        let calendarVC = TerminController()
         let calendarNavigationController = LebensfitNavigation(rootViewController: calendarVC)
         calendarNavigationController.tabBarItem = UITabBarItem(title: "Kalender", image: calendarImage, tag: 0)
         calendarNavigationController.title = "Kalender"

@@ -12,6 +12,7 @@ struct CalendarSettings {
     struct Colors {
         static var darkGray = #colorLiteral(red: 0.3764705882, green: 0.3647058824, blue: 0.3647058824, alpha: 1)
         static var darkRed = #colorLiteral(red: 0.5019607843, green: 0.1529411765, blue: 0.1764705882, alpha: 1)
+        static var disabled = UIColor.gray
     }
     
     struct Style {

@@ -21,7 +21,6 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     var currentDayDate: Int = 0
     var todaysDate = Date()
     var presentDate = Date()
-    
     var presentYear = 0
     
     var twoDimensionalArray = [
@@ -157,6 +156,11 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let parent = parentVC else { return }
+        parent.gotoEvent()
     }
     
     

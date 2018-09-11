@@ -29,7 +29,7 @@ class LebensfitTabBarController: UITabBarController {
     }
     
     func setupTabBar() {
-        view.backgroundColor = .white
+        view.backgroundColor = LebensfitSettings.Colors.buttonBG
         tabBar.autoresizesSubviews = true
         tabBar.isTranslucent = true
         self.tabBar.tintColor = LebensfitSettings.Colors.darkRed

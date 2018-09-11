@@ -106,6 +106,7 @@ class TerminController: UIViewController {
         calendarView.changeTheme()
     }
     
+    //Opens the weekview and expands the selcted day
     func gotoDay(date: Date) {
         gotoWeekView()
         segmentedController.selectedSegmentIndex = 1
@@ -124,6 +125,11 @@ class TerminController: UIViewController {
                 self.weekView.expandHeader(section: date.weekday.formatedWeekDay)
             }
         }
+    }
+    
+    func gotoEvent() {
+        let eventVC = EventViewController()
+        self.navigationController?.pushViewController(eventVC, animated: true)
     }
     
     func addEventToCalendar() {

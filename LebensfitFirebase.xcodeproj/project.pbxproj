@@ -47,6 +47,8 @@
 		0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104B213EA6BE0037DADB /* HELG+UIView.swift */; };
 		0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104D213ECAEC0037DADB /* ProfileFooter.swift */; };
 		0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319B2146696900E5A9C2 /* HELG+Tableview.swift */; };
+		018631A02146BA3700E5A9C2 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319F2146BA3700E5A9C2 /* EventViewController.swift */; };
+		018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018631A12146C67E00E5A9C2 /* EventStruct.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
 		FECC8FB32143306A007F3F3F /* POPMorse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* POPMorse.swift */; };
 		FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB421455430007F3F3F /* HELG+Date.swift */; };
@@ -96,6 +98,8 @@
 		0186104B213EA6BE0037DADB /* HELG+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIView.swift"; sourceTree = "<group>"; };
 		0186104D213ECAEC0037DADB /* ProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooter.swift; sourceTree = "<group>"; };
 		0186319B2146696900E5A9C2 /* HELG+Tableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Tableview.swift"; sourceTree = "<group>"; };
+		0186319F2146BA3700E5A9C2 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		018631A12146C67E00E5A9C2 /* EventStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStruct.swift; sourceTree = "<group>"; };
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +232,7 @@
 				01462E44213FDA9600D4144B /* CalendarSettings.swift */,
 				0153FAD62141778F00D1B5BB /* Month */,
 				0153FAD7214177AE00D1B5BB /* Week */,
+				0186319E2146BA0700E5A9C2 /* Event */,
 				01462E542140283B00D4144B /* Event_old */,
 			);
 			path = Kalender;
@@ -279,6 +284,15 @@
 				016BA89D213D777500ADAA65 /* SignUpController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		0186319E2146BA0700E5A9C2 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				0186319F2146BA3700E5A9C2 /* EventViewController.swift */,
+				018631A12146C67E00E5A9C2 /* EventStruct.swift */,
+			);
+			path = Event;
 			sourceTree = "<group>";
 		};
 		B35E74DF060C89DA6DCEF440 /* Frameworks */ = {
@@ -420,6 +434,7 @@
 				016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */,
 				010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */,
 				0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */,
+				018631A02146BA3700E5A9C2 /* EventViewController.swift in Sources */,
 				01462E51213FF50300D4144B /* DateCell.swift in Sources */,
 				0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */,
 				01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */,
@@ -442,6 +457,7 @@
 				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* HomeController.swift in Sources */,
+				018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */,
 				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
 				01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */,

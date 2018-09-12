@@ -29,39 +29,11 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     var presentYear = 0
     var mondayOfPresentWeek = Date()
     var lastExpandedHeader: WeekDayHeader?
-    var onGoingAnimation = false
-    
-//    var twoDimensionalArray = [
-//        ExpandableNames(isExpanded: false, names: ["Amy", "Bill", "Zack", "Steve", "Jack", "Jill", "Mary"]),
-//        ExpandableNames(isExpanded: false, names: ["Carl", "Chris", "Christina", "Cameron"]),
-//        ExpandableNames(isExpanded: false, names: ["David", "Dan"]),
-//        ExpandableNames(isExpanded: false, names: ["Patrick", "Patty"]),
-//        ]
     
     var twoDimensionalEventArray = [expandableEvent]()
     var parentVC: TerminController?
     
-    //Loops trough the parents array of events and puts the ones that are in the displayed week in an array (sorted by day).
-    func setupArray() {
-        guard let parent = parentVC else { return }
-        let numberOfWeekdays = 7
-        let lengthOfArray = parent.eventArray.count
-        
-        for x in 0..<numberOfWeekdays {
-            let currentDay = mondayOfPresentWeek.thisDate(value: x)
-            var eventsToAddForThatDay = [Event]()
-            
-            for i in 0..<lengthOfArray {
-                let event = parent.eventArray[i]
-                guard let eventStartTime = event.eventStartingDate else { return }
-                let isSameDay = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime)
-                if isSameDay {
-                    eventsToAddForThatDay.append(event)
-                }
-            }
-            twoDimensionalEventArray.append(expandableEvent(isExpanded: false, events: eventsToAddForThatDay))
-        }
-    }
+    
     
     //MARK: - GUI Objects
     let calendarTableView: UITableView = {
@@ -89,6 +61,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         setupViews()
         confBounds()
         setupValues()
+        setupArray()
     }
     
     //MARK: - Setup
@@ -98,7 +71,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         calendarTableView.register(EventTableCell.self, forCellReuseIdentifier: EventTableCell.reuseIdentifier)
         calendarTableView.register(WeekDayHeader.self, forHeaderFooterViewReuseIdentifier: WeekDayHeader.reuseIdentifier)
         calendarTableView.tintColor = .white
-        calendarTableView.separatorStyle = .none
+        calendarTableView.separatorStyle = .singleLine
         //calendarTableView.layoutIfNeeded()
         
     }
@@ -111,7 +84,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         currentWeekDayIndex = Calendar.current.component(.weekday, from: presentDate).formatedWeekDay
         mondayOfPresentWeek = presentDate.thisDate(value: -currentWeekDayIndex)
         todaysDate = Date()
-        setupArray()
+        print(mondayOfPresentWeek)
     }
     
     func setupViews() {
@@ -135,8 +108,6 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }
-
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: WeekDayHeader.reuseIdentifier) as! WeekDayHeader
@@ -183,16 +154,21 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     //MARK: Tablecells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventTableCell.reuseIdentifier, for: indexPath) as! EventTableCell
-        let name = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventName
-        let start = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventStartingDate
-        let finish = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventFinishingDate
-        let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID
+        if let name = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventName {
+             cell.titleLabel.text = name
+            print(name)
+        }
+        if let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID {
+            cell.eventId = id
+            print(id)
+        }
+        if let start = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventStartingDate {
+            if let finish = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventFinishingDate {
+                cell.timeLabel.text = "\(start.getHourAndMinuteAsStringFromDate() ) bis \(finish.getHourAndMinuteAsStringFromDate() )"
+            }
+        }
+        print(indexPath)
         
-        cell.eventId = id!
-        cell.titleLabel.text = name
-        cell.timeLabel.text = "\(start?.getHourAndMinuteAsStringFromDate() ?? "0:00") bis \(finish?.getHourAndMinuteAsStringFromDate() ?? "0:00")"
-
-
         //Make the divider Line of the last tableview cell bigger
         if calendarTableView.isLast(for: indexPath) {
             cell.isLastMethod(last: true)
@@ -203,18 +179,15 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
+    //goes to the event if a row is clicked. uses the array instead of the cell because bugs
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let parent = parentVC else { return }
-        let tvCell = tableView.dequeueReusableCell(withIdentifier: EventTableCell.reuseIdentifier, for: indexPath) as! EventTableCell
-        guard let id = tvCell.eventId else { return }
+        guard let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID else { return }
         parent.gotoEvent(eventID: id)
     }
     
@@ -222,22 +195,39 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     //MARK: - Methods
     @objc func handleHeaderTap(sender: UITapGestureRecognizer) {
         let selectedView = sender.view as! WeekDayHeader
-        print(selectedView.dayLabel.text)
-        
         let section = selectedView.tag
-        if section < twoDimensionalEventArray.count && twoDimensionalEventArray[section].events.count != 0{
-            if let lastHeader = lastExpandedHeader {
-                twoDimensionalEventArray[lastHeader.tag].isExpanded = false
-                isExpandedOrNot(view: lastHeader)
-            }
-            twoDimensionalEventArray[section].isExpanded = !twoDimensionalEventArray[section].isExpanded
+        
+        if section < twoDimensionalEventArray.count && !twoDimensionalEventArray[section].events.isEmpty {
+            manageLastHeader(selectedView: selectedView, completion: {
+                yesorno in
+                print(yesorno)
+                if yesorno {
+                    self.twoDimensionalEventArray[section].isExpanded = !self.twoDimensionalEventArray[section].isExpanded
+                    self.isExpandedOrNot(view: selectedView)
+                }
+            })
         } else {
             selectedView.shake()
         }
-        
-        isExpandedOrNot(view: selectedView)
     }
-
+    
+    func manageLastHeader(selectedView: WeekDayHeader, completion: @escaping (Bool) -> ()) {
+        if let lh = lastExpandedHeader {
+            twoDimensionalEventArray[lh.tag].isExpanded = false
+            isExpandedOrNot(view: lh)
+            lastExpandedHeader = nil
+            
+            if selectedView == lh {
+                completion(false)
+                return
+            }
+            completion(true)
+            return
+        }
+        completion(true)
+        return
+    }
+    
     
     //MARK: Protokol
     func didChangeWeek(week: Int, year: Int) {
@@ -252,6 +242,8 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         }
         unexpandAllHeaders()
         setnewWeekValues(week: week, year: year)
+        setupValues()
+        setupArray()
         
         //Block user from going to the past months
         let calendar = Calendar.current

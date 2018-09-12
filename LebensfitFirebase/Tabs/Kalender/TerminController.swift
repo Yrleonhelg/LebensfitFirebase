@@ -120,6 +120,7 @@ class TerminController: UIViewController {
         weekView.presentDate = date
         weekView.setnewWeekValues(week: weekOfDate, year: yearOfDate)
         weekView.setupValues()
+        weekView.setupArray()
         print("start")
         
         //Make Header automaticly expand (with deadline that it appears after view is there

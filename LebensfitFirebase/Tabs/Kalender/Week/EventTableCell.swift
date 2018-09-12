@@ -16,7 +16,7 @@ class EventTableCell: UITableViewCell, ReusableView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.text = "Titel"
-        label.textColor = .black
+        label.textColor = .white
         return label
     }()
     
@@ -24,19 +24,20 @@ class EventTableCell: UITableViewCell, ReusableView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.text = "11:00 bis 14:00"
-        label.textColor = .gray
+        label.textColor = UIColor.lightGray
         return label
     }()
     
     let bottomDividerView: UIView = {
         let tdv = UIView()
-        tdv.backgroundColor = UIColor.lightGray
+        tdv.backgroundColor = UIColor.white
         return tdv
     }()
     
     //MARK: - Init & View Loading
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = CalendarSettings.Colors.darkRed
         setupViews()
         confBounds()
     }
@@ -46,25 +47,25 @@ class EventTableCell: UITableViewCell, ReusableView {
     func setupViews() {
         addSubview(titleLabel)
         addSubview(timeLabel)
-        addSubview(bottomDividerView)
+        //addSubview(bottomDividerView)
     }
     
     func confBounds(){
         titleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        bottomDividerView.anchor(top: bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0.25)
+        //bottomDividerView.anchor(top: bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0.25)
         timeLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
     }
     
     //MARK: - Methods
     func isLastMethod(last: Bool) {
-        bottomDividerView.removeFromSuperview()
-        addSubview(bottomDividerView)
-        
-        if last {
-            bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.25)
-        } else {
-            bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0.25)
-        }
+//        bottomDividerView.removeFromSuperview()
+//        addSubview(bottomDividerView)
+//        
+//        if last {
+//            bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.25)
+//        } else {
+//            bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0.25)
+//        }
     }
     
     //MARK: - Do not change Methods

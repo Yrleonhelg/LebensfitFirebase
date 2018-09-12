@@ -58,8 +58,6 @@ extension WeekView {
         let indexPaths = makeIndexPathArray(section: section)
         let numberOfRows = calendarTableView.numberOfRows(inSection: section)
         
-        print(section)
-        
         //If a header value is passed it takes it and else it creares it with the section
         let newHeaderView: WeekDayHeader
         if let header = headerView {
@@ -69,7 +67,6 @@ extension WeekView {
         }
         
         if isExpanded {
-            print(newHeaderView.dayLabel.text, "yes")
             if numberOfRows == 0 {
                 calendarTableView.insertRows(at: indexPaths, with: .fade)
             }
@@ -81,7 +78,6 @@ extension WeekView {
             lastExpandedHeader = newHeaderView
             
         } else {
-            print(newHeaderView.dayLabel.text, "not")
             if numberOfRows != 0 {
                 calendarTableView.deleteRows(at: indexPaths, with: .fade)
             }
@@ -106,4 +102,26 @@ extension WeekView {
         return indexPaths
     }
     
+    //Loops trough the parents array of events and puts the ones that are in the displayed week in an array (sorted by day).
+    func setupArray() {
+        twoDimensionalEventArray.removeAll()
+        guard let parent = parentVC else { return }
+        let numberOfWeekdays = 7
+        let lengthOfArray = parent.eventArray.count
+        
+        for x in 0..<numberOfWeekdays {
+            let currentDay = mondayOfPresentWeek.thisDate(value: x)
+            var eventsToAddForThatDay = [Event]()
+            
+            for i in 0..<lengthOfArray {
+                let event = parent.eventArray[i]
+                guard let eventStartTime = event.eventStartingDate else { return }
+                let isSameDay = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime)
+                if isSameDay {
+                    eventsToAddForThatDay.append(event)
+                }
+            }
+            twoDimensionalEventArray.append(expandableEvent(isExpanded: false, events: eventsToAddForThatDay))
+        }
+    }
 }

@@ -69,7 +69,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
         addSubview(dayLabel)
         addSubview(chevronLabel)
         addSubview(dateLabel)
-        addSubview(bottomDividerView)
+        //addSubview(bottomDividerView)
     }
     
     func removeDot() {
@@ -81,12 +81,12 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     }
     
      func confBoundsDefault(){
-        print("BEFORE1")
+
         dayLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         dateLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
         chevronLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
-        bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0.5, paddingRight: 20, width: 0, height: 0.5)
-        print("AFTER1")
+        //bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0.5, paddingRight: 20, width: 0, height: 0.5)
+
     }
     
     func confBoundsToday() {
@@ -98,13 +98,12 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
         selectionDot.centerYAnchor.constraint(equalTo: dayLabel.centerYAnchor).isActive = true
         selectionDot.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 15, height: 15)
         //selectionDot.pulse()
-        print("AFTER2")
     }
     
     func setDate() {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "de_CH")
-        formatter.dateFormat = "dd. MMM. yyyy"
+        formatter.dateFormat = "dd. MMM yyyy"
         
         let result = formatter.string(from: myDate)
         dateLabel.text = result
@@ -112,24 +111,14 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     
     //MARK: - Methods
     func isSelectedMethod(selected: Bool) {
-        
-        
-        bottomDividerView.removeFromSuperview()
-        addSubview(bottomDividerView)
-        
-        print("BEFORE3" ,selected)
-        print(self.dayLabel.text, self.bounds)
-        if self.bounds == CGRect.zero {
-            print("____________")
-            return
-        }
+        //bottomDividerView.removeFromSuperview()
+        //addSubview(bottomDividerView)
         
         if selected {
-            bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0.5, paddingRight: 0, width: 0, height: 0.5)
+            //bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0.5, paddingRight: 0, width: 0, height: 0.5)
         } else {
-            bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0.5, paddingRight: 20, width: 0, height: 0.5)
+            //bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0.5, paddingRight: 20, width: 0, height: 0.5)
         }
-        print("AFTER3")
     }
     
     //MARK: - Do not change Methods

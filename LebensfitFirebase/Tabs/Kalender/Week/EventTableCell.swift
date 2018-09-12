@@ -9,6 +9,7 @@
 import UIKit
 
 class EventTableCell: UITableViewCell, ReusableView {
+    var eventId: Int?
     
     //MARK: - GUI Objects
     let titleLabel: UILabel = {

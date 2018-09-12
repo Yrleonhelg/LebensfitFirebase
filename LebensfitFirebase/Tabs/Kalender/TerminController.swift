@@ -18,6 +18,8 @@ class TerminController: UIViewController {
     //MARK: - Properties & Variables
     var theme = currentTheme.light
     
+    var eventArray = [Event]()
+    
     //MARK: - GUI Objects
     let segmentedController: UISegmentedControl = {
         let items = ["Monat", "Woche"]
@@ -44,6 +46,7 @@ class TerminController: UIViewController {
         setupNavBar()
         setupViews()
         confBounds()
+        fillArray()
     }
     
     //MARK: - Setup
@@ -61,6 +64,7 @@ class TerminController: UIViewController {
         view.addSubview(weekView)
         calendarView.parentVC = self
         weekView.parentVC = self
+        weekView.removeFromSuperview()
     }
     
     override func viewWillLayoutSubviews() {
@@ -88,8 +92,7 @@ class TerminController: UIViewController {
         calendarView.removeFromSuperview()
         view.addSubview(weekView)
         weekView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        weekView.setupViews()
-        weekView.confBounds()
+        weekView.setupTheSetup()
     }
     
     @objc func changeTheme(sender: UIBarButtonItem) {
@@ -120,37 +123,17 @@ class TerminController: UIViewController {
         print("start")
         
         //Make Header automaticly expand (with deadline that it appears after view is there
-        if weekView.twoDimensionalArray.count > date.weekday.formatedWeekDay {
+        if weekView.twoDimensionalEventArray.count > date.weekday.formatedWeekDay {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self.weekView.expandHeader(section: date.weekday.formatedWeekDay)
             }
         }
     }
     
-    func gotoEvent() {
-        let eventVC = EventViewController()
+    func gotoEvent(eventID: Int) {
+        let event = eventArray[eventID]
+        let eventVC = SingleEventViewController(event: event)
         self.navigationController?.pushViewController(eventVC, animated: true)
-    }
-    
-    func addEventToCalendar() {
-        let eventStore:EKEventStore = EKEventStore()
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            
-            if let err = error { print("Failed to add Event", err); return }
-            if granted {
-                let event:EKEvent = EKEvent(eventStore: eventStore)
-                event.title = "title"
-                event.startDate = Date()
-                event.endDate = Date()
-                event.notes = "Notes"
-                event.calendar = eventStore.defaultCalendarForNewEvents
-                do {
-                    try eventStore.save(event, span: .thisEvent)
-                } catch let error as NSError { print("Failed to save Event:  \(error)"); return}
-                print("Event Saved")
-            }
-            
-        }
     }
 }
 

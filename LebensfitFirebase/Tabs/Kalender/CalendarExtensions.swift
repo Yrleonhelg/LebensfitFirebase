@@ -16,6 +16,13 @@ extension Date {
     var firstDayOfTheMonth: Date {
         return Calendar.current.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
     }
+    
+    func getHourAndMinuteAsStringFromDate() -> (String){
+        let hour = Calendar.current.component(.hour, from: self)
+        let minutes = Calendar.current.component(.minute, from: self)
+        let string = "\(hour):\(minutes)"
+        return string
+    }
 }
 
 //get date from string

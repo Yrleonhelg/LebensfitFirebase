@@ -9,13 +9,15 @@
 import UIKit
 import MapKit
 
-class EventViewController: UIViewController {
+class SingleEventViewController: UIViewController {
     //MARK: - Properties & Variables
-    var nameText: String = ""
-    var descritionText: String = ""
-    var teilnehmerArray = [String]()
-    var startingDate = Date()
-    var finishingDate = Date()
+    var thisEvent: Event
+    var eventName: String?
+    var eventDescription: String?
+    var eventLocation: CLLocationCoordinate2D?
+    var eventStartingDate: Date?
+    var eventFinishingDate: Date?
+    var eventNeedsApplication: Bool?
     
     var snapShotter = MKMapSnapshotter()
     
@@ -68,9 +70,16 @@ class EventViewController: UIViewController {
     }()
     
     //MARK: - Init & View Loading
+    init(event: Event) {
+        thisEvent = event
+        super.init(nibName: nil, bundle: nil)
+        setupDefaultValues()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        applyDefaultValues()
         setupNavBar()
         setupViews()
         confBounds()
@@ -78,6 +87,22 @@ class EventViewController: UIViewController {
     }
     
     //MARK: - Setup
+    func setupDefaultValues() {
+        eventName = thisEvent.eventName
+        eventDescription = thisEvent.eventDescription
+        eventLocation = thisEvent.eventLocation
+        eventStartingDate = thisEvent.eventStartingDate
+        eventFinishingDate = thisEvent.eventFinishingDate
+        eventNeedsApplication = thisEvent.eventNeedsApplication
+    }
+    
+    func applyDefaultValues() {
+        titleLabel.text = eventName
+        descLabel.text = eventDescription
+        
+        dateLabel.text = "\(eventStartingDate!.getHourAndMinuteAsStringFromDate()) bis \(eventFinishingDate!.getHourAndMinuteAsStringFromDate())"
+    }
+    
     func setupNavBar() {
         self.navigationItem.title = "Event"
     }
@@ -108,7 +133,8 @@ class EventViewController: UIViewController {
         let mapSnapshotOptions = MKMapSnapshotOptions()
         
         // Set the region of the map that is rendered.
-        let location = CLLocationCoordinate2DMake(37.332077, -122.02962) // Apple HQ
+        //let location = CLLocationCoordinate2DMake(37.332077, -122.02962) // Apple HQ
+        let location = eventLocation!
         let region = MKCoordinateRegionMakeWithDistance(location, 1000, 1000)
         mapSnapshotOptions.region = region
         
@@ -128,8 +154,8 @@ class EventViewController: UIViewController {
             self.mapView.image = snapshot?.image
         }
     }
-    
-    
-    
     //MARK: - Do not change Methods
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

@@ -31,6 +31,8 @@
 		0153FAB021410F3E00D1B5BB /* EventSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAAF21410F3E00D1B5BB /* EventSettings.swift */; };
 		0153FAB22141437E00D1B5BB /* EventTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAB12141437E00D1B5BB /* EventTableController.swift */; };
 		0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAD82141781A00D1B5BB /* WeekView.swift */; };
+		015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */; };
+		0159AA2C2147B0C7005134A3 /* EventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159AA2B2147B0C7005134A3 /* EventHandling.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
 		016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* SignUpController.swift */; };
 		016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA89F213D777500ADAA65 /* Main.storyboard */; };
@@ -47,10 +49,10 @@
 		0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104B213EA6BE0037DADB /* HELG+UIView.swift */; };
 		0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186104D213ECAEC0037DADB /* ProfileFooter.swift */; };
 		0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319B2146696900E5A9C2 /* HELG+Tableview.swift */; };
-		018631A02146BA3700E5A9C2 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319F2146BA3700E5A9C2 /* EventViewController.swift */; };
+		018631A02146BA3700E5A9C2 /* SingleEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */; };
 		018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018631A12146C67E00E5A9C2 /* EventStruct.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
-		FECC8FB32143306A007F3F3F /* POPMorse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* POPMorse.swift */; };
+		FECC8FB32143306A007F3F3F /* HELG+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* HELG+View.swift */; };
 		FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB421455430007F3F3F /* HELG+Date.swift */; };
 		FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB621455C46007F3F3F /* EventTableCell.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,8 @@
 		0153FAAF21410F3E00D1B5BB /* EventSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSettings.swift; sourceTree = "<group>"; };
 		0153FAB12141437E00D1B5BB /* EventTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableController.swift; sourceTree = "<group>"; };
 		0153FAD82141781A00D1B5BB /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewExtensionMethods.swift; sourceTree = "<group>"; };
+		0159AA2B2147B0C7005134A3 /* EventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandling.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016BA89B213D777500ADAA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016BA89D213D777500ADAA65 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -98,12 +102,12 @@
 		0186104B213EA6BE0037DADB /* HELG+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIView.swift"; sourceTree = "<group>"; };
 		0186104D213ECAEC0037DADB /* ProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooter.swift; sourceTree = "<group>"; };
 		0186319B2146696900E5A9C2 /* HELG+Tableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Tableview.swift"; sourceTree = "<group>"; };
-		0186319F2146BA3700E5A9C2 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventViewController.swift; sourceTree = "<group>"; };
 		018631A12146C67E00E5A9C2 /* EventStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStruct.swift; sourceTree = "<group>"; };
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FECC8FB22143306A007F3F3F /* POPMorse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPMorse.swift; sourceTree = "<group>"; };
+		FECC8FB22143306A007F3F3F /* HELG+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+View.swift"; sourceTree = "<group>"; };
 		FECC8FB421455430007F3F3F /* HELG+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Date.swift"; sourceTree = "<group>"; };
 		FECC8FB621455C46007F3F3F /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,7 +132,7 @@
 				0186104B213EA6BE0037DADB /* HELG+UIView.swift */,
 				FECC8FB421455430007F3F3F /* HELG+Date.swift */,
 				016DA581214272B100B07F69 /* POPShakeable.swift */,
-				FECC8FB22143306A007F3F3F /* POPMorse.swift */,
+				FECC8FB22143306A007F3F3F /* HELG+View.swift */,
 				010BC27E213D928E00530B2D /* ReuseableView.swift */,
 				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
 				010BC278213D924A00530B2D /* LebensfitSettings.swift */,
@@ -184,6 +188,7 @@
 			children = (
 				016DA583214275B700B07F69 /* WeekOverVIew.swift */,
 				0153FAD82141781A00D1B5BB /* WeekView.swift */,
+				015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */,
 				016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */,
 				FECC8FB621455C46007F3F3F /* EventTableCell.swift */,
 			);
@@ -228,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				010BC273213D920800530B2D /* TerminController.swift */,
+				0159AA2B2147B0C7005134A3 /* EventHandling.swift */,
 				01462E52213FF5A000D4144B /* CalendarExtensions.swift */,
 				01462E44213FDA9600D4144B /* CalendarSettings.swift */,
 				0153FAD62141778F00D1B5BB /* Month */,
@@ -289,7 +295,7 @@
 		0186319E2146BA0700E5A9C2 /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				0186319F2146BA3700E5A9C2 /* EventViewController.swift */,
+				0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */,
 				018631A12146C67E00E5A9C2 /* EventStruct.swift */,
 			);
 			path = Event;
@@ -434,7 +440,7 @@
 				016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */,
 				010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */,
 				0186104E213ECAEC0037DADB /* ProfileFooter.swift in Sources */,
-				018631A02146BA3700E5A9C2 /* EventViewController.swift in Sources */,
+				018631A02146BA3700E5A9C2 /* SingleEventViewController.swift in Sources */,
 				01462E51213FF50300D4144B /* DateCell.swift in Sources */,
 				0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */,
 				01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */,
@@ -450,6 +456,7 @@
 				01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
 				0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */,
+				0159AA2C2147B0C7005134A3 /* EventHandling.swift in Sources */,
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
 				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
@@ -458,6 +465,7 @@
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* HomeController.swift in Sources */,
 				018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */,
+				015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */,
 				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
 				01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */,
@@ -468,7 +476,7 @@
 				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,
 				01462E562140285B00D4144B /* EventController.swift in Sources */,
 				010BC274213D920900530B2D /* ProfileController.swift in Sources */,
-				FECC8FB32143306A007F3F3F /* POPMorse.swift in Sources */,
+				FECC8FB32143306A007F3F3F /* HELG+View.swift in Sources */,
 				016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

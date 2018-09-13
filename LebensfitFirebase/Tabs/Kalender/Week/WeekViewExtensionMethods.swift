@@ -73,7 +73,6 @@ extension WeekView {
             newHeaderView.chevronLabel.text = "⌄"
             newHeaderView.dayLabel.textColor = CalendarSettings.Colors.darkRed
             newHeaderView.chevronLabel.textColor = CalendarSettings.Colors.darkRed
-            newHeaderView.isSelectedMethod(selected: true)
             newHeaderView.isSelected = true
             lastExpandedHeader = newHeaderView
             
@@ -84,9 +83,7 @@ extension WeekView {
             newHeaderView.chevronLabel.text = "›"
             newHeaderView.dayLabel.textColor = .black
             newHeaderView.chevronLabel.textColor = .black
-            newHeaderView.isSelectedMethod(selected: false)
             newHeaderView.isSelected = false
-            
         }
     }
     

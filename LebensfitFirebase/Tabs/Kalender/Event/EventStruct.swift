@@ -19,27 +19,6 @@ protocol AtLocation {
     var eventLocation: CLLocationCoordinate2D { get }
 }
 
-//MARK: EventStruct
-struct ANormalEvent: DefaultEvent, AtLocation {
-    var eventName: String
-    var eventDescription: String
-    var eventLocation: CLLocationCoordinate2D
-}
-
-//MARK: Location
-enum EventLocationEnum {
-    case appleHC
-    case zuerich
-}
-
-struct EventLocationStruct {
-    static var appleHC = CLLocationCoordinate2DMake(37.332077, -122.02962)
-    static var zuerich = CLLocationCoordinate2DMake(47.366670, 8.55000)
-    static var turnhalleEisenwerk = CLLocationCoordinate2D(latitude: 47.561088, longitude: 8.894019)
-    static var zuercherStrasse = CLLocationCoordinate2D(latitude: 47.553217, longitude: 8.891721)
-}
-
-
 
 enum EventTypeEnum: DefaultEvent, AtLocation {
     case pilatesChair
@@ -97,8 +76,8 @@ enum EventTypeEnum: DefaultEvent, AtLocation {
         case .yogaMitDaniUndRita:
             return EventNameStruct.yogaMitDaniUndRita
             
-        default:
-            return EventNameStruct.defaultName
+//        default:
+//            return EventNameStruct.defaultName
         }
     }
     
@@ -121,6 +100,7 @@ enum EventTypeEnum: DefaultEvent, AtLocation {
     }
 }
 
+//MARK: Name
 struct EventNameStruct {
     static var pilatesChair = "Pilates Chair"
     static var flyingYogaAndPilates = "Flying Yoga & Pilates"
@@ -138,10 +118,69 @@ struct EventNameStruct {
     static var defaultName = "Pilates"
 }
 
+//MARK: Description
 struct EventDescritionStruct {
     static var pialtesChairDesc = "In diesem Kurs machen wir tolle Pilates Übungen mit einem Tisch ;)"
     static var defaultDesc = "In diesem Kurs sind alle die noch nichts mit Pilates am Hut haben, herzig willkommen."
 }
+
+//MARK: Location
+struct EventLocationStruct {
+    static var appleHC = CLLocationCoordinate2DMake(37.332077, -122.02962)
+    static var zuerich = CLLocationCoordinate2DMake(47.366670, 8.55000)
+    static var turnhalleEisenwerk = CLLocationCoordinate2D(latitude: 47.561088, longitude: 8.894019)
+    static var zuercherStrasse = CLLocationCoordinate2D(latitude: 47.553217, longitude: 8.891721)
+}
+
+//MARK: - Actuall Class
+class Event {
+    var eventID: Int?
+    var eventType: EventTypeEnum?
+    var eventName: String?
+    var eventDescription: String?
+    var eventLocation: CLLocationCoordinate2D?
+    var eventStartingDate: Date?
+    var eventFinishingDate: Date?
+    var eventNeedsApplication = false
+    var eventParticipants: [String]?
+    
+    init(id: Int, type: EventTypeEnum, start: Date, finish: Date, needsApplication: Bool?) {
+        eventID = id
+        eventType = type
+        eventName = type.eventName
+        eventDescription = type.eventDescription
+        eventLocation = type.eventLocation
+        eventStartingDate = start
+        eventFinishingDate = finish
+        if let app = needsApplication {
+            eventNeedsApplication = app
+        }
+    }
+    
+    func printAll() {
+        print("ID: \(eventID!)")
+        print("Type: \(eventType!)")
+        print("Name: \(eventName!)")
+        print("Beschreibung: \(eventDescription!)")
+        print("Standort: \(eventLocation!)")
+        print("Start: \(eventStartingDate!)")
+        print("Ende: \(eventFinishingDate!)")
+        print("Anmeldung?: \(eventNeedsApplication)")
+        print("____________________________")
+    }
+}
+
+//MARK: - Currently out of use
+
+
+
+////MARK: EventStruct
+//struct ANormalEvent: DefaultEvent, AtLocation {
+//    var eventName: String
+//    var eventDescription: String
+//    var eventLocation: CLLocationCoordinate2D
+//}
+
 
 //struct EventNameNeedsApplication {
 //    static var pilatesChairApplication = false
@@ -159,44 +198,5 @@ struct EventDescritionStruct {
 //    static var yogaMitDaniUndRitaApplication = "Yoga mit Dani und Rita"
 //    static var defaultNameApplication = "Pilates"
 //}
-
-
-
-
-
-//MARK: - Actuall Class
-class Event {
-    var eventID: Int?
-    var eventType: EventTypeEnum?
-    var eventName: String?
-    var eventDescription: String?
-    var eventLocation: CLLocationCoordinate2D?
-    var eventStartingDate: Date?
-    var eventFinishingDate: Date?
-    var eventNeedsApplication: Bool?
-    
-    init(id: Int, type: EventTypeEnum, start: Date, finish: Date) {
-        eventID = id
-        eventType = type
-        eventName = type.eventName
-        eventDescription = type.eventDescription
-        eventLocation = type.eventLocation
-        eventStartingDate = start
-        eventFinishingDate = finish
-        eventNeedsApplication = false
-    }
-    
-    func printAll() {
-        print("ID: \(eventID!)")
-        print("Type: \(eventType!)")
-        print("Name: \(eventName!)")
-        print("Beschreibung: \(eventDescription!)")
-        print("Standort: \(eventLocation!)")
-        print("Start: \(eventStartingDate!)")
-        print("Ende: \(eventFinishingDate!)")
-        print("Anmeldung?: \(eventNeedsApplication!)")
-        print("____________________________")
-    }
-}
 
 //var normalesPilatesEvent = EventStruct(eventName: .pilatesChair, eventDescription: .defaultDesc, eventLocation: .appleHC)

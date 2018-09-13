@@ -15,7 +15,7 @@ extension TerminController {
         var finDate = Date()
         for i in 0..<10 {
             finDate = Calendar.current.date(byAdding: .minute, value: 50, to: startDate)!
-            let event = Event(id: i, type: .pilatesChair, start: startDate, finish: finDate)
+            let event = Event(id: i, type: .pilatesChair, start: startDate, finish: finDate, needsApplication: nil)
             eventArray.append(event)
             startDate = Calendar.current.date(byAdding: .minute, value: 60*6, to: startDate)!
             //event.printAll()

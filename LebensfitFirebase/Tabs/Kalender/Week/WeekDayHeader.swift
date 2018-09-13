@@ -10,10 +10,10 @@ import UIKit
 
 class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     //MARK: - Properties & Variables
-    var monthsShortArr = ["Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
     var isCurrentDay: Bool = false
     var isSelected: Bool = false
     var myDate = Date()
+    let padding: CGFloat = 20
     
     //MARK: - GUI Objects
     let dayLabel: UILabel = {
@@ -108,19 +108,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
         let result = formatter.string(from: myDate)
         dateLabel.text = result
     }
-    
-    //MARK: - Methods
-    func isSelectedMethod(selected: Bool) {
-        //bottomDividerView.removeFromSuperview()
-        //addSubview(bottomDividerView)
-        
-        if selected {
-            //bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0.5, paddingRight: 0, width: 0, height: 0.5)
-        } else {
-            //bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0.5, paddingRight: 20, width: 0, height: 0.5)
-        }
-    }
-    
+
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -71,9 +71,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         calendarTableView.register(EventTableCell.self, forCellReuseIdentifier: EventTableCell.reuseIdentifier)
         calendarTableView.register(WeekDayHeader.self, forHeaderFooterViewReuseIdentifier: WeekDayHeader.reuseIdentifier)
         calendarTableView.tintColor = .white
-        calendarTableView.separatorStyle = .singleLine
-        //calendarTableView.layoutIfNeeded()
-        
+        calendarTableView.separatorStyle = .none
     }
     
     func setupValues() {
@@ -156,29 +154,17 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         let cell = tableView.dequeueReusableCell(withIdentifier: EventTableCell.reuseIdentifier, for: indexPath) as! EventTableCell
         if let name = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventName {
              cell.titleLabel.text = name
-            print(name)
         }
         if let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID {
             cell.eventId = id
-            print(id)
         }
         if let start = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventStartingDate {
             if let finish = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventFinishingDate {
                 cell.timeLabel.text = "\(start.getHourAndMinuteAsStringFromDate() ) bis \(finish.getHourAndMinuteAsStringFromDate() )"
             }
         }
-        print(indexPath)
-        
-        //Make the divider Line of the last tableview cell bigger
-        if calendarTableView.isLast(for: indexPath) {
-            cell.isLastMethod(last: true)
-        } else {
-            cell.isLastMethod(last: false)
-        }
-        
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
@@ -186,6 +172,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     
     //goes to the event if a row is clicked. uses the array instead of the cell because bugs
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         guard let parent = parentVC else { return }
         guard let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID else { return }
         parent.gotoEvent(eventID: id)
@@ -241,9 +228,9 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
             i += 1
         }
         unexpandAllHeaders()
-        setnewWeekValues(week: week, year: year)
         setupValues()
         setupArray()
+        setnewWeekValues(week: week, year: year)
         
         //Block user from going to the past months
         let calendar = Calendar.current

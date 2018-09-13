@@ -69,7 +69,7 @@ class LebensfitTabBarController: UITabBarController {
         mapNavigationController.tabBarItem = UITabBarItem(title: "Karte", image: mapImage, tag: 0)
         
         //profile
-        let profileController = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        let profileController = ProfileController()
         let profileNavigationController = LebensfitNavigation(rootViewController: profileController)
         profileNavigationController.title = "Profil"
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: aboutImage, tag: 0)

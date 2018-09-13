@@ -45,7 +45,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
         setupViews()
-        confBounds()
+        //confBounds()
     }
     
     
@@ -56,13 +56,14 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     }
     
     func confBounds(){
-        profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
+        let height = self.frame.height
+        let pictureHeight = height - 10
+        print(self.frame.height)
+        profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: pictureHeight, height: pictureHeight)
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        profileImageView.layer.cornerRadius = 35 / 2
+        profileImageView.layer.cornerRadius = pictureHeight / 2
         usernameLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
     }
-    
-    //MARK: - Methods
     
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {

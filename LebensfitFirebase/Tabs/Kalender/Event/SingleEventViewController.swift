@@ -238,7 +238,7 @@ class SingleEventViewController: UIViewController {
     }
     
     func teilnehmerLoaded() {
-        let tableviewHeight: CGFloat = CGFloat(teilnehmerTV.users.count) * 44
+        let tableviewHeight: CGFloat = CGFloat(teilnehmerTV.users.count) * 60
         scrollView.addSubview(teilnehmerTV)
         teilnehmerTV.anchor(top: teilnehmerLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: tableviewHeight)
     }

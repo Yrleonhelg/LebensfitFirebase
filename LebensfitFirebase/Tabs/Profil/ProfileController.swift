@@ -1,21 +1,50 @@
 //
 //  ProfileController.swift
-//  Lebensfit
+//  LebensfitFirebase
 //
-//  Created by Leon on 31.08.18.
+//  Created by Leon on 13.09.18.
 //  Copyright © 2018 helgcreating. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class ProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ProfileController: UIViewController {
+    //MARK: - Properties & Variables
+    var userId: String?
     
-    //MARK: - Viewloading
+    var user: User? {
+        didSet {
+            guard let profileImageUrl = user?.profileImageUrl else { return }
+            profileImageView.loadImage(urlString: profileImageUrl)
+            
+            usernameLabel.text = user?.username
+        }
+    }
+    
+    //MARK: - GUI Objects
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
+        iv.image = UIImage(named: "profile_selected")
+        return iv
+    }()
+    
+    let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "username"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
         setupNavBar()
-        setupCollectionView()
+        setupViews()
+        confBounds()
         fetchUser()
     }
     
@@ -26,12 +55,18 @@ class ProfileController: UICollectionViewController, UICollectionViewDelegateFlo
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
     }
     
-    func setupCollectionView() {
-        collectionView?.backgroundColor = .white
-        collectionView?.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProfileHeader.reuseIdentifier)
-        collectionView?.register(ProfileFooter.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProfileFooter.reuseIdentifier)
+    func setupViews() {
+        view.addSubview(profileImageView)
+        view.addSubview(usernameLabel)
     }
     
+    func confBounds(){
+        profileImageView.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 200)
+        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        profileImageView.layer.cornerRadius = 200/2
+        usernameLabel.anchor(top: profileImageView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        usernameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
     
     //MARK: - Methods
     @objc func handleLogOut() {
@@ -52,50 +87,5 @@ class ProfileController: UICollectionViewController, UICollectionViewDelegateFlo
         present(alertController, animated: true, completion: nil)
     }
     
-    var user: User?
-    fileprivate func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot.value ?? "")
-            
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            self.user = User(uid: uid, dictionary: dictionary)
-            self.navigationItem.title = self.user?.username
-            
-            self.collectionView?.reloadData()
-            
-        }) { (err) in print("Failed to fetch user:", err) }
-    }
-    
-    //MARK: - Collection View
-    //MARK: Header
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height-200)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        print(kind)
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            let headerCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileHeader.reuseIdentifier, for: indexPath) as! ProfileHeader
-            headerCell.user = self.user
-            return headerCell
-            
-        case UICollectionElementKindSectionFooter:
-            let footerCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileFooter.reuseIdentifier, for: indexPath) as! ProfileFooter
-            return footerCell
-            
-        default:
-            assert(false, "Unexpected element kind")
-        }
-    }
+    //MARK: - Do not change Methods
 }

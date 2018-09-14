@@ -17,14 +17,17 @@ class ProfileController: UIViewController {
         didSet {
             guard let profileImageUrl = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
-            
             usernameLabel.text = user?.username
+            backView.loadImage(urlString: profileImageUrl)
         }
     }
+    
     
     //MARK: - GUI Objects
     let profileImageView: CustomImageView = {
         let iv = CustomImageView()
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
         iv.image = UIImage(named: "profile_selected")
         return iv
     }()
@@ -36,6 +39,13 @@ class ProfileController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.textAlignment = .left
         return label
+    }()
+    
+    lazy var backView: BackView = {
+        let rect = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
+        let view = BackView(frame: rect)
+        view.image = UIImage(named: "gray")
+        return view
     }()
     
     //MARK: - Init & View Loading
@@ -56,12 +66,16 @@ class ProfileController: UIViewController {
     }
     
     func setupViews() {
+        view.addSubview(backView)
         view.addSubview(profileImageView)
         view.addSubview(usernameLabel)
+        
     }
     
     func confBounds(){
-        profileImageView.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 200)
+        backView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: self.view.frame.width)
+        
+        profileImageView.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 80, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 200)
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         profileImageView.layer.cornerRadius = 200/2
         usernameLabel.anchor(top: profileImageView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)

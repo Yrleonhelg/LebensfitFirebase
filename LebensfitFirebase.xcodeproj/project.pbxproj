@@ -49,6 +49,7 @@
 		0186319C2146696900E5A9C2 /* HELG+Tableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319B2146696900E5A9C2 /* HELG+Tableview.swift */; };
 		018631A02146BA3700E5A9C2 /* SingleEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */; };
 		018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018631A12146C67E00E5A9C2 /* EventStruct.swift */; };
+		01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE9C18214BB7CF0014E1CB /* BackView.swift */; };
 		01F44A7D214A80DE006723ED /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7C214A80DE006723ED /* UserSearchCell.swift */; };
 		01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7E214A8191006723ED /* CustomImageView.swift */; };
 		01F44A81214A83BB006723ED /* TeilnehmerTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A80214A83BB006723ED /* TeilnehmerTVCell.swift */; };
@@ -107,6 +108,7 @@
 		0186319B2146696900E5A9C2 /* HELG+Tableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Tableview.swift"; sourceTree = "<group>"; };
 		0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventViewController.swift; sourceTree = "<group>"; };
 		018631A12146C67E00E5A9C2 /* EventStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStruct.swift; sourceTree = "<group>"; };
+		01EE9C18214BB7CF0014E1CB /* BackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		01F44A7C214A80DE006723ED /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		01F44A7E214A8191006723ED /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		01F44A80214A83BB006723ED /* TeilnehmerTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeilnehmerTVCell.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				01F44A86214AABED006723ED /* ProfileController.swift */,
+				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* ProfileModel.swift */,
 				01F44A7E214A8191006723ED /* CustomImageView.swift */,
 			);
@@ -478,6 +481,7 @@
 				016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */,
 				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
 				01462E45213FDA9600D4144B /* CalendarSettings.swift in Sources */,
+				01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */,
 				015416BB214941EF006A1A02 /* EventModel.swift in Sources */,
 				01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,

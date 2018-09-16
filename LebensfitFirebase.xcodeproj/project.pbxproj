@@ -28,7 +28,6 @@
 		01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E52213FF5A000D4144B /* CalendarExtensions.swift */; };
 		0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153FAD82141781A00D1B5BB /* WeekView.swift */; };
 		015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */; };
-		015416BB214941EF006A1A02 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416BA214941EF006A1A02 /* EventModel.swift */; };
 		015416BD21495C35006A1A02 /* TeilnehmerTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416BC21495C35006A1A02 /* TeilnehmerTV.swift */; };
 		0159AA2C2147B0C7005134A3 /* APITermin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159AA2B2147B0C7005134A3 /* APITermin.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
@@ -85,7 +84,6 @@
 		01462E52213FF5A000D4144B /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		0153FAD82141781A00D1B5BB /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewExtensionMethods.swift; sourceTree = "<group>"; };
-		015416BA214941EF006A1A02 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		015416BC21495C35006A1A02 /* TeilnehmerTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeilnehmerTV.swift; sourceTree = "<group>"; };
 		0159AA2B2147B0C7005134A3 /* APITermin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITermin.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,8 +222,8 @@
 				0120D634213D97A000B007E7 /* Navigation */,
 				01F44A84214AA99E006723ED /* Structures */,
 				010BC26F213D91D900530B2D /* Tabs */,
+				FEA8AB77214EA194001E1E7E /* BaseClasses */,
 				010165E0213D7A290025BB3F /* Extensions */,
-				010BC27B213D926800530B2D /* BaseCell.swift */,
 				016BA8AA213D777600ADAA65 /* Info.plist */,
 				016BA8A2213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld */,
 				016BA8B0213D784500ADAA65 /* GoogleService-Info.plist */,
@@ -302,7 +300,6 @@
 				015416BC21495C35006A1A02 /* TeilnehmerTV.swift */,
 				01F44A80214A83BB006723ED /* TeilnehmerTVCell.swift */,
 				01F44A82214A8757006723ED /* APIEvent.swift */,
-				015416BA214941EF006A1A02 /* EventModel.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 				01F44A86214AABED006723ED /* ProfileController.swift */,
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
-				01F44A7E214A8191006723ED /* CustomImageView.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -342,6 +338,15 @@
 				5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FEA8AB77214EA194001E1E7E /* BaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				01F44A7E214A8191006723ED /* CustomImageView.swift */,
+				010BC27B213D926800530B2D /* BaseCell.swift */,
+			);
+			path = BaseClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,7 +487,6 @@
 				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
 				01462E45213FDA9600D4144B /* CalendarSettings.swift in Sources */,
 				01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */,
-				015416BB214941EF006A1A02 /* EventModel.swift in Sources */,
 				01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
 				0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */,

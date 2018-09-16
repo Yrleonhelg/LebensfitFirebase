@@ -51,6 +51,7 @@ class TerminController: UIViewController {
     
     //MARK: - Setup
     func setupNavBar() {
+        self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Kalender"
         self.navigationController?.navigationBar.prefersLargeTitles = false
         //let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(changeTheme))

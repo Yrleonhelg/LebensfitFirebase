@@ -18,7 +18,6 @@ extension ProfileController {
             if uid == Auth.auth().currentUser?.uid {
                 //self.navigationItem.title = self.user?.username
             }
-            //self.reloadInputViews()
         }
     }
 }

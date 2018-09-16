@@ -176,6 +176,7 @@ class SingleEventViewController: UIViewController {
     }
     
     func setupNavBar() {
+        self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Event"
     }
     
@@ -251,7 +252,7 @@ class SingleEventViewController: UIViewController {
         return result
     }
     
-    //hardcoded method to set a string for the location //TODO
+    //hardcoded method to set a string for the location //TODO: make smooth
     func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
         if location.latitude == EventLocationStruct.turnhalleEisenwerk.latitude && location.longitude == EventLocationStruct.turnhalleEisenwerk.longitude {
             return "Turnhalle Eisenwerk, Frauenfeld"
@@ -296,6 +297,14 @@ class SingleEventViewController: UIViewController {
             self.mapView.image = snapshot?.image
         }
     }
+    
+    //MARK: - Navigation
+    func gotoProfile(clickedUID: String) {
+        let selectedProfile = ProfileController()
+        selectedProfile.userId = clickedUID
+        self.navigationController?.pushViewController(selectedProfile, animated: true)
+    }
+    
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

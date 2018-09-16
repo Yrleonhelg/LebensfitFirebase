@@ -8,33 +8,47 @@
 
 import UIKit
 
-class BackView: UIImageView {
+class BackView: CustomImageView {
     
     var thisframe: CGRect
-    var anImage: UIImage? {
+    var whiteValue: CGFloat
+    var blackValue: CGFloat
+    
+    override var image: UIImage? {
         didSet {
             setupImage()
         }
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, white: CGFloat, black: CGFloat) {
         self.thisframe = frame
+        self.whiteValue = white
+        self.blackValue = black
         super.init(frame: .zero)
-        self.anImage = UIImage(named: "gray")
-        //setupImage()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.image = UIImage(named: "blue")
+        self.backgroundColor = .green
+        setupImage()
     }
     
     func setupImage() {
-        self.image = anImage
+        normal.image = image
+        self.addSubview(normal)
         self.addSubview(blurry)
-        self.addSubview(blacky)
-        self.layer.insertSublayer(gradientLayer, at: 1)
-        print(gradientLayer.bounds)
+        if whiteValue > 0.0 {
+            self.addSubview(whitey)
+        }
+        if blackValue > 0.0 {
+            self.addSubview(blacky)
+        }
+        gradientLayer.removeFromSuperlayer()
+        self.layer.insertSublayer(gradientLayer, at: 4)
     }
+    lazy var normal: UIImageView = {
+        let view = UIImageView()
+        view.image = image
+        view.frame = thisframe
+        return view
+    }()
     
     lazy var blurry: UIVisualEffectView = {
         let blur = UIVisualEffectView()
@@ -46,9 +60,17 @@ class BackView: UIImageView {
     lazy var blacky: UIImageView = {
         let black = UIImageView()
         black.backgroundColor = .black
-        black.alpha = 0.5
+        black.alpha = blackValue
         black.frame = (thisframe)
         return black
+    }()
+    
+    lazy var whitey: UIImageView = {
+        let white = UIImageView()
+        white.backgroundColor = .white
+        white.alpha = whiteValue
+        white.frame = (thisframe)
+        return white
     }()
     
     lazy var gradientLayer: CAGradientLayer = {
@@ -62,31 +84,9 @@ class BackView: UIImageView {
     }()
     
     //MARK: - Properties & Variables
-    var lastURLUsedToLoadImage: String?
-    
-    //MARK: - Methods
-    func loadImage(urlString: String) {
-        lastURLUsedToLoadImage = urlString
-        
-        if let cachedImage = imageCache[urlString] {
-            self.image = cachedImage
-            return
-        }
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            if let err = err { print("Failed to fetch post image:", err); return }
-            if url.absoluteString != self.lastURLUsedToLoadImage { return }
-            
-            guard let imageData = data else { return }
-            let photoImage = UIImage(data: imageData)
-            imageCache[url.absoluteString] = photoImage
-            
-            DispatchQueue.main.async {
-                
-                self.anImage = photoImage
-            }
-            }.resume()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+
 }
 

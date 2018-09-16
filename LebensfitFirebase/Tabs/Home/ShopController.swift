@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ShopController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: - View Loading
     override func viewDidLoad() {

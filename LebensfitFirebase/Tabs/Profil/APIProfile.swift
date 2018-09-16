@@ -15,8 +15,10 @@ extension ProfileController {
         let uid = userId ?? (Auth.auth().currentUser?.uid ?? "")
         Database.fetchUserWithUID(uid: uid) { (user) in
             self.user = user
-            self.navigationItem.title = self.user?.username
-            self.reloadInputViews()
+            if uid == Auth.auth().currentUser?.uid {
+                //self.navigationItem.title = self.user?.username
+            }
+            //self.reloadInputViews()
         }
     }
 }

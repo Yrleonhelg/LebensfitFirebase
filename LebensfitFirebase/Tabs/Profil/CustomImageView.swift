@@ -10,6 +10,7 @@ import UIKit
 
 var imageCache = [String: UIImage]()
 
+
 class CustomImageView: UIImageView {
     //MARK: - Properties & Variables
     var lastURLUsedToLoadImage: String?
@@ -35,6 +36,7 @@ class CustomImageView: UIImageView {
             DispatchQueue.main.async {
                 
                 self.image = photoImage
+                
             }
             }.resume()
     }

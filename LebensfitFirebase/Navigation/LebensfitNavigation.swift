@@ -18,9 +18,13 @@ class LebensfitNavigation: UINavigationController {
 
 extension UINavigationController {
     func setNavigationBarDefault() {
-       
         self.navigationBar.isTranslucent = false
-        self.navigationBar.prefersLargeTitles = true
+        self.navigationBar.prefersLargeTitles = false
+        
+        self.navigationController?.navigationBar.barTintColor = LebensfitSettings.Colors.buttonBG
+        self.navigationController?.navigationBar.backgroundColor = LebensfitSettings.Colors.buttonBG
+
+        
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.navigationBar.tintColor = LebensfitSettings.Colors.darkRed
 

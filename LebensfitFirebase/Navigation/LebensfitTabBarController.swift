@@ -57,7 +57,7 @@ class LebensfitTabBarController: UITabBarController {
         calendarNavigationController.title = "Kalender"
         
         //Home / videos
-        let homeController = HomeController(collectionViewLayout: UICollectionViewFlowLayout())
+        let homeController = ShopController(collectionViewLayout: UICollectionViewFlowLayout())
         let homeNavigationController = LebensfitNavigation(rootViewController: homeController)
         homeNavigationController.title = "Home"
         homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: homeImage, tag: 0)
@@ -70,6 +70,7 @@ class LebensfitTabBarController: UITabBarController {
         
         //profile
         let profileController = ProfileController()
+        profileController.userId = Auth.auth().currentUser?.uid
         let profileNavigationController = LebensfitNavigation(rootViewController: profileController)
         profileNavigationController.title = "Profil"
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: aboutImage, tag: 0)

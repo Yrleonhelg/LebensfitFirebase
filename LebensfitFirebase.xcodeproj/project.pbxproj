@@ -10,7 +10,7 @@
 		010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC26D213D914900530B2D /* LebensfitTabBarController.swift */; };
 		010BC274213D920900530B2D /* ProfileControllerold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC270213D920800530B2D /* ProfileControllerold.swift */; };
 		010BC275213D920900530B2D /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC271213D920800530B2D /* MapController.swift */; };
-		010BC276213D920900530B2D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC272213D920800530B2D /* HomeController.swift */; };
+		010BC276213D920900530B2D /* ShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC272213D920800530B2D /* ShopController.swift */; };
 		010BC277213D920900530B2D /* TerminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC273213D920800530B2D /* TerminController.swift */; };
 		010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC278213D924A00530B2D /* LebensfitSettings.swift */; };
 		010BC27C213D926800530B2D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27A213D926800530B2D /* ActivityCell.swift */; };
@@ -30,7 +30,7 @@
 		015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */; };
 		015416BB214941EF006A1A02 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416BA214941EF006A1A02 /* EventModel.swift */; };
 		015416BD21495C35006A1A02 /* TeilnehmerTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416BC21495C35006A1A02 /* TeilnehmerTV.swift */; };
-		0159AA2C2147B0C7005134A3 /* EventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159AA2B2147B0C7005134A3 /* EventHandling.swift */; };
+		0159AA2C2147B0C7005134A3 /* APITermin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159AA2B2147B0C7005134A3 /* APITermin.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
 		016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* SignUpController.swift */; };
 		016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA89F213D777500ADAA65 /* Main.storyboard */; };
@@ -53,9 +53,9 @@
 		01F44A7D214A80DE006723ED /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7C214A80DE006723ED /* UserSearchCell.swift */; };
 		01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7E214A8191006723ED /* CustomImageView.swift */; };
 		01F44A81214A83BB006723ED /* TeilnehmerTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A80214A83BB006723ED /* TeilnehmerTVCell.swift */; };
-		01F44A83214A8757006723ED /* UserFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A82214A8757006723ED /* UserFetch.swift */; };
+		01F44A83214A8757006723ED /* APIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A82214A8757006723ED /* APIEvent.swift */; };
 		01F44A87214AABED006723ED /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A86214AABED006723ED /* ProfileController.swift */; };
-		01F44A89214AB0AC006723ED /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A88214AB0AC006723ED /* ProfileModel.swift */; };
+		01F44A89214AB0AC006723ED /* APIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A88214AB0AC006723ED /* APIProfile.swift */; };
 		01F44A8B214AB250006723ED /* HELG+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A8A214AB250006723ED /* HELG+Firebase.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
 		FECC8FB32143306A007F3F3F /* HELG+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* HELG+View.swift */; };
@@ -67,7 +67,7 @@
 		010BC26D213D914900530B2D /* LebensfitTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitTabBarController.swift; sourceTree = "<group>"; };
 		010BC270213D920800530B2D /* ProfileControllerold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileControllerold.swift; sourceTree = "<group>"; };
 		010BC271213D920800530B2D /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
-		010BC272213D920800530B2D /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		010BC272213D920800530B2D /* ShopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopController.swift; sourceTree = "<group>"; };
 		010BC273213D920800530B2D /* TerminController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminController.swift; sourceTree = "<group>"; };
 		010BC278213D924A00530B2D /* LebensfitSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitSettings.swift; sourceTree = "<group>"; };
 		010BC27A213D926800530B2D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewExtensionMethods.swift; sourceTree = "<group>"; };
 		015416BA214941EF006A1A02 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		015416BC21495C35006A1A02 /* TeilnehmerTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeilnehmerTV.swift; sourceTree = "<group>"; };
-		0159AA2B2147B0C7005134A3 /* EventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandling.swift; sourceTree = "<group>"; };
+		0159AA2B2147B0C7005134A3 /* APITermin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITermin.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016BA89B213D777500ADAA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016BA89D213D777500ADAA65 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -112,9 +112,9 @@
 		01F44A7C214A80DE006723ED /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		01F44A7E214A8191006723ED /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		01F44A80214A83BB006723ED /* TeilnehmerTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeilnehmerTVCell.swift; sourceTree = "<group>"; };
-		01F44A82214A8757006723ED /* UserFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFetch.swift; sourceTree = "<group>"; };
+		01F44A82214A8757006723ED /* APIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEvent.swift; sourceTree = "<group>"; };
 		01F44A86214AABED006723ED /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
-		01F44A88214AB0AC006723ED /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		01F44A88214AB0AC006723ED /* APIProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProfile.swift; sourceTree = "<group>"; };
 		01F44A8A214AB250006723ED /* HELG+Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Firebase.swift"; sourceTree = "<group>"; };
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				010BC273213D920800530B2D /* TerminController.swift */,
-				0159AA2B2147B0C7005134A3 /* EventHandling.swift */,
+				0159AA2B2147B0C7005134A3 /* APITermin.swift */,
 				01462E52213FF5A000D4144B /* CalendarExtensions.swift */,
 				01462E44213FDA9600D4144B /* CalendarSettings.swift */,
 				0153FAD62141778F00D1B5BB /* Month */,
@@ -250,7 +250,7 @@
 		0186103C213E6A250037DADB /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				010BC272213D920800530B2D /* HomeController.swift */,
+				010BC272213D920800530B2D /* ShopController.swift */,
 				010BC27A213D926800530B2D /* ActivityCell.swift */,
 			);
 			path = Home;
@@ -301,7 +301,7 @@
 				0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */,
 				015416BC21495C35006A1A02 /* TeilnehmerTV.swift */,
 				01F44A80214A83BB006723ED /* TeilnehmerTVCell.swift */,
-				01F44A82214A8757006723ED /* UserFetch.swift */,
+				01F44A82214A8757006723ED /* APIEvent.swift */,
 				015416BA214941EF006A1A02 /* EventModel.swift */,
 			);
 			path = Event;
@@ -321,7 +321,7 @@
 			children = (
 				01F44A86214AABED006723ED /* ProfileController.swift */,
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
-				01F44A88214AB0AC006723ED /* ProfileModel.swift */,
+				01F44A88214AB0AC006723ED /* APIProfile.swift */,
 				01F44A7E214A8191006723ED /* CustomImageView.swift */,
 			);
 			path = Profil;
@@ -486,19 +486,19 @@
 				01462E53213FF5A000D4144B /* CalendarExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
 				0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */,
-				0159AA2C2147B0C7005134A3 /* EventHandling.swift in Sources */,
+				0159AA2C2147B0C7005134A3 /* APITermin.swift in Sources */,
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
 				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
 				01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */,
-				01F44A83214A8757006723ED /* UserFetch.swift in Sources */,
+				01F44A83214A8757006723ED /* APIEvent.swift in Sources */,
 				FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */,
 				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
-				010BC276213D920900530B2D /* HomeController.swift in Sources */,
+				010BC276213D920900530B2D /* ShopController.swift in Sources */,
 				018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */,
 				015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */,
-				01F44A89214AB0AC006723ED /* ProfileModel.swift in Sources */,
+				01F44A89214AB0AC006723ED /* APIProfile.swift in Sources */,
 				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				015416BD21495C35006A1A02 /* TeilnehmerTV.swift in Sources */,
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,

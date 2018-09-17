@@ -10,45 +10,45 @@ import UIKit
 
 class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     //MARK: - Properties & Variables
-    var isCurrentDay: Bool = false
-    var isSelected: Bool = false
-    var myDate = Date()
-    let padding: CGFloat = 20
+    var isCurrentDay: Bool  = false
+    var isSelected: Bool    = false
+    var myDate              = Date()
+    let padding: CGFloat    = 20
     
     //MARK: - GUI Objects
     let dayLabel: UILabel = {
-        let label = UILabel()
+        let label       = UILabel()
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font      = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     let dateLabel: UILabel = {
-        let label = UILabel()
+        let label       = UILabel()
         label.textColor = .gray
-        label.text = "1. Jan. 2018"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.text      = "1. Jan. 2018"
+        label.font      = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
     let chevronLabel: UILabel = {
-        let label = UILabel()
+        let label       = UILabel()
         label.textColor = .black
-        label.text = "›"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text      = "›"
+        label.font      = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     let selectionDot: UIView = {
-        let sv = UIView()
-        //sv.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        sv.backgroundColor = CalendarSettings.Colors.darkRed
-        sv.layer.cornerRadius = 7.5
+        let sv                  = UIView()
+        //sv.frame              = CGRect(x: 0, y: 0, width: 20, height: 20)
+        sv.backgroundColor      = CalendarSettings.Colors.darkRed
+        sv.layer.cornerRadius   = 7.5
         return sv
     }()
     
     let bottomDividerView: UIView = {
-        let tdv = UIView()
+        let tdv             = UIView()
         tdv.backgroundColor = UIColor.lightGray
         return tdv
     }()
@@ -56,10 +56,10 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     //MARK: - Init & View Loading
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.backgroundView = UIView(frame: self.bounds)
-        self.backgroundView?.backgroundColor = .clear
-        self.tintColor = .white
-        self.isUserInteractionEnabled = true
+        self.backgroundView                     = UIView(frame: self.bounds)
+        self.backgroundView?.backgroundColor    = .clear
+        self.tintColor                          = .white
+        self.isUserInteractionEnabled           = true
         setupViews()
         confBoundsDefault()
     }

@@ -14,6 +14,7 @@ protocol WeekViewDelegate: class {
 }
 
 class WeekOverView: UIView {
+    
     //MARK: - Properties & Variables
     var currentYear: Int = 0
     var currentWeek: Int = 0
@@ -21,12 +22,11 @@ class WeekOverView: UIView {
     
     //MARK: - GUI Objects
     let currentWeekLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "Default Month / Year"
-        lbl.textColor = CalendarSettings.Style.monthViewLblColor
-        lbl.textAlignment = .center
+        let lbl             = UILabel()
+        lbl.text            = "Default Month / Year"
+        lbl.textColor       = CalendarSettings.Style.monthViewLblColor
+        lbl.textAlignment   = .center
         lbl.font = UIFont.boldSystemFont(ofSize: 16)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()
     
@@ -54,9 +54,9 @@ class WeekOverView: UIView {
         setupViews()
         confBounds()
         
-        previousWeekButton.isEnabled=false
-        currentYear = Calendar.current.component(.year, from: Date())
-        currentWeek = Calendar.current.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
+        previousWeekButton.isEnabled    = false
+        currentYear                     = Calendar.current.component(.year, from: Date())
+        currentWeek                     = Calendar.current.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
         
         setValues(week: currentWeek, Year: currentYear)
     }
@@ -69,8 +69,9 @@ class WeekOverView: UIView {
     }
     
     func confBounds(){
-        currentWeekLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         currentWeekLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
+        currentWeekLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
         previousWeekButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
         nextWeekButton.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
     }

@@ -12,7 +12,7 @@ class WeekdayView: UIView {
     
     //MARK: - GUI Objects
     let stackView: UIStackView = {
-        let sv = UIStackView()
+        let sv          = UIStackView()
         sv.distribution = .fillEqually
         return sv
     }()
@@ -38,10 +38,10 @@ class WeekdayView: UIView {
     func setupValues() {
         var daysArr = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
         for i in 0..<7 {
-            let lbl=UILabel()
-            lbl.text=daysArr[i]
-            lbl.textAlignment = .center
-            lbl.textColor = CalendarSettings.Style.weekdaysLblColor
+            let lbl             = UILabel()
+            lbl.text            = daysArr[i]
+            lbl.textAlignment   = .center
+            lbl.textColor       = CalendarSettings.Style.weekdaysLblColor
             stackView.addArrangedSubview(lbl)
         }
     }

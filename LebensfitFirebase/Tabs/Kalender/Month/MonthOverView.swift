@@ -14,23 +14,23 @@ protocol MonthViewDelegate: class {
 
 class MonthOverView: UIView {
     //MARK: - Properties & Variables
-    var monthsArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    var currentMonthIndex = 0
-    var currentYear: Int = 0
+    var monthsArr           = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    var currentMonthIndex   = 0
+    var currentYear: Int    = 0
     var delegate: MonthViewDelegate?
     
     //MARK: - GUI Objects
     let currentMonthLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.text = "Default Month / Year"
-        lbl.textColor = CalendarSettings.Style.monthViewLblColor
-        lbl.textAlignment = .center
+        let lbl             = UILabel()
+        lbl.text            = "Default Month / Year"
+        lbl.textColor       = CalendarSettings.Style.monthViewLblColor
+        lbl.textAlignment   = .center
         lbl.font = UIFont.boldSystemFont(ofSize: 16)
         return lbl
     }()
     
     let nextMonthButton: UIButton = {
-        let btn=UIButton()
+        let btn = UIButton()
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(CalendarSettings.Style.monthViewBtnRightColor, for: .normal)
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
@@ -38,7 +38,7 @@ class MonthOverView: UIView {
     }()
     
     let previousMonthButton: UIButton = {
-        let btn=UIButton()
+        let btn = UIButton()
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(CalendarSettings.Style.monthViewBtnLeftColor, for: .normal)
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)

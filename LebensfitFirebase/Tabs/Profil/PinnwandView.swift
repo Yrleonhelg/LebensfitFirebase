@@ -12,18 +12,18 @@ class PinnwandView: UIView {
     
     //MARK: - GUI Objects
     let ueberMich: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Über Leon Helg:"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Über Leon Helg:"
         label.textColor = .white
         return label
     }()
     
     let steckbriefLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "Cooler Typ, - Umur Hackerman"
-        label.textColor = UIColor.gray
+        let label           = UILabel()
+        label.font          = UIFont.systemFont(ofSize: 16)
+        label.text          = "Cooler Typ, - Umur Hackerman"
+        label.textColor     = UIColor.gray
         label.numberOfLines = 0
         return label
     }()

@@ -32,10 +32,10 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Setup
     func setupTableView() {
-        participantsTableView.delegate = self
-        participantsTableView.dataSource = self
+        participantsTableView.delegate      = self
+        participantsTableView.dataSource    = self
         participantsTableView.register(TeilnehmerTVCell.self, forCellReuseIdentifier: TeilnehmerTVCell.reuseIdentifier)
-        participantsTableView.tintColor = .white
+        participantsTableView.tintColor     = .white
     }
     
     func setupViews() {
@@ -57,8 +57,8 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
-        row.user = users[indexPath.row]
+        let row     = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
+        row.user    = users[indexPath.row]
         row.confBounds()
         return row
     }

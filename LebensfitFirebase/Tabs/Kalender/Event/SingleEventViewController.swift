@@ -31,18 +31,18 @@ class SingleEventViewController: UIViewController {
     }()
     
     let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.text = "Titel"
+        let label       = UILabel()
+        label.font      = UIFont.boldSystemFont(ofSize: 25)
+        label.text      = "Titel"
         label.textColor = .black
         return label
     }()
     
     let locationLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "Standort"
-        label.textColor = CalendarSettings.Colors.darkRed
+        let label           = UILabel()
+        label.font          = UIFont.systemFont(ofSize: 16)
+        label.text          = "Standort"
+        label.textColor     = CalendarSettings.Colors.darkRed
         label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.isUserInteractionEnabled = true
@@ -50,81 +50,81 @@ class SingleEventViewController: UIViewController {
     }()
     
     let descLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "Beschreibung"
-        label.textColor = .gray
+        let label           = UILabel()
+        label.font          = UIFont.systemFont(ofSize: 16)
+        label.text          = "Beschreibung"
+        label.textColor     = .gray
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
     }()
     
     let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "1. Jan. 2018"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 16)
+        label.text      = "1. Jan. 2018"
         label.textColor = .gray
         return label
     }()
     
     let timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "Von jetzt bis jetzt"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 16)
+        label.text      = "Von jetzt bis jetzt"
         label.textColor = .gray
         return label
     }()
     
     let mapView: UIImageView = {
-        let view = UIImageView()
-        view.clipsToBounds = true
-        view.layer.borderWidth = 0
+        let view                = UIImageView()
+        view.clipsToBounds      = true
+        view.layer.borderWidth  = 0
         view.layer.cornerRadius = 10
-        view.contentMode = .scaleAspectFill
+        view.contentMode        = .scaleAspectFill
         view.isUserInteractionEnabled = true
         return view
     }()
     
     let mapLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "Frauenfeld"
-        label.textColor = LebensfitSettings.Colors.darkRed
+        let label           = UILabel()
+        label.font          = UIFont.systemFont(ofSize: 16)
+        label.text          = "Frauenfeld"
+        label.textColor     = LebensfitSettings.Colors.darkRed
         label.textAlignment = .center
         return label
     }()
     
     let notizenLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Notizen"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Notizen"
         label.textColor = .black
         return label
     }()
     
     let teilnehmerLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Teilnehmer"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Teilnehmer"
         label.textColor = .black
         return label
     }()
     
     let teilnehmerTV: TeilnehmerTableView = {
-        let tvt = TeilnehmerTableView()
+        let tvt             = TeilnehmerTableView()
         tvt.backgroundColor = .brown
         return tvt
     }()
     
     let buttonDividerView: UIView = {
-        let tdv = UIView()
+        let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
     }()
     
     let participateButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = CalendarSettings.Colors.buttonBG
+        let button              = UIButton()
+        button.backgroundColor  = CalendarSettings.Colors.buttonBG
         button.setTitle("Teilnehmen", for: .normal)
         button.setTitleColor(CalendarSettings.Colors.darkRed, for: .normal)
         return button
@@ -151,24 +151,24 @@ class SingleEventViewController: UIViewController {
     
     //MARK: - Setup
     func setupDefaultValues() {
-        eventName = thisEvent.eventName
-        eventDescription = thisEvent.eventDescription
-        eventLocation = thisEvent.eventLocation
-        eventStartingDate = thisEvent.eventStartingDate
-        eventFinishingDate = thisEvent.eventFinishingDate
-        eventNeedsApplication = thisEvent.eventNeedsApplication
+        eventName               = thisEvent.eventName
+        eventDescription        = thisEvent.eventDescription
+        eventLocation           = thisEvent.eventLocation
+        eventStartingDate       = thisEvent.eventStartingDate
+        eventFinishingDate      = thisEvent.eventFinishingDate
+        eventNeedsApplication   = thisEvent.eventNeedsApplication
     }
     
     func applyDefaultValues() {
         titleLabel.text = eventName
-        descLabel.text = eventDescription
+        descLabel.text  = eventDescription
         if let start = eventStartingDate, let finish = eventFinishingDate {
             timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
         }
         
         if let location = eventLocation {
-            locationLabel.text = getStringFromLocation(location: location)
-            mapLabel.text = getStringFromLocation(location: location)
+            locationLabel.text  = getStringFromLocation(location: location)
+            mapLabel.text       = getStringFromLocation(location: location)
         }
         if let date = eventStartingDate {
             dateLabel.text = formatDate(date: date)
@@ -300,8 +300,8 @@ class SingleEventViewController: UIViewController {
     
     //MARK: - Navigation
     func gotoProfile(clickedUID: String) {
-        let selectedProfile = ProfileController()
-        selectedProfile.userId = clickedUID
+        let selectedProfile     = ProfileController()
+        selectedProfile.userId  = clickedUID
         self.navigationController?.pushViewController(selectedProfile, animated: true)
     }
     

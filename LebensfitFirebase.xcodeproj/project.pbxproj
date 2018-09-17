@@ -322,9 +322,9 @@
 			children = (
 				01F44A86214AABED006723ED /* ProfileController.swift */,
 				FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */,
+				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
-				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";

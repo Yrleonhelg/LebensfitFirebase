@@ -16,30 +16,28 @@ struct expandableEvent {
 class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, WeekViewDelegate {
     
     //MARK: - Properties & Variables
-    let monthsShortArr = ["Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
-    let numOfDaysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
-    let WeekDays = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
-    var currentMonth: Int = 0
-    var currentYear: Int = 0
-    var currentWeek: Int = 0
-    var currentWeekDayIndex: Int = 0
-    var currentDayDate: Int = 0
-    var todaysDate = Date()
-    var presentDate = Date()
-    var presentYear = 0
-    var mondayOfPresentWeek = Date()
+    let monthsShortArr              = ["Jan", "Feb", "März", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
+    let numOfDaysInMonth            = [31,28,31,30,31,30,31,31,30,31,30,31]
+    let WeekDays                    = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+    var currentMonth: Int           = 0
+    var currentYear: Int            = 0
+    var currentWeek: Int            = 0
+    var currentWeekDayIndex: Int    = 0
+    var currentDayDate: Int         = 0
+    var todaysDate                  = Date()
+    var presentDate                 = Date()
+    var presentYear                 = 0
+    var mondayOfPresentWeek         = Date()
     var lastExpandedHeader: WeekDayHeader?
     
-    var twoDimensionalEventArray = [expandableEvent]()
+    var twoDimensionalEventArray    = [expandableEvent]()
     var parentVC: TerminController?
     
     
     
     //MARK: - GUI Objects
     let calendarTableView: UITableView = {
-        let ctv = UITableView()
-        //ctv.frame = .zero
-        ctv.translatesAutoresizingMaskIntoConstraints = false
+        let ctv     = UITableView()
         return ctv
     }()
     
@@ -51,8 +49,8 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        presentDate = Date()
+        self.backgroundColor    = UIColor.clear
+        presentDate             = Date()
         setupTheSetup()
     }
     
@@ -66,22 +64,22 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     
     //MARK: - Setup
     func setupTableView() {
-        calendarTableView.delegate = self
-        calendarTableView.dataSource = self
+        calendarTableView.delegate          = self
+        calendarTableView.dataSource        = self
+        calendarTableView.tintColor         = .white
+        calendarTableView.separatorStyle    = .none
         calendarTableView.register(EventTableCell.self, forCellReuseIdentifier: EventTableCell.reuseIdentifier)
         calendarTableView.register(WeekDayHeader.self, forHeaderFooterViewReuseIdentifier: WeekDayHeader.reuseIdentifier)
-        calendarTableView.tintColor = .white
-        calendarTableView.separatorStyle = .none
     }
     
     func setupValues() {
-        currentYear = Calendar.current.component(.year, from: presentDate)
-        currentMonth = Calendar.current.component(.month, from: presentDate)
-        currentWeek = Calendar.current.component(.weekOfYear, from: presentDate)
-        currentDayDate = Calendar.current.component(.day, from: presentDate)
+        currentYear         = Calendar.current.component(.year, from: presentDate)
+        currentMonth        = Calendar.current.component(.month, from: presentDate)
+        currentWeek         = Calendar.current.component(.weekOfYear, from: presentDate)
+        currentDayDate      = Calendar.current.component(.day, from: presentDate)
         currentWeekDayIndex = Calendar.current.component(.weekday, from: presentDate).formatedWeekDay
         mondayOfPresentWeek = presentDate.thisDate(value: -currentWeekDayIndex)
-        todaysDate = Date()
+        todaysDate          = Date()
         print(mondayOfPresentWeek)
     }
     
@@ -108,25 +106,25 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: WeekDayHeader.reuseIdentifier) as! WeekDayHeader
-        let headerTap = UITapGestureRecognizer(target: self, action: #selector(self.handleHeaderTap(sender:)))
-        headerTap.delegate = self
+        let view            = tableView.dequeueReusableHeaderFooterView(withIdentifier: WeekDayHeader.reuseIdentifier) as! WeekDayHeader
+        let headerTap       = UITapGestureRecognizer(target: self, action: #selector(self.handleHeaderTap(sender:)))
+        headerTap.delegate  = self
         view.addGestureRecognizer(headerTap)
-        view.tag = section
-        view.isSelected = false
-        view.dayLabel.text = WeekDays[section]
+        view.tag            = section
+        view.isSelected     = false
+        view.dayLabel.text  = WeekDays[section]
         
         
         //Calculate Date and Highlight if today
         let valuee = -(currentWeekDayIndex - (section))
         if section == currentWeekDayIndex && presentDate.noon == todaysDate.noon {
             view.confBoundsToday()
-            view.isCurrentDay = true
-            view.myDate = todaysDate
+            view.isCurrentDay   = true
+            view.myDate         = todaysDate
         } else {
             view.confBoundsDefault()
-            view.isCurrentDay = false
-            view.myDate = presentDate.thisDate(value: valuee)
+            view.isCurrentDay   = false
+            view.myDate         = presentDate.thisDate(value: valuee)
             view.removeDot()
         }
         

@@ -15,8 +15,8 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     var user: User? {
         didSet {
             print("set")
-            usernameLabel.text = user?.username
-            guard let profileImageUrl = user?.profileImageUrl else { return }
+            usernameLabel.text          = user?.username
+            guard let profileImageUrl   = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             if user?.uid == Auth.auth().currentUser?.uid {
                 usernameLabel.textColor = UIColor.green
@@ -26,16 +26,16 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     
     //MARK: - GUI Objects
     let profileImageView: CustomImageView = {
-        let iv = CustomImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
+        let iv              = CustomImageView()
+        iv.contentMode      = .scaleAspectFill
+        iv.clipsToBounds    = true
         return iv
     }()
     
     let usernameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Username"
-        label.font = UIFont.systemFont(ofSize: 20)
+        let label   = UILabel()
+        label.text  = "Username"
+        label.font  = UIFont.systemFont(ofSize: 20)
         return label
     }()
     
@@ -45,7 +45,6 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
         setupViews()
-        //confBounds()
     }
     
     
@@ -55,6 +54,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
         addSubview(usernameLabel)
     }
     
+    //called from rowforsection to provide the correct info from the start
     func confBounds(){
         let height = self.frame.height
         let pictureHeight = height - 10

@@ -11,24 +11,24 @@ import UIKit
 class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MonthViewDelegate {
     
     //MARK: - Properties & Variables
-    var numOfDaysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
-    var currentMonthIndex: Int = 0
-    var currentYear: Int = 0
-    var presentMonthIndex = 0
-    var presentYear = 0
-    var todaysDate = 0
-    var todayDayToPresentDay = 0
-    var presentDate = Date()
-    var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7
-    var currentWeekDay = Calendar.current.component(.weekday, from: Date())
+    var numOfDaysInMonth        = [31,28,31,30,31,30,31,31,30,31,30,31]
+    var currentMonthIndex: Int  = 0
+    var currentYear: Int        = 0
+    var presentMonthIndex       = 0
+    var presentYear             = 0
+    var todaysDate              = 0
+    var todayDayToPresentDay    = 0
+    var presentDate             = Date()
+    var firstWeekDayOfMonth     = 0   //(Sunday-Saturday 1-7
+    var currentWeekDay          = Calendar.current.component(.weekday, from: Date())
     var parentVC: TerminController?
     
     //MARK: - GUI Objects
     let calendarCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout          = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        let mcv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        let mcv             = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         mcv.showsHorizontalScrollIndicator = false
         mcv.backgroundColor = UIColor.clear
         mcv.allowsMultipleSelection = false
@@ -72,23 +72,23 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     //MARK: - Setup
     func setupValues() {
-        currentMonthIndex =     Calendar.current.component(.month, from: Date())
-        currentYear =           Calendar.current.component(.year, from: Date())
-        todaysDate =            Calendar.current.component(.day, from: Date())
-        firstWeekDayOfMonth =   getFirstWeekDay()
+        currentMonthIndex       = Calendar.current.component(.month, from: Date())
+        currentYear             = Calendar.current.component(.year, from: Date())
+        todaysDate              = Calendar.current.component(.day, from: Date())
+        firstWeekDayOfMonth     = getFirstWeekDay()
        
         
         //In Schaltjahren hat der Februar einen Tag mehr
         if currentMonthIndex == 2 && currentYear % 4 == 0 {
             numOfDaysInMonth[currentMonthIndex-1] = 29
         }
-        presentMonthIndex =     currentMonthIndex
-        presentYear =           currentYear
+        presentMonthIndex       = currentMonthIndex
+        presentYear             = currentYear
     }
     
     func setupCollectionView() {
-        calendarCollectionView.delegate=self
-        calendarCollectionView.dataSource=self
+        calendarCollectionView.delegate     = self
+        calendarCollectionView.dataSource   = self
         calendarCollectionView.register(DateCell.self, forCellWithReuseIdentifier: DateCell.reuseIdentifier)
     }
     

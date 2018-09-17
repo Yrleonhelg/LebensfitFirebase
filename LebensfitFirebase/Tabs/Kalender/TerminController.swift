@@ -16,19 +16,19 @@ enum currentTheme {
 
 class TerminController: UIViewController {
     //MARK: - Properties & Variables
-    var theme = currentTheme.light
+    var theme       = currentTheme.light
     
-    var eventArray = [Event]()
+    var eventArray  = [Event]()
     
     //MARK: - GUI Objects
     let segmentedController: UISegmentedControl = {
-        let items = ["Monat", "Woche"]
-        let frame = UIScreen.main.bounds
+        let items               = ["Monat", "Woche"]
+        let frame               = UIScreen.main.bounds
         
-        let sc = UISegmentedControl(items: items)
+        let sc                  = UISegmentedControl(items: items)
         sc.selectedSegmentIndex = 0
-        sc.frame = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
-        sc.layer.cornerRadius = 5.0
+        sc.frame                = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
+        sc.layer.cornerRadius   = 5.0
         return sc
     }()
     
@@ -54,8 +54,6 @@ class TerminController: UIViewController {
         self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Kalender"
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        //let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(changeTheme))
-        //self.navigationItem.rightBarButtonItem = rightBarBtn
         self.navigationItem.titleView = segmentedController
         segmentedController.addTarget(self, action: #selector(changeView(sender:)), for: .valueChanged)
     }
@@ -102,12 +100,12 @@ class TerminController: UIViewController {
     
     @objc func changeTheme(sender: UIBarButtonItem) {
         if theme == .dark {
-            sender.title = "Dark"
-            theme = .light
+            sender.title    = "Dark"
+            theme           = .light
             CalendarSettings.Style.themeLight()
         } else {
-            sender.title = "Light"
-            theme = .dark
+            sender.title    = "Light"
+            theme           = .dark
             CalendarSettings.Style.themeDark()
         }
         self.view.backgroundColor = CalendarSettings.Style.bgColor

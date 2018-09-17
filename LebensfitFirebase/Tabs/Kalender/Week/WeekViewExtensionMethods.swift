@@ -70,20 +70,20 @@ extension WeekView {
             if numberOfRows == 0 {
                 calendarTableView.insertRows(at: indexPaths, with: .fade)
             }
-            newHeaderView.chevronLabel.text = "⌄"
-            newHeaderView.dayLabel.textColor = CalendarSettings.Colors.darkRed
-            newHeaderView.chevronLabel.textColor = CalendarSettings.Colors.darkRed
-            newHeaderView.isSelected = true
-            lastExpandedHeader = newHeaderView
+            newHeaderView.chevronLabel.text         = "⌄"
+            newHeaderView.dayLabel.textColor        = CalendarSettings.Colors.darkRed
+            newHeaderView.chevronLabel.textColor    = CalendarSettings.Colors.darkRed
+            newHeaderView.isSelected                = true
+            lastExpandedHeader                      = newHeaderView
             
         } else {
             if numberOfRows != 0 {
                 calendarTableView.deleteRows(at: indexPaths, with: .fade)
             }
-            newHeaderView.chevronLabel.text = "›"
-            newHeaderView.dayLabel.textColor = .black
-            newHeaderView.chevronLabel.textColor = .black
-            newHeaderView.isSelected = false
+            newHeaderView.chevronLabel.text         = "›"
+            newHeaderView.dayLabel.textColor        = .black
+            newHeaderView.chevronLabel.textColor    = .black
+            newHeaderView.isSelected                = false
         }
     }
     
@@ -102,18 +102,18 @@ extension WeekView {
     //Loops trough the parents array of events and puts the ones that are in the displayed week in an array (sorted by day).
     func setupArray() {
         twoDimensionalEventArray.removeAll()
-        guard let parent = parentVC else { return }
-        let numberOfWeekdays = 7
-        let lengthOfArray = parent.eventArray.count
+        guard let parent        = parentVC else { return }
+        let numberOfWeekdays    = 7
+        let lengthOfArray       = parent.eventArray.count
         
         for x in 0..<numberOfWeekdays {
-            let currentDay = mondayOfPresentWeek.thisDate(value: x)
-            var eventsToAddForThatDay = [Event]()
+            let currentDay              = mondayOfPresentWeek.thisDate(value: x)
+            var eventsToAddForThatDay   = [Event]()
             
             for i in 0..<lengthOfArray {
-                let event = parent.eventArray[i]
-                guard let eventStartTime = event.eventStartingDate else { return }
-                let isSameDay = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime)
+                let event                   = parent.eventArray[i]
+                guard let eventStartTime    = event.eventStartingDate else { return }
+                let isSameDay               = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime)
                 if isSameDay {
                     eventsToAddForThatDay.append(event)
                 }

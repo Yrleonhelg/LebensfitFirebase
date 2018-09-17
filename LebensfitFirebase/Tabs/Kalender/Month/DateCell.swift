@@ -11,20 +11,20 @@ import UIKit
 class DateCell: BaseCell, ReusableView {
     
     //MARK: - Properties & Variables
-    var cellSelected: Bool = false
-    var thisDay: Int = 0
-    var thisMonth: Int = 0
-    var thisYear: Int = 0
-    var myDate: Date = Date()
+    var cellSelected: Bool      = false
+    var thisDay:    Int         = 0
+    var thisMonth:  Int         = 0
+    var thisYear:   Int         = 0
+    var myDate:     Date        = Date()
     
     
     //MARK: - GUI Objects
     let dayLabel: UILabel = {
-        let label = UILabel()
-        label.text = "00"
+        let label           = UILabel()
+        label.text          = "00"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = CalendarSettings.Colors.darkGray
+        label.font          = UIFont.systemFont(ofSize: 16)
+        label.textColor     = CalendarSettings.Colors.darkGray
         return label
     }()
     
@@ -36,8 +36,8 @@ class DateCell: BaseCell, ReusableView {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.clear
-        layer.cornerRadius = frame.height/2
+        backgroundColor     = UIColor.clear
+        layer.cornerRadius  = frame.height/2
         layer.masksToBounds = true
         
     }

@@ -18,9 +18,9 @@ extension Date {
     }
     
     func getHourAndMinuteAsStringFromDate() -> (String){
-        let hour = Calendar.current.component(.hour, from: self)
+        let hour    = Calendar.current.component(.hour, from: self)
         let minutes = Calendar.current.component(.minute, from: self)
-        let string = "\(hour):\(minutes)"
+        let string  = "\(hour):\(minutes)"
         return string
     }
 }
@@ -28,8 +28,8 @@ extension Date {
 //get date from string
 extension String {
     static var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        let formatter           = DateFormatter()
+        formatter.dateFormat    = "yyyy-MM-dd"
         return formatter
     }()
     

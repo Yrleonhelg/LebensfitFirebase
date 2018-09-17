@@ -14,17 +14,17 @@ class EventTableCell: UITableViewCell, ReusableView {
     
     //MARK: - GUI Objects
     let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Titel"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Titel"
         label.textColor = .white
         return label
     }()
     
     let timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "11:00 bis 14:00"
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "11:00 bis 14:00"
         label.textColor = .white
         return label
     }()

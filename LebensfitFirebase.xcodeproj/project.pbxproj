@@ -56,6 +56,8 @@
 		01F44A87214AABED006723ED /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A86214AABED006723ED /* ProfileController.swift */; };
 		01F44A89214AB0AC006723ED /* APIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A88214AB0AC006723ED /* APIProfile.swift */; };
 		01F44A8B214AB250006723ED /* HELG+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A8A214AB250006723ED /* HELG+Firebase.swift */; };
+		FEA8AB79214FDAD2001E1E7E /* SteckbriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */; };
+		FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
 		FECC8FB32143306A007F3F3F /* HELG+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* HELG+View.swift */; };
 		FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB421455430007F3F3F /* HELG+Date.swift */; };
@@ -117,6 +119,8 @@
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteckbriefView.swift; sourceTree = "<group>"; };
+		FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandView.swift; sourceTree = "<group>"; };
 		FECC8FB22143306A007F3F3F /* HELG+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+View.swift"; sourceTree = "<group>"; };
 		FECC8FB421455430007F3F3F /* HELG+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Date.swift"; sourceTree = "<group>"; };
 		FECC8FB621455C46007F3F3F /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
@@ -317,8 +321,10 @@
 			isa = PBXGroup;
 			children = (
 				01F44A86214AABED006723ED /* ProfileController.swift */,
+				FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */,
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
+				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */,
 				01F44A83214A8757006723ED /* APIEvent.swift in Sources */,
 				FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */,
+				FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */,
 				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* ShopController.swift in Sources */,
@@ -508,6 +515,7 @@
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
 				01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */,
 				0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */,
+				FEA8AB79214FDAD2001E1E7E /* SteckbriefView.swift in Sources */,
 				01F44A8B214AB250006723ED /* HELG+Firebase.swift in Sources */,
 				010BC277213D920900530B2D /* TerminController.swift in Sources */,
 				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,

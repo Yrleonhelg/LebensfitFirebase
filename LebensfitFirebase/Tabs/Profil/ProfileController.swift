@@ -107,6 +107,35 @@ class ProfileController: UIViewController {
         return sv
     }()
     
+    let dividerView: UIView = {
+        let dv              = UIView()
+        dv.backgroundColor  = UIColor.lightGray
+        return dv
+    }()
+    
+    let segmentedController: UISegmentedControl = {
+        let items               = ["Steckbrief", "Pinnwand"]
+        let frame               = UIScreen.main.bounds
+        
+        let sc                  = UISegmentedControl(items: items)
+        sc.selectedSegmentIndex = 0
+        sc.frame                = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
+        sc.layer.cornerRadius   = 5.0
+        sc.tintColor            = .white
+        return sc
+    }()
+    
+    let steckbriefView: SteckbriefView = {
+        let sbv = SteckbriefView()
+        return sbv
+    }()
+    
+    let pinnwandView: PinnwandView = {
+        let pwv = PinnwandView()
+        return pwv
+    }()
+    
+    
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +144,12 @@ class ProfileController: UIViewController {
         setupViews()
         confBounds()
         fetchUser()
+        presentSteckbriefView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        setupNavBar()
     }
     
     //MARK: - Setup
@@ -149,6 +184,10 @@ class ProfileController: UIViewController {
         view.addSubview(profileImageView)
         view.addSubview(usernameLabel)
         view.addSubview(controlStackView)
+        view.addSubview(dividerView)
+        view.addSubview(segmentedController)
+        segmentedController.addTarget(self, action: #selector(changeView(sender:)), for: .valueChanged)
+        
     }
     
     func confBounds(){
@@ -167,12 +206,36 @@ class ProfileController: UIViewController {
         } else {
             controlStackView.anchor(top: usernameLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
         }
+        dividerView.anchor(top: controlStackView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        segmentedController.anchor(top: dividerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
+        
     }
     
     //MARK: - Methods
     @objc func resetNavBar() {
         setupNavBar()
         setupNavBarBackground()
+    }
+    
+    @objc func changeView(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 1:
+            presentPinnwandView()
+        default:
+            presentSteckbriefView()
+        }
+    }
+    
+    func presentSteckbriefView() {
+        pinnwandView.removeFromSuperview()
+        view.addSubview(steckbriefView)
+        steckbriefView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+    }
+    
+    func presentPinnwandView() {
+        steckbriefView.removeFromSuperview()
+        view.addSubview(pinnwandView)
+        pinnwandView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     @objc func handleLogOut() {

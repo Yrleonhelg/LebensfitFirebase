@@ -83,9 +83,7 @@ class TerminController: UIViewController {
         case 1:
             gotoWeekView()
         default:
-            weekView.removeFromSuperview()
-            view.addSubview(calendarView)
-            calendarView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
+            gotoMonthView()
         }
     }
     
@@ -94,6 +92,12 @@ class TerminController: UIViewController {
         view.addSubview(weekView)
         weekView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         weekView.setupTheSetup()
+    }
+    
+    func gotoMonthView() {
+        weekView.removeFromSuperview()
+        view.addSubview(calendarView)
+        calendarView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
     }
     
     @objc func changeTheme(sender: UIBarButtonItem) {

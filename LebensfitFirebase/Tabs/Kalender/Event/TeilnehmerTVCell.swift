@@ -50,7 +50,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     //MARK: - Init & View Loading
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
         setupViews()
     }
     
@@ -76,7 +76,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
         profileImageView.layer.borderColor = LebensfitSettings.Colors.darkRed.cgColor
         profileImageView.layer.borderWidth = 2
         addSubview(selectionDot)
-        selectionDot.anchor(top: nil, left: nil, bottom: nil, right: usernameLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 15, height: 15)
+        selectionDot.anchor(top: nil, left: nil, bottom: nil, right: usernameLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding/2, width: 15, height: 15)
         selectionDot.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor).isActive = true
     }
     

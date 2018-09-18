@@ -33,7 +33,7 @@ extension TeilnehmerTableView {
             })
             DispatchQueue.main.async( execute: {
                 self.participantsTableView.reloadData()
-                //self.parentVC?.teilnehmerLoaded()
+                self.parentVC?.teilnehmerLoaded()
             })
             
             

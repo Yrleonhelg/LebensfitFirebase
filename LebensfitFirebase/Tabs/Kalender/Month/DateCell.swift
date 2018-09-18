@@ -36,7 +36,7 @@ class DateCell: BaseCell, ReusableView {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor     = UIColor.clear
+        backgroundColor     = UIColor.white
         layer.cornerRadius  = frame.height/2
         layer.masksToBounds = true
         

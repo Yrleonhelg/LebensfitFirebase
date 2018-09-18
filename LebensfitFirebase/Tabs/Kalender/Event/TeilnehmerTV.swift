@@ -24,7 +24,7 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
         setupTableView()
         setupViews()
         confBounds()

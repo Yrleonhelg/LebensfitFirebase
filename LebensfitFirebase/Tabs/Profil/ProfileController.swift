@@ -20,7 +20,7 @@ class ProfileController: UIViewController {
             guard let profileImageUrl = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             backView.loadImage(urlString: profileImageUrl)
-            resetNavBar()
+            setupNavBar()
         }
     }
     
@@ -29,7 +29,7 @@ class ProfileController: UIViewController {
         let iv              = CustomImageView()
         iv.clipsToBounds    = true
         iv.contentMode      = .scaleAspectFill
-        iv.image            = UIImage(named: "profile_selected")
+        iv.image            = UIImage(named: "basePP")
         return iv
     }()
     
@@ -46,16 +46,6 @@ class ProfileController: UIViewController {
         let view    = BackView(frame: rectForBackView, white: 0.2, black: 0)
         //view.image  = UIImage(named: "")
         return view
-    }()
-    
-    let picture: UIImageView = {
-        let pic                 = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-        pic.clipsToBounds       = true
-        pic.contentMode         = .scaleAspectFill
-        pic.image               = UIImage(named: "plus_photo")
-        pic.layer.borderColor   = UIColor.white.cgColor
-        pic.layer.borderWidth   = 2
-        return pic
     }()
     
     let followButton: UIButton = {
@@ -139,14 +129,18 @@ class ProfileController: UIViewController {
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         setupNavBar()
-        setupViews()
-        confBounds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .black
+        setupViews()
+        confBounds()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if userId == Auth.auth().currentUser?.uid {
             user = CDUser.sharedInstance.loadUser()
         } else {
@@ -171,15 +165,8 @@ class ProfileController: UIViewController {
         }
         
         self.navigationController?.navigationBar.isTranslucent  = true
-        //self.navigationController?.navigationBar.barTintColor = .clear
-        //self.navigationController?.navigationBar.backgroundColor = .clear
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         self.navigationController?.navigationBar.shadowImage    = image
-
-        profileImageView.removeFromSuperview()
-        usernameLabel.removeFromSuperview()
-        setupViews()
-        confBounds()
     }
     
     func setupViews() {
@@ -203,7 +190,7 @@ class ProfileController: UIViewController {
             view.addSubview(followButton)
             followButton.anchor(top: usernameLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)
             followButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            followButton.addTarget(self, action: #selector (resetNavBar), for: .touchUpInside)
+            //followButton.addTarget(self, action: #selector (""), for: .touchUpInside)
             controlStackView.anchor(top: followButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
         } else {
             controlStackView.anchor(top: usernameLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
@@ -214,10 +201,6 @@ class ProfileController: UIViewController {
     }
     
     //MARK: - Methods
-    @objc func resetNavBar() {
-        setupNavBar()
-        setupNavBarBackground()
-    }
     
     @objc func changeView(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {

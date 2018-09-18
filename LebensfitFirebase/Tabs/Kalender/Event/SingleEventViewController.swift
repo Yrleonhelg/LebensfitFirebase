@@ -387,6 +387,7 @@ class SingleEventViewController: UIViewController {
     func gotoProfile(clickedUID: String) {
         let selectedProfile     = ProfileController()
         selectedProfile.userId  = clickedUID
+        print("clicked")
         DispatchQueue.main.async( execute: {
             self.navigationController?.pushViewController(selectedProfile, animated: true)
         })

@@ -49,7 +49,7 @@ class MonthOverView: UIView {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.white
         setupViews()
         confBounds()
         setDefaultValues()

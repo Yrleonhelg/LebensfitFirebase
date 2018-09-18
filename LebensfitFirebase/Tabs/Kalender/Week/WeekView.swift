@@ -172,7 +172,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let parent = parentVC else { return }
-        guard let id: Int32 = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID else { return }
+        let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID
         parent.gotoEvent(eventID: id)
     }
     

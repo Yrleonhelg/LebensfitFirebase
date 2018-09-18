@@ -17,7 +17,6 @@ enum currentTheme {
 class TerminController: UIViewController {
     //MARK: - Properties & Variables
     var theme       = currentTheme.light
-    
     var eventArray  = [Event]()
     
     //MARK: - GUI Objects

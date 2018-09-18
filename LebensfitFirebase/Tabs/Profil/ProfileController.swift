@@ -166,7 +166,9 @@ class ProfileController: UIViewController {
         
         self.navigationController?.navigationBar.isTranslucent  = true
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        self.navigationController?.navigationBar.shadowImage    = image
+        //self.navigationController?.navigationBar.shadowImage    = image
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        
     }
     
     func setupViews() {
@@ -242,6 +244,7 @@ class ProfileController: UIViewController {
     
     //MARK: - Do not change Methods
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarDefault()
+        self.user = nil
+        
     }
 }

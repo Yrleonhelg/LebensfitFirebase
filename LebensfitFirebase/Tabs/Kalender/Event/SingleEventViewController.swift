@@ -210,6 +210,11 @@ class SingleEventViewController: UIViewController {
         getSnapshotForLocation()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        teilnehmerTV.fetchUsers()
+    }
+    
     //MARK: - Setup
     func setupDefaultValues() {
         eventName               = thisEvent.eventName
@@ -265,7 +270,7 @@ class SingleEventViewController: UIViewController {
         scrollView.addSubview(descLabel)
         scrollView.addSubview(teilnehmerLabel)
         teilnehmerTV.parentVC = self
-        teilnehmerTV.fetchUsers()
+        
     }
     
     
@@ -391,6 +396,11 @@ class SingleEventViewController: UIViewController {
         DispatchQueue.main.async( execute: {
             self.navigationController?.pushViewController(selectedProfile, animated: true)
         })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        teilnehmerTV.users.removeAll()
     }
     
     //MARK: - Do not change Methods

@@ -24,6 +24,7 @@ class CDUser: NSObject {
 //            newUser.username = user.username
 //            newUser.email = user.email
 //            newUser.profileImageUrl = user.profileImageUrl
+            print(user.username)
         }
         
         do {
@@ -58,13 +59,14 @@ class CDUser: NSObject {
     func deleteUsers() {
         
         do {
+            try managedContext.save()
             let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
             try managedContext.execute(deleteRequest)
             try managedContext.save()
             print("Users deleted")
             
-        }catch let err { print(err) }
+        } catch let err { print(err) }
         
     }
 }

@@ -124,17 +124,20 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             cell.myDate = Date().thisDate(value: valuee)
             
             if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
-                cell.isUserInteractionEnabled=false
-                cell.dayLabel.textColor = UIColor.lightGray
+                cell.isUserInteractionEnabled   = false
+                cell.dayLabel.textColor         = UIColor.lightGray
             } else if calcDate == todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex{
-                cell.selectionView.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
-                cell.selectionView.layer.borderWidth = 1
-                cell.isUserInteractionEnabled=true
-                cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColor
-                //print("TODAY")
+                cell.selectionView.layer.borderColor    = CalendarSettings.Colors.darkRed.cgColor
+                cell.selectionView.layer.borderWidth    = 1
+                cell.isUserInteractionEnabled           = true
+                cell.dayLabel.textColor                 = CalendarSettings.Style.activeCellLblColor
             } else {
-                cell.isUserInteractionEnabled=true
+                cell.isUserInteractionEnabled = true
                 cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColor
+            }
+            
+            if isAnEventThisDay(date: Date().thisDate(value: valuee)) {
+                cell.thereIsAnEventView.backgroundColor = CalendarSettings.Colors.darkRed
             }
         }
         
@@ -145,6 +148,9 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else { return }
         cell.selectionView.backgroundColor = CalendarSettings.Colors.darkRed
         cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColorHighlighted
+        if cell.thereIsAnEventView.backgroundColor == CalendarSettings.Colors.darkRed {
+            cell.thereIsAnEventView.backgroundColor = .white
+        }
         
         //show event menu if double clicked on a cell
         if !cell.cellSelected {
@@ -179,6 +185,22 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     
     //MARK: - Methods
+    func isAnEventThisDay(date: Date) -> Bool {
+        guard let parent        = parentVC else { return false }
+        let lengthOfArray       = parent.eventArray.count
+        
+        for i in 0..<lengthOfArray {
+            let event                   = parent.eventArray[i]
+            if let eventStartTime       = event.eventStartingDate {
+                let isSameDay               = Calendar.current.isDate(date, inSameDayAs: eventStartTime as Date)
+                if isSameDay {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     func changeTheme() {
         calendarCollectionView.reloadData()
         
@@ -207,7 +229,6 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         currentMonthIndex = monthIndex+1
         currentYear = year
-        
         
         //In Schaltjahren hat der Februar einen Tag mehr
         if monthIndex == 1 {

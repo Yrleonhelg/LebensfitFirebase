@@ -28,6 +28,7 @@ extension UINavigationController {
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.navigationBar.tintColor = LebensfitSettings.Colors.darkRed
 
+
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .right

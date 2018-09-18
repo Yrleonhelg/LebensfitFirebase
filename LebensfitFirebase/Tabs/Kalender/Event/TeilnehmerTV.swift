@@ -13,7 +13,7 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
-    var users = [User]()
+    var users: [User]! = [User]()
     
     //MARK: - GUI Objects
     let participantsTableView: UITableView = {

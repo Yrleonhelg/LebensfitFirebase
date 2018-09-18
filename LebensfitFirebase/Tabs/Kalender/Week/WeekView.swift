@@ -158,7 +158,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         
         if let start = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventStartingDate {
             if let finish = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventFinishingDate {
-                //cell.timeLabel.text = "\(start.getHourAndMinuteAsStringFromDate() ) bis \(finish.getHourAndMinuteAsStringFromDate() )"
+                cell.timeLabel.text = "\(start.getHourAndMinuteAsStringFromDate() ) bis \(finish.getHourAndMinuteAsStringFromDate() )"
             }
         }
         return cell
@@ -172,8 +172,8 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         guard let parent = parentVC else { return }
-        //guard let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID else { return }
-        //parent.gotoEvent(eventID: id)
+        guard let id: Int32 = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID else { return }
+        parent.gotoEvent(eventID: id)
     }
     
     

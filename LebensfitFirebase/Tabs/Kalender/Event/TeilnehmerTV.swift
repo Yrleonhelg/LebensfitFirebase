@@ -12,7 +12,7 @@ import Firebase
 class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Properties & Variables
-    //var parentVC: SingleEventViewController?
+    var parentVC: SingleEventViewController?
     var users = [User]()
     
     //MARK: - GUI Objects
@@ -65,9 +65,9 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let id = users[indexPath.row].uid
-        //guard let parent = parentVC else { return }
-        //parent.gotoProfile(clickedUID: id)
+        guard let id = users[indexPath.row].uid else { return }
+        guard let parent = parentVC else { return }
+        parent.gotoProfile(clickedUID: id)
     }
     
     //MARK: - Methods

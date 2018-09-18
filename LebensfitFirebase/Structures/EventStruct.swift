@@ -1,137 +1,137 @@
-////
-////  EventStruct.swift
-////  LebensfitFirebase
-////
-////  Created by Leon on 10.09.18.
-////  Copyright © 2018 helgcreating. All rights reserved.
-////
 //
-//import UIKit
-//import MapKit
+//  EventStruct.swift
+//  LebensfitFirebase
 //
-////MARK: Protocol
-//protocol DefaultEvent {
-//    var eventName: String { get }
-//    var eventDescription: String { get }
-//}
+//  Created by Leon on 10.09.18.
+//  Copyright © 2018 helgcreating. All rights reserved.
 //
-//protocol AtLocation {
-//    var eventLocation: CLLocationCoordinate2D { get }
-//}
-//
-//
-//enum EventTypeEnum: DefaultEvent, AtLocation {
-//    case pilatesChair
-//    case flyingYogaAndPilates
-//    case kidsFit
-//    case pilatesFitMatte
-//    case businessYoga
-//    case taiJi
-//    case theraFitHit
-//    case feetUpYoga
-//    case yogaFit
-//    case rueckenFit
-//    case drumsAlive
-//    case fitImPark
-//    case yogaMitDaniUndRita
-//
-//    var eventName: String {
-//        switch self {
-//        case .pilatesChair:
-//            return EventNameStruct.pilatesChair
-//            
-//        case .flyingYogaAndPilates:
-//            return EventNameStruct.flyingYogaAndPilates
-//
-//        case .kidsFit:
-//            return EventNameStruct.kidsFit
-//
-//        case .pilatesFitMatte:
-//            return EventNameStruct.pilatesFitMatte
-//
-//        case .businessYoga:
-//            return EventNameStruct.businessYoga
-//
-//        case .taiJi:
-//            return EventNameStruct.taiJi
-//
-//        case .theraFitHit:
-//            return EventNameStruct.theraFitHit
-//
-//        case .feetUpYoga:
-//            return EventNameStruct.feetUpYoga
-//
-//        case .yogaFit:
-//            return EventNameStruct.yogaFit
-//
-//        case .rueckenFit:
-//            return EventNameStruct.rueckenFit
-//
-//        case .drumsAlive:
-//            return EventNameStruct.drumsAlive
-//
-//        case .fitImPark:
-//            return EventNameStruct.fitImPark
-//
-//        case .yogaMitDaniUndRita:
-//            return EventNameStruct.yogaMitDaniUndRita
-//
-////        default:
-////            return EventNameStruct.defaultName
-//        }
-//    }
-//
-//    var eventDescription: String {
-//        switch self {
-//        case .pilatesChair:
-//            return EventDescritionStruct.pialtesChairDesc
+
+import UIKit
+import MapKit
+
+//MARK: Protocol
+protocol DefaultEvent {
+    var eventName: String { get }
+    var eventDescription: String { get }
+}
+
+protocol AtLocation {
+    var eventLocation: CLLocationCoordinate2D { get }
+}
+
+
+enum EventTypeEnum: DefaultEvent, AtLocation {
+    case pilatesChair
+    case flyingYogaAndPilates
+    case kidsFit
+    case pilatesFitMatte
+    case businessYoga
+    case taiJi
+    case theraFitHit
+    case feetUpYoga
+    case yogaFit
+    case rueckenFit
+    case drumsAlive
+    case fitImPark
+    case yogaMitDaniUndRita
+
+    var eventName: String {
+        switch self {
+        case .pilatesChair:
+            return EventNameStruct.pilatesChair
+            
+        case .flyingYogaAndPilates:
+            return EventNameStruct.flyingYogaAndPilates
+
+        case .kidsFit:
+            return EventNameStruct.kidsFit
+
+        case .pilatesFitMatte:
+            return EventNameStruct.pilatesFitMatte
+
+        case .businessYoga:
+            return EventNameStruct.businessYoga
+
+        case .taiJi:
+            return EventNameStruct.taiJi
+
+        case .theraFitHit:
+            return EventNameStruct.theraFitHit
+
+        case .feetUpYoga:
+            return EventNameStruct.feetUpYoga
+
+        case .yogaFit:
+            return EventNameStruct.yogaFit
+
+        case .rueckenFit:
+            return EventNameStruct.rueckenFit
+
+        case .drumsAlive:
+            return EventNameStruct.drumsAlive
+
+        case .fitImPark:
+            return EventNameStruct.fitImPark
+
+        case .yogaMitDaniUndRita:
+            return EventNameStruct.yogaMitDaniUndRita
+
 //        default:
-//            return EventDescritionStruct.defaultDesc
-//        }
-//    }
-//
-//    var eventLocation: CLLocationCoordinate2D {
-//        switch self {
-//        case .pilatesChair:
-//            return EventLocationStruct.turnhalleEisenwerk
-//        default:
-//            return EventLocationStruct.zuercherStrasse
-//        }
-//    }
-//}
-//
-////MARK: Name
-//struct EventNameStruct {
-//    static var pilatesChair = "Pilates Chair"
-//    static var flyingYogaAndPilates = "Flying Yoga & Pilates"
-//    static var kidsFit = "Kids fit"
-//    static var pilatesFitMatte = "Pilates fit Matte"
-//    static var businessYoga = "Business Yoga"
-//    static var taiJi = "Tai Ji mit Christa"
-//    static var theraFitHit = "Thera fit Hit"
-//    static var feetUpYoga = "FeetUp® Yoga"
-//    static var yogaFit = "Yoga Fit"
-//    static var rueckenFit = "Rücken Fit"
-//    static var drumsAlive = "Drums Alive®"
-//    static var fitImPark = "Fit Im Park"
-//    static var yogaMitDaniUndRita = "Yoga mit Dani und Rita"
-//    static var defaultName = "Pilates"
-//}
-//
-////MARK: Description
-//struct EventDescritionStruct {
-//    static var pialtesChairDesc = "In diesem Kurs machen wir tolle Pilates Übungen mit einem Tisch ;)"
-//    static var defaultDesc = "In diesem Kurs sind alle die noch nichts mit Pilates am Hut haben, herzig willkommen."
-//}
-//
-////MARK: Location
-//struct EventLocationStruct {
-//    static var appleHC = CLLocationCoordinate2DMake(37.332077, -122.02962)
-//    static var zuerich = CLLocationCoordinate2DMake(47.366670, 8.55000)
-//    static var turnhalleEisenwerk = CLLocationCoordinate2D(latitude: 47.561088, longitude: 8.894019)
-//    static var zuercherStrasse = CLLocationCoordinate2D(latitude: 47.553217, longitude: 8.891721)
-//}
-//
+//            return EventNameStruct.defaultName
+        }
+    }
+
+    var eventDescription: String {
+        switch self {
+        case .pilatesChair:
+            return EventDescritionStruct.pialtesChairDesc
+        default:
+            return EventDescritionStruct.defaultDesc
+        }
+    }
+
+    var eventLocation: CLLocationCoordinate2D {
+        switch self {
+        case .pilatesChair:
+            return EventLocationStruct.turnhalleEisenwerk
+        default:
+            return EventLocationStruct.zuercherStrasse
+        }
+    }
+}
+
+//MARK: Name
+struct EventNameStruct {
+    static var pilatesChair = "Pilates Chair"
+    static var flyingYogaAndPilates = "Flying Yoga & Pilates"
+    static var kidsFit = "Kids fit"
+    static var pilatesFitMatte = "Pilates fit Matte"
+    static var businessYoga = "Business Yoga"
+    static var taiJi = "Tai Ji mit Christa"
+    static var theraFitHit = "Thera fit Hit"
+    static var feetUpYoga = "FeetUp® Yoga"
+    static var yogaFit = "Yoga Fit"
+    static var rueckenFit = "Rücken Fit"
+    static var drumsAlive = "Drums Alive®"
+    static var fitImPark = "Fit Im Park"
+    static var yogaMitDaniUndRita = "Yoga mit Dani und Rita"
+    static var defaultName = "Pilates"
+}
+
+//MARK: Description
+struct EventDescritionStruct {
+    static var pialtesChairDesc = "In diesem Kurs machen wir tolle Pilates Übungen mit einem Tisch ;)"
+    static var defaultDesc = "In diesem Kurs sind alle die noch nichts mit Pilates am Hut haben, herzig willkommen."
+}
+
+//MARK: Location
+struct EventLocationStruct {
+    static var appleHC = CLLocationCoordinate2DMake(37.332077, -122.02962)
+    static var zuerich = CLLocationCoordinate2DMake(47.366670, 8.55000)
+    static var turnhalleEisenwerk = CLLocationCoordinate2D(latitude: 47.561088, longitude: 8.894019)
+    static var zuercherStrasse = CLLocationCoordinate2D(latitude: 47.553217, longitude: 8.891721)
+}
+
 ////MARK: - Actuall Class
 //class Event {
 //    var eventID: Int?

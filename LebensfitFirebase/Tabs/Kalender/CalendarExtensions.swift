@@ -29,6 +29,19 @@ extension Date {
     }
 }
 
+extension NSDate {
+    func getHourAndMinuteAsStringFromDate() -> (String){
+        let hour    = Calendar.current.component(.hour, from: self as Date)
+        let minutes = Calendar.current.component(.minute, from: self as Date)
+        var minutesAsString: String = String(minutes)
+        while minutesAsString.count <= 1{
+            minutesAsString.insert("0", at: minutesAsString.startIndex)
+        }
+        let string  = "\(hour):\(minutesAsString)"
+        return string
+    }
+}
+
 //get date from string
 extension String {
     static var dateFormatter: DateFormatter = {

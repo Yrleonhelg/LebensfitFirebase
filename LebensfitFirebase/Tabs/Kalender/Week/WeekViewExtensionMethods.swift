@@ -113,10 +113,10 @@ extension WeekView {
             for i in 0..<lengthOfArray {
                 let event                   = parent.eventArray[i]
                 guard let eventStartTime    = event.eventStartingDate else { return }
-                //let isSameDay               = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime)
-                //if isSameDay {
-                    //eventsToAddForThatDay.append(event)
-                //}
+                let isSameDay               = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime as Date)
+                if isSameDay {
+                    eventsToAddForThatDay.append(event)
+                }
             }
             twoDimensionalEventArray.append(expandableEvent(isExpanded: false, events: eventsToAddForThatDay))
         }

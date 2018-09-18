@@ -16,9 +16,9 @@ class ProfileController: UIViewController {
     
     var user: User? {
         didSet {
+            usernameLabel.text = user?.username
             guard let profileImageUrl = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
-            usernameLabel.text = user?.username
             backView.loadImage(urlString: profileImageUrl)
             resetNavBar()
         }

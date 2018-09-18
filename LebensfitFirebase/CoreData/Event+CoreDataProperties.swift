@@ -25,9 +25,23 @@ extension Event {
     @NSManaged public var eventFinishingDate: NSDate?
     @NSManaged public var eventNeedsApplication: Bool
     @NSManaged public var eventIsOver: Bool
-    @NSManaged public var eventSureParticipants: NSSet?
+    @NSManaged public var eventSureParticipants: User?
     @NSManaged public var eventMaybeParticipants: NSSet?
     @NSManaged public var eventAdministrator: NSSet?
+    
+    convenience init(id: Int32, type: EventTypeEnum, start: NSDate, finish: NSDate, needsApplication: Bool?) {
+        let managedContext = PersistenceService.context
+        self.init(context: managedContext)
+        eventID = id
+        eventName = type.eventName
+        eventDescription = type.eventDescription
+        eventLocation = type.eventLocation as NSObject
+        eventStartingDate = start
+        eventFinishingDate = finish
+        if let app = needsApplication {
+            eventNeedsApplication = app
+        }
+    }
 
 }
 

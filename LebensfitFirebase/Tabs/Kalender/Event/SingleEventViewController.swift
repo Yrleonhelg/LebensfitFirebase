@@ -150,7 +150,7 @@ class SingleEventViewController: UIViewController {
         //button.setTitleColor(CalendarSettings.Colors.darkRed, for: .normal)
         
         let buttonImage: UIImage = {
-            let image           = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
+            let image           = UIImage(named: "checkmark2")?.withRenderingMode(.alwaysTemplate)
             return image!
         }()
         button.setImage(buttonImage, for: .normal)
@@ -206,6 +206,7 @@ class SingleEventViewController: UIViewController {
         thisEvent = event
         super.init(nibName: nil, bundle: nil)
         setupDefaultValues()
+        self.view.backgroundColor = .white
     }
     
     override func viewDidLoad() {
@@ -216,7 +217,6 @@ class SingleEventViewController: UIViewController {
         confBounds()
         getSnapshotForLocation()
     }
-    
     
     //MARK: - Setup
     func setupDefaultValues() {
@@ -256,10 +256,10 @@ class SingleEventViewController: UIViewController {
         view.addSubview(participateButton)
         view.addSubview(buttonSeparatorView)
         view.addSubview(buttonSeparatorViewTwo)
-        participateButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
-        maybeButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
         view.addSubview(buttonViewDividerView)
         view.addSubview(buttonViewDividerViewTwo)
+        participateButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
+        maybeButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
         
         let locationTap = UITapGestureRecognizer(target: self, action: #selector(self.openInGoogleMaps))
         scrollView.addSubview(titleLabel)
@@ -281,6 +281,7 @@ class SingleEventViewController: UIViewController {
         let tabbarHeight        = self.tabBarController?.tabBar.frame.height ?? 0
         let buttonDividerWidth  = view.frame.width / 4
         
+        //buttons first because they not in the scrollview
         nopeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
         nopeButton.imageView!.layer.cornerRadius = maybeButton.imageView!.layer.frame.height / 2
         buttonSeparatorViewTwo.anchor(top: participateButton.topAnchor, left: nopeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
@@ -290,14 +291,12 @@ class SingleEventViewController: UIViewController {
         buttonSeparatorView.anchor(top: participateButton.topAnchor, left: maybeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
         
         participateButton.anchor(top: nil, left: buttonSeparatorView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0, height: 50)
-        participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 0, height: 0)
+        participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 7, paddingLeft: 0, paddingBottom: 7, paddingRight: 0, width: 0, height: 0)
         participateButton.imageView!.widthAnchor.constraint(equalTo: participateButton.imageView!.heightAnchor, multiplier: 1).isActive = true
 
         
         buttonViewDividerViewTwo.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         buttonViewDividerView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
-        
-        
         
         
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: buttonViewDividerView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -370,7 +369,7 @@ class SingleEventViewController: UIViewController {
         
         // Set the region of the map that is rendered.
         //let location = CLLocationCoordinate2DMake(37.332077, -122.02962) // Apple HQ
-        let location = eventLocation!
+        guard let location = eventLocation else { return }
         let region = MKCoordinateRegionMakeWithDistance(location, 2000, 2000)
         mapSnapshotOptions.region = region
         
@@ -395,7 +394,9 @@ class SingleEventViewController: UIViewController {
     func gotoProfile(clickedUID: String) {
         let selectedProfile     = ProfileController()
         selectedProfile.userId  = clickedUID
-        self.navigationController?.pushViewController(selectedProfile, animated: true)
+        DispatchQueue.main.async( execute: {
+            self.navigationController?.pushViewController(selectedProfile, animated: true)
+        })
     }
     
     //MARK: - Do not change Methods

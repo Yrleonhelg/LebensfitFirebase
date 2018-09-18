@@ -64,9 +64,10 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: true)
         let id = users[indexPath.row].uid
-        parentVC?.gotoProfile(clickedUID: id)
+        guard let parent = parentVC else { return }
+        parent.gotoProfile(clickedUID: id)
     }
     
     //MARK: - Methods

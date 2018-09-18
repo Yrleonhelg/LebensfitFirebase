@@ -44,7 +44,7 @@ class ProfileController: UIViewController {
     
     lazy var backView: BackView = {
         let view    = BackView(frame: rectForBackView, white: 0.2, black: 0)
-        view.image  = UIImage(named: "")
+        //view.image  = UIImage(named: "")
         return view
     }()
     
@@ -143,13 +143,12 @@ class ProfileController: UIViewController {
         setupNavBar()
         setupViews()
         confBounds()
-        fetchUser()
-        presentSteckbriefView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        setupNavBar()
+        fetchUser()
+        presentSteckbriefView()
     }
     
     //MARK: - Setup
@@ -187,7 +186,6 @@ class ProfileController: UIViewController {
         view.addSubview(dividerView)
         view.addSubview(segmentedController)
         segmentedController.addTarget(self, action: #selector(changeView(sender:)), for: .valueChanged)
-        
     }
     
     func confBounds(){

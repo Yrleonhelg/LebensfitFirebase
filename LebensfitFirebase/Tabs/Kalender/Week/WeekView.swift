@@ -49,7 +49,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor    = UIColor.clear
+        self.backgroundColor    = UIColor.white
         presentDate             = Date()
         setupTheSetup()
     }

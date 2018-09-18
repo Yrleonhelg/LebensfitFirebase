@@ -25,8 +25,6 @@ class BackView: CustomImageView {
         self.whiteValue = white
         self.blackValue = black
         super.init(frame: .zero)
-        self.image = UIImage(named: "")
-        self.backgroundColor = .green
         setupImage()
     }
     

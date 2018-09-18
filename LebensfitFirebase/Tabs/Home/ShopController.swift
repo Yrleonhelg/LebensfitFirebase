@@ -37,7 +37,7 @@ class ShopController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCell.reuseIdentifier, for: indexPath) as! ActivityCell
         cell.colorView.backgroundColor = UIColor.rgb(226, 48, 47, 1)
         cell.iconView.image = UIImage(named: "youtube-icon")
-        cell.activityLabel.text = "Videos"
+        cell.activityLabel.text = "Test Video"
         return cell
     }
     

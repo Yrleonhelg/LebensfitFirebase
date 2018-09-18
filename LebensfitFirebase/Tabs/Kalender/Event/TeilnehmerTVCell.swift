@@ -73,7 +73,6 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     }
     
     func isToday() {
-        print("istoday")
         profileImageView.layer.borderColor = LebensfitSettings.Colors.darkRed.cgColor
         profileImageView.layer.borderWidth = 2
         addSubview(selectionDot)

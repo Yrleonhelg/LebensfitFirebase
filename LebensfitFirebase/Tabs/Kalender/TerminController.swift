@@ -137,7 +137,9 @@ class TerminController: UIViewController {
     func gotoEvent(eventID: Int) {
         let event = eventArray[eventID]
         let eventVC = SingleEventViewController(event: event)
-        self.navigationController?.pushViewController(eventVC, animated: true)
+        DispatchQueue.main.async( execute: {
+            self.navigationController?.pushViewController(eventVC, animated: true)
+        })
     }
 }
 

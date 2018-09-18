@@ -22,7 +22,7 @@ extension Date {
         let minutes = Calendar.current.component(.minute, from: self)
         var minutesAsString: String = String(minutes)
         while minutesAsString.count <= 1{
-            minutesAsString.append("0")
+            minutesAsString.insert("0", at: minutesAsString.startIndex)
         }
         let string  = "\(hour):\(minutesAsString)"
         return string

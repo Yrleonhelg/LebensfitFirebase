@@ -14,17 +14,25 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     let padding: CGFloat = 20
     var user: User? {
         didSet {
-            print("set")
             usernameLabel.text          = user?.username
             guard let profileImageUrl   = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             if user?.uid == Auth.auth().currentUser?.uid {
-                usernameLabel.textColor = UIColor.green
+                isToday()
             }
         }
     }
     
+    
     //MARK: - GUI Objects
+    let selectionDot: UIView = {
+        let sv                  = UIView()
+        //sv.frame              = CGRect(x: 0, y: 0, width: 20, height: 20)
+        sv.backgroundColor      = CalendarSettings.Colors.darkRed
+        sv.layer.cornerRadius   = 7.5
+        return sv
+    }()
+    
     let profileImageView: CustomImageView = {
         let iv              = CustomImageView()
         iv.contentMode      = .scaleAspectFill
@@ -38,7 +46,6 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
         label.font  = UIFont.systemFont(ofSize: 20)
         return label
     }()
-    
     
     //MARK: - Init & View Loading
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -56,13 +63,22 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     
     //called from rowforsection to provide the correct info from the start
     func confBounds(){
-        let height = self.frame.height
-        let pictureHeight = height - 10
+        let frameHeight = self.frame.height
+        let pictureHeight = frameHeight - 10
         print(self.frame.height)
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: pictureHeight, height: pictureHeight)
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         profileImageView.layer.cornerRadius = pictureHeight / 2
         usernameLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+    }
+    
+    func isToday() {
+        print("istoday")
+        profileImageView.layer.borderColor = LebensfitSettings.Colors.darkRed.cgColor
+        profileImageView.layer.borderWidth = 2
+        addSubview(selectionDot)
+        selectionDot.anchor(top: nil, left: nil, bottom: nil, right: usernameLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 15, height: 15)
+        selectionDot.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor).isActive = true
     }
     
     //MARK: - Do not change Methods

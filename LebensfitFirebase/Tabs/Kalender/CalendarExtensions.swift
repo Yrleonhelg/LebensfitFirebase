@@ -20,7 +20,11 @@ extension Date {
     func getHourAndMinuteAsStringFromDate() -> (String){
         let hour    = Calendar.current.component(.hour, from: self)
         let minutes = Calendar.current.component(.minute, from: self)
-        let string  = "\(hour):\(minutes)"
+        var minutesAsString: String = String(minutes)
+        while minutesAsString.count <= 1{
+            minutesAsString.append("0")
+        }
+        let string  = "\(hour):\(minutesAsString)"
         return string
     }
 }

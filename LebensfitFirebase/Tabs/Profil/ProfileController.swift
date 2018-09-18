@@ -156,7 +156,7 @@ class ProfileController: UIViewController {
     func setupNavBar() {
         self.navigationItem.title = ""
         if user?.uid == Auth.auth().currentUser?.uid {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(resetNavBar))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "logout")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
         }
         setupNavBarBackground()
     }

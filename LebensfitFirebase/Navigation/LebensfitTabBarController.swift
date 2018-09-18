@@ -29,15 +29,15 @@ class LebensfitTabBarController: UITabBarController {
     }
     
     func setupTabBar() {
-        view.backgroundColor = LebensfitSettings.Colors.buttonBG
-        tabBar.autoresizesSubviews = true
-        tabBar.isTranslucent = true
-        self.tabBar.tintColor = LebensfitSettings.Colors.darkRed
+        view.backgroundColor        = LebensfitSettings.Colors.buttonBG
+        tabBar.autoresizesSubviews  = true
+        tabBar.isTranslucent        = true
+        self.tabBar.tintColor       = LebensfitSettings.Colors.darkRed
         self.tabBar.unselectedItemTintColor = LebensfitSettings.Colors.darkGray
         
-        let topBorder = CALayer()
-        topBorder.frame = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
-        topBorder.backgroundColor = UIColor.rgb(229, 231, 235, 1).cgColor
+        let topBorder               = CALayer()
+        topBorder.frame             = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
+        topBorder.backgroundColor   = UIColor.rgb(229, 231, 235, 1).cgColor
         
         tabBar.layer.addSublayer(topBorder)
         tabBar.clipsToBounds = true

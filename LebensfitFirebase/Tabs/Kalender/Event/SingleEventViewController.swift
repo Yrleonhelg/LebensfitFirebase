@@ -116,7 +116,27 @@ class SingleEventViewController: UIViewController {
         return tvt
     }()
     
-    let buttonDividerView: UIView = {
+    //divides the buttons from the rest of the view
+    let buttonViewDividerView: UIView = {
+        let tdv             = UIView()
+        tdv.backgroundColor = UIColor.gray
+        return tdv
+    }()
+    
+    let buttonViewDividerViewTwo: UIView = {
+        let tdv             = UIView()
+        tdv.backgroundColor = UIColor.gray
+        return tdv
+    }()
+    
+    //divides the two buttons
+    let buttonSeparatorView: UIView = {
+        let tdv             = UIView()
+        tdv.backgroundColor = UIColor.gray
+        return tdv
+    }()
+    
+    let buttonSeparatorViewTwo: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
@@ -125,8 +145,57 @@ class SingleEventViewController: UIViewController {
     let participateButton: UIButton = {
         let button              = UIButton()
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
-        button.setTitle("Teilnehmen", for: .normal)
-        button.setTitleColor(CalendarSettings.Colors.darkRed, for: .normal)
+        button.tintColor        = CalendarSettings.Colors.darkRed
+        //button.setTitle("Teilnehmen", for: .normal)
+        //button.setTitleColor(CalendarSettings.Colors.darkRed, for: .normal)
+        
+        let buttonImage: UIImage = {
+            let image           = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
+            return image!
+        }()
+        button.setImage(buttonImage, for: .normal)
+        button.imageView?.contentMode       = .scaleAspectFit
+        button.imageView?.layer.borderWidth = 0
+        button.imageView?.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
+       // button.imageView?.anchor(top: button.topAnchor, left: nil, bottom: button.bottomAnchor, right: button.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 0, height: 0)
+//        button.imageView?.widthAnchor.constraint(equalTo: button.imageView!.heightAnchor, multiplier: 1).isActive = true
+        
+        return button
+    }()
+    
+    let maybeButton: UIButton = {
+        let button              = UIButton()
+        button.backgroundColor  = CalendarSettings.Colors.buttonBG
+        button.tintColor        = CalendarSettings.Colors.darkRed
+        let buttonImage: UIImage = {
+            let image = UIImage(named: "questionmark2")?.withRenderingMode(.alwaysTemplate)
+            return image!
+        }()
+        
+        button.setImage(buttonImage, for: .normal)
+        button.imageView?.contentMode       = .scaleAspectFit
+        button.imageView?.layer.borderWidth = 0
+        button.imageView?.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
+        //button.imageView?.anchor(top: button.topAnchor, left: nil, bottom: button.bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 5, paddingRight: 0, width: 0, height: 0)
+        //button.imageView?.widthAnchor.constraint(equalTo: button.imageView!.heightAnchor, multiplier: 1).isActive = true
+        return button
+    }()
+    
+    let nopeButton: UIButton = {
+        let button              = UIButton()
+        button.backgroundColor  = CalendarSettings.Colors.buttonBG
+        button.tintColor        = CalendarSettings.Colors.darkRed
+        let buttonImage: UIImage = {
+            let image = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)
+            return image!
+        }()
+        
+        button.setImage(buttonImage, for: .normal)
+        button.imageView?.contentMode       = .scaleAspectFit
+        button.imageView?.layer.borderWidth = 0
+        button.imageView?.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
+        //button.imageView?.anchor(top: button.topAnchor, left: nil, bottom: button.bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 5, paddingRight: 0, width: 0, height: 0)
+        //button.imageView?.widthAnchor.constraint(equalTo: button.imageView!.heightAnchor, multiplier: 1).isActive = true
         return button
     }()
     
@@ -182,9 +251,15 @@ class SingleEventViewController: UIViewController {
     
     func setupViews() {
         view.addSubview(scrollView)
+        view.addSubview(maybeButton)
+        view.addSubview(nopeButton)
         view.addSubview(participateButton)
+        view.addSubview(buttonSeparatorView)
+        view.addSubview(buttonSeparatorViewTwo)
         participateButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
-        view.addSubview(buttonDividerView)
+        maybeButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
+        view.addSubview(buttonViewDividerView)
+        view.addSubview(buttonViewDividerViewTwo)
         
         let locationTap = UITapGestureRecognizer(target: self, action: #selector(self.openInGoogleMaps))
         scrollView.addSubview(titleLabel)
@@ -201,13 +276,31 @@ class SingleEventViewController: UIViewController {
         teilnehmerTV.fetchUsers()
     }
     
+    
     func confBounds(){
-        let tabbarHeight = self.tabBarController?.tabBar.frame.height ?? 0
+        let tabbarHeight        = self.tabBarController?.tabBar.frame.height ?? 0
+        let buttonDividerWidth  = view.frame.width / 4
         
-        participateButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0, height: 50)
-        buttonDividerView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        nopeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
+        nopeButton.imageView!.layer.cornerRadius = maybeButton.imageView!.layer.frame.height / 2
+        buttonSeparatorViewTwo.anchor(top: participateButton.topAnchor, left: nopeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
         
-        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: buttonDividerView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        maybeButton.anchor(top: nil, left: buttonSeparatorViewTwo.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
+        maybeButton.imageView!.layer.cornerRadius = maybeButton.imageView!.layer.frame.height / 2
+        buttonSeparatorView.anchor(top: participateButton.topAnchor, left: maybeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
+        
+        participateButton.anchor(top: nil, left: buttonSeparatorView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0, height: 50)
+        participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 0, height: 0)
+        participateButton.imageView!.widthAnchor.constraint(equalTo: participateButton.imageView!.heightAnchor, multiplier: 1).isActive = true
+
+        
+        buttonViewDividerViewTwo.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        buttonViewDividerView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        
+        
+        
+        
+        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: buttonViewDividerView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         //Scrollview related Objects
         titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)

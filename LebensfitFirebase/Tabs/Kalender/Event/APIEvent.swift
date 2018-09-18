@@ -29,11 +29,11 @@ extension TeilnehmerTableView {
             })
             
             self.users.sort(by: { (u1, u2) -> Bool in
-                return u1.username.compare(u2.username) == .orderedAscending
+                return u1.username?.compare(u2.username!) == .orderedAscending
             })
             DispatchQueue.main.async( execute: {
                 self.participantsTableView.reloadData()
-                self.parentVC?.teilnehmerLoaded()
+                //self.parentVC?.teilnehmerLoaded()
             })
             
             

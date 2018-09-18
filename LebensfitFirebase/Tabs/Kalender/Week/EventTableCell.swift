@@ -9,7 +9,7 @@
 import UIKit
 
 class EventTableCell: UITableViewCell, ReusableView {
-    var eventId: Int?
+    var eventId: Int32?
     let padding: CGFloat = 20
     
     //MARK: - GUI Objects

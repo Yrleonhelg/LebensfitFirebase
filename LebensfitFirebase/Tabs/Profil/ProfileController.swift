@@ -145,9 +145,13 @@ class ProfileController: UIViewController {
         confBounds()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        fetchUser()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if userId == Auth.auth().currentUser?.uid {
+            user = CDUser.sharedInstance.loadUser()
+        } else {
+            fetchUser()
+        }
         presentSteckbriefView()
     }
     
@@ -242,7 +246,6 @@ class ProfileController: UIViewController {
             do {
                 try Auth.auth().signOut()
 
-                //what happens? we need to present some kind of login controller
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)
                 self.present(navController, animated: true, completion: nil)

@@ -120,18 +120,7 @@ class LoginController: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, err) in
-            
-            if let err = err { print("Failed to sign in with email:", err); return }
-            print("Successfully logged back in with user:", user?.user.uid ?? "")
-            
-            guard let LebensfitTabBarController = UIApplication.shared.keyWindow?.rootViewController as? LebensfitTabBarController else { return }
-            LebensfitTabBarController.setupTabBar()
-            LebensfitTabBarController.setupViewControllers()
-            
-            self.dismiss(animated: true, completion: nil)
-            
-        })
+        loginToFireBase(email: email, pw: password)
     }
     
     @objc func handleShowSignUp() {

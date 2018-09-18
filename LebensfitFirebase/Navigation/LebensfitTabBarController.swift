@@ -23,7 +23,7 @@ class LebensfitTabBarController: UITabBarController {
             }
             return
         }
-        
+        CDUser.sharedInstance.createNewUser()
         setupTabBar()
         setupViewControllers()
     }

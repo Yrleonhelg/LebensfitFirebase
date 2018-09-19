@@ -17,8 +17,8 @@ class SingleEventViewController: UIViewController {
     var eventName: String?
     var eventDescription: String?
     var eventLocation: CLLocationCoordinate2D?
-    var eventStartingDate: Date?
-    var eventFinishingDate: Date?
+    var eventStartingDate: NSDate?
+    var eventFinishingDate: NSDate?
     var eventNeedsApplication: Bool?
     
     var snapShotter = MKMapSnapshotter()
@@ -177,6 +177,7 @@ class SingleEventViewController: UIViewController {
     
     let nopeButton: UIButton = {
         let button              = UIButton()
+        button.isEnabled = true
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
         button.tintColor        = CalendarSettings.Colors.darkRed
         let buttonImage: UIImage = {
@@ -205,7 +206,6 @@ class SingleEventViewController: UIViewController {
         super.viewDidLoad()
         applyDefaultValues()
         setupViews()
-        confBounds()
         getSnapshotForLocation()
     }
     
@@ -213,6 +213,7 @@ class SingleEventViewController: UIViewController {
         super.viewDidAppear(animated)
         teilnehmerTV.fetchUsers()
         setupNavBar()
+        confBounds()
     }
     
     //MARK: - Setup
@@ -220,8 +221,8 @@ class SingleEventViewController: UIViewController {
         eventName               = thisEvent.eventName
         eventDescription        = thisEvent.eventDescription
         eventLocation           = thisEvent.eventLocation as? CLLocationCoordinate2D
-        eventStartingDate       = thisEvent.eventStartingDate as? Date
-        eventFinishingDate      = thisEvent.eventFinishingDate as? Date
+        eventStartingDate       = thisEvent.eventStartingDate
+        eventFinishingDate      = thisEvent.eventFinishingDate
         eventNeedsApplication   = thisEvent.eventNeedsApplication
     }
     
@@ -237,7 +238,7 @@ class SingleEventViewController: UIViewController {
             mapLabel.text       = getStringFromLocation(location: location)
         }
         if let date = eventStartingDate {
-            dateLabel.text = formatDate(date: date)
+            dateLabel.text = formatDate(date: date as Date)
         }
     }
     
@@ -276,6 +277,8 @@ class SingleEventViewController: UIViewController {
     
     func confBounds(){
         let tabbarHeight        = self.tabBarController?.tabBar.frame.height ?? 0
+        print("height")
+        print(tabbarHeight)
         let buttonDividerWidth  = view.frame.width / 4
         
         //buttons first because they not in the scrollview
@@ -322,10 +325,20 @@ class SingleEventViewController: UIViewController {
     }
     
     //MARK: - Methods
-    @objc func buttonClick() {
-        guard let currentUser = Auth.auth().currentUser else { return }
-        let user = currentUser as! User
-        thisEvent.addToEventSureParticipants(user)
+    @objc func maybeButtonClick() {
+        let currentUser = CDUser.sharedInstance.loadCurrentUser()
+        
+        //thisEvent.addToEventMaybeParticipants(currentUser)
+    }
+    @objc func yesButtonClick() {
+        let currentUser = CDUser.sharedInstance.loadCurrentUser()
+        
+        //thisEvent.addToEventSureParticipants(currentUser)
+    }
+    @objc func nopeButtonClick() {
+        let currentUser = CDUser.sharedInstance.loadCurrentUser()
+        
+        //thisEvent.addToEventSureParticipants(currentUser)
     }
     
     func teilnehmerLoaded() {
@@ -389,6 +402,18 @@ class SingleEventViewController: UIViewController {
     }
     
     //MARK: - Navigation
+    func selectButton(button: UIButton, selected: Bool) {
+        if selected {
+            button.backgroundColor      = LebensfitSettings.Colors.darkRed
+            //button.tintColor          = .white
+            button.imageView?.tintColor = .white
+        } else {
+            button.backgroundColor      = .white
+            //button.tintColor          = .white
+            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
+        }
+    }
+    
     func gotoProfile(clickedUID: String) {
         let selectedProfile     = ProfileController()
         selectedProfile.userId  = clickedUID

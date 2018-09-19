@@ -54,7 +54,7 @@ class CDUser: NSObject {
         guard let key = Auth.auth().currentUser?.uid else { print("returning ",allUsers.first!); return allUsers.first!}
         for i in 0..<allUsers.count {
             if key == allUsers[i].uid {
-                print("returning ",allUsers[i].username)
+                print("returning ",allUsers[i].username as Any)
                 return allUsers[i]
             }
         }

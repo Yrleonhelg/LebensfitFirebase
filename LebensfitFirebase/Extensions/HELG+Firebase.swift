@@ -18,6 +18,7 @@ extension Database {
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
             guard let userDictionary = snapshot.value as? [String: Any] else { return }
+            //maybe create a User Class which has nothing to do with coredata and create the CD Class based on that result.
             let user = User(uid: uid, dictionary: userDictionary)
             completion(user)
             

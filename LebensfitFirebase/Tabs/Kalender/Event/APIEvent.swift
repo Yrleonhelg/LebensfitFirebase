@@ -11,9 +11,11 @@ import Firebase
 extension TeilnehmerTableView {
     func fetchUsers() {
         print("Fetching users..")
-        if users != nil {
-            users.removeAll()
-        }
+        print(users)
+//        if !users.isEmpty {
+//            users.removeAll()
+//            CDUser.sharedInstance.deleteUsers()
+//        }
         let ref = Database.database().reference().child("users")
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
@@ -23,14 +25,23 @@ extension TeilnehmerTableView {
 //                    print("Found myself, omit from list")
 //                    return
 //                }
+                
+                for i in 0..<self.users.count {
+                    if key == self.users[i].uid {
+                        print("Found existing user, omit from list: ",self.users[i].username)
+                        return
+                    }
+                    print(self.users[i].username,": Not found")
+                }
+                
 
                 guard let userDictionary = value as? [String: Any] else { return }
                 
                 let user = User(uid: key, dictionary: userDictionary)
                 self.users.append(user)
             })
-            
-            self.users.sort(by: { (u1, u2) -> Bool in
+            self.sortedUsers = self.users
+            self.sortedUsers.sort(by: { (u1, u2) -> Bool in
                 return u1.username?.compare(u2.username!) == .orderedAscending
             })
             DispatchQueue.main.async( execute: {

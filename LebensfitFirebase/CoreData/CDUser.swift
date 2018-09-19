@@ -15,8 +15,7 @@ class CDUser: NSObject {
     let managedContext = PersistenceService.context
     
     //create
-    func createNewUser() {
-        deleteUsers()
+    func createCurrentUser() {
         //let newUser = User(context: managedContext)
         
         Database.fetchUserWithUID(uid: (Auth.auth().currentUser?.uid)!) { (user) in
@@ -29,6 +28,7 @@ class CDUser: NSObject {
         
         do {
             try managedContext.save()
+            print("user saved")
         } catch {
             print("Error beim erstellen eines neuen Benutzers: ",error)
         }
@@ -36,18 +36,30 @@ class CDUser: NSObject {
     }
     
     //read
-    func loadUser() -> User {
+    func loadUsers() -> [User] {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         var users = [User]()
         
         do {
             users = try managedContext.fetch(fetchRequest)
-            print(users)
+            print("All users loaded")
         } catch {
             print("Error beim laden des Nutzer: ",error)
         }
-        guard let user = users.last else { return User()}
-        return user
+        return users
+    }
+    
+    func loadCurrentUser() -> User {
+        let allUsers = loadUsers()
+        guard let key = Auth.auth().currentUser?.uid else { print("returning ",allUsers.first!); return allUsers.first!}
+        for i in 0..<allUsers.count {
+            if key == allUsers[i].uid {
+                print("returning ",allUsers[i].username)
+                return allUsers[i]
+            }
+        }
+        print("returning ",allUsers.first!)
+        return allUsers.first!
     }
     
     //update

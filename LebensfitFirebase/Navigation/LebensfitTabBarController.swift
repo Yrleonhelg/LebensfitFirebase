@@ -13,7 +13,7 @@ class LebensfitTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        CDUser.sharedInstance.deleteUsers()
         //Only let the user pass when they're logged in.
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -23,7 +23,8 @@ class LebensfitTabBarController: UITabBarController {
             }
             return
         }
-        CDUser.sharedInstance.createNewUser()
+        CDUser.sharedInstance.createCurrentUser()
+        print("created")
         setupTabBar()
         setupViewControllers()
     }
@@ -46,9 +47,9 @@ class LebensfitTabBarController: UITabBarController {
     func setupViewControllers() {
         //Images:
         let calendarImage = UIImage(named: LebensfitSettings.UI.iconNames.calendar)
-        let homeImage = UIImage(named: LebensfitSettings.UI.iconNames.home)
+        let shopImage = UIImage(named: LebensfitSettings.UI.iconNames.shop)
         let mapImage = UIImage(named: LebensfitSettings.UI.iconNames.map)
-        let aboutImage = UIImage(named: LebensfitSettings.UI.iconNames.menu)
+        let userImage = UIImage(named: LebensfitSettings.UI.iconNames.benutzer)
         
         //Calendar
         let calendarVC = TerminController()
@@ -59,8 +60,8 @@ class LebensfitTabBarController: UITabBarController {
         //Home / videos
         let homeController = ShopController(collectionViewLayout: UICollectionViewFlowLayout())
         let homeNavigationController = LebensfitNavigation(rootViewController: homeController)
-        homeNavigationController.title = "Home"
-        homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: homeImage, tag: 0)
+        homeNavigationController.title = "Shop"
+        homeNavigationController.tabBarItem = UITabBarItem(title: "Shop", image: shopImage, tag: 0)
         
         //map
         let mapController = MapController()
@@ -70,10 +71,10 @@ class LebensfitTabBarController: UITabBarController {
         
         //profile
         let profileController = ProfileController()
-        profileController.userId = Auth.auth().currentUser?.uid
+//        profileController.userId = Auth.auth().currentUser?.uid
         let profileNavigationController = LebensfitNavigation(rootViewController: profileController)
         profileNavigationController.title = "Profil"
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: aboutImage, tag: 0)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: userImage, tag: 0)
         
         viewControllers = [calendarNavigationController, homeNavigationController, mapNavigationController, profileNavigationController]
     }

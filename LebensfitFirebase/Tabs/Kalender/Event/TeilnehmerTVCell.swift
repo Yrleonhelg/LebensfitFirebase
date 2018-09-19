@@ -18,7 +18,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
             guard let profileImageUrl   = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             if user?.uid == Auth.auth().currentUser?.uid {
-                isToday()
+                isCurrentUser()
             }
         }
     }
@@ -65,14 +65,13 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     func confBounds(){
         let frameHeight = self.frame.height
         let pictureHeight = frameHeight - 10
-        print(self.frame.height)
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: pictureHeight, height: pictureHeight)
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         profileImageView.layer.cornerRadius = pictureHeight / 2
         usernameLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
     }
     
-    func isToday() {
+    func isCurrentUser() {
         profileImageView.layer.borderColor = LebensfitSettings.Colors.darkRed.cgColor
         profileImageView.layer.borderWidth = 2
         addSubview(selectionDot)

@@ -14,6 +14,7 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
     var users: [User]! = [User]()
+    var sortedUsers: [User]! = [User]()
     
     //MARK: - GUI Objects
     let participantsTableView: UITableView = {
@@ -48,7 +49,6 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Users: ",users.count)
         return users.count
     }
     

@@ -37,8 +37,6 @@ extension User {
         self.username = dictionary["username"] as? String ?? ""
         self.profileImageUrl = dictionary["profileImageUrl"]  as? String ?? ""
     }
-
-
 }
 
 // MARK: Generated accessors for boughtVideos

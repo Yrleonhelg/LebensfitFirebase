@@ -115,7 +115,7 @@ class TerminController: UIViewController {
     func gotoDay(date: Date) {
         gotoWeekView()
         segmentedController.selectedSegmentIndex = 1
-        print(date)
+
         let weekOfDate = Calendar.current.component(.weekOfYear, from: date)
         let yearOfDate = Calendar.current.component(.year, from: date)
     

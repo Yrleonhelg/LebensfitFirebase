@@ -185,7 +185,6 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         if section < twoDimensionalEventArray.count && !twoDimensionalEventArray[section].events.isEmpty {
             manageLastHeader(selectedView: selectedView, completion: {
                 yesorno in
-                print(yesorno)
                 if yesorno {
                     self.twoDimensionalEventArray[section].isExpanded = !self.twoDimensionalEventArray[section].isExpanded
                     self.isExpandedOrNot(view: selectedView)

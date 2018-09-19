@@ -41,7 +41,7 @@ extension SignUpController {
                         
                         if let err = err { print("Failed to save user info into db:", err); return }
                         print("Successfully saved user info to db")
-                        CDUser.sharedInstance.createNewUser()
+                        CDUser.sharedInstance.createCurrentUser()
                         
                         guard let LebensfitTabBarController = UIApplication.shared.keyWindow?.rootViewController as? LebensfitTabBarController else { return }
                         LebensfitTabBarController.setupTabBar()

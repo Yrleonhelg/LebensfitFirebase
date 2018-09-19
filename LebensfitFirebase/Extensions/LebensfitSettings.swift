@@ -22,7 +22,9 @@ struct LebensfitSettings {
         struct iconNames {
             static let calendar = "calendar"
             static let home = "home"
+            static let shop = "shop75"
             static let profile = "profile"
+            static let benutzer = "user75"
             static let map = "map"
             static let menu = "menu"
             

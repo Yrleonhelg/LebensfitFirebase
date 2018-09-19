@@ -204,7 +204,6 @@ class SingleEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDefaultValues()
-        setupNavBar()
         setupViews()
         confBounds()
         getSnapshotForLocation()
@@ -213,6 +212,7 @@ class SingleEventViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         teilnehmerTV.fetchUsers()
+        setupNavBar()
     }
     
     //MARK: - Setup
@@ -400,7 +400,7 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        teilnehmerTV.users.removeAll()
+        //teilnehmerTV.users.removeAll()
     }
     
     //MARK: - Do not change Methods

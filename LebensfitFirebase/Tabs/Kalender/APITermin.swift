@@ -19,7 +19,6 @@ extension TerminController {
             eventArray.append(event)
             startDate   = Calendar.current.date(byAdding: .minute, value: 60*6, to: startDate)!
         }
-        print(eventArray)
     }
     
     func addEventToCalendar() {

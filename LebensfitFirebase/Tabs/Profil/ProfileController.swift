@@ -44,7 +44,6 @@ class ProfileController: UIViewController {
     
     lazy var backView: BackView = {
         let view    = BackView(frame: rectForBackView, white: 0.2, black: 0)
-        //view.image  = UIImage(named: "")
         return view
     }()
     
@@ -141,9 +140,12 @@ class ProfileController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if userId == Auth.auth().currentUser?.uid {
-            user = CDUser.sharedInstance.loadUser()
+        let vc = self.navigationController?.viewControllers.first
+        if vc == self.navigationController?.visibleViewController {
+            print("self")
+            user = CDUser.sharedInstance.loadCurrentUser()
         } else {
+            print("notself")
             fetchUser()
         }
         presentSteckbriefView()
@@ -193,7 +195,7 @@ class ProfileController: UIViewController {
             followButton.anchor(top: usernameLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)
             followButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             //followButton.addTarget(self, action: #selector (""), for: .touchUpInside)
-            controlStackView.anchor(top: followButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
+            controlStackView.anchor(top: followButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 15, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
         } else {
             controlStackView.anchor(top: usernameLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
         }
@@ -244,7 +246,7 @@ class ProfileController: UIViewController {
     
     //MARK: - Do not change Methods
     override func viewWillDisappear(_ animated: Bool) {
-        self.user = nil
-        
+        //self.userId = nil
+       // print("userID resetted")
     }
 }

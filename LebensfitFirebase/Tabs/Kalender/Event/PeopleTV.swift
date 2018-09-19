@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
+class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
@@ -17,7 +17,7 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     var sortedUsers: [User]! = [User]()
     
     //MARK: - GUI Objects
-    let participantsTableView: UITableView = {
+    let peopleTableView: UITableView = {
         let ctv = UITableView()
         return ctv
     }()
@@ -33,18 +33,18 @@ class TeilnehmerTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Setup
     func setupTableView() {
-        participantsTableView.delegate      = self
-        participantsTableView.dataSource    = self
-        participantsTableView.register(TeilnehmerTVCell.self, forCellReuseIdentifier: TeilnehmerTVCell.reuseIdentifier)
-        participantsTableView.tintColor     = .white
+        peopleTableView.delegate      = self
+        peopleTableView.dataSource    = self
+        peopleTableView.register(TeilnehmerTVCell.self, forCellReuseIdentifier: TeilnehmerTVCell.reuseIdentifier)
+        peopleTableView.tintColor     = .white
     }
     
     func setupViews() {
-        addSubview(participantsTableView)
+        addSubview(peopleTableView)
     }
     
     func confBounds(){
-        participantsTableView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        peopleTableView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     //MARK: - Tableview

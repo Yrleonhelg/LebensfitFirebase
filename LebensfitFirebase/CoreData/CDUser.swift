@@ -32,11 +32,21 @@ class CDUser: NSObject {
         } catch {
             print("Error beim erstellen eines neuen Benutzers: ",error)
         }
-        
     }
     
     //read
-    func loadUsers() -> [User] {
+    func loadUsers() {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        
+        do {
+            _ = try managedContext.fetch(fetchRequest)
+            print("All users loaded")
+        } catch {
+            print("Error beim laden des Nutzer: ",error)
+        }
+    }
+    
+    func getUsers() -> [User] {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         var users = [User]()
         
@@ -49,8 +59,8 @@ class CDUser: NSObject {
         return users
     }
     
-    func loadCurrentUser() -> User {
-        let allUsers = loadUsers()
+    func getCurrentUser() -> User {
+        let allUsers = getUsers()
         guard let key = Auth.auth().currentUser?.uid else { print("returning ",allUsers.first!); return allUsers.first!}
         for i in 0..<allUsers.count {
             if key == allUsers[i].uid {

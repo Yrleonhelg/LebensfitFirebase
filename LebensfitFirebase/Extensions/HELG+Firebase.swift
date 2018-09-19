@@ -16,11 +16,13 @@ extension Database {
         
         
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            
+            print("Fetching User for post")
             guard let userDictionary = snapshot.value as? [String: Any] else { return }
             //maybe create a User Class which has nothing to do with coredata and create the CD Class based on that result.
             let user = User(uid: uid, dictionary: userDictionary)
+            print("Fetching complete")
             completion(user)
+            
             
         }) { (err) in
             print("Failed to fetch user for posts:", err)

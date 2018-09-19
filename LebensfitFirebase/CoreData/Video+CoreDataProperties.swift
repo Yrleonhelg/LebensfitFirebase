@@ -2,7 +2,7 @@
 //  Video+CoreDataProperties.swift
 //  LebensfitFirebase
 //
-//  Created by Leon on 18.09.18.
+//  Created by Leon on 19.09.18.
 //  Copyright © 2018 helgcreating. All rights reserved.
 //
 //
@@ -18,8 +18,8 @@ extension Video {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var videoUrl: String?
     @NSManaged public var videoId: String?
+    @NSManaged public var videoUrl: String?
     @NSManaged public var userOwningThis: NSSet?
 
 }

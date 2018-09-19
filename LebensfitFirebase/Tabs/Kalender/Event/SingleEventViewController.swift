@@ -106,15 +106,40 @@ class SingleEventViewController: UIViewController {
     let teilnehmerLabel: UILabel = {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 20)
-        label.text      = "Teilnehmer"
+        label.text      = "Teilnehmer:"
+        label.textColor = .black
+        return label
+    }()
+    let interessentenLabel: UILabel = {
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Interessenten:"
+        label.textColor = .black
+        return label
+    }()
+    let absagenLabel: UILabel = {
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Absagen:"
         label.textColor = .black
         return label
     }()
     
-    let teilnehmerTV: TeilnehmerTableView = {
-        let tvt             = TeilnehmerTableView()
-        tvt.backgroundColor = .brown
+    let teilnehmerTV: PeopleTableView = {
+        let tvt             = PeopleTableView()
         return tvt
+    }()
+    let surePeopleTV: SurePeople = {
+        let view = SurePeople()
+        return view
+    }()
+    let maybePeopleTV: MaybePeople = {
+        let view = MaybePeople()
+        return view
+    }()
+    let nopePeopleTV: NopePeople = {
+        let view = NopePeople()
+        return view
     }()
     
     //divides the buttons from the rest of the view
@@ -211,7 +236,15 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        teilnehmerTV.fetchUsers()
+        //teilnehmerTV.fetchUsers()
+        let user = CDUser.sharedInstance.getCurrentUser()
+        thisEvent.addToEventSureParticipants(user)
+        
+        teilnehmerTV.parentVC = self
+        surePeopleTV.loadSureUsers()
+        maybePeopleTV.loadMaybeUsers()
+        nopePeopleTV.loadNopeUsers()
+        
         setupNavBar()
         confBounds()
     }
@@ -256,8 +289,9 @@ class SingleEventViewController: UIViewController {
         view.addSubview(buttonSeparatorViewTwo)
         view.addSubview(buttonViewDividerView)
         view.addSubview(buttonViewDividerViewTwo)
-        participateButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
-        maybeButton.addTarget(self, action: #selector (buttonClick), for: .touchUpInside)
+        participateButton.addTarget(self, action: #selector (yesButtonClick), for: .touchUpInside)
+        maybeButton.addTarget(self, action: #selector (maybeButtonClick), for: .touchUpInside)
+        nopeButton.addTarget(self, action: #selector (nopeButtonClick), for: .touchUpInside)
         
         let locationTap = UITapGestureRecognizer(target: self, action: #selector(self.openInGoogleMaps))
         scrollView.addSubview(titleLabel)
@@ -269,17 +303,12 @@ class SingleEventViewController: UIViewController {
         mapView.addGestureRecognizer(locationTap)
         scrollView.addSubview(notizenLabel)
         scrollView.addSubview(descLabel)
-        scrollView.addSubview(teilnehmerLabel)
-        teilnehmerTV.parentVC = self
-        
     }
     
     
     func confBounds(){
         let tabbarHeight        = self.tabBarController?.tabBar.frame.height ?? 0
-        print("height")
-        print(tabbarHeight)
-        let buttonDividerWidth  = view.frame.width / 4
+        let buttonDividerWidth  = view.frame.width / 3
         
         //buttons first because they not in the scrollview
         nopeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
@@ -293,7 +322,7 @@ class SingleEventViewController: UIViewController {
         participateButton.anchor(top: nil, left: buttonSeparatorView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0, height: 50)
         participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 7, paddingLeft: 0, paddingBottom: 7, paddingRight: 0, width: 0, height: 0)
         participateButton.imageView!.widthAnchor.constraint(equalTo: participateButton.imageView!.heightAnchor, multiplier: 1).isActive = true
-
+        
         
         buttonViewDividerViewTwo.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         buttonViewDividerView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
@@ -313,38 +342,110 @@ class SingleEventViewController: UIViewController {
         notizenLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         descLabel.anchor(top: notizenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         
-        teilnehmerLabel.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
     }
     
     override func viewDidLayoutSubviews() {
-        let objHeight = titleLabel.frame.height + locationLabel.frame.height + dateLabel.frame.height + timeLabel.frame.height + mapView.frame.height + notizenLabel.frame.height + descLabel.frame.height + teilnehmerLabel.frame.height + teilnehmerTV.frame.height
-        let paddingHeight = 10+0+50+padding+20+5 - 15
-        print(objHeight, paddingHeight)
+        var objHeight = titleLabel.frame.height + locationLabel.frame.height + dateLabel.frame.height + timeLabel.frame.height + mapView.frame.height + notizenLabel.frame.height + descLabel.frame.height
+        let tableviewsHeight = teilnehmerLabel.frame.height + interessentenLabel.frame.height + absagenLabel.frame.height
+        objHeight += tableviewsHeight
+        let paddingHeight = 10+0+50+padding+20+20+20 - 15 + 1000
         
         scrollView.contentSize = CGSize(width: view.frame.width, height: objHeight+paddingHeight)
     }
     
     //MARK: - Methods
     @objc func maybeButtonClick() {
-        let currentUser = CDUser.sharedInstance.loadCurrentUser()
+        let selected = !maybeButton.isSelected
+        deselectAllButtons()
+        selectButton(button: maybeButton, selected: selected)
+        let currentUser = CDUser.sharedInstance.getCurrentUser()
         
-        //thisEvent.addToEventMaybeParticipants(currentUser)
+        if selected {
+            thisEvent.addToEventMaybeParticipants(currentUser)
+        } else {
+            thisEvent.removeFromEventMaybeParticipants(currentUser)
+        }
     }
     @objc func yesButtonClick() {
-        let currentUser = CDUser.sharedInstance.loadCurrentUser()
+        let selected = !participateButton.isSelected
+        deselectAllButtons()
+        selectButton(button: participateButton, selected: selected)
+        let currentUser = CDUser.sharedInstance.getCurrentUser()
         
-        //thisEvent.addToEventSureParticipants(currentUser)
+        if selected {
+            thisEvent.addToEventSureParticipants(currentUser)
+        } else {
+            thisEvent.removeFromEventSureParticipants(currentUser)
+        }
     }
     @objc func nopeButtonClick() {
-        let currentUser = CDUser.sharedInstance.loadCurrentUser()
+        let selected = !nopeButton.isSelected
+        deselectAllButtons()
+        selectButton(button: nopeButton, selected: selected)
+        let currentUser = CDUser.sharedInstance.getCurrentUser()
         
-        //thisEvent.addToEventSureParticipants(currentUser)
+        if selected {
+            thisEvent.addToEventNopeParticipants(currentUser)
+        } else {
+            thisEvent.removeFromEventNopeParticipants(currentUser)
+        }
+    }
+    
+    func deselectAllButtons() {
+        let buttons = [nopeButton, maybeButton, participateButton]
+        for button in buttons {
+            button.backgroundColor      = .white
+            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
+            button.isSelected = false
+        }
+    }
+    
+    func selectButton(button: UIButton, selected: Bool) {
+        if selected {
+            button.backgroundColor      = LebensfitSettings.Colors.darkRed
+            button.imageView?.tintColor = .white
+            button.isSelected = true
+        } else {
+            button.backgroundColor      = .white
+            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
+            button.isSelected = false
+        }
     }
     
     func teilnehmerLoaded() {
-        let tableviewHeight: CGFloat = CGFloat(teilnehmerTV.users.count) * 60
-        scrollView.addSubview(teilnehmerTV)
-        teilnehmerTV.anchor(top: teilnehmerLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: tableviewHeight)
+        //        let tableviewHeight: CGFloat = CGFloat(teilnehmerTV.users.count) * 60
+        //        scrollView.addSubview(teilnehmerTV)
+        //        teilnehmerTV.anchor(top: teilnehmerLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: tableviewHeight)
+        
+        print(thisEvent.eventSureParticipants)
+        if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
+            
+            print("all tvs loaded")
+            scrollView.addSubview(teilnehmerLabel)
+            scrollView.addSubview(interessentenLabel)
+            scrollView.addSubview(absagenLabel)
+            
+            scrollView.addSubview(surePeopleTV)
+            scrollView.addSubview(maybePeopleTV)
+            scrollView.addSubview(nopePeopleTV)
+            
+            let sureTVHeight: CGFloat = CGFloat(surePeopleTV.users.count) * 60
+            let maybeTVHeight: CGFloat = CGFloat(maybePeopleTV.users.count) * 60
+            let nopeTVHeight: CGFloat = CGFloat(nopePeopleTV.users.count) * 60
+            
+            teilnehmerLabel.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+            surePeopleTV.anchor(top: teilnehmerTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: sureTVHeight)
+            
+            interessentenLabel.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+            maybePeopleTV.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: maybeTVHeight)
+            
+            absagenLabel.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+            nopePeopleTV.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: nopeTVHeight)
+            
+            surePeopleTV.peopleTableView.reloadData()
+            maybePeopleTV.peopleTableView.reloadData()
+            nopePeopleTV.peopleTableView.reloadData()
+        }
     }
     
     func formatDate(date: Date) -> String {
@@ -367,7 +468,6 @@ class SingleEventViewController: UIViewController {
     }
     
     @objc func openInGoogleMaps() {
-        print("tapped")
         guard let coord = eventLocation else { return }
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord, addressDictionary:nil))
         mapItem.name = "Target location"
@@ -402,22 +502,9 @@ class SingleEventViewController: UIViewController {
     }
     
     //MARK: - Navigation
-    func selectButton(button: UIButton, selected: Bool) {
-        if selected {
-            button.backgroundColor      = LebensfitSettings.Colors.darkRed
-            //button.tintColor          = .white
-            button.imageView?.tintColor = .white
-        } else {
-            button.backgroundColor      = .white
-            //button.tintColor          = .white
-            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
-        }
-    }
-    
     func gotoProfile(clickedUID: String) {
         let selectedProfile     = ProfileController()
         selectedProfile.userId  = clickedUID
-        print("clicked")
         DispatchQueue.main.async( execute: {
             self.navigationController?.pushViewController(selectedProfile, animated: true)
         })

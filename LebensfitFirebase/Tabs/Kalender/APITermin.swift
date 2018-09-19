@@ -8,6 +8,7 @@
 
 import UIKit
 import EventKit
+import Firebase
 
 extension TerminController {
     func fillArray() {
@@ -16,8 +17,9 @@ extension TerminController {
         for i in 0..<10 {
             finDate     = Calendar.current.date(byAdding: .minute, value: 50, to: startDate)!
             let event   = Event(id: Int32(i), type: .pilatesChair, start: startDate as NSDate, finish: finDate as NSDate, needsApplication: nil)
-            eventArray.append(event)
+            self.eventArray.append(event)
             startDate   = Calendar.current.date(byAdding: .minute, value: 60*6, to: startDate)!
+            
         }
     }
     

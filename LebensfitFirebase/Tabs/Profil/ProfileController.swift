@@ -143,7 +143,7 @@ class ProfileController: UIViewController {
         let vc = self.navigationController?.viewControllers.first
         if vc == self.navigationController?.visibleViewController {
             print("self")
-            user = CDUser.sharedInstance.loadCurrentUser()
+            user = CDUser.sharedInstance.getCurrentUser()
         } else {
             print("notself")
             fetchUser()

@@ -9,15 +9,18 @@ import UIKit
 import Firebase
 
 extension PeopleTableView {
-    func fetchUsers() {
+    func fetchUsersold() {
         print("Fetching users..")
-
+        
         let ref = Database.database().reference().child("users")
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
             dictionaries.forEach({ (key, value) in
-
+                //                if key == Auth.auth().currentUser?.uid {
+                //                    print("Found myself, omit from list")
+                //                    return
+                //                }
                 
                 for i in 0..<self.users.count {
                     if key == self.users[i].uid {
@@ -27,7 +30,7 @@ extension PeopleTableView {
                     print(self.users[i].username,": Not found")
                 }
                 
-
+                
                 guard let userDictionary = value as? [String: Any] else { return }
                 
                 let user = User(uid: key, dictionary: userDictionary)

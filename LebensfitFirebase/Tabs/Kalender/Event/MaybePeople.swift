@@ -18,12 +18,7 @@ class MaybePeople: PeopleTableView {
     
     func loadMaybeUsers() {
         guard let parent = parentVC else { return }
-        let users = parent.thisEvent.eventMaybeParticipants
-        print("Maybe: ")
-        print(users)
-        //        for user in users {
-        //            print(user.username)
-        //        }
+        users = (parent.thisEvent.eventMaybeParticipants?.allObjects as! [User]) ?? []
         finishedLoading = true
         parent.teilnehmerLoaded()
     }

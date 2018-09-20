@@ -18,12 +18,7 @@ class NopePeople: PeopleTableView {
     
     func loadNopeUsers() {
         guard let parent = parentVC else { return }
-        let users = parent.thisEvent.eventNopeParticipants
-        print("Nope: ")
-        print(users)
-        //        for user in users {
-        //            print(user.username)
-        //        }
+        users = (parent.thisEvent.eventNopeParticipants?.allObjects as! [User]) ?? []
         finishedLoading = true
         parent.teilnehmerLoaded()
     }

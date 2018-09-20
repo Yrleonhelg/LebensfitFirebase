@@ -20,12 +20,7 @@ class SurePeople: PeopleTableView {
     
     func loadSureUsers() {
         guard let parent = parentVC else { return }
-        let users = parent.thisEvent.eventSureParticipants
-        print("Sure: ")
-        print(users)
-//        for user in users {
-//            print(user.username)
-//        }
+        users = (parent.thisEvent.eventSureParticipants?.allObjects as! [User]) ?? []
         finishedLoading = true
         parent.teilnehmerLoaded()
     }

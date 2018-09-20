@@ -126,7 +126,7 @@ class SingleEventViewController: UIViewController {
     }()
     
     let teilnehmerTV: PeopleTableView = {
-        let tvt             = PeopleTableView()
+        let tvt = PeopleTableView()
         return tvt
     }()
     let surePeopleTV: SurePeople = {
@@ -236,11 +236,19 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //teilnehmerTV.fetchUsers()
+
+        surePeopleTV.parentVC = self
+        maybePeopleTV.parentVC = self
+        nopePeopleTV.parentVC = self
+        
+        //todo
         let user = CDUser.sharedInstance.getCurrentUser()
         thisEvent.addToEventSureParticipants(user)
         
-        teilnehmerTV.parentVC = self
+        let users = CDUser.sharedInstance.getUsers()
+        let nsusers = NSSet(array: users)
+        thisEvent.addToEventNopeParticipants(nsusers)
+        
         surePeopleTV.loadSureUsers()
         maybePeopleTV.loadMaybeUsers()
         nopePeopleTV.loadNopeUsers()
@@ -323,7 +331,6 @@ class SingleEventViewController: UIViewController {
         participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 7, paddingLeft: 0, paddingBottom: 7, paddingRight: 0, width: 0, height: 0)
         participateButton.imageView!.widthAnchor.constraint(equalTo: participateButton.imageView!.heightAnchor, multiplier: 1).isActive = true
         
-        
         buttonViewDividerViewTwo.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         buttonViewDividerView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
@@ -342,6 +349,7 @@ class SingleEventViewController: UIViewController {
         notizenLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         descLabel.anchor(top: notizenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         
+        //print(thisEvent.eventSureParticipants, thisEvent.eventMaybeParticipants, thisEvent.eventNopeParticipants)
     }
     
     override func viewDidLayoutSubviews() {
@@ -413,14 +421,8 @@ class SingleEventViewController: UIViewController {
     }
     
     func teilnehmerLoaded() {
-        //        let tableviewHeight: CGFloat = CGFloat(teilnehmerTV.users.count) * 60
-        //        scrollView.addSubview(teilnehmerTV)
-        //        teilnehmerTV.anchor(top: teilnehmerLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: tableviewHeight)
-        
-        print(thisEvent.eventSureParticipants)
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
-            
-            print("all tvs loaded")
+
             scrollView.addSubview(teilnehmerLabel)
             scrollView.addSubview(interessentenLabel)
             scrollView.addSubview(absagenLabel)
@@ -434,13 +436,13 @@ class SingleEventViewController: UIViewController {
             let nopeTVHeight: CGFloat = CGFloat(nopePeopleTV.users.count) * 60
             
             teilnehmerLabel.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            surePeopleTV.anchor(top: teilnehmerTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: sureTVHeight)
+            surePeopleTV.anchor(top: teilnehmerLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: sureTVHeight)
             
             interessentenLabel.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
             maybePeopleTV.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: maybeTVHeight)
             
             absagenLabel.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            nopePeopleTV.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: nopeTVHeight)
+            nopePeopleTV.anchor(top: absagenLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: nopeTVHeight)
             
             surePeopleTV.peopleTableView.reloadData()
             maybePeopleTV.peopleTableView.reloadData()

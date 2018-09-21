@@ -24,6 +24,7 @@ class SingleEventViewController: UIViewController {
     var snapShotter = MKMapSnapshotter()
     var tableViewControllers: [PeopleTableView]!
     var tableViews: [UITableView]!
+    var buttons: [UIButton]!
     
     let padding: CGFloat = 20
     var heightOfAllPaddings: CGFloat = 0
@@ -84,7 +85,6 @@ class SingleEventViewController: UIViewController {
     let mapView: UIImageView = {
         let view                = UIImageView()
         view.clipsToBounds      = true
-        view.layer.borderWidth  = 0
         view.layer.cornerRadius = 10
         view.contentMode        = .scaleAspectFill
         view.isUserInteractionEnabled = true
@@ -142,11 +142,7 @@ class SingleEventViewController: UIViewController {
         let button              = UIButton()
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
         button.tintColor        = CalendarSettings.Colors.darkRed
-        
-        let buttonImage: UIImage = {
-            let image           = UIImage(named: "checkmark2")?.withRenderingMode(.alwaysTemplate)
-            return image!
-        }()
+        let buttonImage = UIImage(named: "checkmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
         return button
@@ -156,11 +152,7 @@ class SingleEventViewController: UIViewController {
         let button              = UIButton()
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
         button.tintColor        = CalendarSettings.Colors.darkRed
-        let buttonImage: UIImage = {
-            let image = UIImage(named: "questionmark2")?.withRenderingMode(.alwaysTemplate)
-            return image!
-        }()
-        
+        let buttonImage = UIImage(named: "questionmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
         return button
@@ -171,17 +163,11 @@ class SingleEventViewController: UIViewController {
         button.isEnabled = true
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
         button.tintColor        = CalendarSettings.Colors.darkRed
-        let buttonImage: UIImage = {
-            let image = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)
-            return image!
-        }()
-        
+        let buttonImage = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
         return button
     }()
-    
-    
     
     //MARK: - Init & View Loading
     init(event: Event) {
@@ -193,8 +179,9 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewControllers = [surePeopleTV, maybePeopleTV, nopePeopleTV]
-        tableViews = [surePeopleTV.peopleTableView, maybePeopleTV.peopleTableView, nopePeopleTV.peopleTableView]
+        tableViewControllers    = [surePeopleTV, maybePeopleTV, nopePeopleTV]
+        tableViews              = [surePeopleTV.peopleTableView, maybePeopleTV.peopleTableView, nopePeopleTV.peopleTableView]
+        buttons                 = [nopeButton, maybeButton, participateButton]
         provisorischeNutzer()
         applyDefaultValues()
         setupViews()
@@ -208,7 +195,6 @@ class SingleEventViewController: UIViewController {
             controller.loadUsers()
         }
         setupNavBar()
-        
     }
     
     func provisorischeNutzer() {
@@ -360,6 +346,8 @@ class SingleEventViewController: UIViewController {
     
     @objc func buttonClick(sender: UIButton) {
         let selected = !sender.isSelected
+        deselectAllButtons()
+        removeFromAllParticipantsList()
         selectButton(button: sender, selected: selected)
         if selected {
             addUserToList(sender: sender)
@@ -379,11 +367,22 @@ class SingleEventViewController: UIViewController {
     }
     
     func deselectAllButtons() {
-        let buttons = [nopeButton, maybeButton, participateButton]
         for button in buttons {
             button.backgroundColor      = .white
             button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
-            button.isSelected = false
+            button.isSelected           = false
+        }
+    }
+    
+    func selectButton(button: UIButton, selected: Bool) {
+        if selected {
+            button.backgroundColor      = LebensfitSettings.Colors.darkRed
+            button.imageView?.tintColor = .white
+            button.isSelected           = true
+        } else {
+            button.backgroundColor      = .white
+            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
+            button.isSelected           = false
         }
     }
     
@@ -405,19 +404,6 @@ class SingleEventViewController: UIViewController {
         }
     }
     
-    func selectButton(button: UIButton, selected: Bool) {
-        deselectAllButtons()
-        removeFromAllParticipantsList()
-        if selected {
-            button.backgroundColor      = LebensfitSettings.Colors.darkRed
-            button.imageView?.tintColor = .white
-            button.isSelected = true
-        } else {
-            button.backgroundColor      = .white
-            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
-            button.isSelected = false
-        }
-    }
     
     func teilnehmerLoaded() {
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {

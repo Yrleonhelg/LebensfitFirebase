@@ -19,8 +19,7 @@ class loadEverything {
             
             dictionaries.forEach({ (key, value) in
                 guard let userDictionary = value as? [String: Any] else { return }
-                
-                let user = User(uid: key, dictionary: userDictionary, context: managedContext)
+                _ = User(uid: key, dictionary: userDictionary, context: managedContext)
             })
         }
         )}

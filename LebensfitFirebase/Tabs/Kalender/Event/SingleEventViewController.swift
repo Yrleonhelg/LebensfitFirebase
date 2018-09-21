@@ -98,7 +98,7 @@ class SingleEventViewController: UIViewController {
         label.textColor = .black
         return label
     }()
-
+    
     let surePeopleTV: SurePeople = {
         let view = SurePeople()
         return view
@@ -261,9 +261,9 @@ class SingleEventViewController: UIViewController {
         view.addSubview(buttonSeparatorViewTwo)
         view.addSubview(buttonViewDividerView)
         view.addSubview(buttonViewDividerViewTwo)
-        participateButton.addTarget(self, action: #selector (yesButtonClick), for: .touchUpInside)
-        maybeButton.addTarget(self, action: #selector (maybeButtonClick), for: .touchUpInside)
-        nopeButton.addTarget(self, action: #selector (nopeButtonClick), for: .touchUpInside)
+        participateButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
+        maybeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
+        nopeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
         
         //Scrollview related Objects
         let locationTap = UITapGestureRecognizer(target: self, action: #selector(self.openInGoogleMaps))
@@ -313,18 +313,18 @@ class SingleEventViewController: UIViewController {
         //Scrollview related Objects
         titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         locationLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 200, height: 0)
-            heightOfAllPaddings += 10
+        heightOfAllPaddings += 10
         
         dateLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 50, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         timeLabel.anchor(top: dateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            heightOfAllPaddings += 50
+        heightOfAllPaddings += 50
         
         mapView.anchor(top: timeLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 200)
-            heightOfAllPaddings += padding
+        heightOfAllPaddings += padding
         
         notizenLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         descLabel.anchor(top: notizenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            heightOfAllPaddings += 20 + 5
+        heightOfAllPaddings += 20 + 5
         
         surePeopleTV.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         maybePeopleTV.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -351,42 +351,31 @@ class SingleEventViewController: UIViewController {
             }
             heightOfAllObjects += height
         }
-
+        
         heightOfAllObjects -= participateButton.frame.height
         heightOfAllObjects += 14
         print("=",heightOfAllObjects)
         return heightOfAllObjects
     }
     
-    @objc func maybeButtonClick() {
-        let selected = !maybeButton.isSelected
-        selectButton(button: maybeButton, selected: selected)
-        let currentUser = CDUser.sharedInstance.getCurrentUser()
-        
+    @objc func buttonClick(sender: UIButton) {
+        let selected = !sender.isSelected
+        selectButton(button: sender, selected: selected)
         if selected {
+            addUserToList(sender: sender)
+        }
+        reloadAllTableViews()
+    }
+    
+    func addUserToList(sender: UIButton) {
+        let currentUser = CDUser.sharedInstance.getCurrentUser()
+        if sender == maybeButton {
             thisEvent.addToEventMaybeParticipants(currentUser)
-        }
-        reloadAllTableViews()
-    }
-    @objc func yesButtonClick() {
-        let selected = !participateButton.isSelected
-        selectButton(button: participateButton, selected: selected)
-        let currentUser = CDUser.sharedInstance.getCurrentUser()
-        
-        if selected {
+        } else if sender == participateButton {
             thisEvent.addToEventSureParticipants(currentUser)
-        }
-        reloadAllTableViews()
-    }
-    @objc func nopeButtonClick() {
-        let selected = !nopeButton.isSelected
-        selectButton(button: nopeButton, selected: selected)
-        let currentUser = CDUser.sharedInstance.getCurrentUser()
-        
-        if selected {
+        } else {
             thisEvent.addToEventNopeParticipants(currentUser)
         }
-        reloadAllTableViews()
     }
     
     func deselectAllButtons() {

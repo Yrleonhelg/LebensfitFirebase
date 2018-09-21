@@ -15,7 +15,7 @@ class CDEvent: NSObject {
     
     //create
     func createNewEvent(id: Int32, name: String, startdate: Date, enddate: Date, needsApp: Bool) {
-        let newEvent = Event(context: managedContext)
+        _ = Event(context: managedContext)
 
         do {
             try managedContext.save()

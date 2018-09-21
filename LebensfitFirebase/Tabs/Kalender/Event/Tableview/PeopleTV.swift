@@ -9,17 +9,28 @@
 import UIKit
 import Firebase
 
-class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource {
+class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, ReusableView {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
     var users: [User]! = [User]()
     var sortedUsers: [User]! = [User]()
+    var finishedLoading: Bool = false
+    var padding: CGFloat = 15+25+5
+    var height: CGFloat = 60
     
     //MARK: - GUI Objects
     let peopleTableView: UITableView = {
         let ctv = UITableView()
         return ctv
+    }()
+    
+    let peopleLabel: UILabel = {
+        let label       = UILabel()
+        label.font      = UIFont.systemFont(ofSize: 20)
+        label.text      = "Label:"
+        label.textColor = .black
+        return label
     }()
     
     //MARK: - Init & View Loading
@@ -28,7 +39,6 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource {
         self.backgroundColor = .white
         setupTableView()
         setupViews()
-        confBounds()
     }
     
     //MARK: - Setup
@@ -40,12 +50,21 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func setupViews() {
+        addSubview(peopleLabel)
         addSubview(peopleTableView)
     }
     
-    func confBounds(){
-        peopleTableView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+    func removeViews() {
+        peopleTableView.removeFromSuperview()
+        peopleLabel.removeFromSuperview()
     }
+    
+    func confBounds(){
+        peopleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 20, paddingBottom: 0, paddingRight: 0, width: 0, height: 25)
+        peopleTableView.anchor(top: peopleLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        padding = 15+25+5
+    }
+    
     
     //MARK: - Tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,7 +72,7 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,7 +90,16 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: - Methods
-    
+    func loadUsers() {
+        setNeedsUpdateConstraints()
+        if users.count == 0 {
+            removeViews()
+            padding = 0
+        } else {
+            setupViews()
+        }
+        self.updateConstraints()
+    }
     
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {

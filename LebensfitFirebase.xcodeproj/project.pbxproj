@@ -41,6 +41,7 @@
 		015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */; };
 		015416BD21495C35006A1A02 /* PeopleTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015416BC21495C35006A1A02 /* PeopleTV.swift */; };
 		0159AA2C2147B0C7005134A3 /* APITermin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0159AA2B2147B0C7005134A3 /* APITermin.swift */; };
+		015F8CC02153A4B20090EC2C /* loadEverything.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015F8CBF2153A4B20090EC2C /* loadEverything.swift */; };
 		016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89B213D777500ADAA65 /* AppDelegate.swift */; };
 		016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016BA89D213D777500ADAA65 /* SignUpController.swift */; };
 		016BA8A1213D777500ADAA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016BA89F213D777500ADAA65 /* Main.storyboard */; };
@@ -74,7 +75,6 @@
 		FEA8AB79214FDAD2001E1E7E /* SteckbriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */; };
 		FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
-		FECC8FB32143306A007F3F3F /* HELG+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB22143306A007F3F3F /* HELG+View.swift */; };
 		FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB421455430007F3F3F /* HELG+Date.swift */; };
 		FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB621455C46007F3F3F /* EventTableCell.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +114,7 @@
 		015416B82148E7E7006A1A02 /* WeekViewExtensionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewExtensionMethods.swift; sourceTree = "<group>"; };
 		015416BC21495C35006A1A02 /* PeopleTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTV.swift; sourceTree = "<group>"; };
 		0159AA2B2147B0C7005134A3 /* APITermin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITermin.swift; sourceTree = "<group>"; };
+		015F8CBF2153A4B20090EC2C /* loadEverything.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loadEverything.swift; sourceTree = "<group>"; };
 		016BA898213D777500ADAA65 /* LebensfitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LebensfitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016BA89B213D777500ADAA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016BA89D213D777500ADAA65 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -151,7 +152,6 @@
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteckbriefView.swift; sourceTree = "<group>"; };
 		FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandView.swift; sourceTree = "<group>"; };
-		FECC8FB22143306A007F3F3F /* HELG+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+View.swift"; sourceTree = "<group>"; };
 		FECC8FB421455430007F3F3F /* HELG+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Date.swift"; sourceTree = "<group>"; };
 		FECC8FB621455C46007F3F3F /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,7 +177,6 @@
 				0186104B213EA6BE0037DADB /* HELG+UIView.swift */,
 				FECC8FB421455430007F3F3F /* HELG+Date.swift */,
 				016DA581214272B100B07F69 /* POPShakeable.swift */,
-				FECC8FB22143306A007F3F3F /* HELG+View.swift */,
 				010BC27E213D928E00530B2D /* ReuseableView.swift */,
 				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
 				010BC278213D924A00530B2D /* LebensfitSettings.swift */,
@@ -202,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				010BC26D213D914900530B2D /* LebensfitTabBarController.swift */,
+				015F8CBF2153A4B20090EC2C /* loadEverything.swift */,
 				010BC284213D92F100530B2D /* LebensfitNavigation.swift */,
 			);
 			path = Navigation;
@@ -244,6 +244,18 @@
 				FECC8FB621455C46007F3F3F /* EventTableCell.swift */,
 			);
 			path = Week;
+			sourceTree = "<group>";
+		};
+		015F8CBE2153A3A90090EC2C /* Tableview */ = {
+			isa = PBXGroup;
+			children = (
+				015416BC21495C35006A1A02 /* PeopleTV.swift */,
+				017FE8982152832C00B75330 /* SurePeople.swift */,
+				017FE89A2152833700B75330 /* MaybePeople.swift */,
+				017FE89C2152834200B75330 /* NopePeople.swift */,
+				01F44A80214A83BB006723ED /* PeopleTVCell.swift */,
+			);
+			path = Tableview;
 			sourceTree = "<group>";
 		};
 		016BA88F213D777500ADAA65 = {
@@ -350,12 +362,8 @@
 			isa = PBXGroup;
 			children = (
 				0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */,
-				015416BC21495C35006A1A02 /* PeopleTV.swift */,
-				017FE8982152832C00B75330 /* SurePeople.swift */,
-				017FE89C2152834200B75330 /* NopePeople.swift */,
-				017FE89A2152833700B75330 /* MaybePeople.swift */,
-				01F44A80214A83BB006723ED /* PeopleTVCell.swift */,
 				01F44A82214A8757006723ED /* APIEvent.swift */,
+				015F8CBE2153A3A90090EC2C /* Tableview */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -372,12 +380,12 @@
 		01F44A85214AA9CD006723ED /* Profil */ = {
 			isa = PBXGroup;
 			children = (
-				017FE89E2152842200B75330 /* APIEventOld.swift */,
 				01F44A86214AABED006723ED /* ProfileController.swift */,
 				FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */,
 				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
+				017FE89E2152842200B75330 /* APIEventOld.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -537,6 +545,7 @@
 				01F44A81214A83BB006723ED /* PeopleTVCell.swift in Sources */,
 				014CF79621513EFE006E17A6 /* User+CoreDataProperties.swift in Sources */,
 				01F44A87214AABED006723ED /* ProfileController.swift in Sources */,
+				015F8CC02153A4B20090EC2C /* loadEverything.swift in Sources */,
 				014CF79321513EFE006E17A6 /* Video+CoreDataClass.swift in Sources */,
 				01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */,
 				014CF7A02151478C006E17A6 /* APIRegister.swift in Sources */,
@@ -587,7 +596,6 @@
 				010BC277213D920900530B2D /* TerminController.swift in Sources */,
 				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,
 				010BC274213D920900530B2D /* ProfileControllerold.swift in Sources */,
-				FECC8FB32143306A007F3F3F /* HELG+View.swift in Sources */,
 				016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */,
 				014CF79421513EFE006E17A6 /* Video+CoreDataProperties.swift in Sources */,
 			);

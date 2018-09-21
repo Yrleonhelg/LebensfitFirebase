@@ -23,9 +23,8 @@ class LebensfitTabBarController: UITabBarController {
             }
             return
         }
-        CDUser.sharedInstance.createCurrentUser()
-        createAllUsers()
-        print("created")
+        
+        loadEverything.createAllUsers()
         setupTabBar()
         setupViewControllers()
     }
@@ -80,17 +79,5 @@ class LebensfitTabBarController: UITabBarController {
         viewControllers = [calendarNavigationController, homeNavigationController, mapNavigationController, profileNavigationController]
     }
     
-    func createAllUsers() {
-        let ref = Database.database().reference().child("users")
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let dictionaries = snapshot.value as? [String: Any] else { return }
-            
-            dictionaries.forEach({ (key, value) in
-                guard let userDictionary = value as? [String: Any] else { return }
-                
-                let user = User(uid: key, dictionary: userDictionary)
-            })
-        }
-    )}
 }
 

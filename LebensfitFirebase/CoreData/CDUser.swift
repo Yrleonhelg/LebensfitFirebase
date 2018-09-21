@@ -16,16 +16,21 @@ class CDUser: NSObject {
     
     //create
     func createCurrentUser() {
-        //let newUser = User(context: managedContext)
-        
-        Database.fetchUserWithUID(uid: (Auth.auth().currentUser?.uid)!) { (user) in
-//            newUser.uid = user.uid
-//            newUser.username = user.username
-//            newUser.email = user.email
-//            newUser.profileImageUrl = user.profileImageUrl
-            print(user.username)
+        Database.fetchUserWithUID(uid: (Auth.auth().currentUser?.uid)!) { (userId, userDictionary)  in
+            _ = User(uid: userId, dictionary: userDictionary, context: self.managedContext)
         }
-        
+        do {
+            try managedContext.save()
+            print("user saved")
+        } catch {
+            print("Error beim erstellen eines neuen Benutzers: ",error)
+        }
+    }
+    
+    func createUserWithID(userId: String) {
+        Database.fetchUserWithUID(uid: userId) { (userId, userDictionary)  in
+            _ = User(uid: userId, dictionary: userDictionary, context: self.managedContext)
+        }
         do {
             try managedContext.save()
             print("user saved")
@@ -64,13 +69,24 @@ class CDUser: NSObject {
         guard let key = Auth.auth().currentUser?.uid else { print("returning ",allUsers.first!); return allUsers.first!}
         for i in 0..<allUsers.count {
             if key == allUsers[i].uid {
-                print("returning ",allUsers[i].username as Any)
                 return allUsers[i]
             }
         }
-        print("returning ",allUsers.first!)
         return allUsers.first!
     }
+    
+    func getUserForId(userId: String) -> User {
+        let allUsers = getUsers()
+        
+        for i in 0..<allUsers.count {
+            if userId == allUsers[i].uid {
+                return allUsers[i]
+            }
+        }
+        print("No user for passed id")
+        return allUsers.first!
+    }
+    
     
     //update
     func updateUsers() {

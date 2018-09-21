@@ -13,12 +13,11 @@ import CoreData
 
 public class User: NSManagedObject {
 
-    convenience init(uid: String, dictionary: [String: Any]) {
-        let managedContext = PersistenceService.context
+    convenience init(uid: String, dictionary: [String: Any], context: NSManagedObjectContext) {
+        let managedContext = context
         self.init(context: managedContext)
         self.uid = uid
         self.username = dictionary["username"] as? String ?? ""
         self.profileImageUrl = dictionary["profileImageUrl"]  as? String ?? ""
     }
-    
 }

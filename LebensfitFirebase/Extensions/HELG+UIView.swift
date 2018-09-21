@@ -37,6 +37,13 @@ extension UIView {
         }
     }
     
+    func clearConstraints() {
+        for subview in self.subviews {
+            subview.clearConstraints()
+        }
+        self.removeConstraints(self.constraints)
+    }
+    
     func fillSuperview(padding: UIEdgeInsets) {
         translatesAutoresizingMaskIntoConstraints = false
         if let superviewTopAnchor = superview?.topAnchor {

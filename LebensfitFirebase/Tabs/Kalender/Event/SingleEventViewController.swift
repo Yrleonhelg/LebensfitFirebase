@@ -22,8 +22,13 @@ class SingleEventViewController: UIViewController {
     var eventNeedsApplication: Bool?
     
     var snapShotter = MKMapSnapshotter()
+    var tableViewControllers: [PeopleTableView]!
+    var tableViews: [UITableView]!
     
     let padding: CGFloat = 20
+    var heightOfAllPaddings: CGFloat = 0
+    var heightCons = [NSLayoutConstraint]()
+    
     
     //MARK: - GUI Objects
     let scrollView: UIScrollView = {
@@ -86,15 +91,6 @@ class SingleEventViewController: UIViewController {
         return view
     }()
     
-    let mapLabel: UILabel = {
-        let label           = UILabel()
-        label.font          = UIFont.systemFont(ofSize: 16)
-        label.text          = "Frauenfeld"
-        label.textColor     = LebensfitSettings.Colors.darkRed
-        label.textAlignment = .center
-        return label
-    }()
-    
     let notizenLabel: UILabel = {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 20)
@@ -102,33 +98,7 @@ class SingleEventViewController: UIViewController {
         label.textColor = .black
         return label
     }()
-    
-    let teilnehmerLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.systemFont(ofSize: 20)
-        label.text      = "Teilnehmer:"
-        label.textColor = .black
-        return label
-    }()
-    let interessentenLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.systemFont(ofSize: 20)
-        label.text      = "Interessenten:"
-        label.textColor = .black
-        return label
-    }()
-    let absagenLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.systemFont(ofSize: 20)
-        label.text      = "Absagen:"
-        label.textColor = .black
-        return label
-    }()
-    
-    let teilnehmerTV: PeopleTableView = {
-        let tvt = PeopleTableView()
-        return tvt
-    }()
+
     let surePeopleTV: SurePeople = {
         let view = SurePeople()
         return view
@@ -179,8 +149,6 @@ class SingleEventViewController: UIViewController {
         }()
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
-        button.imageView?.layer.borderWidth = 0
-        button.imageView?.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
         return button
     }()
     
@@ -195,8 +163,6 @@ class SingleEventViewController: UIViewController {
         
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
-        button.imageView?.layer.borderWidth = 0
-        button.imageView?.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
         return button
     }()
     
@@ -212,8 +178,6 @@ class SingleEventViewController: UIViewController {
         
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
-        button.imageView?.layer.borderWidth = 0
-        button.imageView?.layer.borderColor = CalendarSettings.Colors.darkRed.cgColor
         return button
     }()
     
@@ -229,6 +193,9 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViewControllers = [surePeopleTV, maybePeopleTV, nopePeopleTV]
+        tableViews = [surePeopleTV.peopleTableView, maybePeopleTV.peopleTableView, nopePeopleTV.peopleTableView]
+        provisorischeNutzer()
         applyDefaultValues()
         setupViews()
         getSnapshotForLocation()
@@ -236,11 +203,15 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        surePeopleTV.parentVC = self
-        maybePeopleTV.parentVC = self
-        nopePeopleTV.parentVC = self
+        confBounds()
+        for controller in tableViewControllers {
+            controller.loadUsers()
+        }
+        setupNavBar()
         
+    }
+    
+    func provisorischeNutzer() {
         //todo
         let user = CDUser.sharedInstance.getCurrentUser()
         thisEvent.addToEventSureParticipants(user)
@@ -248,13 +219,7 @@ class SingleEventViewController: UIViewController {
         let users = CDUser.sharedInstance.getUsers()
         let nsusers = NSSet(array: users)
         thisEvent.addToEventNopeParticipants(nsusers)
-        
-        surePeopleTV.loadSureUsers()
-        maybePeopleTV.loadMaybeUsers()
-        nopePeopleTV.loadNopeUsers()
-        
-        setupNavBar()
-        confBounds()
+        //todoend
     }
     
     //MARK: - Setup
@@ -276,10 +241,9 @@ class SingleEventViewController: UIViewController {
         
         if let location = eventLocation {
             locationLabel.text  = getStringFromLocation(location: location)
-            mapLabel.text       = getStringFromLocation(location: location)
         }
         if let date = eventStartingDate {
-            dateLabel.text = formatDate(date: date as Date)
+            dateLabel.text = (date as Date).formatDateEEEEddMMMyyyy()
         }
     }
     
@@ -301,6 +265,7 @@ class SingleEventViewController: UIViewController {
         maybeButton.addTarget(self, action: #selector (maybeButtonClick), for: .touchUpInside)
         nopeButton.addTarget(self, action: #selector (nopeButtonClick), for: .touchUpInside)
         
+        //Scrollview related Objects
         let locationTap = UITapGestureRecognizer(target: self, action: #selector(self.openInGoogleMaps))
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(locationLabel)
@@ -311,6 +276,14 @@ class SingleEventViewController: UIViewController {
         mapView.addGestureRecognizer(locationTap)
         scrollView.addSubview(notizenLabel)
         scrollView.addSubview(descLabel)
+        
+        for controller in tableViewControllers {
+            scrollView.addSubview(controller)
+            controller.parentVC = self
+            let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
+            heightCon.isActive = true
+            heightCons.append(heightCon)
+        }
     }
     
     
@@ -340,63 +313,80 @@ class SingleEventViewController: UIViewController {
         //Scrollview related Objects
         titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         locationLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 200, height: 0)
+            heightOfAllPaddings += 10
         
         dateLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 50, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         timeLabel.anchor(top: dateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+            heightOfAllPaddings += 50
         
         mapView.anchor(top: timeLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 200)
+            heightOfAllPaddings += padding
         
         notizenLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         descLabel.anchor(top: notizenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+            heightOfAllPaddings += 20 + 5
         
-        //print(thisEvent.eventSureParticipants, thisEvent.eventMaybeParticipants, thisEvent.eventNopeParticipants)
+        surePeopleTV.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        maybePeopleTV.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        nopePeopleTV.anchor(top: maybePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     override func viewDidLayoutSubviews() {
-        var objHeight = titleLabel.frame.height + locationLabel.frame.height + dateLabel.frame.height + timeLabel.frame.height + mapView.frame.height + notizenLabel.frame.height + descLabel.frame.height
-        let tableviewsHeight = teilnehmerLabel.frame.height + interessentenLabel.frame.height + absagenLabel.frame.height
-        objHeight += tableviewsHeight
-        let paddingHeight = 10+0+50+padding+20+20+20 - 15 + 1000
-        
-        scrollView.contentSize = CGSize(width: view.frame.width, height: objHeight+paddingHeight)
+        let heightOfAllObjects = calculateHeightOfAllObjects()
+        scrollView.contentSize = CGSize(width: view.frame.width, height: heightOfAllObjects+heightOfAllPaddings)
     }
     
     //MARK: - Methods
+    func calculateHeightOfAllObjects() -> CGFloat {
+        var heightOfAllObjects: CGFloat = 0
+        heightOfAllObjects += titleLabel.frame.height + locationLabel.frame.height
+        heightOfAllObjects += dateLabel.frame.height + timeLabel.frame.height
+        heightOfAllObjects += mapView.frame.height
+        heightOfAllObjects += notizenLabel.frame.height + descLabel.frame.height
+        
+        for controller in tableViewControllers {
+            var height = CGFloat(controller.users.count) * controller.height
+            if controller.users.count > 0 {
+                height += controller.padding
+            }
+            heightOfAllObjects += height
+        }
+
+        heightOfAllObjects -= participateButton.frame.height
+        heightOfAllObjects += 14
+        print("=",heightOfAllObjects)
+        return heightOfAllObjects
+    }
+    
     @objc func maybeButtonClick() {
         let selected = !maybeButton.isSelected
-        deselectAllButtons()
         selectButton(button: maybeButton, selected: selected)
         let currentUser = CDUser.sharedInstance.getCurrentUser()
         
         if selected {
             thisEvent.addToEventMaybeParticipants(currentUser)
-        } else {
-            thisEvent.removeFromEventMaybeParticipants(currentUser)
         }
+        reloadAllTableViews()
     }
     @objc func yesButtonClick() {
         let selected = !participateButton.isSelected
-        deselectAllButtons()
         selectButton(button: participateButton, selected: selected)
         let currentUser = CDUser.sharedInstance.getCurrentUser()
         
         if selected {
             thisEvent.addToEventSureParticipants(currentUser)
-        } else {
-            thisEvent.removeFromEventSureParticipants(currentUser)
         }
+        reloadAllTableViews()
     }
     @objc func nopeButtonClick() {
         let selected = !nopeButton.isSelected
-        deselectAllButtons()
         selectButton(button: nopeButton, selected: selected)
         let currentUser = CDUser.sharedInstance.getCurrentUser()
         
         if selected {
             thisEvent.addToEventNopeParticipants(currentUser)
-        } else {
-            thisEvent.removeFromEventNopeParticipants(currentUser)
         }
+        reloadAllTableViews()
     }
     
     func deselectAllButtons() {
@@ -408,7 +398,27 @@ class SingleEventViewController: UIViewController {
         }
     }
     
+    //gets called before we add the user to a different list, he cannot be in two lists at the same time
+    func removeFromAllParticipantsList() {
+        let partList = [thisEvent.eventSureParticipants, thisEvent.eventMaybeParticipants, thisEvent.eventNopeParticipants]
+        let currentUser = CDUser.sharedInstance.getCurrentUser()
+        for list in partList {
+            guard let thisList = list else { return }
+            if thisList.contains(currentUser) {
+                if thisList == thisEvent.eventSureParticipants {
+                    thisEvent.removeFromEventSureParticipants(currentUser)
+                } else if thisList == thisEvent.eventMaybeParticipants {
+                    thisEvent.removeFromEventMaybeParticipants(currentUser)
+                } else if thisList == thisEvent.eventNopeParticipants {
+                    thisEvent.removeFromEventNopeParticipants(currentUser)
+                }
+            }
+        }
+    }
+    
     func selectButton(button: UIButton, selected: Bool) {
+        deselectAllButtons()
+        removeFromAllParticipantsList()
         if selected {
             button.backgroundColor      = LebensfitSettings.Colors.darkRed
             button.imageView?.tintColor = .white
@@ -422,41 +432,34 @@ class SingleEventViewController: UIViewController {
     
     func teilnehmerLoaded() {
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
-
-            scrollView.addSubview(teilnehmerLabel)
-            scrollView.addSubview(interessentenLabel)
-            scrollView.addSubview(absagenLabel)
-            
-            scrollView.addSubview(surePeopleTV)
-            scrollView.addSubview(maybePeopleTV)
-            scrollView.addSubview(nopePeopleTV)
-            
-            let sureTVHeight: CGFloat = CGFloat(surePeopleTV.users.count) * 60
-            let maybeTVHeight: CGFloat = CGFloat(maybePeopleTV.users.count) * 60
-            let nopeTVHeight: CGFloat = CGFloat(nopePeopleTV.users.count) * 60
-            
-            teilnehmerLabel.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            surePeopleTV.anchor(top: teilnehmerLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: sureTVHeight)
-            
-            interessentenLabel.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            maybePeopleTV.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: maybeTVHeight)
-            
-            absagenLabel.anchor(top: interessentenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-            nopePeopleTV.anchor(top: absagenLabel.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: nopeTVHeight)
-            
-            surePeopleTV.peopleTableView.reloadData()
-            maybePeopleTV.peopleTableView.reloadData()
-            nopePeopleTV.peopleTableView.reloadData()
+            for (index, controller) in tableViewControllers.enumerated() {
+                var height = CGFloat(controller.users.count) * 60.0
+                print("Users: ",controller.users.count)
+                if controller.users.count > 0 {
+                    height += controller.padding
+                    heightCons[index].constant = height
+                    controller.confBounds()
+                } else {
+                    heightCons[index].constant = 0
+                }
+                view.layoutIfNeeded()
+            }
         }
     }
     
-    func formatDate(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_CH")
-        formatter.dateFormat = "EEEE, dd. MMM yyyy"
-        let result = formatter.string(from: date)
-        return result
+    func reloadAllTableViews() {
+        print("Function: \(#function)")
+        for controller in tableViewControllers {
+            controller.finishedLoading = false
+            controller.loadUsers()
+        }
+        for tv in tableViews {
+            DispatchQueue.main.async( execute: {
+                tv.reloadData()
+            })
+        }
     }
+    
     
     //hardcoded method to set a string for the location //TODO: make smooth
     func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
@@ -469,35 +472,17 @@ class SingleEventViewController: UIViewController {
         return "Unbekannt"
     }
     
-    @objc func openInGoogleMaps() {
-        guard let coord = eventLocation else { return }
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord, addressDictionary:nil))
-        mapItem.name = "Target location"
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-    }
-    
     //https://dispatchswift.com/render-a-map-as-an-image-using-mapkit-3102a5a3fa5
     func getSnapshotForLocation() {
         let mapSnapshotOptions = MKMapSnapshotOptions()
-        
-        // Set the region of the map that is rendered.
-        //let location = CLLocationCoordinate2DMake(37.332077, -122.02962) // Apple HQ
         guard let location = eventLocation else { return }
         let region = MKCoordinateRegionMakeWithDistance(location, 2000, 2000)
         mapSnapshotOptions.region = region
-        
-        // Set the scale of the image. We'll just use the scale of the current device, which is 2x scale on Retina screens.
         mapSnapshotOptions.scale = UIScreen.main.scale
-        
-        // Set the size of the image output.
         mapSnapshotOptions.size = CGSize(width: 400, height: 400)
-        
-        // Show buildings and Points of Interest on the snapshot
         mapSnapshotOptions.showsBuildings = true
         mapSnapshotOptions.showsPointsOfInterest = true
-        
         snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
-        
         snapShotter.start { (snapshot:MKMapSnapshot?, error:Error?) in
             self.mapView.image = snapshot?.image
         }
@@ -512,9 +497,11 @@ class SingleEventViewController: UIViewController {
         })
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //teilnehmerTV.users.removeAll()
+    @objc func openInGoogleMaps() {
+        guard let coord = eventLocation else { return }
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord, addressDictionary:nil))
+        mapItem.name = "Target location"
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
     //MARK: - Do not change Methods

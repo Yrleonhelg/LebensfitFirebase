@@ -28,4 +28,12 @@ extension Date {
     func thisDate(value: Int) -> Date{
         return Calendar.current.date(byAdding: .day, value: value, to: noon)!
     }
+    
+    func formatDateEEEEddMMMyyyy() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "de_CH")
+        formatter.dateFormat = "EEEE, dd. MMM yyyy"
+        let result = formatter.string(from: self)
+        return result
+    }
 }

@@ -10,17 +10,17 @@ import UIKit
 
 class SurePeople: PeopleTableView {
 
-    var sureUsers: [User]! = [User]()
-    var finishedLoading: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        peopleLabel.text = "Teilnehmer:"
     }
     
-    func loadSureUsers() {
+    override func loadUsers() {
+        print("Class: \(#file) Function: \(#function)")
         guard let parent = parentVC else { return }
-        users = (parent.thisEvent.eventSureParticipants?.allObjects as! [User]) ?? []
+        users = parent.thisEvent.eventSureParticipants?.allObjects as! [User]
+        super.loadUsers()
         finishedLoading = true
         parent.teilnehmerLoaded()
     }

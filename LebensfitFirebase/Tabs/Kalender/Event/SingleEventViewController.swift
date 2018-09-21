@@ -56,16 +56,6 @@ class SingleEventViewController: UIViewController {
         return label
     }()
     
-    let descLabel: UILabel = {
-        let label           = UILabel()
-        label.font          = UIFont.systemFont(ofSize: 16)
-        label.text          = "Beschreibung"
-        label.textColor     = .gray
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
-    
     let dateLabel: UILabel = {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 16)
@@ -91,11 +81,21 @@ class SingleEventViewController: UIViewController {
         return view
     }()
     
-    let notizenLabel: UILabel = {
+    let notesHeaderLabel: UILabel = {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 20)
         label.text      = "Notizen"
         label.textColor = .black
+        return label
+    }()
+    
+    let notesContentLabel: UILabel = {
+        let label           = UILabel()
+        label.font          = UIFont.systemFont(ofSize: 16)
+        label.text          = "Beschreibung"
+        label.textColor     = .gray
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -126,13 +126,13 @@ class SingleEventViewController: UIViewController {
     }()
     
     //divides the two buttons
-    let buttonSeparatorView: UIView = {
+    let separatorMaybeSure: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
     }()
     
-    let buttonSeparatorViewTwo: UIView = {
+    let separatorNopeMaybe: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
@@ -220,7 +220,7 @@ class SingleEventViewController: UIViewController {
     
     func applyDefaultValues() {
         titleLabel.text = eventName
-        descLabel.text  = eventDescription
+        notesContentLabel.text  = eventDescription
         if let start = eventStartingDate, let finish = eventFinishingDate {
             timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
         }
@@ -243,8 +243,8 @@ class SingleEventViewController: UIViewController {
         view.addSubview(maybeButton)
         view.addSubview(nopeButton)
         view.addSubview(participateButton)
-        view.addSubview(buttonSeparatorView)
-        view.addSubview(buttonSeparatorViewTwo)
+        view.addSubview(separatorMaybeSure)
+        view.addSubview(separatorNopeMaybe)
         view.addSubview(buttonViewDividerView)
         view.addSubview(buttonViewDividerViewTwo)
         participateButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
@@ -260,8 +260,8 @@ class SingleEventViewController: UIViewController {
         scrollView.addSubview(dateLabel)
         scrollView.addSubview(mapView)
         mapView.addGestureRecognizer(locationTap)
-        scrollView.addSubview(notizenLabel)
-        scrollView.addSubview(descLabel)
+        scrollView.addSubview(notesHeaderLabel)
+        scrollView.addSubview(notesContentLabel)
         
         for controller in tableViewControllers {
             scrollView.addSubview(controller)
@@ -280,13 +280,13 @@ class SingleEventViewController: UIViewController {
         //buttons first because they not in the scrollview
         nopeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
         nopeButton.imageView!.layer.cornerRadius = maybeButton.imageView!.layer.frame.height / 2
-        buttonSeparatorViewTwo.anchor(top: participateButton.topAnchor, left: nopeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
+        separatorNopeMaybe.anchor(top: participateButton.topAnchor, left: nopeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
         
-        maybeButton.anchor(top: nil, left: buttonSeparatorViewTwo.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
+        maybeButton.anchor(top: nil, left: separatorNopeMaybe.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
         maybeButton.imageView!.layer.cornerRadius = maybeButton.imageView!.layer.frame.height / 2
-        buttonSeparatorView.anchor(top: participateButton.topAnchor, left: maybeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
+        separatorMaybeSure.anchor(top: participateButton.topAnchor, left: maybeButton.rightAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0.5, height: 0)
         
-        participateButton.anchor(top: nil, left: buttonSeparatorView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0, height: 50)
+        participateButton.anchor(top: nil, left: separatorMaybeSure.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: 0, height: 50)
         participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 7, paddingLeft: 0, paddingBottom: 7, paddingRight: 0, width: 0, height: 0)
         participateButton.imageView!.widthAnchor.constraint(equalTo: participateButton.imageView!.heightAnchor, multiplier: 1).isActive = true
         
@@ -308,11 +308,11 @@ class SingleEventViewController: UIViewController {
         mapView.anchor(top: timeLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 200)
         heightOfAllPaddings += padding
         
-        notizenLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-        descLabel.anchor(top: notizenLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+        notesHeaderLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+        notesContentLabel.anchor(top: notesHeaderLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         heightOfAllPaddings += 20 + 5
         
-        surePeopleTV.anchor(top: descLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        surePeopleTV.anchor(top: notesContentLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         maybePeopleTV.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         nopePeopleTV.anchor(top: maybePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
@@ -328,7 +328,7 @@ class SingleEventViewController: UIViewController {
         heightOfAllObjects += titleLabel.frame.height + locationLabel.frame.height
         heightOfAllObjects += dateLabel.frame.height + timeLabel.frame.height
         heightOfAllObjects += mapView.frame.height
-        heightOfAllObjects += notizenLabel.frame.height + descLabel.frame.height
+        heightOfAllObjects += notesHeaderLabel.frame.height + notesContentLabel.frame.height
         
         for controller in tableViewControllers {
             var height = CGFloat(controller.users.count) * controller.height

@@ -10,7 +10,6 @@ import UIKit
 
 class MaybePeople: PeopleTableView {
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         peopleLabel.text = "Interessenten:"

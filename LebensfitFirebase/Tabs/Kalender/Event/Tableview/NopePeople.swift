@@ -10,7 +10,6 @@ import UIKit
 
 class NopePeople: PeopleTableView {
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         peopleLabel.text = "Absagen:"

@@ -65,6 +65,7 @@
 		018631A02146BA3700E5A9C2 /* SingleEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */; };
 		018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018631A12146C67E00E5A9C2 /* EventStruct.swift */; };
 		01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE9C18214BB7CF0014E1CB /* BackView.swift */; };
+		01EEF39D21554A7C008BA0C4 /* EventScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */; };
 		01F44A7D214A80DE006723ED /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7C214A80DE006723ED /* UserSearchCell.swift */; };
 		01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7E214A8191006723ED /* CustomImageView.swift */; };
 		01F44A81214A83BB006723ED /* PeopleTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A80214A83BB006723ED /* PeopleTVCell.swift */; };
@@ -140,6 +141,7 @@
 		0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventViewController.swift; sourceTree = "<group>"; };
 		018631A12146C67E00E5A9C2 /* EventStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStruct.swift; sourceTree = "<group>"; };
 		01EE9C18214BB7CF0014E1CB /* BackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
+		01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScrollView.swift; sourceTree = "<group>"; };
 		01F44A7C214A80DE006723ED /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		01F44A7E214A8191006723ED /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		01F44A80214A83BB006723ED /* PeopleTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTVCell.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */,
+				01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */,
 				01F44A82214A8757006723ED /* APIEvent.swift */,
 				015F8CBE2153A3A90090EC2C /* Tableview */,
 			);
@@ -533,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01EEF39D21554A7C008BA0C4 /* EventScrollView.swift in Sources */,
 				01861047213E9EC90037DADB /* LoginController.swift in Sources */,
 				010BC27C213D926800530B2D /* ActivityCell.swift in Sources */,
 				016BA89E213D777500ADAA65 /* SignUpController.swift in Sources */,

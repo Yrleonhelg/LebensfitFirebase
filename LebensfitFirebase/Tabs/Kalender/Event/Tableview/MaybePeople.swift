@@ -17,11 +17,10 @@ class MaybePeople: PeopleTableView {
     
     override func loadUsers() {
         print("Class: \(#file) Function: \(#function)")
-        guard let parent = parentVC else { return }
-        users = parent.thisEvent.eventMaybeParticipants?.allObjects as! [User]
-        super.loadUsers()
+        guard let parentCont = parentVC else { return }
+        users = parentCont.thisEvent.eventMaybeParticipants?.allObjects as! [User]
         finishedLoading = true
-        parent.teilnehmerLoaded()
+        super.loadUsers()
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -22,117 +22,36 @@ class SingleEventViewController: UIViewController {
     var eventNeedsApplication: Bool?
     
     var snapShotter = MKMapSnapshotter()
-    var tableViewControllers: [PeopleTableView]!
-    var tableViews: [UITableView]!
+
     var buttons: [UIButton]!
     
-    let padding: CGFloat = 20
-    var heightOfAllPaddings: CGFloat = 0
-    var heightCons = [NSLayoutConstraint]()
-    
-    
     //MARK: - GUI Objects
-    let scrollView: UIScrollView = {
-        let view = UIScrollView()
-        return view
-    }()
-    
-    let titleLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.boldSystemFont(ofSize: 25)
-        label.text      = "Titel"
-        label.textColor = .black
-        return label
-    }()
-    
-    let locationLabel: UILabel = {
-        let label           = UILabel()
-        label.font          = UIFont.systemFont(ofSize: 16)
-        label.text          = "Standort"
-        label.textColor     = CalendarSettings.Colors.darkRed
-        label.numberOfLines = 2
-        label.lineBreakMode = .byWordWrapping
-        label.isUserInteractionEnabled = true
-        return label
-    }()
-    
-    let dateLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.systemFont(ofSize: 16)
-        label.text      = "1. Jan. 2018"
-        label.textColor = .gray
-        return label
-    }()
-    
-    let timeLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.systemFont(ofSize: 16)
-        label.text      = "Von jetzt bis jetzt"
-        label.textColor = .gray
-        return label
-    }()
-    
-    let mapView: UIImageView = {
-        let view                = UIImageView()
-        view.clipsToBounds      = true
-        view.layer.cornerRadius = 10
-        view.contentMode        = .scaleAspectFill
-        view.isUserInteractionEnabled = true
-        return view
-    }()
-    
-    let notesHeaderLabel: UILabel = {
-        let label       = UILabel()
-        label.font      = UIFont.systemFont(ofSize: 20)
-        label.text      = "Notizen"
-        label.textColor = .black
-        return label
-    }()
-    
-    let notesContentLabel: UILabel = {
-        let label           = UILabel()
-        label.font          = UIFont.systemFont(ofSize: 16)
-        label.text          = "Beschreibung"
-        label.textColor     = .gray
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
-    
-    let surePeopleTV: SurePeople = {
-        let view = SurePeople()
-        return view
-    }()
-    let maybePeopleTV: MaybePeople = {
-        let view = MaybePeople()
-        return view
-    }()
-    let nopePeopleTV: NopePeople = {
-        let view = NopePeople()
+    let scrollView: EventScrollView = {
+        let view = EventScrollView()
         return view
     }()
     
     //divides the buttons from the rest of the view
-    let buttonViewDividerView: UIView = {
+    let dividerButtonsView: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
     }()
     
-    let buttonViewDividerViewTwo: UIView = {
+    let dividerButtonsTabbar: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
     }()
     
     //divides the two buttons
-    let separatorMaybeSure: UIView = {
+    let separatorNopeMaybe: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
     }()
     
-    let separatorNopeMaybe: UIView = {
+    let separatorMaybeSure: UIView = {
         let tdv             = UIView()
         tdv.backgroundColor = UIColor.gray
         return tdv
@@ -179,22 +98,19 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewControllers    = [surePeopleTV, maybePeopleTV, nopePeopleTV]
-        tableViews              = [surePeopleTV.peopleTableView, maybePeopleTV.peopleTableView, nopePeopleTV.peopleTableView]
-        buttons                 = [nopeButton, maybeButton, participateButton]
+        buttons = [nopeButton, maybeButton, participateButton]
         provisorischeNutzer()
-        applyDefaultValues()
         setupViews()
+        scrollView.parentVC = self
+        scrollView.setupTheSetup()
         getSnapshotForLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         confBounds()
-        for controller in tableViewControllers {
-            controller.loadUsers()
-        }
         setupNavBar()
+        scrollView.viewDidAppear()
     }
     
     func provisorischeNutzer() {
@@ -217,22 +133,7 @@ class SingleEventViewController: UIViewController {
         eventFinishingDate      = thisEvent.eventFinishingDate
         eventNeedsApplication   = thisEvent.eventNeedsApplication
     }
-    
-    func applyDefaultValues() {
-        titleLabel.text = eventName
-        notesContentLabel.text  = eventDescription
-        if let start = eventStartingDate, let finish = eventFinishingDate {
-            timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
-        }
-        
-        if let location = eventLocation {
-            locationLabel.text  = getStringFromLocation(location: location)
-        }
-        if let date = eventStartingDate {
-            dateLabel.text = (date as Date).formatDateEEEEddMMMyyyy()
-        }
-    }
-    
+
     func setupNavBar() {
         self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Event"
@@ -245,31 +146,11 @@ class SingleEventViewController: UIViewController {
         view.addSubview(participateButton)
         view.addSubview(separatorMaybeSure)
         view.addSubview(separatorNopeMaybe)
-        view.addSubview(buttonViewDividerView)
-        view.addSubview(buttonViewDividerViewTwo)
+        view.addSubview(dividerButtonsView)
+        view.addSubview(dividerButtonsTabbar)
         participateButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
         maybeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
         nopeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
-        
-        //Scrollview related Objects
-        let locationTap = UITapGestureRecognizer(target: self, action: #selector(self.openInGoogleMaps))
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(locationLabel)
-        locationLabel.addGestureRecognizer(locationTap)
-        scrollView.addSubview(timeLabel)
-        scrollView.addSubview(dateLabel)
-        scrollView.addSubview(mapView)
-        mapView.addGestureRecognizer(locationTap)
-        scrollView.addSubview(notesHeaderLabel)
-        scrollView.addSubview(notesContentLabel)
-        
-        for controller in tableViewControllers {
-            scrollView.addSubview(controller)
-            controller.parentVC = self
-            let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
-            heightCon.isActive = true
-            heightCons.append(heightCon)
-        }
     }
     
     
@@ -290,60 +171,19 @@ class SingleEventViewController: UIViewController {
         participateButton.imageView!.anchor(top: participateButton.topAnchor, left: nil, bottom: participateButton.bottomAnchor, right: nil, paddingTop: 7, paddingLeft: 0, paddingBottom: 7, paddingRight: 0, width: 0, height: 0)
         participateButton.imageView!.widthAnchor.constraint(equalTo: participateButton.imageView!.heightAnchor, multiplier: 1).isActive = true
         
-        buttonViewDividerViewTwo.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
-        buttonViewDividerView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        dividerButtonsTabbar.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        dividerButtonsView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
         
-        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: buttonViewDividerView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        //Scrollview related Objects
-        titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-        locationLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 200, height: 0)
-        heightOfAllPaddings += 10
-        
-        dateLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 50, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-        timeLabel.anchor(top: dateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-        heightOfAllPaddings += 50
-        
-        mapView.anchor(top: timeLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: padding, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 200)
-        heightOfAllPaddings += padding
-        
-        notesHeaderLabel.anchor(top: mapView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-        notesContentLabel.anchor(top: notesHeaderLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
-        heightOfAllPaddings += 20 + 5
-        
-        surePeopleTV.anchor(top: notesContentLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        maybePeopleTV.anchor(top: surePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        nopePeopleTV.anchor(top: maybePeopleTV.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: dividerButtonsView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     override func viewDidLayoutSubviews() {
-        let heightOfAllObjects = calculateHeightOfAllObjects()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: heightOfAllObjects+heightOfAllPaddings)
+        let heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects + scrollView.heightOfAllPaddings)
     }
     
     //MARK: - Methods
-    func calculateHeightOfAllObjects() -> CGFloat {
-        var heightOfAllObjects: CGFloat = 0
-        heightOfAllObjects += titleLabel.frame.height + locationLabel.frame.height
-        heightOfAllObjects += dateLabel.frame.height + timeLabel.frame.height
-        heightOfAllObjects += mapView.frame.height
-        heightOfAllObjects += notesHeaderLabel.frame.height + notesContentLabel.frame.height
-        
-        for controller in tableViewControllers {
-            var height = CGFloat(controller.users.count) * controller.height
-            if controller.users.count > 0 {
-                height += controller.padding
-            }
-            heightOfAllObjects += height
-        }
-        
-        heightOfAllObjects -= participateButton.frame.height
-        heightOfAllObjects += 14
-        print("=",heightOfAllObjects)
-        return heightOfAllObjects
-    }
-    
     @objc func buttonClick(sender: UIButton) {
         let selected = !sender.isSelected
         deselectAllButtons()
@@ -352,7 +192,7 @@ class SingleEventViewController: UIViewController {
         if selected {
             addUserToList(sender: sender)
         }
-        reloadAllTableViews()
+        scrollView.reloadAllTableViews()
     }
     
     func addUserToList(sender: UIButton) {
@@ -404,38 +244,6 @@ class SingleEventViewController: UIViewController {
         }
     }
     
-    
-    func teilnehmerLoaded() {
-        if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
-            for (index, controller) in tableViewControllers.enumerated() {
-                var height = CGFloat(controller.users.count) * 60.0
-                print("Users: ",controller.users.count)
-                if controller.users.count > 0 {
-                    height += controller.padding
-                    heightCons[index].constant = height
-                    controller.confBounds()
-                } else {
-                    heightCons[index].constant = 0
-                }
-                view.layoutIfNeeded()
-            }
-        }
-    }
-    
-    func reloadAllTableViews() {
-        print("Function: \(#function)")
-        for controller in tableViewControllers {
-            controller.finishedLoading = false
-            controller.loadUsers()
-        }
-        for tv in tableViews {
-            DispatchQueue.main.async( execute: {
-                tv.reloadData()
-            })
-        }
-    }
-    
-    
     //hardcoded method to set a string for the location //TODO: make smooth
     func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
         if location.latitude == EventLocationStruct.turnhalleEisenwerk.latitude && location.longitude == EventLocationStruct.turnhalleEisenwerk.longitude {
@@ -459,7 +267,7 @@ class SingleEventViewController: UIViewController {
         mapSnapshotOptions.showsPointsOfInterest = true
         snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
         snapShotter.start { (snapshot:MKMapSnapshot?, error:Error?) in
-            self.mapView.image = snapshot?.image
+            self.scrollView.mapView.image = snapshot?.image
         }
     }
     

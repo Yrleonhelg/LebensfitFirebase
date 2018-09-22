@@ -13,6 +13,7 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
+    var parentSV: EventScrollView?
     var users: [User]! = [User]()
     var sortedUsers: [User]! = [User]()
     var finishedLoading: Bool = false
@@ -99,6 +100,8 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
             setupViews()
         }
         self.updateConstraints()
+        guard let parentScrol = parentSV else { return }
+        parentScrol.teilnehmerLoaded()
     }
     
     //MARK: - Do not change Methods

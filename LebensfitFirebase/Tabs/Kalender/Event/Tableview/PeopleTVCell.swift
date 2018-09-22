@@ -14,6 +14,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     let padding: CGFloat = 20
     var user: User? {
         didSet {
+            print("settttt")
             usernameLabel.text          = user?.username
             guard let profileImageUrl   = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
@@ -22,7 +23,6 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
             }
         }
     }
-    
     
     //MARK: - GUI Objects
     let selectionDot: UIView = {
@@ -53,7 +53,6 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
         self.backgroundColor = .white
         setupViews()
     }
-    
     
     //MARK: - Setup
     func setupViews() {

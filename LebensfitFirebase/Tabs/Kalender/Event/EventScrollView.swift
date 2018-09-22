@@ -200,7 +200,7 @@ class EventScrollView: UIScrollView {
             }
             heightOfAllObjects += height
         }
-        heightOfAllObjects += 14
+        heightOfAllObjects += 12
         
         guard let parent = parentVC else { return heightOfAllObjects }
         heightOfAllObjects -= parent.participateButton.frame.height

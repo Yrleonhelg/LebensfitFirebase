@@ -52,7 +52,6 @@ class EventScrollView: UIScrollView {
         label.textColor = .gray
         return label
     }()
-    
     let timeLabel: UILabel = {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 16)
@@ -77,7 +76,6 @@ class EventScrollView: UIScrollView {
         label.textColor = .black
         return label
     }()
-    
     let notesContentLabel: UILabel = {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 16)
@@ -113,8 +111,6 @@ class EventScrollView: UIScrollView {
         tableViews              = [surePeopleTV.peopleTableView, maybePeopleTV.peopleTableView, nopePeopleTV.peopleTableView]
         applyDefaultValues()
         setupViews()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
     }
     
     func viewDidAppear() {
@@ -168,6 +164,7 @@ class EventScrollView: UIScrollView {
     
     func confBounds(){
         contentView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
         titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         locationLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 200, height: 0)
         heightOfAllPaddings += 10
@@ -183,11 +180,9 @@ class EventScrollView: UIScrollView {
         notesContentLabel.anchor(top: notesHeaderLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 5, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         heightOfAllPaddings += 20 + 5
         
-        surePeopleTV.anchor(top: notesContentLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        maybePeopleTV.anchor(top: surePeopleTV.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        nopePeopleTV.anchor(top: maybePeopleTV.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        layoutIfNeeded()
-        contentView.layoutIfNeeded()
+        surePeopleTV.anchor(top: notesContentLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+        maybePeopleTV.anchor(top: surePeopleTV.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+        nopePeopleTV.anchor(top: maybePeopleTV.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
     }
     
     //MARK: - Methods

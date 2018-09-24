@@ -48,7 +48,7 @@ class DateCell: BaseCell, ReusableView {
     override func setupViews() {
         addSubview(dayLabel)
         addSubview(selectionView)
-        sendSubview(toBack: selectionView)
+        sendSubviewToBack(selectionView)
         addSubview(thereIsAnEventView)
     }
     

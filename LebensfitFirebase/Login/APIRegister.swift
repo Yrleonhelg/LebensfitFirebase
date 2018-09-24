@@ -20,7 +20,8 @@ extension SignUpController {
             print("Successfully created user:", user?.user.uid ?? "")
             
             guard let image = self.plusPhotoButton.imageView?.image else { return }
-            guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+            //guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
             let filename = NSUUID().uuidString
             let storageRef = Storage.storage().reference().child("profile_images").child(filename)
             

@@ -13,7 +13,6 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     //MARK: - Properties & Variables
     var user: User? {
         didSet {
-            print("settttt")
             usernameLabel.text          = user?.username
             guard let profileImageUrl   = user?.profileImageUrl else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
@@ -47,7 +46,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     }()
     
     //MARK: - Init & View Loading
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()

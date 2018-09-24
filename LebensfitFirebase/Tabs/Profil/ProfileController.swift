@@ -61,8 +61,8 @@ class ProfileController: UIViewController {
         label.textAlignment     = .center
         label.numberOfLines     = 0
         
-        let attributedText      = NSMutableAttributedString(string: "2\n", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
-        attributedText.append(NSAttributedString(string: "Kurse", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
+        let attributedText      = NSMutableAttributedString(string: "2\n", attributes: [NSAttributedString.Key.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Kurse", attributes: [NSAttributedString.Key.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText    = attributedText
         return label
     }()
@@ -72,8 +72,8 @@ class ProfileController: UIViewController {
         label.textAlignment     = .center
         label.numberOfLines     = 0
         
-        let attributedText      = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
-        attributedText.append(NSAttributedString(string: "Follower", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
+        let attributedText      = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedString.Key.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Follower", attributes: [NSAttributedString.Key.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText    = attributedText
         return label
     }()
@@ -83,8 +83,8 @@ class ProfileController: UIViewController {
         label.textAlignment     = .center
         label.numberOfLines     = 0
         
-        let attributedText      = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
-        attributedText.append(NSAttributedString(string: "Videos", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
+        let attributedText      = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Videos", attributes: [NSAttributedString.Key.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText    = attributedText
         return label
     }()

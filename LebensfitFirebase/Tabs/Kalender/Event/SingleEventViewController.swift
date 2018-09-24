@@ -256,18 +256,30 @@ class SingleEventViewController: UIViewController {
     
     //https://dispatchswift.com/render-a-map-as-an-image-using-mapkit-3102a5a3fa5
     func getSnapshotForLocation() {
-        let mapSnapshotOptions = MKMapSnapshotOptions()
+        let mapSnapshotOptions = MKMapSnapshotter.Options()
         guard let location = eventLocation else { return }
-        let region = MKCoordinateRegionMakeWithDistance(location, 2000, 2000)
+        let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 2000, longitudinalMeters: 2000)
         mapSnapshotOptions.region = region
         mapSnapshotOptions.scale = UIScreen.main.scale
         mapSnapshotOptions.size = CGSize(width: 400, height: 400)
         mapSnapshotOptions.showsBuildings = true
         mapSnapshotOptions.showsPointsOfInterest = true
         snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
-        snapShotter.start { (snapshot:MKMapSnapshot?, error:Error?) in
+        snapShotter.start { (snapshot:MKMapSnapshotter.Snapshot?, error:Error?) in
             self.scrollView.mapView.image = snapshot?.image
         }
+//        let mapSnapshotOptions = MKMapSnapshotOptions()
+//        guard let location = eventLocation else { return }
+//        let region = MKCoordinateRegionMakeWithDistance(location, 2000, 2000)
+//        mapSnapshotOptions.region = region
+//        mapSnapshotOptions.scale = UIScreen.main.scale
+//        mapSnapshotOptions.size = CGSize(width: 400, height: 400)
+//        mapSnapshotOptions.showsBuildings = true
+//        mapSnapshotOptions.showsPointsOfInterest = true
+//        snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
+//        snapShotter.start { (snapshot:MKMapSnapshot?, error:Error?) in
+//            self.scrollView.mapView.image = snapshot?.image
+//        }
     }
     
     //MARK: - Navigation

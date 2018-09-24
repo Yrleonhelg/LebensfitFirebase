@@ -32,8 +32,8 @@ extension UINavigationController {
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .right
-        let attributes = [NSAttributedStringKey.foregroundColor:UIColor.black,
-                          NSAttributedStringKey.paragraphStyle:paragraph]
+        let attributes = [NSAttributedString.Key.foregroundColor:UIColor.black,
+                          NSAttributedString.Key.paragraphStyle:paragraph]
         self.navigationBar.titleTextAttributes = attributes
         
     }

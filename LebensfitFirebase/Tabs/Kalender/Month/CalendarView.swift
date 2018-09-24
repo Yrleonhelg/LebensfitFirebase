@@ -49,27 +49,13 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
+        presentDate = Date()
         setupValues()
         setupViews()
         confBounds()
         setupCollectionView()
     }
-    
-    convenience init(theme: currentTheme) {
-        self.init()
-        if theme == .dark {
-            CalendarSettings.Style.themeDark()
-        } else {
-            CalendarSettings.Style.themeLight()
-        }
-         presentDate = Date()
-        setupValues()
-        setupViews()
-        confBounds()
-        setupCollectionView()
-    }
-    
-    
+
     //MARK: - Setup
     func setupValues() {
         currentMonthIndex       = Calendar.current.component(.month, from: Date())
@@ -130,10 +116,10 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 cell.selectionView.layer.borderColor    = LebensfitSettings.Colors.basicTintColor.cgColor
                 cell.selectionView.layer.borderWidth    = 1
                 cell.isUserInteractionEnabled           = true
-                cell.dayLabel.textColor                 = CalendarSettings.Style.activeCellLblColor
+                cell.dayLabel.textColor                 = LebensfitSettings.Calendar.Style.activeCellLblColor
             } else {
                 cell.isUserInteractionEnabled = true
-                cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColor
+                cell.dayLabel.textColor = LebensfitSettings.Calendar.Style.activeCellLblColor
             }
             
             if isAnEventThisDay(date: Date().thisDate(value: valuee)) {
@@ -147,7 +133,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else { return }
         cell.selectionView.backgroundColor = LebensfitSettings.Colors.basicTintColor
-        cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColorHighlighted
+        cell.dayLabel.textColor = LebensfitSettings.Calendar.Style.activeCellLblColorHighlighted
         if cell.thereIsAnEventView.backgroundColor == LebensfitSettings.Colors.basicTintColor {
             cell.thereIsAnEventView.backgroundColor = LebensfitSettings.Colors.basicBackColor
         }
@@ -166,7 +152,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else { return }
         cell.selectionView.backgroundColor = LebensfitSettings.Colors.basicBackColor
         cell.cellSelected = false
-        cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColor
+        cell.dayLabel.textColor = LebensfitSettings.Calendar.Style.activeCellLblColor
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -204,12 +190,12 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func changeTheme() {
         calendarCollectionView.reloadData()
         
-        monthOverView.currentMonthLabel.textColor = CalendarSettings.Style.monthViewLblColor
-        monthOverView.nextMonthButton.setTitleColor(CalendarSettings.Style.monthViewBtnRightColor, for: .normal)
-        monthOverView.previousMonthButton.setTitleColor(CalendarSettings.Style.monthViewBtnLeftColor, for: .normal)
+        monthOverView.currentMonthLabel.textColor = LebensfitSettings.Calendar.Style.monthViewLblColor
+        monthOverView.nextMonthButton.setTitleColor(LebensfitSettings.Calendar.Style.monthViewBtnRightColor, for: .normal)
+        monthOverView.previousMonthButton.setTitleColor(LebensfitSettings.Calendar.Style.monthViewBtnLeftColor, for: .normal)
         
         for i in 0..<7 {
-            (weekdayView.stackView.subviews[i] as! UILabel).textColor = CalendarSettings.Style.weekdaysLblColor
+            (weekdayView.stackView.subviews[i] as! UILabel).textColor = LebensfitSettings.Calendar.Style.weekdaysLblColor
         }
     }
     

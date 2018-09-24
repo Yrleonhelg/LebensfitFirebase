@@ -24,17 +24,8 @@ extension UINavigationController {
         self.navigationController?.navigationBar.barTintColor       = LebensfitSettings.Colors.buttonBG
         self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.buttonBG
 
-        
         self.navigationItem.largeTitleDisplayMode   = .automatic
         self.navigationBar.tintColor                = LebensfitSettings.Colors.basicTintColor
-
-
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .right
-        let attributes = [NSAttributedString.Key.foregroundColor:UIColor.black,
-                          NSAttributedString.Key.paragraphStyle:paragraph]
-        self.navigationBar.titleTextAttributes = attributes
-        
+  
     }
 }

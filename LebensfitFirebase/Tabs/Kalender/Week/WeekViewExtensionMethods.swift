@@ -35,7 +35,7 @@ extension WeekView {
             let isExpanded = twoDimensionalEventArray[view.tag].isExpanded
             setValuesOfHeader(isExpanded: isExpanded, section: view.tag, headerView: view)
         } else {
-            view.chevronLabel.textColor = CalendarSettings.Colors.disabled
+            view.chevronLabel.textColor = LebensfitSettings.Colors.disabled
         }
     }
     

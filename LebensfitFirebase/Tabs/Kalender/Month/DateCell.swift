@@ -21,7 +21,7 @@ class DateCell: BaseCell, ReusableView {
         label.text          = "00"
         label.textAlignment = .center
         label.font          = UIFont.systemFont(ofSize: 16)
-        label.textColor     = CalendarSettings.Colors.darkGray
+        label.textColor     = LebensfitSettings.Colors.darkGray
         return label
     }()
     

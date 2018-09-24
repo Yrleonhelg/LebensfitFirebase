@@ -23,7 +23,7 @@ class MonthOverView: UIView {
     let currentMonthLabel: UILabel = {
         let lbl             = UILabel()
         lbl.text            = "Default Month / Year"
-        lbl.textColor       = CalendarSettings.Style.monthViewLblColor
+        lbl.textColor       = LebensfitSettings.Calendar.Style.monthViewLblColor
         lbl.textAlignment   = .center
         lbl.font = UIFont.boldSystemFont(ofSize: 16)
         return lbl
@@ -32,7 +32,7 @@ class MonthOverView: UIView {
     let nextMonthButton: UIButton = {
         let btn = UIButton()
         btn.setTitle(">", for: .normal)
-        btn.setTitleColor(CalendarSettings.Style.monthViewBtnRightColor, for: .normal)
+        btn.setTitleColor(LebensfitSettings.Calendar.Style.monthViewBtnRightColor, for: .normal)
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
     }()
@@ -40,9 +40,9 @@ class MonthOverView: UIView {
     let previousMonthButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("<", for: .normal)
-        btn.setTitleColor(CalendarSettings.Style.monthViewBtnLeftColor, for: .normal)
+        btn.setTitleColor(LebensfitSettings.Calendar.Style.monthViewBtnLeftColor, for: .normal)
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
-        btn.setTitleColor(CalendarSettings.Colors.disabled, for: .disabled)
+        btn.setTitleColor(LebensfitSettings.Colors.disabled, for: .disabled)
         return btn
     }()
     

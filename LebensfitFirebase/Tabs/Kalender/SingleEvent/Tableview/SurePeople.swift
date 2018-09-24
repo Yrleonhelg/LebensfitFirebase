@@ -1,5 +1,5 @@
 //
-//  MaybePeople.swift
+//  SurePeople.swift
 //  LebensfitFirebase
 //
 //  Created by Leon on 19.09.18.
@@ -8,17 +8,16 @@
 
 import UIKit
 
-class MaybePeople: PeopleTableView {
-    
+class SurePeople: PeopleTableView {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        peopleLabel.text = "Interessenten:"
+        peopleLabel.text = "Teilnehmer:"
     }
     
     override func loadUsers() {
-        print("Class: \(#file) Function: \(#function)")
         guard let parentCont = parentVC else { return }
-        users = parentCont.thisEvent.eventMaybeParticipants?.allObjects as! [User]
+        users = (parentCont.thisEvent.eventSureParticipants?.allObjects as! [User])
         finishedLoading = true
         super.loadUsers()
     }

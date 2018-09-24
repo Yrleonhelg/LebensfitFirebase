@@ -58,7 +58,7 @@ class SingleEventViewController: UIViewController {
     
     let participateButton: UIButton = {
         let button              = UIButton()
-        button.backgroundColor  = CalendarSettings.Colors.buttonBG
+        button.backgroundColor  = LebensfitSettings.Colors.buttonBG
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "checkmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)

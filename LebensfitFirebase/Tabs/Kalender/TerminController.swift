@@ -9,14 +9,8 @@
 import UIKit
 import EventKit
 
-enum currentTheme {
-    case light
-    case dark
-}
-
 class TerminController: UIViewController {
     //MARK: - Properties & Variables
-    var theme       = currentTheme.light
     var eventArray  = [Event]()
     
     //MARK: - GUI Objects
@@ -24,24 +18,27 @@ class TerminController: UIViewController {
         let items               = ["Monat", "Woche"]
         let frame               = UIScreen.main.bounds
         
-        let sc                  = UISegmentedControl(items: items)
-        sc.selectedSegmentIndex = 0
-        sc.frame                = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
-        sc.layer.cornerRadius   = 5.0
-        return sc
+        let controller                  = UISegmentedControl(items: items)
+        controller.selectedSegmentIndex = 0
+        controller.frame                = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
+        controller.layer.cornerRadius   = 5.0
+        return controller
     }()
     
     let calendarView: CalendarView = {
-        let cv = CalendarView(theme: currentTheme.light)
-        return cv
+        let view = CalendarView()
+        return view
     }()
     
-    let weekView = WeekView()
+    let weekView: WeekView = {
+        let view = WeekView()
+        return view
+    }()
     
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = CalendarSettings.Style.bgColor
+        self.view.backgroundColor = LebensfitSettings.Calendar.Style.bgColor
         setupNavBar()
         setupViews()
         confBounds()
@@ -54,7 +51,6 @@ class TerminController: UIViewController {
         self.navigationItem.title = "Kalender"
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.titleView = segmentedController
-        segmentedController.addTarget(self, action: #selector(changeView(sender:)), for: .valueChanged)
     }
     
     func setupViews() {
@@ -97,20 +93,8 @@ class TerminController: UIViewController {
         calendarView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
     }
     
-    @objc func changeTheme(sender: UIBarButtonItem) {
-        if theme == .dark {
-            sender.title    = "Dark"
-            theme           = .light
-            CalendarSettings.Style.themeLight()
-        } else {
-            sender.title    = "Light"
-            theme           = .dark
-            CalendarSettings.Style.themeDark()
-        }
-        self.view.backgroundColor = CalendarSettings.Style.bgColor
-        calendarView.changeTheme()
-    }
     
+    //MARK: - Navigation
     //Opens the weekview and expands the selcted day
     func gotoDay(date: Date) {
         gotoWeekView()

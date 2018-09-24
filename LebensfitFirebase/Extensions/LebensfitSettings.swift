@@ -44,4 +44,16 @@ struct LebensfitSettings {
             
         }
     }
+    
+    struct Calendar {
+        struct Style {
+            static var bgColor                          = UIColor.white
+            static var monthViewLblColor                = UIColor.black
+            static var monthViewBtnRightColor           = UIColor.black
+            static var monthViewBtnLeftColor            = UIColor.black
+            static var activeCellLblColor               = UIColor.black
+            static var activeCellLblColorHighlighted    = UIColor.white
+            static var weekdaysLblColor                 = UIColor.black
+        }
+    }
 }

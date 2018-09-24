@@ -27,24 +27,24 @@ class LoginController: UIViewController {
     }()
     
     let emailTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder          = "Email"
-        tf.backgroundColor      = UIColor(white: 0, alpha: 0.03)
-        tf.borderStyle          = .roundedRect
-        tf.font                 = UIFont.systemFont(ofSize: 14)
-        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
-        return tf
+        let texfield                = UITextField()
+        texfield.placeholder        = "Email"
+        texfield.backgroundColor    = UIColor(white: 0, alpha: 0.03)
+        texfield.borderStyle        = .roundedRect
+        texfield.font               = UIFont.systemFont(ofSize: 14)
+        texfield.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        return texfield
     }()
     
     let passwordTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder          = "Password"
-        tf.isSecureTextEntry    = true
-        tf.backgroundColor      = UIColor(white: 0, alpha: 0.03)
-        tf.borderStyle          = .roundedRect
-        tf.font                 = UIFont.systemFont(ofSize: 14)
-        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
-        return tf
+        let texfield                = UITextField()
+        texfield.placeholder        = "Password"
+        texfield.isSecureTextEntry  = true
+        texfield.backgroundColor    = UIColor(white: 0, alpha: 0.03)
+        texfield.borderStyle        = .roundedRect
+        texfield.font               = UIFont.systemFont(ofSize: 14)
+        texfield.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        return texfield
     }()
     
     let loginButton: UIButton = {
@@ -70,11 +70,11 @@ class LoginController: UIViewController {
     }()
     
     lazy var stackView: UIStackView = {
-        let sv          = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
-        sv.axis         = .vertical
-        sv.spacing      = 10
-        sv.distribution = .fillEqually
-        return sv
+        let view          = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
+        view.axis         = .vertical
+        view.spacing      = 10
+        view.distribution = .fillEqually
+        return view
     }()
     
     //MARK: - Init & View Loading

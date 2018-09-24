@@ -41,7 +41,7 @@ class WeekdayView: UIView {
             let lbl             = UILabel()
             lbl.text            = daysArr[i]
             lbl.textAlignment   = .center
-            lbl.textColor       = CalendarSettings.Style.weekdaysLblColor
+            lbl.textColor       = LebensfitSettings.Calendar.Style.weekdaysLblColor
             stackView.addArrangedSubview(lbl)
         }
     }

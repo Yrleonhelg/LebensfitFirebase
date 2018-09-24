@@ -57,7 +57,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         self.backgroundView                     = UIView(frame: self.bounds)
-        self.tintColor                          = .white
+        self.tintColor                          = LebensfitSettings.Colors.basicBackColor
         self.isUserInteractionEnabled           = true
         setupViews()
         confBoundsDefault()

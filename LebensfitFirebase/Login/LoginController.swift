@@ -12,53 +12,55 @@ import Firebase
 class LoginController: UIViewController {
     
     //MARK: - GUI Objects
-    let logoContainerView: UIView = {
-        let lcview = UIView()
-        lcview.backgroundColor = LebensfitSettings.Colors.basicTintColor
-        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
-        logoImageView.contentMode = .scaleAspectFill
-        lcview.addSubview(logoImageView)
-        logoImageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 50)
-        logoImageView.centerXAnchor.constraint(equalTo: lcview.centerXAnchor).isActive = true
-        logoImageView.centerYAnchor.constraint(equalTo: lcview.centerYAnchor).isActive = true
-        return lcview
+    let headerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Lebensfit"
+        label.font = .boldSystemFont(ofSize: 50)
+        label.textColor = .white
+        return label
+    }()
+    
+    let headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = LebensfitSettings.Colors.basicTintColor
+        return view
     }()
     
     let emailTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Email"
-        tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
-        tf.borderStyle = .roundedRect
-        tf.font = UIFont.systemFont(ofSize: 14)
+        tf.placeholder          = "Email"
+        tf.backgroundColor      = UIColor(white: 0, alpha: 0.03)
+        tf.borderStyle          = .roundedRect
+        tf.font                 = UIFont.systemFont(ofSize: 14)
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
     let passwordTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Password"
-        tf.isSecureTextEntry = true
-        tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
-        tf.borderStyle = .roundedRect
-        tf.font = UIFont.systemFont(ofSize: 14)
+        tf.placeholder          = "Password"
+        tf.isSecureTextEntry    = true
+        tf.backgroundColor      = UIColor(white: 0, alpha: 0.03)
+        tf.borderStyle          = .roundedRect
+        tf.font                 = UIFont.systemFont(ofSize: 14)
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
     let loginButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button                  = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.backgroundColor = LebensfitSettings.Colors.basicTintColor
-        button.layer.cornerRadius = 5
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.backgroundColor      = LebensfitSettings.Colors.basicTintColor
+        button.layer.cornerRadius   = 5
+        button.titleLabel?.font     = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
+        button.isEnabled            = false
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
-        button.isEnabled = false
         return button
     }()
     
     let dontHaveAccountButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button          = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTintColor
             ]))
@@ -68,9 +70,9 @@ class LoginController: UIViewController {
     }()
     
     lazy var stackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
-        sv.axis = .vertical
-        sv.spacing = 10
+        let sv          = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton])
+        sv.axis         = .vertical
+        sv.spacing      = 10
         sv.distribution = .fillEqually
         return sv
     }()
@@ -78,7 +80,7 @@ class LoginController: UIViewController {
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupNavBar()
         setupViews()
         confBounds()
@@ -90,15 +92,18 @@ class LoginController: UIViewController {
     }
     
     func setupViews() {
-        view.addSubview(logoContainerView)
+        view.addSubview(headerView)
+        view.addSubview(headerLabel)
         view.addSubview(stackView)
         view.addSubview(dontHaveAccountButton)
     }
     
     func confBounds(){
-        logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
+        headerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
+        headerLabel.anchor(top: nil, left: nil, bottom: headerView.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 30, paddingRight: 0, width: 0, height: 0)
+        headerLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
         
-        stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
+        stackView.anchor(top: headerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
         
         dontHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
     }

@@ -14,6 +14,7 @@ class LebensfitTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         CDUser.sharedInstance.deleteUsers()
+        
         //Only let the user pass when they're logged in.
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -45,7 +46,7 @@ class LebensfitTabBarController: UITabBarController {
     }
     
     func setupViewControllers() {
-        //Images:
+        //Tabbar-Images:
         let calendarImage = UIImage(named: LebensfitSettings.UI.iconNames.calendar)
         let shopImage = UIImage(named: LebensfitSettings.UI.iconNames.shop)
         let mapImage = UIImage(named: LebensfitSettings.UI.iconNames.map)
@@ -71,7 +72,6 @@ class LebensfitTabBarController: UITabBarController {
         
         //profile
         let profileController = ProfileController()
-//        profileController.userId = Auth.auth().currentUser?.uid
         let profileNavigationController = LebensfitNavigation(rootViewController: profileController)
         profileNavigationController.title = "Profil"
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: userImage, tag: 0)

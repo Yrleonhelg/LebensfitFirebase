@@ -30,7 +30,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         let mcv             = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         mcv.showsHorizontalScrollIndicator = false
-        mcv.backgroundColor = UIColor.white
+        mcv.backgroundColor = LebensfitSettings.Colors.basicBackColor
         mcv.allowsMultipleSelection = false
         return mcv
     }()
@@ -48,7 +48,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupValues()
         setupViews()
         confBounds()
@@ -113,7 +113,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DateCell.reuseIdentifier, for: indexPath) as! DateCell
-        cell.backgroundColor = UIColor.white
+        cell.backgroundColor = LebensfitSettings.Colors.basicBackColor
         if indexPath.item <= firstWeekDayOfMonth - 2 {
             cell.isHidden = true
         } else {
@@ -149,7 +149,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         cell.selectionView.backgroundColor = LebensfitSettings.Colors.basicTintColor
         cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColorHighlighted
         if cell.thereIsAnEventView.backgroundColor == LebensfitSettings.Colors.basicTintColor {
-            cell.thereIsAnEventView.backgroundColor = .white
+            cell.thereIsAnEventView.backgroundColor = LebensfitSettings.Colors.basicBackColor
         }
         
         //show event menu if double clicked on a cell
@@ -164,7 +164,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else { return }
-        cell.selectionView.backgroundColor = UIColor.white
+        cell.selectionView.backgroundColor = LebensfitSettings.Colors.basicBackColor
         cell.cellSelected = false
         cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColor
     }
@@ -257,8 +257,8 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         let cells = self.calendarCollectionView.visibleCells as! [DateCell]
         for cell in cells {
             cell.cellSelected = false
-            cell.selectionView.backgroundColor = .white
-            cell.selectionView.layer.borderColor = UIColor.white.cgColor
+            cell.selectionView.backgroundColor = LebensfitSettings.Colors.basicBackColor
+            cell.selectionView.layer.borderColor = LebensfitSettings.Colors.basicBackColor.cgColor
         }
     }
     

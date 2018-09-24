@@ -43,7 +43,7 @@ class ProfileController: UIViewController {
     }()
     
     lazy var backView: BackView = {
-        let view    = BackView(frame: rectForBackView, white: 0.2, black: 0, layerColor: UIColor.white)
+        let view    = BackView(frame: rectForBackView, white: 0.2, black: 0, layerColor: LebensfitSettings.Colors.basicBackColor)
         return view
     }()
     
@@ -169,7 +169,7 @@ class ProfileController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent  = true
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         //self.navigationController?.navigationBar.shadowImage    = image
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        self.navigationController?.navigationBar.backgroundColor = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.5)
         
     }
     

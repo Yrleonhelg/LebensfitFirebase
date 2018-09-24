@@ -49,7 +49,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     //MARK: - Init & View Loading
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .white
+        self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
     }
     

@@ -37,7 +37,7 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupTableView()
         setupViews()
     }

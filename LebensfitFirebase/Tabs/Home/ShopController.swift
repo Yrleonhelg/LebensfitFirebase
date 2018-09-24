@@ -12,7 +12,7 @@ class ShopController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     //MARK: - View Loading
     override func viewDidLoad() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupNavBar()
         setupCollectionView()
     }

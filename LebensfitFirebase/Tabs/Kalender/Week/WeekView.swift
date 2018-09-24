@@ -49,7 +49,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor    = UIColor.white
+        self.backgroundColor    = LebensfitSettings.Colors.basicBackColor
         presentDate             = Date()
         setupTheSetup()
     }
@@ -66,7 +66,7 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     func setupTableView() {
         calendarTableView.delegate          = self
         calendarTableView.dataSource        = self
-        calendarTableView.tintColor         = .white
+        calendarTableView.tintColor         = LebensfitSettings.Colors.basicBackColor
         calendarTableView.separatorStyle    = .none
         calendarTableView.register(EventTableCell.self, forCellReuseIdentifier: EventTableCell.reuseIdentifier)
         calendarTableView.register(WeekDayHeader.self, forHeaderFooterViewReuseIdentifier: WeekDayHeader.reuseIdentifier)

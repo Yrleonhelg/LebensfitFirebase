@@ -68,7 +68,7 @@ class SingleEventViewController: UIViewController {
     
     let maybeButton: UIButton = {
         let button              = UIButton()
-        button.backgroundColor  = CalendarSettings.Colors.buttonBG
+        button.backgroundColor  = LebensfitSettings.Colors.buttonBG
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "questionmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
@@ -79,7 +79,7 @@ class SingleEventViewController: UIViewController {
     let nopeButton: UIButton = {
         let button              = UIButton()
         button.isEnabled = true
-        button.backgroundColor  = CalendarSettings.Colors.buttonBG
+        button.backgroundColor  = LebensfitSettings.Colors.buttonBG
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
@@ -92,7 +92,7 @@ class SingleEventViewController: UIViewController {
         thisEvent = event
         super.init(nibName: nil, bundle: nil)
         setupDefaultValues()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = LebensfitSettings.Colors.basicBackColor
     }
     
     override func viewDidLoad() {
@@ -207,7 +207,7 @@ class SingleEventViewController: UIViewController {
     
     func deselectAllButtons() {
         for button in buttons {
-            button.backgroundColor      = .white
+            button.backgroundColor      = LebensfitSettings.Colors.buttonBG
             button.imageView?.tintColor = LebensfitSettings.Colors.basicTintColor
             button.isSelected           = false
         }

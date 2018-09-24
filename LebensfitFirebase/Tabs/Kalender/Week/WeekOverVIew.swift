@@ -50,7 +50,7 @@ class WeekOverView: UIView {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
         confBounds()
         

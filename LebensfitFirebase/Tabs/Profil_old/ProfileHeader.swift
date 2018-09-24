@@ -126,7 +126,7 @@ class ProfileHeader: BaseCell, ReusableView{
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = LebensfitSettings.Colors.basicBackColor
     }
     
     //MARK: - Setup

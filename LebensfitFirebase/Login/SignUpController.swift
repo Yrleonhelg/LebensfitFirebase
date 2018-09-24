@@ -55,7 +55,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.backgroundColor = UIColor.rgb(149, 204, 244, 1)
+        button.backgroundColor = LebensfitSettings.Colors.basicTintColor
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
@@ -137,7 +137,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
             signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(1)
         } else {
             signUpButton.isEnabled = false
-            signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(0.5)
+            signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(0.6)
         }
     }
     

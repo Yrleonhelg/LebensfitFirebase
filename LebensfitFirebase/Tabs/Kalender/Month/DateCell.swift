@@ -32,14 +32,14 @@ class DateCell: BaseCell, ReusableView {
     
     let thereIsAnEventView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         return view
     }()
     
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor     = UIColor.white
+        backgroundColor     = LebensfitSettings.Colors.basicBackColor
         layer.cornerRadius  = frame.height/2
         layer.masksToBounds = true
     }

@@ -134,10 +134,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         if isFormValid {
             signUpButton.isEnabled = true
-            signUpButton.backgroundColor = LebensfitSettings.Colors.darkRed.withAlphaComponent(1)
+            signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(1)
         } else {
             signUpButton.isEnabled = false
-            signUpButton.backgroundColor = LebensfitSettings.Colors.darkRed.withAlphaComponent(0.5)
+            signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(0.5)
         }
     }
     

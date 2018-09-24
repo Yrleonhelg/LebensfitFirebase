@@ -15,7 +15,7 @@ class SteckbriefView: UIView {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 20)
         label.text      = "Über mich:"
-        label.textColor = .white
+        label.textColor = LebensfitSettings.Colors.basicTextColor
         return label
     }()
     
@@ -23,7 +23,7 @@ class SteckbriefView: UIView {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 16)
         label.text          = "Ich heisse Leon und bin 19 Jahre alt. \nIn meiner Freizeit programmiere ich gerne iOS Apps. \nIch wohne in Frauenfeld in der Nähe der Kantonsschule"
-        label.textColor     = UIColor.gray
+        label.textColor     = LebensfitSettings.Colors.NITextColor
         label.numberOfLines = 0
         return label
     }()

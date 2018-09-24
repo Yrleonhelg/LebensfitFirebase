@@ -33,7 +33,7 @@ class EventTableCell: UITableViewCell, ReusableView {
     //MARK: - Init & View Loading
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = CalendarSettings.Colors.darkRed
+        self.backgroundColor = LebensfitSettings.Colors.basicTintColor
         setupViews()
         confBounds()
     }

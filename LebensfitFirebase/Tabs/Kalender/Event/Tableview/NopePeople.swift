@@ -18,7 +18,7 @@ class NopePeople: PeopleTableView {
     override func loadUsers() {
         print("Class: \(#file) Function: \(#function)")
         guard let parentCont = parentVC else { return }
-        users = parentCont.thisEvent.eventNopeParticipants?.allObjects as! [User]
+        users = (parentCont.thisEvent.eventNopeParticipants?.allObjects as! [User])
         finishedLoading = true
         super.loadUsers()
     }

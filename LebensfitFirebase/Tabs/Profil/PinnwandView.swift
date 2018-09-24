@@ -15,7 +15,7 @@ class PinnwandView: UIView {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 20)
         label.text      = "Über Leon Helg:"
-        label.textColor = .white
+        label.textColor = LebensfitSettings.Colors.basicTextColor
         return label
     }()
     
@@ -23,7 +23,7 @@ class PinnwandView: UIView {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 16)
         label.text          = "Cooler Typ, - Umur Hackerman"
-        label.textColor     = UIColor.gray
+        label.textColor     = LebensfitSettings.Colors.NITextColor
         label.numberOfLines = 0
         return label
     }()

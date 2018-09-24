@@ -64,7 +64,7 @@ class CDUser: NSObject {
         return users
     }
     
-    func getCurrentUser() -> User {
+    func getCurrentUser() -> User? {
         let allUsers = getUsers()
         guard let key = Auth.auth().currentUser?.uid else { print("returning ",allUsers.first!); return allUsers.first!}
         for i in 0..<allUsers.count {
@@ -72,7 +72,7 @@ class CDUser: NSObject {
                 return allUsers[i]
             }
         }
-        return allUsers.first!
+        return nil
     }
     
     func getUserForId(userId: String) -> User {

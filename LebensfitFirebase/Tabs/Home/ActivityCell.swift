@@ -12,25 +12,25 @@ class ActivityCell: BaseCell, ReusableView {
     
     //MARK: - GUI Objects
     let colorView: UIImageView = {
-        let colview = UIImageView()
-        colview.backgroundColor = LebensfitSettings.Colors.darkRed
-        colview.clipsToBounds = true
+        let colview             = UIImageView()
+        colview.backgroundColor = LebensfitSettings.Colors.basicTintColor
+        colview.clipsToBounds   = true
         return colview
     }()
     
     let iconView: UIImageView = {
-        let icview = UIImageView()
-        icview.contentMode = .scaleAspectFill
-        icview.clipsToBounds = true
+        let icview              = UIImageView()
+        icview.contentMode      = .scaleAspectFill
+    icview.clipsToBounds        = true
         return icview
     }()
     
     let activityLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
+        let label           = UILabel()
+        label.textColor     = .white
         label.textAlignment = .left
         label.clipsToBounds = true
-        label.font = UIFont.boldSystemFont( ofSize: 25)
+        label.font          = UIFont.boldSystemFont( ofSize: 25)
         label.isUserInteractionEnabled = false
         return label
     }()
@@ -39,7 +39,7 @@ class ActivityCell: BaseCell, ReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = self.bounds.width / 10
-        self.clipsToBounds = true
+        self.clipsToBounds      = true
     }
     
     //MARK: - Setup

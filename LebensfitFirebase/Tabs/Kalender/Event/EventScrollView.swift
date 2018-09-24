@@ -38,7 +38,7 @@ class EventScrollView: UIScrollView {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 16)
         label.text          = "Standort"
-        label.textColor     = CalendarSettings.Colors.darkRed
+        label.textColor     = LebensfitSettings.Colors.basicTintColor
         label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.isUserInteractionEnabled = true

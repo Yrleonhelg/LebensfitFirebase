@@ -59,7 +59,7 @@ class SingleEventViewController: UIViewController {
     let participateButton: UIButton = {
         let button              = UIButton()
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
-        button.tintColor        = CalendarSettings.Colors.darkRed
+        button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "checkmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
@@ -69,7 +69,7 @@ class SingleEventViewController: UIViewController {
     let maybeButton: UIButton = {
         let button              = UIButton()
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
-        button.tintColor        = CalendarSettings.Colors.darkRed
+        button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "questionmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
@@ -80,7 +80,7 @@ class SingleEventViewController: UIViewController {
         let button              = UIButton()
         button.isEnabled = true
         button.backgroundColor  = CalendarSettings.Colors.buttonBG
-        button.tintColor        = CalendarSettings.Colors.darkRed
+        button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
         button.imageView?.contentMode       = .scaleAspectFit
@@ -114,7 +114,7 @@ class SingleEventViewController: UIViewController {
     
     func provisorischeNutzer() {
         //todo
-        let user = CDUser.sharedInstance.getCurrentUser()
+        guard let user = CDUser.sharedInstance.getCurrentUser() else { return }
         thisEvent.addToEventSureParticipants(user)
         
         let users = CDUser.sharedInstance.getUsers()
@@ -195,7 +195,7 @@ class SingleEventViewController: UIViewController {
     }
     
     func addUserToList(sender: UIButton) {
-        let currentUser = CDUser.sharedInstance.getCurrentUser()
+        guard let currentUser = CDUser.sharedInstance.getCurrentUser() else { return }
         if sender == maybeButton {
             thisEvent.addToEventMaybeParticipants(currentUser)
         } else if sender == participateButton {
@@ -208,19 +208,19 @@ class SingleEventViewController: UIViewController {
     func deselectAllButtons() {
         for button in buttons {
             button.backgroundColor      = .white
-            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
+            button.imageView?.tintColor = LebensfitSettings.Colors.basicTintColor
             button.isSelected           = false
         }
     }
     
     func selectButton(button: UIButton, selected: Bool) {
         if selected {
-            button.backgroundColor      = LebensfitSettings.Colors.darkRed
+            button.backgroundColor      = LebensfitSettings.Colors.basicTintColor
             button.imageView?.tintColor = .white
             button.isSelected           = true
         } else {
             button.backgroundColor      = .white
-            button.imageView?.tintColor = LebensfitSettings.Colors.darkRed
+            button.imageView?.tintColor = LebensfitSettings.Colors.basicTintColor
             button.isSelected           = false
         }
     }
@@ -228,7 +228,7 @@ class SingleEventViewController: UIViewController {
     //gets called before we add the user to a different list, he cannot be in two lists at the same time
     func removeFromAllParticipantsList() {
         let partList = [thisEvent.eventSureParticipants, thisEvent.eventMaybeParticipants, thisEvent.eventNopeParticipants]
-        let currentUser = CDUser.sharedInstance.getCurrentUser()
+        guard let currentUser = CDUser.sharedInstance.getCurrentUser() else { return }
         for list in partList {
             guard let thisList = list else { return }
             if thisList.contains(currentUser) {

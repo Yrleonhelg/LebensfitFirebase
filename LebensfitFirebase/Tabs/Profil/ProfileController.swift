@@ -36,14 +36,14 @@ class ProfileController: UIViewController {
     let usernameLabel: UILabel = {
         let label           = UILabel()
         label.text          = "username"
-        label.textColor     = .white
+        label.textColor     = LebensfitSettings.Colors.basicTextColor
         label.font          = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .left
         return label
     }()
     
     lazy var backView: BackView = {
-        let view    = BackView(frame: rectForBackView, white: 0.2, black: 0)
+        let view    = BackView(frame: rectForBackView, white: 0.2, black: 0, layerColor: UIColor.white)
         return view
     }()
     
@@ -51,7 +51,7 @@ class ProfileController: UIViewController {
         let button                  = UIButton()
         button.setTitle("Folgen", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor      = LebensfitSettings.Colors.darkRed
+        button.backgroundColor      = LebensfitSettings.Colors.basicTintColor
         button.layer.cornerRadius   = 20
         return button
     }()
@@ -61,8 +61,8 @@ class ProfileController: UIViewController {
         label.textAlignment     = .center
         label.numberOfLines     = 0
         
-        let attributedText      = NSMutableAttributedString(string: "2\n", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
-        attributedText.append(NSAttributedString(string: "Kurse", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
+        let attributedText      = NSMutableAttributedString(string: "2\n", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Kurse", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText    = attributedText
         return label
     }()
@@ -72,8 +72,8 @@ class ProfileController: UIViewController {
         label.textAlignment     = .center
         label.numberOfLines     = 0
         
-        let attributedText      = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
-        attributedText.append(NSAttributedString(string: "Follower", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
+        let attributedText      = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Follower", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText    = attributedText
         return label
     }()
@@ -83,8 +83,8 @@ class ProfileController: UIViewController {
         label.textAlignment     = .center
         label.numberOfLines     = 0
         
-        let attributedText      = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
-        attributedText.append(NSAttributedString(string: "Videos", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
+        let attributedText      = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTextColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17)])
+        attributedText.append(NSAttributedString(string: "Videos", attributes: [NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.NITextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17)]))
         label.attributedText    = attributedText
         return label
     }()
@@ -110,7 +110,7 @@ class ProfileController: UIViewController {
         sc.selectedSegmentIndex = 0
         sc.frame                = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
         sc.layer.cornerRadius   = 5.0
-        sc.tintColor            = .white
+        sc.tintColor            = LebensfitSettings.Colors.basicTintColor
         return sc
     }()
     
@@ -133,7 +133,7 @@ class ProfileController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = .black
+        view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
         confBounds()
     }
@@ -184,9 +184,9 @@ class ProfileController: UIViewController {
     }
     
     func confBounds(){
-        profileImageView.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 200)
+        profileImageView.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 250, height: 250)
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImageView.layer.cornerRadius = 200/2
+        profileImageView.layer.cornerRadius = 250/2
         usernameLabel.anchor(top: profileImageView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         usernameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         

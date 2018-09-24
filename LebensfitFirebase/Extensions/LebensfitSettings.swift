@@ -15,6 +15,10 @@ struct LebensfitSettings {
         static var darkRed = #colorLiteral(red: 0.5019607843, green: 0.1529411765, blue: 0.1764705882, alpha: 1)
         static var disabled = UIColor.gray
         static var buttonBG = UIColor.rgb(249, 249, 249, 1)
+        static var basicBackColor = UIColor.white
+        static var basicTextColor = UIColor.black
+        static var NITextColor = UIColor.darkGray
+        static var basicTintColor = darkRed
     }
     
     struct UI {

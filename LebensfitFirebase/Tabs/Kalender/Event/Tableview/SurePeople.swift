@@ -18,7 +18,7 @@ class SurePeople: PeopleTableView {
     override func loadUsers() {
         print("Class: \(#file) Function: \(#function)")
         guard let parentCont = parentVC else { return }
-        users = parentCont.thisEvent.eventSureParticipants?.allObjects as! [User]
+        users = (parentCont.thisEvent.eventSureParticipants?.allObjects as! [User])
         finishedLoading = true
         super.loadUsers()
     }

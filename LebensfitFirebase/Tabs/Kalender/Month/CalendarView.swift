@@ -127,7 +127,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 cell.isUserInteractionEnabled   = false
                 cell.dayLabel.textColor         = UIColor.lightGray
             } else if calcDate == todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex{
-                cell.selectionView.layer.borderColor    = CalendarSettings.Colors.darkRed.cgColor
+                cell.selectionView.layer.borderColor    = LebensfitSettings.Colors.basicTintColor.cgColor
                 cell.selectionView.layer.borderWidth    = 1
                 cell.isUserInteractionEnabled           = true
                 cell.dayLabel.textColor                 = CalendarSettings.Style.activeCellLblColor
@@ -137,7 +137,7 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             }
             
             if isAnEventThisDay(date: Date().thisDate(value: valuee)) {
-                cell.thereIsAnEventView.backgroundColor = CalendarSettings.Colors.darkRed
+                cell.thereIsAnEventView.backgroundColor = LebensfitSettings.Colors.basicTintColor
             }
         }
         
@@ -146,9 +146,9 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else { return }
-        cell.selectionView.backgroundColor = CalendarSettings.Colors.darkRed
+        cell.selectionView.backgroundColor = LebensfitSettings.Colors.basicTintColor
         cell.dayLabel.textColor = CalendarSettings.Style.activeCellLblColorHighlighted
-        if cell.thereIsAnEventView.backgroundColor == CalendarSettings.Colors.darkRed {
+        if cell.thereIsAnEventView.backgroundColor == LebensfitSettings.Colors.basicTintColor {
             cell.thereIsAnEventView.backgroundColor = .white
         }
         

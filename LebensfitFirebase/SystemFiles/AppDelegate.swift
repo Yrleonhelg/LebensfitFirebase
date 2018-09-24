@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         window?.rootViewController = LebensfitTabBarController()
-        application.statusBarStyle = .lightContent
+        //application.statusBarStyle = .lightContent
         
         return true
     }

@@ -27,7 +27,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     let selectionDot: UIView = {
         let sv                  = UIView()
         //sv.frame              = CGRect(x: 0, y: 0, width: 20, height: 20)
-        sv.backgroundColor      = CalendarSettings.Colors.darkRed
+        sv.backgroundColor      = LebensfitSettings.Colors.basicTintColor
         sv.layer.cornerRadius   = 7.5
         return sv
     }()
@@ -70,7 +70,7 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     }
     
     func isCurrentUser() {
-        profileImageView.layer.borderColor = LebensfitSettings.Colors.darkRed.cgColor
+        profileImageView.layer.borderColor = LebensfitSettings.Colors.basicTintColor.cgColor
         profileImageView.layer.borderWidth = 2
         addSubview(selectionDot)
         selectionDot.anchor(top: nil, left: nil, bottom: nil, right: usernameLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 15, height: 15)

@@ -13,6 +13,7 @@ class BackView: CustomImageView {
     var thisFrame: CGRect
     var whiteValue: CGFloat
     var blackValue: CGFloat
+    var layerColor: UIColor
     
     override var image: UIImage? {
         didSet {
@@ -20,10 +21,11 @@ class BackView: CustomImageView {
         }
     }
     
-    init(frame: CGRect, white: CGFloat, black: CGFloat) {
+    init(frame: CGRect, white: CGFloat, black: CGFloat, layerColor: UIColor) {
         self.thisFrame  = frame
         self.whiteValue = white
         self.blackValue = black
+        self.layerColor = layerColor
         super.init(frame: .zero)
         setupImage()
     }
@@ -76,8 +78,8 @@ class BackView: CustomImageView {
     
     lazy var gradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.colors     = [UIColor.black.withAlphaComponent(0.0).cgColor,
-                               UIColor.black.withAlphaComponent(1.0).cgColor]
+        gradient.colors     = [layerColor.withAlphaComponent(0.0).cgColor,
+                               layerColor.withAlphaComponent(1.0).cgColor]
         gradient.frame      = (thisFrame)
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint   = CGPoint(x: 0.5, y: 1)

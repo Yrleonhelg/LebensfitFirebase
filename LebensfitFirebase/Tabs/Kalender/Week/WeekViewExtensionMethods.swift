@@ -71,8 +71,8 @@ extension WeekView {
                 calendarTableView.insertRows(at: indexPaths, with: .fade)
             }
             newHeaderView.chevronLabel.text         = "⌄"
-            newHeaderView.dayLabel.textColor        = CalendarSettings.Colors.darkRed
-            newHeaderView.chevronLabel.textColor    = CalendarSettings.Colors.darkRed
+            newHeaderView.dayLabel.textColor        = LebensfitSettings.Colors.basicTintColor
+            newHeaderView.chevronLabel.textColor    = LebensfitSettings.Colors.basicTintColor
             newHeaderView.isSelected                = true
             lastExpandedHeader                      = newHeaderView
             

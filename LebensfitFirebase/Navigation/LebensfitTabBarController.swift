@@ -33,7 +33,7 @@ class LebensfitTabBarController: UITabBarController {
         view.backgroundColor        = LebensfitSettings.Colors.buttonBG
         tabBar.autoresizesSubviews  = true
         tabBar.isTranslucent        = true
-        self.tabBar.tintColor       = LebensfitSettings.Colors.darkRed
+        self.tabBar.tintColor       = LebensfitSettings.Colors.basicTintColor
         self.tabBar.unselectedItemTintColor = LebensfitSettings.Colors.darkGray
         
         let topBorder               = CALayer()

@@ -14,7 +14,7 @@ class LoginController: UIViewController {
     //MARK: - GUI Objects
     let logoContainerView: UIView = {
         let lcview = UIView()
-        lcview.backgroundColor = UIColor.rgb(0, 120, 175, 1)
+        lcview.backgroundColor = LebensfitSettings.Colors.basicTintColor
         let logoImageView = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
         logoImageView.contentMode = .scaleAspectFill
         lcview.addSubview(logoImageView)
@@ -48,7 +48,7 @@ class LoginController: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.backgroundColor = LebensfitSettings.Colors.darkRed
+        button.backgroundColor = LebensfitSettings.Colors.basicTintColor
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
@@ -60,7 +60,7 @@ class LoginController: UIViewController {
     let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(17, 154, 237, 1)
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: LebensfitSettings.Colors.basicTintColor
             ]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
@@ -109,10 +109,10 @@ class LoginController: UIViewController {
         
         if isFormValid {
             loginButton.isEnabled = true
-            loginButton.backgroundColor = UIColor.rgb(17, 154, 237, 1)
+            loginButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(1)
         } else {
             loginButton.isEnabled = false
-            loginButton.backgroundColor = UIColor.rgb(149, 204, 244, 1)
+            loginButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(0.6)
         }
     }
     

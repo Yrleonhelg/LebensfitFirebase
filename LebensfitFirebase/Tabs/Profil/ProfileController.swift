@@ -115,13 +115,13 @@ class ProfileController: UIViewController {
     }()
     
     let steckbriefView: SteckbriefView = {
-        let sbv = SteckbriefView()
-        return sbv
+        let view = SteckbriefView()
+        return view
     }()
     
     let pinnwandView: PinnwandView = {
-        let pwv = PinnwandView()
-        return pwv
+        let view = PinnwandView()
+        return view
     }()
     
     

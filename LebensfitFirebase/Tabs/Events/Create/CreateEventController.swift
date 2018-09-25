@@ -16,7 +16,7 @@ class CreateEventController: UIViewController {
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupNavBar()
         setupViews()
         confBounds()
@@ -25,6 +25,8 @@ class CreateEventController: UIViewController {
     //MARK: - Setup
     func setupNavBar() {
         self.navigationItem.title = "Event erstellen"
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        navigationItem.leftBarButtonItem = cancelButton
     }
     
     func setupViews() {
@@ -36,6 +38,9 @@ class CreateEventController: UIViewController {
     }
     
     //MARK: - Methods
+    @objc func handleCancel() {
+        dismiss(animated: true, completion: nil)
+    }
     
     //MARK: - Do not change Methods
 }

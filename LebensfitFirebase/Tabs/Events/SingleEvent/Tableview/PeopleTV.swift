@@ -22,8 +22,8 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
     
     //MARK: - GUI Objects
     let peopleTableView: UITableView = {
-        let ctv = UITableView()
-        return ctv
+        let tableview = UITableView()
+        return tableview
     }()
     
     let peopleLabel: UILabel = {
@@ -90,6 +90,7 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
         parent.gotoProfile(clickedUID: id)
     }
     
+    
     //MARK: - Methods
     func loadUsers() {
         setNeedsUpdateConstraints()
@@ -101,7 +102,7 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
         }
         self.updateConstraints()
         guard let parentScrol = parentSV else { return }
-        parentScrol.teilnehmerLoaded()
+        parentScrol.finishedLoadingParticipants()
     }
     
     //MARK: - Do not change Methods

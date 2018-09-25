@@ -12,17 +12,17 @@ class ActivityCell: BaseCell, ReusableView {
     
     //MARK: - GUI Objects
     let colorView: UIImageView = {
-        let colview             = UIImageView()
-        colview.backgroundColor = LebensfitSettings.Colors.basicTintColor
-        colview.clipsToBounds   = true
-        return colview
+        let imageview             = UIImageView()
+        imageview.backgroundColor = LebensfitSettings.Colors.basicTintColor
+        imageview.clipsToBounds   = true
+        return imageview
     }()
     
     let iconView: UIImageView = {
-        let icview              = UIImageView()
-        icview.contentMode      = .scaleAspectFill
-    icview.clipsToBounds        = true
-        return icview
+        let imageview              = UIImageView()
+        imageview.contentMode      = .scaleAspectFill
+        imageview.clipsToBounds        = true
+        return imageview
     }()
     
     let activityLabel: UILabel = {

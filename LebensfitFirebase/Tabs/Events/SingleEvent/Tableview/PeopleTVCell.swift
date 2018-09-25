@@ -24,18 +24,17 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     
     //MARK: - GUI Objects
     let selectionDot: UIView = {
-        let sv                  = UIView()
-        //sv.frame              = CGRect(x: 0, y: 0, width: 20, height: 20)
-        sv.backgroundColor      = LebensfitSettings.Colors.basicTintColor
-        sv.layer.cornerRadius   = 7.5
-        return sv
+        let view                  = UIView()
+        view.backgroundColor      = LebensfitSettings.Colors.basicTintColor
+        view.layer.cornerRadius   = 7.5
+        return view
     }()
     
     let profileImageView: CustomImageView = {
-        let iv              = CustomImageView()
-        iv.contentMode      = .scaleAspectFill
-        iv.clipsToBounds    = true
-        return iv
+        let customview              = CustomImageView()
+        customview.contentMode      = .scaleAspectFill
+        customview.clipsToBounds    = true
+        return customview
     }()
     
     let usernameLabel: UILabel = {

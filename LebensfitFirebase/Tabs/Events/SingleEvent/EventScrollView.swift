@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventScrollView: UIScrollView {
+class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
@@ -104,6 +104,9 @@ class EventScrollView: UIScrollView {
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         
+        self.isUserInteractionEnabled = true
+        contentView.isUserInteractionEnabled = true
+        self.panGestureRecognizer.isEnabled = false
     }
     
     func setupTheSetup() {
@@ -119,7 +122,6 @@ class EventScrollView: UIScrollView {
             controller.loadUsers()
         }
     }
-    
     
     //MARK: - Setup
     func applyDefaultValues() {
@@ -138,9 +140,17 @@ class EventScrollView: UIScrollView {
         }
     }
     
+    @objc func tapped() {
+        print("tapped")
+    }
+    
     func setupViews() {
         guard let parent = parentVC else { return }
-        let locationTap = UITapGestureRecognizer(target: self, action: #selector(parent.openInGoogleMaps))
+        let locationTap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        locationTap.cancelsTouchesInView = false
+        locationTap.numberOfTapsRequired = 1
+        locationTap.delegate = self
+
         addSubview(contentView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(locationLabel)
@@ -154,7 +164,7 @@ class EventScrollView: UIScrollView {
         
         for controller in tableViewControllers {
             contentView.addSubview(controller)
-            controller.parentVC = parentVC
+            controller.parentVC = parent
             controller.parentSV = self
             let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
             heightCon.isActive = true
@@ -165,6 +175,8 @@ class EventScrollView: UIScrollView {
     func confBounds(){
         contentView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
+        contentView.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor, multiplier: 1).isActive = true
+        
         titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: padding, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
         locationLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 200, height: 0)
         heightOfAllPaddings += 10
@@ -207,7 +219,7 @@ class EventScrollView: UIScrollView {
         return heightOfAllObjects
     }
     
-    func teilnehmerLoaded() {
+    func finishedLoadingParticipants() {
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
             for (index, controller) in tableViewControllers.enumerated() {
                 var height = CGFloat(controller.users.count) * 60.0

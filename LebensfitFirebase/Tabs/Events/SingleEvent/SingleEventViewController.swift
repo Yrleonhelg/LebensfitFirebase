@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 
-class SingleEventViewController: UIViewController {
+class SingleEventViewController: UIViewController, UIScrollViewDelegate {
     //MARK: - Properties & Variables
     var thisEvent: Event
     var eventName: String?
@@ -32,28 +32,28 @@ class SingleEventViewController: UIViewController {
     
     //divides the buttons from the rest of the view
     let dividerButtonsView: UIView = {
-        let tdv             = UIView()
-        tdv.backgroundColor = UIColor.gray
-        return tdv
+        let view             = UIView()
+        view.backgroundColor = UIColor.gray
+        return view
     }()
     
     let dividerButtonsTabbar: UIView = {
-        let tdv             = UIView()
-        tdv.backgroundColor = UIColor.gray
-        return tdv
+        let view             = UIView()
+        view.backgroundColor = UIColor.gray
+        return view
     }()
     
     //divides the two buttons
     let separatorNopeMaybe: UIView = {
-        let tdv             = UIView()
-        tdv.backgroundColor = UIColor.gray
-        return tdv
+        let view             = UIView()
+        view.backgroundColor = UIColor.gray
+        return view
     }()
     
     let separatorMaybeSure: UIView = {
-        let tdv             = UIView()
-        tdv.backgroundColor = UIColor.gray
-        return tdv
+        let view             = UIView()
+        view.backgroundColor = UIColor.gray
+        return view
     }()
     
     let participateButton: UIButton = {
@@ -152,7 +152,6 @@ class SingleEventViewController: UIViewController {
         nopeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
     }
     
-    
     func confBounds(){
         let tabbarHeight        = self.tabBarController?.tabBar.frame.height ?? 0
         let buttonDividerWidth  = view.frame.width / 3
@@ -173,13 +172,14 @@ class SingleEventViewController: UIViewController {
         dividerButtonsTabbar.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         dividerButtonsView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
-        
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: dividerButtonsView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     override func viewDidLayoutSubviews() {
         let heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects + scrollView.heightOfAllPaddings)
+        print("Scroll:",scrollView.frame)
+        print("Content:",scrollView.contentView.frame)
     }
     
     //MARK: - Methods
@@ -254,7 +254,7 @@ class SingleEventViewController: UIViewController {
         return "Unbekannt"
     }
     
-    //https://dispatchswift.com/render-a-map-as-an-image-using-mapkit-3102a5a3fa5
+    //copied from: https://dispatchswift.com/render-a-map-as-an-image-using-mapkit-3102a5a3fa5
     func getSnapshotForLocation() {
         let mapSnapshotOptions = MKMapSnapshotter.Options()
         guard let location = eventLocation else { return }
@@ -268,20 +268,8 @@ class SingleEventViewController: UIViewController {
         snapShotter.start { (snapshot:MKMapSnapshotter.Snapshot?, error:Error?) in
             self.scrollView.mapView.image = snapshot?.image
         }
-//        let mapSnapshotOptions = MKMapSnapshotOptions()
-//        guard let location = eventLocation else { return }
-//        let region = MKCoordinateRegionMakeWithDistance(location, 2000, 2000)
-//        mapSnapshotOptions.region = region
-//        mapSnapshotOptions.scale = UIScreen.main.scale
-//        mapSnapshotOptions.size = CGSize(width: 400, height: 400)
-//        mapSnapshotOptions.showsBuildings = true
-//        mapSnapshotOptions.showsPointsOfInterest = true
-//        snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
-//        snapShotter.start { (snapshot:MKMapSnapshot?, error:Error?) in
-//            self.scrollView.mapView.image = snapshot?.image
-//        }
     }
-    
+
     //MARK: - Navigation
     func gotoProfile(clickedUID: String) {
         let selectedProfile     = ProfileController()

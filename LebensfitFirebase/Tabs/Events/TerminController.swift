@@ -51,6 +51,8 @@ class TerminController: UIViewController {
         self.navigationItem.title = "Kalender"
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.titleView = segmentedController
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddEvent))
+        self.navigationItem.rightBarButtonItem = addButton
     }
     
     func setupViews() {
@@ -80,6 +82,12 @@ class TerminController: UIViewController {
         }
     }
     
+    @objc func handleAddEvent() {
+        let createEventController = CreateEventController()
+        let createEventNavigationController = LebensfitNavigation(rootViewController: createEventController)
+        present(createEventNavigationController, animated: true, completion: nil)
+    }
+    
     func gotoWeekView() {
         calendarView.removeFromSuperview()
         view.addSubview(weekView)
@@ -107,7 +115,6 @@ class TerminController: UIViewController {
         weekView.setnewWeekValues(week: weekOfDate, year: yearOfDate)
         weekView.setupValues()
         weekView.setupArray()
-        print("start")
         
         //Make Header automaticly expand (with deadline that it appears after view is there
         if weekView.twoDimensionalEventArray.count > date.weekday.formatedWeekDay {

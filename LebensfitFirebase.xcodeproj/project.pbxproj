@@ -384,9 +384,9 @@
 		01C706E3215A296B0065643F /* BottomPart */ = {
 			isa = PBXGroup;
 			children = (
-				FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */,
-				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
 				01C706E4215A298C0065643F /* ProfileScrollView.swift */,
+				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
+				FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */,
 			);
 			path = BottomPart;
 			sourceTree = "<group>";

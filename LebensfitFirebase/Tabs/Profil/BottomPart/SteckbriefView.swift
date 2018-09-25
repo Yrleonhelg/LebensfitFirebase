@@ -9,6 +9,8 @@
 import UIKit
 
 class SteckbriefView: UIView {
+    var parentVC: ProfileController?
+    var parentSV: ProfileScrollView?
     
     //MARK: - GUI Objects
     let ueberMich: UILabel = {
@@ -32,7 +34,6 @@ class SteckbriefView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        confBounds()
     }
     
     //MARK: - Setup Methods

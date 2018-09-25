@@ -13,6 +13,7 @@ class LebensfitTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        CDUser.sharedInstance.deleteUsers()
         
         //Only let the user pass when they're logged in.
         if Auth.auth().currentUser == nil {
@@ -24,43 +25,44 @@ class LebensfitTabBarController: UITabBarController {
             return
         }
         
+        loadEverything.createAllUsers()
         setupTabBar()
         setupViewControllers()
     }
     
     func setupTabBar() {
-        view.backgroundColor = .white
-        tabBar.autoresizesSubviews = true
-        tabBar.isTranslucent = true
-        self.tabBar.tintColor = LebensfitSettings.Colors.darkRed
+        view.backgroundColor        = LebensfitSettings.Colors.buttonBG
+        tabBar.autoresizesSubviews  = true
+        tabBar.isTranslucent        = true
+        self.tabBar.tintColor       = LebensfitSettings.Colors.basicTintColor
         self.tabBar.unselectedItemTintColor = LebensfitSettings.Colors.darkGray
         
-        let topBorder = CALayer()
-        topBorder.frame = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
-        topBorder.backgroundColor = UIColor.rgb(229, 231, 235, 1).cgColor
+        let topBorder               = CALayer()
+        topBorder.frame             = CGRect(x: 0, y: 0, width: 1000, height: 0.5)
+        topBorder.backgroundColor   = UIColor.rgb(229, 231, 235, 1).cgColor
         
         tabBar.layer.addSublayer(topBorder)
         tabBar.clipsToBounds = true
     }
     
     func setupViewControllers() {
-        //Images:
+        //Tabbar-Images:
         let calendarImage = UIImage(named: LebensfitSettings.UI.iconNames.calendar)
-        let homeImage = UIImage(named: LebensfitSettings.UI.iconNames.home)
+        let shopImage = UIImage(named: LebensfitSettings.UI.iconNames.shop)
         let mapImage = UIImage(named: LebensfitSettings.UI.iconNames.map)
-        let aboutImage = UIImage(named: LebensfitSettings.UI.iconNames.menu)
+        let userImage = UIImage(named: LebensfitSettings.UI.iconNames.benutzer)
         
         //Calendar
         let calendarVC = TerminController()
         let calendarNavigationController = LebensfitNavigation(rootViewController: calendarVC)
-        calendarNavigationController.tabBarItem = UITabBarItem(title: "Kalender", image: calendarImage, tag: 0)
-        calendarNavigationController.title = "Kalender"
+        calendarNavigationController.tabBarItem = UITabBarItem(title: "Events", image: calendarImage, tag: 0)
+        calendarNavigationController.title = "Events"
         
         //Home / videos
-        let homeController = HomeController(collectionViewLayout: UICollectionViewFlowLayout())
+        let homeController = ShopController(collectionViewLayout: UICollectionViewFlowLayout())
         let homeNavigationController = LebensfitNavigation(rootViewController: homeController)
-        homeNavigationController.title = "Home"
-        homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: homeImage, tag: 0)
+        homeNavigationController.title = "Shop"
+        homeNavigationController.tabBarItem = UITabBarItem(title: "Shop", image: shopImage, tag: 0)
         
         //map
         let mapController = MapController()
@@ -69,12 +71,13 @@ class LebensfitTabBarController: UITabBarController {
         mapNavigationController.tabBarItem = UITabBarItem(title: "Karte", image: mapImage, tag: 0)
         
         //profile
-        let profileController = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        let profileController = ProfileController()
         let profileNavigationController = LebensfitNavigation(rootViewController: profileController)
         profileNavigationController.title = "Profil"
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: aboutImage, tag: 0)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profil", image: userImage, tag: 0)
         
         viewControllers = [calendarNavigationController, homeNavigationController, mapNavigationController, profileNavigationController]
     }
+    
 }
 

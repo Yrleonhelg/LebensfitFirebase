@@ -18,18 +18,14 @@ class LebensfitNavigation: UINavigationController {
 
 extension UINavigationController {
     func setNavigationBarDefault() {
-       
-        self.navigationBar.isTranslucent = false
-        self.navigationBar.prefersLargeTitles = true
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationBar.tintColor = LebensfitSettings.Colors.darkRed
+        self.navigationBar.isTranslucent        = false
+        self.navigationBar.prefersLargeTitles   = false
+        
+        self.navigationController?.navigationBar.barTintColor       = LebensfitSettings.Colors.buttonBG
+        self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.buttonBG
 
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .right
-        let attributes = [NSAttributedStringKey.foregroundColor:UIColor.black,
-                          NSAttributedStringKey.paragraphStyle:paragraph]
-        self.navigationBar.titleTextAttributes = attributes
-        
+        self.navigationItem.largeTitleDisplayMode   = .automatic
+        self.navigationBar.tintColor                = LebensfitSettings.Colors.basicTintColor
+  
     }
 }

@@ -31,7 +31,7 @@ class MapController: UIViewController {
     //MARK: - Setup
     func setupNavigation() {
         self.navigationItem.title = "Karte"
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.setNavigationBarDefault()
     }
     
     func setupMapView() {
@@ -50,7 +50,7 @@ class MapController: UIViewController {
     //MARK: - Location
     func centerViewOnUserLocation() {
         if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegionMakeWithDistance(location, regionInMeters, regionInMeters)
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
             mapView.setRegion(region, animated: true)
         }
     }
@@ -92,7 +92,7 @@ extension MapController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegionMakeWithDistance(location, regionInMeters, regionInMeters)
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
             mapView.setRegion(region, animated: true)
         }
     }

@@ -11,7 +11,7 @@ import Firebase
 
 class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    //MARK: - Variables
+    //MARK: - GUI Objects
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
@@ -55,7 +55,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.backgroundColor = UIColor.rgb(149, 204, 244, 1)
+        button.backgroundColor = LebensfitSettings.Colors.basicTintColor
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
@@ -66,8 +66,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
-        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(17, 154, 237, 1)
+        let attributedTitle = NSMutableAttributedString(string: "Don't have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.rgb(17, 154, 237, 1)
             ]))
         button.setAttributedTitle(attributedTitle, for: .normal)
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
@@ -100,9 +100,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     func confBounds() {
         plusPhotoButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 40, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 140, height: 140)
         plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
         stackView.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
-        
         alreadyHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
     }
     
@@ -115,7 +113,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -134,10 +135,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         if isFormValid {
             signUpButton.isEnabled = true
-            signUpButton.backgroundColor = UIColor.rgb(17, 154, 237, 1)
+            signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(1)
         } else {
             signUpButton.isEnabled = false
-            signUpButton.backgroundColor = UIColor.rgb(149, 204, 244, 1)
+            signUpButton.backgroundColor = LebensfitSettings.Colors.basicTintColor.withAlphaComponent(0.6)
         }
     }
     
@@ -146,43 +147,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         guard let username = usernameTextField.text, !username.isEmpty else { return }
         guard let password = passwordTextField.text, !password.isEmpty else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error: Error?) in
-            if let err = error { print("Failed to create user:", err); return }
-            print("Successfully created user:", user?.user.uid ?? "")
-            
-            guard let image = self.plusPhotoButton.imageView?.image else { return }
-            guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
-            let filename = NSUUID().uuidString
-            let storageRef = Storage.storage().reference().child("profile_images").child(filename)
-            
-            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
-                if let err = err { print("Failed to upload profile image:", err); return}
-                
-                // Firebase 5 Update: Must now retrieve downloadURL
-                storageRef.downloadURL(completion: { (downloadURL, err) in
-                    if let err = err { print("Failed to fetch downloadURL:", err); return }
-                    guard let profileImageUrl = downloadURL?.absoluteString else { return }
-                    print("Successfully uploaded profile image:", profileImageUrl)
-                    guard let uid = user?.user.uid else { return }
-                    
-                    let dictionaryValues = ["username": username, "profileImageUrl": profileImageUrl]
-                    let values = [uid: dictionaryValues]
-                    
-                    Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
-                        
-                        if let err = err { print("Failed to save user info into db:", err); return }
-                        print("Successfully saved user info to db")
-                        
-                        guard let LebensfitTabBarController = UIApplication.shared.keyWindow?.rootViewController as? LebensfitTabBarController else { return }
-                        LebensfitTabBarController.setupTabBar()
-                        LebensfitTabBarController.setupViewControllers()
-                        
-                        self.dismiss(animated: true, completion: nil)
-                        
-                    })
-                })
-            })
-        })
+        registerToFireBase(email: email, user: username, pw: password)
     }
     
     @objc func handleShowLogin() {
@@ -191,3 +156,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}

@@ -10,12 +10,10 @@ import UIKit
 
 class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     //MARK: - Properties & Variables
-    var isCurrentDay: Bool  = false
     var isSelected: Bool    = false
     var myDate              = Date()
     let padding: CGFloat    = 20
     
-    var dayIndent: CGFloat  = 10
     var dayLeftAnchor = NSLayoutConstraint()
     
     //MARK: - GUI Objects

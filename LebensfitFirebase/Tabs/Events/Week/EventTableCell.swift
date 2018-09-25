@@ -24,7 +24,7 @@ class EventTableCell: UITableViewCell, ReusableView {
     let timeLabel: UILabel = {
         let label       = UILabel()
         label.font      = UIFont.systemFont(ofSize: 20)
-        label.text      = "11:00 bis 14:00"
+        label.text      = "00:00 bis 00:00"
         label.textColor = .white
         return label
     }()
@@ -37,7 +37,6 @@ class EventTableCell: UITableViewCell, ReusableView {
         setupViews()
         confBounds()
     }
-    
     
     //MARK: - Setup
     func setupViews() {

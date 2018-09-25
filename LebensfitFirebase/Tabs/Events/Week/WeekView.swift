@@ -76,7 +76,7 @@ class WeekView: UIView {
         currentWeek         = Calendar.current.component(.weekOfYear, from: presentDate)
         currentDayDate      = Calendar.current.component(.day, from: presentDate)
         currentWeekDayIndex = Calendar.current.component(.weekday, from: presentDate).formatedWeekDay
-        mondayOfPresentWeek = presentDate.thisDate(value: -currentWeekDayIndex)
+        mondayOfPresentWeek = presentDate.addDaysToToday(amount: -currentWeekDayIndex)
         todaysDate          = Date()
     }
     
@@ -189,7 +189,7 @@ class WeekView: UIView {
         let lengthOfArray       = parent.eventArray.count
         
         for x in 0..<numberOfWeekdays {
-            let currentDay              = mondayOfPresentWeek.thisDate(value: x)
+            let currentDay              = mondayOfPresentWeek.addDaysToToday(amount: x)
             var eventsToAddForThatDay   = [Event]()
             
             for i in 0..<lengthOfArray {

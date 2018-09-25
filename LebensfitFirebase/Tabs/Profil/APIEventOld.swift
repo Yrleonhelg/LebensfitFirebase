@@ -50,4 +50,19 @@
 //            print("Failed to fetch users for search:", err)
 //        }
 //    }
+
+
+
+
+
+//    func fetchUser() {
+//
+//        let uid = userId ?? (Auth.auth().currentUser?.uid ?? "")
+//        Database.fetchUserWithUID(uid: uid) { (user) in
+//            self.user = user
+//            if uid == Auth.auth().currentUser?.uid {
+//                //self.navigationItem.title = self.user?.username
+//            }
+//        }
+//    }
 //}

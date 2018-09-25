@@ -25,8 +25,8 @@ extension Date {
         return tomorrow.month != month
     }
     
-    func thisDate(value: Int) -> Date{
-        return Calendar.current.date(byAdding: .day, value: value, to: noon)!
+    func addDaysToToday(amount: Int) -> Date{
+        return Calendar.current.date(byAdding: .day, value: amount, to: noon)!
     }
     
     func formatDateEEEEddMMMyyyy() -> String {
@@ -41,8 +41,25 @@ extension Date {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "de_CH")
         formatter.dateFormat = "dd. MMM yyyy"
-        
         let result = formatter.string(from: self)
         return result
+    }
+    
+    var weekday: Int {
+        return Calendar.current.component(.weekday, from: self)
+    }
+    var firstDayOfTheMonth: Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
+    }
+    
+    func getHourAndMinuteAsStringFromDate() -> (String){
+        let hour    = Calendar.current.component(.hour, from: self)
+        let minutes = Calendar.current.component(.minute, from: self)
+        var minutesAsString: String = String(minutes)
+        while minutesAsString.count <= 1{
+            minutesAsString.insert("0", at: minutesAsString.startIndex)
+        }
+        let string  = "\(hour):\(minutesAsString)"
+        return string
     }
 }

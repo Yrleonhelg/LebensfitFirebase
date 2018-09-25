@@ -48,8 +48,6 @@ class EventTableCell: UITableViewCell, ReusableView {
         titleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         timeLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
     }
-    
-    //MARK: - Methods
 
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {

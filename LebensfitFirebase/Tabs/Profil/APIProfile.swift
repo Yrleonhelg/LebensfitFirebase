@@ -10,16 +10,6 @@ import UIKit
 import Firebase
 
 extension ProfileController {
-//    func fetchUser() {
-//
-//        let uid = userId ?? (Auth.auth().currentUser?.uid ?? "")
-//        Database.fetchUserWithUID(uid: uid) { (user) in
-//            self.user = user
-//            if uid == Auth.auth().currentUser?.uid {
-//                //self.navigationItem.title = self.user?.username
-//            }
-//        }
-//    }
     func fetchUser() {
         let uid = userId ?? (Auth.auth().currentUser?.uid ?? "")
         self.user = CDUser.sharedInstance.getUserForId(userId: uid)

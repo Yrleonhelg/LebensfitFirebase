@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 
-class SingleEventViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+class SingleEventViewController: UIViewController {
     //MARK: - Properties & Variables
     var thisEvent: Event
     var eventName: String?

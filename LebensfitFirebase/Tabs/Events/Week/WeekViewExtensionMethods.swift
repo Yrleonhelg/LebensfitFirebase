@@ -13,7 +13,7 @@ extension WeekView: WeekViewDelegate {
     func didChangeWeek(week: Int, year: Int) {
         //calculates the new dates based on old and new week
         let valuue = (week-currentWeek)*7
-        presentDate = presentDate.thisDate(value: valuue)
+        presentDate = presentDate.addDaysToToday(amount: valuue)
         
         //Make all headers unexpand and in its default state
         for var i in 0..<twoDimensionalEventArray.count {
@@ -109,7 +109,7 @@ extension WeekView: UITableViewDataSource {
             view.myDate         = todaysDate
             view.addDot()
         } else {
-            view.myDate         = presentDate.thisDate(value: valuee)
+            view.myDate         = presentDate.addDaysToToday(amount: valuee)
             view.removeDot()
         }
         

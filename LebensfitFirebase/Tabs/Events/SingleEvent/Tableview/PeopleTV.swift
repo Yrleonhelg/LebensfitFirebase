@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, ReusableView {
+class PeopleTableView: UIView, ReusableView {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
@@ -66,31 +66,6 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
         padding = 15+25+5
     }
     
-    
-    //MARK: - Tableview
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return height
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row     = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
-        row.user    = users[indexPath.row]
-        row.confBounds()
-        return row
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard let id = users[indexPath.row].uid else { return }
-        guard let parent = parentVC else { return }
-        parent.gotoProfile(clickedUID: id)
-    }
-    
-    
     //MARK: - Methods
     func loadUsers() {
         setNeedsUpdateConstraints()
@@ -109,4 +84,36 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: - Extensions
+//MARK: -
+//MARK: - TVDataSource
+extension PeopleTableView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row     = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
+        row.user    = users[indexPath.row]
+        row.confBounds()
+        return row
+    }
+}
+
+//MARK: - TVDelegate
+extension PeopleTableView: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let id = users[indexPath.row].uid else { return }
+        guard let parent = parentVC else { return }
+        parent.gotoProfile(clickedUID: id)
+    }
+    
 }

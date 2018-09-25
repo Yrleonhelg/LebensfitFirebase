@@ -25,7 +25,6 @@
 		01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4A213FF03000D4144B /* WeekdayView.swift */; };
 		01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4E213FF1E100D4144B /* CalendarView.swift */; };
 		01462E51213FF50300D4144B /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E50213FF50300D4144B /* DateCell.swift */; };
-		01462E53213FF5A000D4144B /* EventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E52213FF5A000D4144B /* EventExtensions.swift */; };
 		014CF79121513EFE006E17A6 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CF78B21513EFE006E17A6 /* Event+CoreDataClass.swift */; };
 		014CF79221513EFE006E17A6 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CF78C21513EFE006E17A6 /* Event+CoreDataProperties.swift */; };
 		014CF79321513EFE006E17A6 /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CF78D21513EFE006E17A6 /* Video+CoreDataClass.swift */; };
@@ -75,6 +74,9 @@
 		01F44A87214AABED006723ED /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A86214AABED006723ED /* ProfileController.swift */; };
 		01F44A89214AB0AC006723ED /* APIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A88214AB0AC006723ED /* APIProfile.swift */; };
 		01F44A8B214AB250006723ED /* HELG+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A8A214AB250006723ED /* HELG+Firebase.swift */; };
+		FE75A144215AB75D0036BE8D /* HELG+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */; };
+		FE75A146215AB7A40036BE8D /* HELG+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A145215AB7A40036BE8D /* HELG+Int.swift */; };
+		FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A147215AB8160036BE8D /* HELG+String.swift */; };
 		FEA8AB79214FDAD2001E1E7E /* SteckbriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */; };
 		FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
@@ -101,7 +103,6 @@
 		01462E4A213FF03000D4144B /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
 		01462E4E213FF1E100D4144B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		01462E50213FF50300D4144B /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
-		01462E52213FF5A000D4144B /* EventExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExtensions.swift; sourceTree = "<group>"; };
 		014CF78B21513EFE006E17A6 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
 		014CF78C21513EFE006E17A6 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		014CF78D21513EFE006E17A6 /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -156,6 +157,9 @@
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+NSDate.swift"; sourceTree = "<group>"; };
+		FE75A145215AB7A40036BE8D /* HELG+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Int.swift"; sourceTree = "<group>"; };
+		FE75A147215AB8160036BE8D /* HELG+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+String.swift"; sourceTree = "<group>"; };
 		FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteckbriefView.swift; sourceTree = "<group>"; };
 		FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandView.swift; sourceTree = "<group>"; };
 		FECC8FB421455430007F3F3F /* HELG+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Date.swift"; sourceTree = "<group>"; };
@@ -182,6 +186,9 @@
 				0186319B2146696900E5A9C2 /* HELG+Tableview.swift */,
 				0186104B213EA6BE0037DADB /* HELG+UIView.swift */,
 				FECC8FB421455430007F3F3F /* HELG+Date.swift */,
+				FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */,
+				FE75A145215AB7A40036BE8D /* HELG+Int.swift */,
+				FE75A147215AB8160036BE8D /* HELG+String.swift */,
 				0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */,
 				016DA581214272B100B07F69 /* POPShakeable.swift */,
 				010BC27E213D928E00530B2D /* ReuseableView.swift */,
@@ -313,7 +320,6 @@
 			children = (
 				010BC273213D920800530B2D /* TerminController.swift */,
 				0159AA2B2147B0C7005134A3 /* APITermin.swift */,
-				01462E52213FF5A000D4144B /* EventExtensions.swift */,
 				0153FAD62141778F00D1B5BB /* Month */,
 				0153FAD7214177AE00D1B5BB /* Week */,
 				010CF6802158E43000C0B9F0 /* Create */,
@@ -590,7 +596,6 @@
 				016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */,
 				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
 				01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */,
-				01462E53213FF5A000D4144B /* EventExtensions.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
 				010CF67F2158E42900C0B9F0 /* CreateEventController.swift in Sources */,
 				0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */,
@@ -602,6 +607,7 @@
 				01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */,
 				01F44A83214A8757006723ED /* APIEvent.swift in Sources */,
 				014CF79C2151441F006E17A6 /* CDEvent.swift in Sources */,
+				FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */,
 				FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */,
 				014CF79E2151469C006E17A6 /* APILogin.swift in Sources */,
 				FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */,
@@ -617,6 +623,8 @@
 				016BA8A4213D777500ADAA65 /* LebensfitFirebase.xcdatamodeld in Sources */,
 				01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */,
 				014CF79A215140DB006E17A6 /* CDUser.swift in Sources */,
+				FE75A144215AB75D0036BE8D /* HELG+NSDate.swift in Sources */,
+				FE75A146215AB7A40036BE8D /* HELG+Int.swift in Sources */,
 				0186104C213EA6BE0037DADB /* HELG+UIView.swift in Sources */,
 				FEA8AB79214FDAD2001E1E7E /* SteckbriefView.swift in Sources */,
 				014CF79821513FC4006E17A6 /* PersistenceService.swift in Sources */,

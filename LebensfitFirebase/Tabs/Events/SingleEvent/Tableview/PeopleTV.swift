@@ -15,7 +15,7 @@ class PeopleTableView: UIView, UITableViewDelegate, UITableViewDataSource, Reusa
     var parentVC: SingleEventViewController?
     var parentSV: EventScrollView?
     var users: [User]! = [User]()
-    var sortedUsers: [User]! = [User]()
+
     var finishedLoading: Bool = false
     var padding: CGFloat = 15+25+5
     var height: CGFloat = 60

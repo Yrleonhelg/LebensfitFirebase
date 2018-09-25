@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 
-class SingleEventViewController: UIViewController, UIScrollViewDelegate {
+class SingleEventViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     //MARK: - Properties & Variables
     var thisEvent: Event
     var eventName: String?
@@ -43,7 +43,7 @@ class SingleEventViewController: UIViewController, UIScrollViewDelegate {
         return view
     }()
     
-    //divides the two buttons
+    //separates two buttons
     let separatorNopeMaybe: UIView = {
         let view             = UIView()
         view.backgroundColor = UIColor.gray
@@ -62,7 +62,7 @@ class SingleEventViewController: UIViewController, UIScrollViewDelegate {
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "checkmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
-        button.imageView?.contentMode       = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -72,18 +72,18 @@ class SingleEventViewController: UIViewController, UIScrollViewDelegate {
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "questionmark2")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
-        button.imageView?.contentMode       = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
     let nopeButton: UIButton = {
         let button              = UIButton()
-        button.isEnabled = true
+    button.isEnabled            = true
         button.backgroundColor  = LebensfitSettings.Colors.buttonBG
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)
         button.setImage(buttonImage, for: .normal)
-        button.imageView?.contentMode       = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -178,8 +178,6 @@ class SingleEventViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLayoutSubviews() {
         let heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects + scrollView.heightOfAllPaddings)
-        print("Scroll:",scrollView.frame)
-        print("Content:",scrollView.contentView.frame)
     }
     
     //MARK: - Methods

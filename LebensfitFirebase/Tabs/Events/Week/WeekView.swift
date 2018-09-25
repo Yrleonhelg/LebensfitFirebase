@@ -80,7 +80,6 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         currentWeekDayIndex = Calendar.current.component(.weekday, from: presentDate).formatedWeekDay
         mondayOfPresentWeek = presentDate.thisDate(value: -currentWeekDayIndex)
         todaysDate          = Date()
-        print(mondayOfPresentWeek)
     }
     
     func setupViews() {

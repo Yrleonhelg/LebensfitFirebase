@@ -15,7 +15,7 @@ class TerminController: UIViewController {
     
     //MARK: - GUI Objects
     let segmentedController: UISegmentedControl = {
-        let items               = ["Monat", "Woche"]
+        let items               = ["Monat", "Woche", "Events"]
         let frame               = UIScreen.main.bounds
         
         let controller                  = UISegmentedControl(items: items)
@@ -49,7 +49,6 @@ class TerminController: UIViewController {
     func setupNavBar() {
         self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Kalender"
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.titleView = segmentedController
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddEvent))
         self.navigationItem.rightBarButtonItem = addButton
@@ -82,12 +81,6 @@ class TerminController: UIViewController {
         }
     }
     
-    @objc func handleAddEvent() {
-        let createEventController = CreateEventController()
-        let createEventNavigationController = LebensfitNavigation(rootViewController: createEventController)
-        present(createEventNavigationController, animated: true, completion: nil)
-    }
-    
     func gotoWeekView() {
         calendarView.removeFromSuperview()
         view.addSubview(weekView)
@@ -101,6 +94,11 @@ class TerminController: UIViewController {
         calendarView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
     }
     
+    @objc func handleAddEvent() {
+        let createEventController = CreateEventController()
+        let createEventNavigationController = LebensfitNavigation(rootViewController: createEventController)
+        present(createEventNavigationController, animated: true, completion: nil)
+    }
     
     //MARK: - Navigation
     //Opens the weekview and expands the selcted day

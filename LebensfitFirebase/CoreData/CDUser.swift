@@ -45,7 +45,7 @@ class CDUser: NSObject {
         
         do {
             _ = try managedContext.fetch(fetchRequest)
-            print("All users loaded")
+            print("loadUsers: All users loaded")
         } catch {
             print("Error beim laden des Nutzer: ",error)
         }
@@ -57,7 +57,7 @@ class CDUser: NSObject {
         
         do {
             users = try managedContext.fetch(fetchRequest)
-            print("All users loaded")
+            print("getUsers: All users loaded")
         } catch {
             print("Error beim laden des Nutzer: ",error)
         }

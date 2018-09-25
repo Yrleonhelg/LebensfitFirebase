@@ -55,8 +55,8 @@ class LebensfitTabBarController: UITabBarController {
         //Calendar
         let calendarVC = TerminController()
         let calendarNavigationController = LebensfitNavigation(rootViewController: calendarVC)
-        calendarNavigationController.tabBarItem = UITabBarItem(title: "Kalender", image: calendarImage, tag: 0)
-        calendarNavigationController.title = "Kalender"
+        calendarNavigationController.tabBarItem = UITabBarItem(title: "Events", image: calendarImage, tag: 0)
+        calendarNavigationController.title = "Events"
         
         //Home / videos
         let homeController = ShopController(collectionViewLayout: UICollectionViewFlowLayout())

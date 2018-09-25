@@ -31,7 +31,7 @@ class MapController: UIViewController {
     //MARK: - Setup
     func setupNavigation() {
         self.navigationItem.title = "Karte"
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.setNavigationBarDefault()
     }
     
     func setupMapView() {

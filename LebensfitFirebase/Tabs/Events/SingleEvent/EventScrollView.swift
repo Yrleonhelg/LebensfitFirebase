@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
+class EventScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
@@ -76,6 +76,7 @@ class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
         label.textColor = .black
         return label
     }()
+    
     let notesContentLabel: UILabel = {
         let label           = UILabel()
         label.font          = UIFont.systemFont(ofSize: 16)
@@ -103,10 +104,8 @@ class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
-        
-        self.isUserInteractionEnabled = true
+
         contentView.isUserInteractionEnabled = true
-        self.panGestureRecognizer.isEnabled = false
     }
     
     func setupTheSetup() {
@@ -140,16 +139,12 @@ class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc func tapped() {
-        print("tapped")
-    }
-    
     func setupViews() {
         guard let parent = parentVC else { return }
-        let locationTap = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        let locationTap = UITapGestureRecognizer(target: parent, action: #selector(parent.openInGoogleMaps))
         locationTap.cancelsTouchesInView = false
-        locationTap.numberOfTapsRequired = 1
-        locationTap.delegate = self
+        //locationTap.numberOfTapsRequired = 1
+        //locationTap.delegate = parent
 
         addSubview(contentView)
         contentView.addSubview(titleLabel)
@@ -200,18 +195,22 @@ class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
     //MARK: - Methods
     func calculateHeightOfAllObjects() -> CGFloat {
         var heightOfAllObjects: CGFloat = 0
-        heightOfAllObjects += titleLabel.frame.height + locationLabel.frame.height
-        heightOfAllObjects += dateLabel.frame.height + timeLabel.frame.height
-        heightOfAllObjects += mapView.frame.height
-        heightOfAllObjects += notesHeaderLabel.frame.height + notesContentLabel.frame.height
+        
+        let titleAndLocation = titleLabel.frame.height + locationLabel.frame.height
+        let dateAndTime = dateLabel.frame.height + timeLabel.frame.height
+        let map = mapView.frame.height
+        let notes = notesHeaderLabel.frame.height + notesContentLabel.frame.height
+        var tableViewsHeight: CGFloat = 0
         
         for controller in tableViewControllers {
-            var height = CGFloat(controller.users.count) * controller.height
+            var tableHeight = CGFloat(controller.users.count) * controller.height
             if controller.users.count > 0 {
-                height += controller.padding
+                tableHeight += controller.padding
             }
-            heightOfAllObjects += height
+            tableViewsHeight += tableHeight
         }
+        //print("Heights: ",titleAndLocation, dateAndTime, map, notes, tableViewsHeight)
+        heightOfAllObjects = titleAndLocation + dateAndTime + map + notes + tableViewsHeight
         heightOfAllObjects += 12
         
         guard let parent = parentVC else { return heightOfAllObjects }
@@ -223,7 +222,7 @@ class EventScrollView: UIScrollView, UIGestureRecognizerDelegate {
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
             for (index, controller) in tableViewControllers.enumerated() {
                 var height = CGFloat(controller.users.count) * 60.0
-                print("Users: ",controller.users.count)
+                print(index, "Users: ",controller.users.count)
                 if controller.users.count > 0 {
                     height += controller.padding
                     heightCons[index].constant = height

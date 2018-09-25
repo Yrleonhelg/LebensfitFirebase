@@ -19,6 +19,7 @@ class ShopController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     //MARK: - Setup
     func setupNavBar() {
+        self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Home"
     }
     

@@ -54,17 +54,16 @@ extension WeekView: UIGestureRecognizerDelegate {
 
 //MARK: - TVDelegate
 extension WeekView: UITableViewDelegate {
-    //MARK: Header
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return WeekDays.count
     }
     
-    //Height of the accordions
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }
     
-    //returns the number of cells for each header if the header is on mode expanded
+    //returns the number of cells for each header if the header is expanded
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section < twoDimensionalEventArray.count {
             if twoDimensionalEventArray[section].isExpanded{
@@ -82,9 +81,8 @@ extension WeekView: UITableViewDelegate {
     //goes to the event if a row is clicked. uses the array instead of the cell because bugs
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        guard let parent = parentVC else { return }
         let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID
-        parent.gotoEvent(eventID: id)
+        delegate?.gotoEvent(eventID: id)
     }
 }
 

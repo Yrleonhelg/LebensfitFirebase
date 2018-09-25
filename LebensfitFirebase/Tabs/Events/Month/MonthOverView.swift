@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MonthViewDelegate: class {
+protocol MonthViewDelegate: Any {
     func didChangeMonth(monthIndex: Int, year: Int)
 }
 
@@ -63,8 +63,8 @@ class MonthOverView: UIView {
     }
     
     func confBounds(){
-        currentMonthLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
         currentMonthLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
+        currentMonthLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         previousMonthButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 35)
         nextMonthButton.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 35)

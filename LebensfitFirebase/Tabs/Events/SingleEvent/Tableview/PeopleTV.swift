@@ -9,10 +9,15 @@
 import UIKit
 import Firebase
 
+protocol peopleRowClicked {
+    func gotoProfile(clickedUID: String)
+}
+
 class PeopleTableView: UIView, ReusableView {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
+    var delegate: peopleRowClicked?
     var parentSV: EventScrollView?
     var users: [User]! = [User]()
 
@@ -112,8 +117,7 @@ extension PeopleTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let id = users[indexPath.row].uid else { return }
-        guard let parent = parentVC else { return }
-        parent.gotoProfile(clickedUID: id)
+        delegate?.gotoProfile(clickedUID: id)
     }
     
 }

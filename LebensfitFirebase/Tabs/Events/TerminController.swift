@@ -61,6 +61,8 @@ class TerminController: UIViewController {
         view.addSubview(calendarView)
         view.addSubview(weekView)
         calendarView.parentVC = self
+        calendarView.delegate = self
+        weekView.delegate = self
         weekView.parentVC = self
         weekView.removeFromSuperview()
     }
@@ -110,16 +112,17 @@ class TerminController: UIViewController {
         let createEventNavigationController = LebensfitNavigation(rootViewController: createEventController)
         present(createEventNavigationController, animated: true, completion: nil)
     }
-    
-    //MARK: - Navigation
+}
+
+extension TerminController: cellClickedDelegate {
     //Opens the weekview and expands the selcted day
     func gotoDay(date: Date) {
         gotoWeekView()
         segmentedController.selectedSegmentIndex = 1
-
+        
         let weekOfDate = Calendar.current.component(.weekOfYear, from: date)
         let yearOfDate = Calendar.current.component(.year, from: date)
-    
+        
         weekView.presentDate = date
         weekView.setnewWeekValues(week: weekOfDate, year: yearOfDate)
         weekView.setupValues()
@@ -132,7 +135,10 @@ class TerminController: UIViewController {
             }
         }
     }
-    
+}
+
+extension TerminController: eventClickedDelegate {
+    //Goes directly to an event
     func gotoEvent(eventID: Int32) {
         let event = eventArray[Int(eventID)]
         let eventVC = SingleEventViewController(event: event)
@@ -141,4 +147,3 @@ class TerminController: UIViewController {
         })
     }
 }
-

@@ -13,6 +13,10 @@ struct expandableEvent {
     let events: [Event]
 }
 
+protocol eventClickedDelegate: Any {
+    func gotoEvent(eventID: Int32)
+}
+
 class WeekView: UIView {
     
     //MARK: - Properties & Variables
@@ -32,6 +36,7 @@ class WeekView: UIView {
     
     var twoDimensionalEventArray    = [expandableEvent]()
     var parentVC: TerminController?
+    var delegate: eventClickedDelegate?
     
     //MARK: - GUI Objects
     let calendarTableView: UITableView = {

@@ -159,8 +159,9 @@ class EventScrollView: UIScrollView {
         
         for controller in tableViewControllers {
             contentView.addSubview(controller)
-            controller.parentVC = parent
+            controller.delegate = parent
             controller.parentSV = self
+            controller.parentVC = parent
             let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
             heightCon.isActive = true
             heightCons.append(heightCon)

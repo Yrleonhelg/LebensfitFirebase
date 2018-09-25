@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol cellClickedDelegate: Any {
+    func gotoDay(date: Date)
+}
+
 class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Properties & Variables
@@ -22,6 +26,7 @@ class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
     var firstWeekDayOfMonth     = 0   //(Sunday-Saturday 1-7
     var currentWeekDay          = Calendar.current.component(.weekday, from: Date())
     var parentVC: TerminController?
+    var delegate: cellClickedDelegate?
     
     enum dayProperty {
         case before
@@ -244,9 +249,7 @@ extension CalendarView: UICollectionViewDelegate {
         if !cell.cellSelected {
             cell.cellSelected = true
         } else {
-            //TODO: Delegate back to controller and navigate from there
-            guard let parent = parentVC else { return }
-            parent.gotoDay(date: cell.myDate)
+            delegate?.gotoDay(date: cell.myDate)
         }
     }
     

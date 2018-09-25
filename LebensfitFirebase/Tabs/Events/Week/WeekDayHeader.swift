@@ -12,7 +12,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     //MARK: - Properties & Variables
     var isSelected: Bool    = false
     var myDate              = Date()
-    let padding: CGFloat    = 20
+    let padding: CGFloat    = 10
     
     var dayLeftAnchor = NSLayoutConstraint()
     
@@ -75,18 +75,18 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     
     func confBounds() {
         dayLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        dayLeftAnchor.constant = 10
+        dayLeftAnchor.constant = padding
         
-        dateLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
-        chevronLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
-        bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: -1, paddingRight: 10, width: 0, height: 1)
+        dateLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: padding, paddingRight: 0, width: 0, height: 0)
+        chevronLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+        bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: -1, paddingRight: padding, width: 0, height: 0.5)
     }
     
     func addDot() {
         dayLeftAnchor.constant = 30
         addSubview(selectionDot)
         selectionDot.centerYAnchor.constraint(equalTo: dayLabel.centerYAnchor).isActive = true
-        selectionDot.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 15, height: 15)
+        selectionDot.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 15, height: 15)
     }
     
     func removeDot() {

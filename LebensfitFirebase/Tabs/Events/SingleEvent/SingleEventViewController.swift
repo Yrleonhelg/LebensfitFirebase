@@ -267,16 +267,6 @@ class SingleEventViewController: UIViewController {
             self.scrollView.mapView.image = snapshot?.image
         }
     }
-
-    //MARK: - Navigation
-    func gotoProfile(clickedUID: String) {
-        let selectedProfile     = ProfileController()
-        selectedProfile.userId  = clickedUID
-        DispatchQueue.main.async( execute: {
-            self.navigationController?.pushViewController(selectedProfile, animated: true)
-        })
-    }
-    
     @objc func openInGoogleMaps() {
         guard let coord = eventLocation else { return }
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord, addressDictionary:nil))
@@ -287,5 +277,15 @@ class SingleEventViewController: UIViewController {
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension SingleEventViewController: peopleRowClicked {
+    func gotoProfile(clickedUID: String) {
+        let selectedProfile     = ProfileController()
+        selectedProfile.userId  = clickedUID
+        DispatchQueue.main.async( execute: {
+            self.navigationController?.pushViewController(selectedProfile, animated: true)
+        })
     }
 }

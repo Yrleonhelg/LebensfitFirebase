@@ -9,7 +9,7 @@
 
 import UIKit
 
-protocol WeekViewDelegate: class {
+protocol WeekViewDelegate: Any {
     func didChangeWeek(week: Int, year: Int)
 }
 

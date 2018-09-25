@@ -33,8 +33,6 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
     var twoDimensionalEventArray    = [expandableEvent]()
     var parentVC: TerminController?
     
-    
-    
     //MARK: - GUI Objects
     let calendarTableView: UITableView = {
         let ctv     = UITableView()
@@ -116,19 +114,17 @@ class WeekView: UIView, UITableViewDelegate, UITableViewDataSource, UIGestureRec
         
         //Calculate Date and Highlight if today
         let valuee = -(currentWeekDayIndex - (section))
+        view.confBounds()
         if section == currentWeekDayIndex && presentDate.noon == todaysDate.noon {
-            view.confBoundsToday()
-            view.isCurrentDay   = true
             view.myDate         = todaysDate
+            view.addDot()
         } else {
-            view.confBoundsDefault()
-            view.isCurrentDay   = false
             view.myDate         = presentDate.thisDate(value: valuee)
             view.removeDot()
         }
         
         //Set the date and check if the Header is expanded and should display content
-        view.setDate()
+        view.dateLabel.text = view.myDate.formatDateddMMMyyyy()
         isExpandedOrNot(view: view)
         
         return view

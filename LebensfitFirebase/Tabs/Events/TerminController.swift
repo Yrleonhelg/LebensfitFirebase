@@ -22,6 +22,7 @@ class TerminController: UIViewController {
         controller.selectedSegmentIndex = 0
         controller.frame                = CGRect(x: frame.minX + 10, y: frame.minY + 50, width: frame.width - 20, height: 30)
         controller.layer.cornerRadius   = 5.0
+        controller.tintColor            = LebensfitSettings.Colors.basicTintColor
         return controller
     }()
     
@@ -43,18 +44,20 @@ class TerminController: UIViewController {
         setupViews()
         confBounds()
         fillArray()
+        segmentedController.addTarget(self, action: #selector(self.changeView(_:)), for: .valueChanged)
     }
     
     //MARK: - Setup
     func setupNavBar() {
         self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Kalender"
-        self.navigationItem.titleView = segmentedController
+        //self.navigationItem.titleView = segmentedController
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddEvent))
         self.navigationItem.rightBarButtonItem = addButton
     }
     
     func setupViews() {
+        view.addSubview(segmentedController)
         view.addSubview(calendarView)
         view.addSubview(weekView)
         calendarView.parentVC = self
@@ -68,12 +71,15 @@ class TerminController: UIViewController {
     }
     
     func confBounds(){
-        calendarView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
+        segmentedController.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
+        calendarView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
     }
     
     //MARK: - Methods
-    @objc func changeView(sender: UISegmentedControl) {
+    @objc func changeView(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
+        case 0:
+            gotoMonthView()
         case 1:
             gotoWeekView()
         default:
@@ -84,14 +90,19 @@ class TerminController: UIViewController {
     func gotoWeekView() {
         calendarView.removeFromSuperview()
         view.addSubview(weekView)
-        weekView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        weekView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         weekView.setupTheSetup()
     }
     
     func gotoMonthView() {
         weekView.removeFromSuperview()
         view.addSubview(calendarView)
-        calendarView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
+        calendarView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
+        
+        DispatchQueue.main.async( execute: {
+            self.calendarView.calendarCollectionView.reloadData()
+        })
+        
     }
     
     @objc func handleAddEvent() {

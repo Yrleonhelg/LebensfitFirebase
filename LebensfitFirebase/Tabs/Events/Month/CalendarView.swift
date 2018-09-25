@@ -23,6 +23,12 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var currentWeekDay          = Calendar.current.component(.weekday, from: Date())
     var parentVC: TerminController?
     
+    enum dayProperty {
+        case before
+        case today
+        case after
+    }
+    
     //MARK: - GUI Objects
     let calendarCollectionView: UICollectionView = {
         let layout          = UICollectionViewFlowLayout()
@@ -62,7 +68,6 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         currentYear             = Calendar.current.component(.year, from: Date())
         todaysDate              = Calendar.current.component(.day, from: Date())
         firstWeekDayOfMonth     = getFirstWeekDay()
-       
         
         //In Schaltjahren hat der Februar einen Tag mehr
         if currentMonthIndex == 2 && currentYear % 4 == 0 {
@@ -99,35 +104,54 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DateCell.reuseIdentifier, for: indexPath) as! DateCell
-        cell.backgroundColor = LebensfitSettings.Colors.basicBackColor
+        //reset indicators
+        cell.thereIsAnEventView.backgroundColor = LebensfitSettings.Colors.basicBackColor
+        cell.selectionView.layer.borderWidth    = 0
+        
+        //only display the cells of the days of the month
         if indexPath.item <= firstWeekDayOfMonth - 2 {
             cell.isHidden = true
         } else {
-            let calcDate = indexPath.row-firstWeekDayOfMonth+2
-            cell.isHidden=false
-            cell.dayLabel.text="\(calcDate)"
-            let valuee = (calcDate-todaysDate + todayDayToPresentDay)
-            cell.myDate = Date().thisDate(value: valuee)
+            cell.isHidden       = false
             
-            if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
+            let calcDate        = indexPath.row-firstWeekDayOfMonth+2
+            cell.dayLabel.text  = "\(calcDate)"
+            let valuee          = (calcDate-todaysDate + todayDayToPresentDay)
+            cell.myDate         = Date().thisDate(value: valuee)
+            
+            let dayProperty = setDayProperty(date: calcDate)
+            switch dayProperty {
+            case .before:
                 cell.isUserInteractionEnabled   = false
                 cell.dayLabel.textColor         = UIColor.lightGray
-            } else if calcDate == todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex{
+                return cell
+            case .today:
                 cell.selectionView.layer.borderColor    = LebensfitSettings.Colors.basicTintColor.cgColor
                 cell.selectionView.layer.borderWidth    = 1
                 cell.isUserInteractionEnabled           = true
                 cell.dayLabel.textColor                 = LebensfitSettings.Calendar.Style.activeCellLblColor
-            } else {
+                break
+            case .after:
                 cell.isUserInteractionEnabled = true
                 cell.dayLabel.textColor = LebensfitSettings.Calendar.Style.activeCellLblColor
+                break
             }
-            
+        
             if isAnEventThisDay(date: Date().thisDate(value: valuee)) {
                 cell.thereIsAnEventView.backgroundColor = LebensfitSettings.Colors.basicTintColor
             }
         }
-        
         return cell
+    }
+    
+    func setDayProperty(date: Int) -> dayProperty{
+        if date < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
+            return dayProperty.before
+        } else if date == todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
+            return dayProperty.today
+        } else {
+            return dayProperty.after
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -173,13 +197,9 @@ class CalendarView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     //MARK: - Methods
     func isAnEventThisDay(date: Date) -> Bool {
         guard let parent        = parentVC else { return false }
-        let lengthOfArray       = parent.eventArray.count
-        
-        for i in 0..<lengthOfArray {
-            let event                   = parent.eventArray[i]
-            if let eventStartTime       = event.eventStartingDate {
-                let isSameDay               = Calendar.current.isDate(date, inSameDayAs: eventStartTime as Date)
-                if isSameDay {
+        for event in parent.eventArray {
+            if let eventStartTime = event.eventStartingDate {
+                if (Calendar.current.isDate(date, inSameDayAs: eventStartTime as Date)) {
                     return true
                 }
             }

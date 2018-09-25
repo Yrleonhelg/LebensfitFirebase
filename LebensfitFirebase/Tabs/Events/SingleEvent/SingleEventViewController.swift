@@ -78,7 +78,7 @@ class SingleEventViewController: UIViewController, UIScrollViewDelegate, UIGestu
     
     let nopeButton: UIButton = {
         let button              = UIButton()
-    button.isEnabled            = true
+        button.isEnabled            = true
         button.backgroundColor  = LebensfitSettings.Colors.buttonBG
         button.tintColor        = LebensfitSettings.Colors.basicTintColor
         let buttonImage = UIImage(named: "delete-sign")?.withRenderingMode(.alwaysTemplate)

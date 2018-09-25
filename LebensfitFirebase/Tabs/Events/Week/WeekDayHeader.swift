@@ -15,6 +15,9 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     var myDate              = Date()
     let padding: CGFloat    = 20
     
+    var dayIndent: CGFloat  = 10
+    var dayLeftAnchor = NSLayoutConstraint()
+    
     //MARK: - GUI Objects
     let dayLabel: UILabel = {
         let label       = UILabel()
@@ -49,7 +52,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     
     let bottomDividerView: UIView = {
         let tdv             = UIView()
-        tdv.backgroundColor = UIColor.lightGray
+        tdv.backgroundColor = LebensfitSettings.Colors.basicTintColor
         return tdv
     }()
     
@@ -60,7 +63,8 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
         self.tintColor                          = LebensfitSettings.Colors.basicBackColor
         self.isUserInteractionEnabled           = true
         setupViews()
-        confBoundsDefault()
+        dayLeftAnchor = dayLabel.leftAnchor.constraint(equalTo: leftAnchor)
+        dayLeftAnchor.isActive = true
     }
     
     //MARK: - Setup
@@ -68,44 +72,28 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
         addSubview(dayLabel)
         addSubview(chevronLabel)
         addSubview(dateLabel)
-        //addSubview(bottomDividerView)
+        addSubview(bottomDividerView)
+    }
+    
+    func confBounds() {
+        dayLabel.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        dayLeftAnchor.constant = 10
+        
+        dateLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
+        chevronLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
+        bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: -1, paddingRight: 10, width: 0, height: 1)
+    }
+    
+    func addDot() {
+        dayLeftAnchor.constant = 30
+        addSubview(selectionDot)
+        selectionDot.centerYAnchor.constraint(equalTo: dayLabel.centerYAnchor).isActive = true
+        selectionDot.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 15, height: 15)
     }
     
     func removeDot() {
-        dayLabel.removeFromSuperview()
         selectionDot.removeFromSuperview()
-        addSubview(dayLabel)
-        confBoundsDefault()
-        
-    }
-    
-     func confBoundsDefault(){
-
-        dayLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        dateLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
-        chevronLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
-        //bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0.5, paddingRight: 20, width: 0, height: 0.5)
-
-    }
-    
-    func confBoundsToday() {
-        dayLabel.removeFromSuperview()
-        addSubview(selectionDot)
-        addSubview(dayLabel)
-        
-        dayLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 30, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        selectionDot.centerYAnchor.constraint(equalTo: dayLabel.centerYAnchor).isActive = true
-        selectionDot.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 15, height: 15)
-        //selectionDot.pulse()
-    }
-    
-    func setDate() {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_CH")
-        formatter.dateFormat = "dd. MMM yyyy"
-        
-        let result = formatter.string(from: myDate)
-        dateLabel.text = result
+       // confBounds()
     }
 
     //MARK: - Do not change Methods

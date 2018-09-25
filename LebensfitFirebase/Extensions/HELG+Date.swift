@@ -36,4 +36,13 @@ extension Date {
         let result = formatter.string(from: self)
         return result
     }
+    
+    func formatDateddMMMyyyy() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "de_CH")
+        formatter.dateFormat = "dd. MMM yyyy"
+        
+        let result = formatter.string(from: self)
+        return result
+    }
 }

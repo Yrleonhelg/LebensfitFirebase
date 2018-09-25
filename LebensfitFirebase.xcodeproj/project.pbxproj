@@ -52,6 +52,7 @@
 		016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */; };
 		016DA582214272B100B07F69 /* POPShakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA581214272B100B07F69 /* POPShakeable.swift */; };
 		016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA583214275B700B07F69 /* WeekOverVIew.swift */; };
+		0179697F215A6D7700B652C4 /* HELG+UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */; };
 		017FE8992152832C00B75330 /* SurePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE8982152832C00B75330 /* SurePeople.swift */; };
 		017FE89B2152833700B75330 /* MaybePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE89A2152833700B75330 /* MaybePeople.swift */; };
 		017FE89D2152834200B75330 /* NopePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE89C2152834200B75330 /* NopePeople.swift */; };
@@ -129,6 +130,7 @@
 		016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayHeader.swift; sourceTree = "<group>"; };
 		016DA581214272B100B07F69 /* POPShakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPShakeable.swift; sourceTree = "<group>"; };
 		016DA583214275B700B07F69 /* WeekOverVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekOverVIew.swift; sourceTree = "<group>"; };
+		0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIScrollView.swift"; sourceTree = "<group>"; };
 		017FE8982152832C00B75330 /* SurePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurePeople.swift; sourceTree = "<group>"; };
 		017FE89A2152833700B75330 /* MaybePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybePeople.swift; sourceTree = "<group>"; };
 		017FE89C2152834200B75330 /* NopePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NopePeople.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				0186319B2146696900E5A9C2 /* HELG+Tableview.swift */,
 				0186104B213EA6BE0037DADB /* HELG+UIView.swift */,
 				FECC8FB421455430007F3F3F /* HELG+Date.swift */,
+				0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */,
 				016DA581214272B100B07F69 /* POPShakeable.swift */,
 				010BC27E213D928E00530B2D /* ReuseableView.swift */,
 				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
@@ -621,6 +624,7 @@
 				010BC277213D920900530B2D /* TerminController.swift in Sources */,
 				010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */,
 				010BC274213D920900530B2D /* ProfileControllerold.swift in Sources */,
+				0179697F215A6D7700B652C4 /* HELG+UIScrollView.swift in Sources */,
 				016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */,
 				014CF79421513EFE006E17A6 /* Video+CoreDataProperties.swift in Sources */,
 			);

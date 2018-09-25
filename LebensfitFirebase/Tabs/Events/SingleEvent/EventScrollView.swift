@@ -143,7 +143,7 @@ class EventScrollView: UIScrollView {
         guard let parent = parentVC else { return }
         let locationTap = UITapGestureRecognizer(target: parent, action: #selector(parent.openInGoogleMaps))
         locationTap.cancelsTouchesInView = false
-        //locationTap.numberOfTapsRequired = 1
+        locationTap.numberOfTapsRequired = 1
         //locationTap.delegate = parent
 
         addSubview(contentView)

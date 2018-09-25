@@ -47,6 +47,7 @@ class ProfileController: UIViewController {
         view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
         confBounds()
+        scrollView.confBounds()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,8 +60,8 @@ class ProfileController: UIViewController {
             print("notself")
             fetchUser()
         }
-        scrollView.confBounds()
         scrollView.presentSteckbriefView()
+        scrollView.scrollToTop()
     }
     
     //MARK: - Setup
@@ -81,7 +82,7 @@ class ProfileController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent  = true
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
         //self.navigationController?.navigationBar.shadowImage    = image
-        self.navigationController?.navigationBar.backgroundColor = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.5)
+        self.navigationController?.navigationBar.backgroundColor = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.7)
     }
     
     func setupViews() {
@@ -100,6 +101,8 @@ class ProfileController: UIViewController {
     
     //MARK: - Methods
     @objc func handleLogOut() {
+        scrollView.scrollToTop()
+        return
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {

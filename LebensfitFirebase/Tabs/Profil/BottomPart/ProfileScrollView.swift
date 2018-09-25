@@ -117,7 +117,6 @@ class ProfileScrollView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-        confBounds()
     }
     
     //MARK: - Setup
@@ -137,23 +136,24 @@ class ProfileScrollView: UIScrollView {
         contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
         contentView.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor, multiplier: 1).isActive = true
         
-        profileImageView.anchor(top: contentView.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 75, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 250, height: 250)
+        profileImageView.anchor(top: contentView.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 250, height: 250)
         profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileImageView.layer.cornerRadius = 250/2
         usernameLabel.anchor(top: profileImageView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         usernameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        if parent.userId != Auth.auth().currentUser?.uid {
+        if parent.userId != Auth.auth().currentUser?.uid { //TODO: with the height
             contentView.addSubview(followButton)
             followButton.anchor(top: usernameLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)
             followButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             controlStackView.anchor(top: followButton.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
         } else {
-            controlStackView.anchor(top: usernameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 40, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
+            controlStackView.anchor(top: usernameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
         }
         dividerView.anchor(top: controlStackView.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: -10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
         segmentedController.anchor(top: dividerView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
+        
     }
     
     //MARK: - Methods

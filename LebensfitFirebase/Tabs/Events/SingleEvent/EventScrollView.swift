@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import MapKit
+
+@objc protocol scrollViewToSingleEvent: Any {
+    func getHeightOfButtons() -> CGFloat
+    func getStringFromLocation(location: CLLocationCoordinate2D) -> String
+    @objc func openInGoogleMaps()
+    func viewDidLayoutSubviews()
+    func getSingleEventVC() -> SingleEventViewController
+}
 
 class EventScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
-    var parentVC: SingleEventViewController?
+    var delegateSVToSingleEvent: scrollViewToSingleEvent?
     let thisEvent: Event
-    let padding: CGFloat = 20
-    var heightOfAllPaddings: CGFloat = 0
-    
     var tableViewControllers: [PeopleTableView]!
     var tableViews: [UITableView]!
+    
+    
+    let padding: CGFloat = 20
+    var heightOfAllPaddings: CGFloat = 0
     var heightCons = [NSLayoutConstraint]()
     
     //MARK: - GUI Objects
@@ -87,23 +97,9 @@ class EventScrollView: UIScrollView {
         return label
     }()
     
-//    let surePeopleTV: SurePeople = {
-//        let view = SurePeople(frame: self.frame)
-//        return view
-//    }()
-//    let maybePeopleTV: MaybePeople = {
-//        let view = MaybePeople()
-//        return view
-//    }()
-//    let nopePeopleTV: NopePeople = {
-//        let view = NopePeople()
-//        return view
-//    }()
-    
     let surePeopleTV: SurePeople!
     let maybePeopleTV: MaybePeople!
     let nopePeopleTV: NopePeople!
-
     
     //MARK: - Init & View Loading
     init(frame: CGRect, event: Event) {
@@ -113,7 +109,6 @@ class EventScrollView: UIScrollView {
         nopePeopleTV = NopePeople(frame: frame, event: event)
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
-
         contentView.isUserInteractionEnabled = true
     }
     
@@ -133,27 +128,23 @@ class EventScrollView: UIScrollView {
     
     //MARK: - Setup
     func applyDefaultValues() {
-        guard let parent = parentVC else { return }
-        titleLabel.text = parent.eventName
-        notesContentLabel.text  = parent.eventDescription
-        if let start = parent.eventStartingDate, let finish = parent.eventFinishingDate {
+        titleLabel.text = thisEvent.eventName
+        notesContentLabel.text  = thisEvent.eventDescription
+        if let start = thisEvent.eventStartingDate, let finish = thisEvent.eventFinishingDate {
             timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
         }
-        
-        if let location = parent.eventLocation {
-            locationLabel.text  = parent.getStringFromLocation(location: location)
+        if let location = thisEvent.eventLocation {
+            locationLabel.text  = delegateSVToSingleEvent?.getStringFromLocation(location: location as! CLLocationCoordinate2D)
         }
-        if let date = parent.eventStartingDate {
+        if let date = thisEvent.eventStartingDate {
             dateLabel.text = (date as Date).formatDateEEEEddMMMyyyy()
         }
     }
     
     func setupViews() {
-        guard let parent = parentVC else { return }
-        let locationTap = UITapGestureRecognizer(target: parent, action: #selector(parent.openInGoogleMaps))
+        let locationTap = UITapGestureRecognizer(target: delegateSVToSingleEvent, action: #selector(delegateSVToSingleEvent?.openInGoogleMaps))
         locationTap.cancelsTouchesInView = false
         locationTap.numberOfTapsRequired = 1
-        //locationTap.delegate = parent
 
         addSubview(contentView)
         contentView.addSubview(titleLabel)
@@ -168,8 +159,8 @@ class EventScrollView: UIScrollView {
         
         for controller in tableViewControllers {
             contentView.addSubview(controller)
-            controller.delegatePRC = parent
-            controller.delegateFLP = self
+            controller.delegateTVToSingleEvent = delegateSVToSingleEvent?.getSingleEventVC()
+            controller.delegateTVToScrollView = self
             let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
             heightCon.isActive = true
             heightCons.append(heightCon)
@@ -218,24 +209,26 @@ class EventScrollView: UIScrollView {
             }
             tableViewsHeight += tableHeight
         }
-        //print("Heights: ",titleAndLocation, dateAndTime, map, notes, tableViewsHeight)
-        heightOfAllObjects = titleAndLocation + dateAndTime + map + notes + tableViewsHeight
-        heightOfAllObjects += 12
+        //print("Heights: ",titleAndLocation, dateAndTime, map, notes, tableViewsHeight," 12")
+        heightOfAllObjects  = titleAndLocation + dateAndTime + map + notes + tableViewsHeight + 12
         
-        guard let parent = parentVC else { return heightOfAllObjects }
-        heightOfAllObjects -= parent.participateButton.frame.height
+        let buttonHeight    = delegateSVToSingleEvent?.getHeightOfButtons()
+        heightOfAllObjects -= buttonHeight ?? 0
         return heightOfAllObjects
     }
     
     func reloadAllTableViews() {
-        print("Function: \(#function)")
-        for controller in tableViewControllers {
+        tableViewControllers.forEach { (controller) in
             controller.finishedLoading = false
+        }
+        
+        tableViewControllers.forEach { (controller) in
             controller.loadUsers()
         }
-        for tv in tableViews {
+
+        tableViews.forEach { (tableview) in
             DispatchQueue.main.async( execute: {
-                tv.reloadData()
+                tableview.reloadData()
             })
         }
     }
@@ -246,7 +239,7 @@ class EventScrollView: UIScrollView {
     }
 }
 
-extension EventScrollView: finishedLoadingParticipants {
+extension EventScrollView: tableViewToScrollView {
     func finishedLoadingParticipants() {
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
             for (index, controller) in tableViewControllers.enumerated() {
@@ -260,7 +253,7 @@ extension EventScrollView: finishedLoadingParticipants {
                     heightCons[index].constant = 0
                 }
                 layoutIfNeeded()
-                parentVC?.viewDidLayoutSubviews()
+                delegateSVToSingleEvent?.viewDidLayoutSubviews()
             }
         }
     }

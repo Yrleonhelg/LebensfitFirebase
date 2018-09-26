@@ -48,3 +48,16 @@ import Firebase
 //        }
 //    }
 //}
+
+extension SingleEventViewController {
+    func provisorischeNutzer() {
+        //todo
+        guard let user = CDUser.sharedInstance.getCurrentUser() else { return }
+        thisEvent.addToEventSureParticipants(user)
+        
+        let users   = CDUser.sharedInstance.getUsers()
+        let nsusers = NSSet(array: users)
+        thisEvent.addToEventNopeParticipants(nsusers)
+        //todoend
+    }
+}

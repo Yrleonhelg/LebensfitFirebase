@@ -25,10 +25,6 @@ class SingleEventViewController: UIViewController {
     var buttons: [UIButton]!
     
     //MARK: - GUI Objects
-//    let scrollView: EventScrollView = {
-//        let view = EventScrollView()
-//        return view
-//    }()
     let scrollView: EventScrollView!
     
     //divides the buttons from the rest of the view
@@ -102,7 +98,7 @@ class SingleEventViewController: UIViewController {
         buttons = [nopeButton, maybeButton, participateButton]
         provisorischeNutzer()
         setupViews()
-        scrollView.parentVC = self
+        scrollView.delegateSVToSingleEvent = self
         scrollView.setupTheSetup()
         getSnapshotForLocation()
     }
@@ -112,17 +108,6 @@ class SingleEventViewController: UIViewController {
         confBounds()
         setupNavBar()
         scrollView.viewDidAppear()
-    }
-    
-    func provisorischeNutzer() {
-        //todo
-        guard let user = CDUser.sharedInstance.getCurrentUser() else { return }
-        thisEvent.addToEventSureParticipants(user)
-        
-        let users   = CDUser.sharedInstance.getUsers()
-        let nsusers = NSSet(array: users)
-        thisEvent.addToEventNopeParticipants(nsusers)
-        //todoend
     }
     
     //MARK: - Setup
@@ -177,10 +162,6 @@ class SingleEventViewController: UIViewController {
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: dividerButtonsView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
-    override func viewDidLayoutSubviews() {
-        let heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects + scrollView.heightOfAllPaddings)
-    }
     
     //MARK: - Methods
     @objc func buttonClick(sender: UIButton) {
@@ -243,17 +224,6 @@ class SingleEventViewController: UIViewController {
         }
     }
     
-    //hardcoded method to set a string for the location //TODO: make smooth
-    func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
-        if location.latitude == EventLocationStruct.turnhalleEisenwerk.latitude && location.longitude == EventLocationStruct.turnhalleEisenwerk.longitude {
-            return "Turnhalle Eisenwerk, Frauenfeld"
-        }
-        else if location.latitude == EventLocationStruct.zuercherStrasse.latitude && location.longitude == EventLocationStruct.zuercherStrasse.longitude {
-            return "Zürcherstrasse, Frauenfeld"
-        }
-        return "Unbekannt"
-    }
-    
     //copied from: https://dispatchswift.com/render-a-map-as-an-image-using-mapkit-3102a5a3fa5
     func getSnapshotForLocation() {
         let mapSnapshotOptions = MKMapSnapshotter.Options()
@@ -269,12 +239,6 @@ class SingleEventViewController: UIViewController {
             self.scrollView.mapView.image = snapshot?.image
         }
     }
-    @objc func openInGoogleMaps() {
-        guard let coord = eventLocation else { return }
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord, addressDictionary:nil))
-        mapItem.name = "Target location"
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-    }
     
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {
@@ -282,7 +246,41 @@ class SingleEventViewController: UIViewController {
     }
 }
 
-extension SingleEventViewController: peopleRowClicked {
+extension SingleEventViewController: scrollViewToSingleEvent {
+    
+    override func viewDidLayoutSubviews() {
+        let heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects + scrollView.heightOfAllPaddings)
+    }
+    
+    func getHeightOfButtons() -> CGFloat {
+        return participateButton.frame.height
+    }
+    
+    //hardcoded method to set a string for the location //TODO: make smooth
+    func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
+        if location.latitude == EventLocationStruct.turnhalleEisenwerk.latitude && location.longitude == EventLocationStruct.turnhalleEisenwerk.longitude {
+            return "Turnhalle Eisenwerk, Frauenfeld"
+        }
+        else if location.latitude == EventLocationStruct.zuercherStrasse.latitude && location.longitude == EventLocationStruct.zuercherStrasse.longitude {
+            return "Zürcherstrasse, Frauenfeld"
+        }
+        return "Unbekannt"
+    }
+    
+    @objc func openInGoogleMaps() {
+        guard let coord = eventLocation else { return }
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coord, addressDictionary:nil))
+        mapItem.name = "Target location"
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    func getSingleEventVC() -> SingleEventViewController {
+        return self
+    }
+}
+
+extension SingleEventViewController: tableViewToSingleEvent {
     func gotoProfile(clickedUID: String) {
         let selectedProfile     = ProfileController()
         selectedProfile.userId  = clickedUID

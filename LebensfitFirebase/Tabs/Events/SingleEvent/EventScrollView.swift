@@ -12,7 +12,7 @@ class EventScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
     var parentVC: SingleEventViewController?
-    
+    let thisEvent: Event
     let padding: CGFloat = 20
     var heightOfAllPaddings: CGFloat = 0
     
@@ -87,21 +87,30 @@ class EventScrollView: UIScrollView {
         return label
     }()
     
-    let surePeopleTV: SurePeople = {
-        let view = SurePeople()
-        return view
-    }()
-    let maybePeopleTV: MaybePeople = {
-        let view = MaybePeople()
-        return view
-    }()
-    let nopePeopleTV: NopePeople = {
-        let view = NopePeople()
-        return view
-    }()
+//    let surePeopleTV: SurePeople = {
+//        let view = SurePeople(frame: self.frame)
+//        return view
+//    }()
+//    let maybePeopleTV: MaybePeople = {
+//        let view = MaybePeople()
+//        return view
+//    }()
+//    let nopePeopleTV: NopePeople = {
+//        let view = NopePeople()
+//        return view
+//    }()
+    
+    let surePeopleTV: SurePeople!
+    let maybePeopleTV: MaybePeople!
+    let nopePeopleTV: NopePeople!
+
     
     //MARK: - Init & View Loading
-    override init(frame: CGRect) {
+    init(frame: CGRect, event: Event) {
+        self.thisEvent = event
+        surePeopleTV = SurePeople(frame: frame, event: event)
+        maybePeopleTV = MaybePeople(frame: frame, event: event)
+        nopePeopleTV = NopePeople(frame: frame, event: event)
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
 
@@ -159,9 +168,8 @@ class EventScrollView: UIScrollView {
         
         for controller in tableViewControllers {
             contentView.addSubview(controller)
-            controller.delegate = parent
-            controller.parentSV = self
-            controller.parentVC = parent
+            controller.delegatePRC = parent
+            controller.delegateFLP = self
             let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
             heightCon.isActive = true
             heightCons.append(heightCon)
@@ -219,24 +227,6 @@ class EventScrollView: UIScrollView {
         return heightOfAllObjects
     }
     
-    func finishedLoadingParticipants() {
-        if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
-            for (index, controller) in tableViewControllers.enumerated() {
-                var height = CGFloat(controller.users.count) * 60.0
-                print(index, "Users: ",controller.users.count)
-                if controller.users.count > 0 {
-                    height += controller.padding
-                    heightCons[index].constant = height
-                    controller.confBounds()
-                } else {
-                    heightCons[index].constant = 0
-                }
-                layoutIfNeeded()
-                parentVC?.viewDidLayoutSubviews()
-            }
-        }
-    }
-    
     func reloadAllTableViews() {
         print("Function: \(#function)")
         for controller in tableViewControllers {
@@ -253,5 +243,25 @@ class EventScrollView: UIScrollView {
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension EventScrollView: finishedLoadingParticipants {
+    func finishedLoadingParticipants() {
+        if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
+            for (index, controller) in tableViewControllers.enumerated() {
+                var height = CGFloat(controller.users.count) * 60.0
+                print(index, "Users: ",controller.users.count)
+                if controller.users.count > 0 {
+                    height += controller.padding
+                    heightCons[index].constant = height
+                    controller.confBounds()
+                } else {
+                    heightCons[index].constant = 0
+                }
+                layoutIfNeeded()
+                parentVC?.viewDidLayoutSubviews()
+            }
+        }
     }
 }

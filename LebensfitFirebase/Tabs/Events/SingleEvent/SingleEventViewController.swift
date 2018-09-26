@@ -25,10 +25,11 @@ class SingleEventViewController: UIViewController {
     var buttons: [UIButton]!
     
     //MARK: - GUI Objects
-    let scrollView: EventScrollView = {
-        let view = EventScrollView()
-        return view
-    }()
+//    let scrollView: EventScrollView = {
+//        let view = EventScrollView()
+//        return view
+//    }()
+    let scrollView: EventScrollView!
     
     //divides the buttons from the rest of the view
     let dividerButtonsView: UIView = {
@@ -90,6 +91,7 @@ class SingleEventViewController: UIViewController {
     //MARK: - Init & View Loading
     init(event: Event) {
         thisEvent = event
+        self.scrollView = EventScrollView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), event: thisEvent)
         super.init(nibName: nil, bundle: nil)
         setupDefaultValues()
         self.view.backgroundColor = LebensfitSettings.Colors.basicBackColor

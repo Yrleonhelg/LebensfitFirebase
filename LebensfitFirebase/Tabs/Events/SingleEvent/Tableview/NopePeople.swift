@@ -10,14 +10,13 @@ import UIKit
 
 class NopePeople: PeopleTableView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, event: Event) {
+        super.init(frame: frame, event: event)
         peopleLabel.text = "Absagen:"
     }
     
     override func loadUsers() {
-        guard let parentCont = parentVC else { return }
-        users = (parentCont.thisEvent.eventNopeParticipants?.allObjects as! [User])
+        users = myEvent.eventNopeParticipants?.allObjects as? [User]
         finishedLoading = true
         super.loadUsers()
     }

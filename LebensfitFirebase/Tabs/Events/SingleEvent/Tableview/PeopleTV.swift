@@ -9,16 +9,20 @@
 import UIKit
 import Firebase
 
-protocol peopleRowClicked {
+protocol peopleRowClicked: Any {
     func gotoProfile(clickedUID: String)
+}
+protocol finishedLoadingParticipants: Any {
+    func finishedLoadingParticipants()
 }
 
 class PeopleTableView: UIView, ReusableView {
     
     //MARK: - Properties & Variables
-    var parentVC: SingleEventViewController?
-    var delegate: peopleRowClicked?
-    var parentSV: EventScrollView?
+    var delegatePRC: peopleRowClicked?
+    var delegateFLP: finishedLoadingParticipants?
+    
+    var myEvent: Event
     var users: [User]! = [User]()
 
     var finishedLoading: Bool = false
@@ -40,7 +44,8 @@ class PeopleTableView: UIView, ReusableView {
     }()
     
     //MARK: - Init & View Loading
-    override init(frame: CGRect) {
+    init(frame: CGRect, event: Event) {
+        self.myEvent = event
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupTableView()
@@ -81,8 +86,7 @@ class PeopleTableView: UIView, ReusableView {
             setupViews()
         }
         self.updateConstraints()
-        guard let parentScrol = parentSV else { return }
-        parentScrol.finishedLoadingParticipants()
+        delegateFLP?.finishedLoadingParticipants()
     }
     
     //MARK: - Do not change Methods
@@ -117,7 +121,7 @@ extension PeopleTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let id = users[indexPath.row].uid else { return }
-        delegate?.gotoProfile(clickedUID: id)
+        delegatePRC?.gotoProfile(clickedUID: id)
     }
     
 }

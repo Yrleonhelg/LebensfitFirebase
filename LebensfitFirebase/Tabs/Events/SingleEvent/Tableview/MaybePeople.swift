@@ -10,14 +10,13 @@ import UIKit
 
 class MaybePeople: PeopleTableView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, event: Event) {
+        super.init(frame: frame, event: event)
         peopleLabel.text = "Interessenten:"
     }
     
     override func loadUsers() {
-        guard let parentCont = parentVC else { return }
-        users = (parentCont.thisEvent.eventMaybeParticipants?.allObjects as! [User])
+        users = myEvent.eventMaybeParticipants?.allObjects as? [User]
         finishedLoading = true
         super.loadUsers()
     }

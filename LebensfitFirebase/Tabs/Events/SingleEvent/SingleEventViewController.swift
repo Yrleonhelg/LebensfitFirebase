@@ -96,7 +96,7 @@ class SingleEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buttons = [nopeButton, maybeButton, participateButton]
-        provisorischeNutzer()
+        fillProvisorischeNutzer()
         setupViews()
         scrollView.delegateSVToSingleEvent = self
         scrollView.setupTheSetup()
@@ -249,12 +249,13 @@ class SingleEventViewController: UIViewController {
 extension SingleEventViewController: scrollViewToSingleEvent {
     
     override func viewDidLayoutSubviews() {
-        let heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects + scrollView.heightOfAllPaddings)
-    }
-    
-    func getHeightOfButtons() -> CGFloat {
-        return participateButton.frame.height
+        var heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
+        heightOfAllObjects -= participateButton.frame.height
+        if heightOfAllObjects != 0 {
+            heightOfAllObjects += 12
+        }
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects)
+        scrollView.heightOfContent.constant = heightOfAllObjects
     }
     
     //hardcoded method to set a string for the location //TODO: make smooth

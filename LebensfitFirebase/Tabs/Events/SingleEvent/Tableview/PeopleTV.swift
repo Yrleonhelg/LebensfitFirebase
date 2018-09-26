@@ -54,10 +54,11 @@ class PeopleTableView: UIView, ReusableView {
     
     //MARK: - Setup
     func setupTableView() {
-        peopleTableView.delegate      = self
-        peopleTableView.dataSource    = self
+        peopleTableView.delegate            = self
+        peopleTableView.dataSource          = self
         peopleTableView.register(TeilnehmerTVCell.self, forCellReuseIdentifier: TeilnehmerTVCell.reuseIdentifier)
-        peopleTableView.tintColor     = .white
+        peopleTableView.tintColor           = .white
+        peopleTableView.isScrollEnabled     = false
     }
     
     func setupViews() {
@@ -101,6 +102,8 @@ class PeopleTableView: UIView, ReusableView {
 extension PeopleTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row     = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
+        //TODO: don't just pass the user.. fill the rows elements from here
+        row.isUserInteractionEnabled = true
         row.user    = users[indexPath.row]
         row.confBounds()
         return row

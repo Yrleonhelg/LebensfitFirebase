@@ -13,7 +13,7 @@ extension UIScrollView {
         
         //let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
         let desiredOffset = CGPoint(x: 0, y: -adjustedContentInset.top)
-        setContentOffset(desiredOffset, animated: false)
+        setContentOffset(desiredOffset, animated: true)
         
     }
 }

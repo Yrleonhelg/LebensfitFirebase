@@ -50,7 +50,7 @@ import Firebase
 //}
 
 extension SingleEventViewController {
-    func provisorischeNutzer() {
+    func fillProvisorischeNutzer() {
         //todo
         guard let user = CDUser.sharedInstance.getCurrentUser() else { return }
         thisEvent.addToEventSureParticipants(user)

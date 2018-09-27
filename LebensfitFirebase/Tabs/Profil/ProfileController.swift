@@ -97,6 +97,7 @@ class ProfileController: UIViewController {
     override func viewDidLayoutSubviews() {
         let heightOfAllObjects: CGFloat = 2000 //scrollView.calculateHeightOfAllObjects()
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects)
+        scrollView.heightOfContent.constant = heightOfAllObjects
     }
     
     //MARK: - Methods

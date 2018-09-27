@@ -13,6 +13,12 @@ class ProfileScrollView: UIScrollView {
     //MARK: - Properties & Variables
     var parentVC: ProfileController?
     
+    var heightOfContent = NSLayoutConstraint()
+    var heightOfPinnwandView = NSLayoutConstraint()
+    var heightOfSteckbriefView = NSLayoutConstraint()
+    
+    var heightOfAllPaddings: CGFloat    = 0
+    
     //MARK: - GUI Objects
     let contentView: UIView = {
         let view = UIView()
@@ -122,41 +128,69 @@ class ProfileScrollView: UIScrollView {
     //MARK: - Setup
     func setupViews() {
         addSubview(contentView)
+        heightOfContent = contentView.heightAnchor.constraint(equalToConstant: 0)
+        heightOfContent.isActive = true
+        
         contentView.addSubview(profileImageView)
         contentView.addSubview(usernameLabel)
         contentView.addSubview(controlStackView)
         contentView.addSubview(dividerView)
         contentView.addSubview(segmentedController)
         segmentedController.addTarget(self, action: #selector(changeView(sender:)), for: .valueChanged)
+        
+        contentView.addSubview(pinnwandView)
+        contentView.addSubview(steckbriefView)
+        heightOfPinnwandView = pinnwandView.heightAnchor.constraint(equalToConstant: 0)
+        heightOfSteckbriefView = steckbriefView.heightAnchor.constraint(equalToConstant: 0)
+        heightOfPinnwandView.isActive = true
+        heightOfSteckbriefView.isActive = true
     }
     
     func confBounds(){
         guard let parent = parentVC else { return }
+        heightOfAllPaddings = 0
         contentView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
-        contentView.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor, multiplier: 1).isActive = true
         
         profileImageView.anchor(top: contentView.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 20, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 250, height: 250)
         profileImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         profileImageView.layer.cornerRadius = 250/2
+        heightOfAllPaddings += 20
+        
         usernameLabel.anchor(top: profileImageView.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         usernameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        heightOfAllPaddings += 10
         
         if parent.userId != Auth.auth().currentUser?.uid { //TODO: with the height
             contentView.addSubview(followButton)
             followButton.anchor(top: usernameLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)
             followButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             controlStackView.anchor(top: followButton.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
+            heightOfAllPaddings += 45
         } else {
             controlStackView.anchor(top: usernameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
+            heightOfAllPaddings += 20
         }
         dividerView.anchor(top: controlStackView.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: -10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
+        heightOfAllPaddings -= 10
         
         segmentedController.anchor(top: dividerView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
+        heightOfAllPaddings += 10
         
+        steckbriefView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        pinnwandView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        heightOfSteckbriefView.constant = 300
+        heightOfPinnwandView.constant = 0
     }
     
     //MARK: - Methods
+    func calculateHeightOfAllObjects() -> CGFloat{
+        let uiArray: [UIView] = [profileImageView, usernameLabel, followButton, controlStackView, dividerView, segmentedController, steckbriefView, pinnwandView]
+        let sum = uiArray.reduce(0, {$0 + $1.frame.height})
+        return sum + heightOfAllPaddings + 50
+    }
+    
+    
     @objc func changeView(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
@@ -167,28 +201,18 @@ class ProfileScrollView: UIScrollView {
     }
     
     func presentSteckbriefView() {
-        removeSteckAndPinn()
-        contentView.addSubview(steckbriefView)
-        steckbriefView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        steckbriefView.confBounds()
-        steckbriefView.parentVC = parentVC
-        steckbriefView.parentSV = self
+        pinnwandView.setHeightToZero()
+        heightOfPinnwandView.constant = 0
+        heightOfSteckbriefView.constant = 300
+        steckbriefView.resetHeight()
     }
     
     func presentPinnwandView() {
-        removeSteckAndPinn()
-        contentView.addSubview(pinnwandView)
-        pinnwandView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        pinnwandView.confBounds()
-        pinnwandView.parentVC = parentVC
-        pinnwandView.parentSV = self
+        steckbriefView.setHeightToZero()
+        heightOfSteckbriefView.constant = 0
+        heightOfPinnwandView.constant = 300
+        pinnwandView.resetHeight()
     }
-    
-    func removeSteckAndPinn() {
-        steckbriefView.removeFromSuperview()
-        pinnwandView.removeFromSuperview()
-    }
-    
     
     //MARK: - Do not change Methods
     required init?(coder aDecoder: NSCoder) {

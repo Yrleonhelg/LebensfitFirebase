@@ -9,8 +9,8 @@
 import UIKit
 
 class SteckbriefView: UIView {
-    var parentVC: ProfileController?
-    var parentSV: ProfileScrollView?
+    var heightOfLabel = NSLayoutConstraint()
+    var heightOfSteckbrief = NSLayoutConstraint()
     
     //MARK: - GUI Objects
     let ueberMich: UILabel = {
@@ -18,6 +18,7 @@ class SteckbriefView: UIView {
         label.font      = UIFont.systemFont(ofSize: 20)
         label.text      = "Über mich:"
         label.textColor = LebensfitSettings.Colors.basicTextColor
+        label.sizeToFit()
         return label
     }()
     
@@ -27,13 +28,20 @@ class SteckbriefView: UIView {
         label.text          = "Ich heisse Leon und bin 19 Jahre alt. \nIn meiner Freizeit programmiere ich gerne iOS Apps. \nIch wohne in Frauenfeld in der Nähe der Kantonsschule"
         label.textColor     = LebensfitSettings.Colors.NITextColor
         label.numberOfLines = 0
+        label.sizeToFit()
         return label
     }()
     
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
+        heightOfLabel = ueberMich.heightAnchor.constraint(equalToConstant: 0)
+        heightOfSteckbrief = steckbriefLabel.heightAnchor.constraint(equalToConstant: 0)
         setupViews()
+        confBounds()
+        setHeightToZero()
+        self.layer.borderColor = UIColor.red.cgColor
+        self.layer.borderWidth = 1
     }
     
     //MARK: - Setup Methods
@@ -45,6 +53,16 @@ class SteckbriefView: UIView {
     func confBounds() {
         ueberMich.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
         steckbriefLabel.anchor(top: ueberMich.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
+    }
+    
+    func setHeightToZero() {
+        heightOfLabel.isActive = true
+        heightOfSteckbrief.isActive = true
+    }
+    
+    func resetHeight() {
+        heightOfLabel.isActive = false
+        heightOfSteckbrief.isActive = false
     }
     
     //MARK: - Do not change Methods

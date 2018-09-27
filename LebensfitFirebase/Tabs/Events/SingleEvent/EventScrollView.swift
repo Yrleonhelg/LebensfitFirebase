@@ -20,15 +20,14 @@ class EventScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
     var delegateSVToSingleEvent: scrollViewToSingleEvent?
-    let thisEvent: Event
-    var tableViewControllers: [PeopleTableView]!
-    var tableViews: [UITableView]!
+    let thisEvent:              Event
+    var tableViewControllers:   [PeopleTableView]!
+    var tableViews:             [UITableView]!
     
-    
-    let padding: CGFloat = 20
-    var heightOfAllPaddings: CGFloat = 0
-    var heightCons = [NSLayoutConstraint]()
-    var heightOfContent = NSLayoutConstraint()
+    let padding: CGFloat                = 20
+    var heightOfAllPaddings: CGFloat    = 0
+    var heightCons                      = [NSLayoutConstraint]()
+    var heightOfContent                 = NSLayoutConstraint()
     
     //MARK: - GUI Objects
     let contentView: UIView = {
@@ -141,9 +140,9 @@ class EventScrollView: UIScrollView {
     }
     
     func setupViews() {
-        //        let locationTap = UITapGestureRecognizer(target: delegateSVToSingleEvent, action: #selector(delegateSVToSingleEvent?.openInGoogleMaps))
-        //        locationTap.cancelsTouchesInView = false
-        //        locationTap.numberOfTapsRequired = 1
+        let locationTap = UITapGestureRecognizer(target: delegateSVToSingleEvent, action: #selector(delegateSVToSingleEvent?.openInGoogleMaps))
+        locationTap.cancelsTouchesInView = false
+        locationTap.numberOfTapsRequired = 1
         
         addSubview(contentView)
         heightOfContent = contentView.heightAnchor.constraint(equalToConstant: 0)
@@ -156,8 +155,8 @@ class EventScrollView: UIScrollView {
         contentView.addSubview(mapView)
         contentView.addSubview(notesHeaderLabel)
         contentView.addSubview(notesContentLabel)
-        //locationLabel.addGestureRecognizer(locationTap)
-        //mapView.addGestureRecognizer(locationTap)
+        locationLabel.addGestureRecognizer(locationTap)
+        mapView.addGestureRecognizer(locationTap)
         
         for controller in tableViewControllers {
             contentView.addSubview(controller)
@@ -197,17 +196,11 @@ class EventScrollView: UIScrollView {
     //MARK: - Methods
     func calculateHeightOfAllObjects() -> CGFloat{
         let uiArray: [UIView] = [titleLabel, locationLabel, dateLabel, timeLabel, mapView, notesHeaderLabel, notesContentLabel, surePeopleTV, maybePeopleTV, nopePeopleTV]
-        let sum = uiArray.reduce(0) { (res, next) -> CGFloat in
-            return res + next.frame.height
-        }
+        let sum = uiArray.reduce(0, {$0 + $1.frame.height})
         return sum + heightOfAllPaddings
     }
-
     
     func reloadAllTableViews() {
-        tableViewControllers.forEach { (controller) in
-            controller.finishedLoading = false
-        }
         tableViewControllers.forEach { (controller) in
             controller.loadUsers()
         }

@@ -19,6 +19,7 @@ class ProfileController: UIViewController {
             scrollView.profileImageView.loadImage(urlString: profileImageUrl)
             backView.loadImage(urlString: profileImageUrl)
             setupNavBar()
+            scrollView.user = user
         }
     }
     

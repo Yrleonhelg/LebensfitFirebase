@@ -18,6 +18,15 @@ class ProfileScrollView: UIScrollView {
     var heightOfSteckbriefView = NSLayoutConstraint()
     
     var heightOfAllPaddings: CGFloat    = 0
+    var user: User? {
+        didSet{
+            guard let user = user else { return }
+            if let name = user.username {
+                pinnwandView.ueberMich.text = "Über \(name)"
+            }
+            isCurrentUser()
+        }
+    }
     
     //MARK: - GUI Objects
     let contentView: UIView = {
@@ -48,6 +57,8 @@ class ProfileScrollView: UIScrollView {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor      = LebensfitSettings.Colors.basicTintColor
         button.layer.cornerRadius   = 20
+        button.layer.borderWidth    = 1
+        button.layer.borderColor    = LebensfitSettings.Colors.basicTintColor.cgColor
         return button
     }()
     
@@ -133,6 +144,7 @@ class ProfileScrollView: UIScrollView {
         
         contentView.addSubview(profileImageView)
         contentView.addSubview(usernameLabel)
+        contentView.addSubview(followButton)
         contentView.addSubview(controlStackView)
         contentView.addSubview(dividerView)
         contentView.addSubview(segmentedController)
@@ -147,7 +159,6 @@ class ProfileScrollView: UIScrollView {
     }
     
     func confBounds(){
-        guard let parent = parentVC else { return }
         heightOfAllPaddings = 0
         contentView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         contentView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, multiplier: 1).isActive = true
@@ -161,16 +172,12 @@ class ProfileScrollView: UIScrollView {
         usernameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         heightOfAllPaddings += 10
         
-        if parent.userId != Auth.auth().currentUser?.uid { //TODO: with the height
-            contentView.addSubview(followButton)
-            followButton.anchor(top: usernameLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 160, height: 40)
-            followButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            controlStackView.anchor(top: followButton.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
-            heightOfAllPaddings += 45
-        } else {
-            controlStackView.anchor(top: usernameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
-            heightOfAllPaddings += 20
-        }
+        followButton.anchor(top: usernameLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 180, height: 40)
+        followButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        
+        controlStackView.anchor(top: followButton.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 15, paddingLeft: -10, paddingBottom: 0, paddingRight: -10, width: 0, height: 80)
+        heightOfAllPaddings += 45
+        
         dividerView.anchor(top: controlStackView.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: -10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         heightOfAllPaddings -= 10
         
@@ -190,6 +197,17 @@ class ProfileScrollView: UIScrollView {
         return sum + heightOfAllPaddings
     }
     
+    func isCurrentUser() {
+        guard let user = user else { return }
+        if user.uid == Auth.auth().currentUser?.uid {
+            followButton.setTitle("Freunde finden", for: .normal)
+            followButton.addTarget(self, action: #selector(findFriendsButtonPressed), for: .touchUpInside)
+        } else {
+            followButton.setTitle("Folgen", for: .normal)
+            followButton.setTitle("Gefolgt", for: .selected)
+            followButton.addTarget(self, action: #selector(followButtonPressed), for: .touchUpInside)
+        }
+    }
     
     @objc func changeView(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -212,6 +230,27 @@ class ProfileScrollView: UIScrollView {
         heightOfSteckbriefView.constant = 0
         heightOfPinnwandView.constant = 300
         pinnwandView.resetHeight()
+    }
+    
+    @objc func followButtonPressed() {
+        let selected = !followButton.isSelected
+        selectButton(button: followButton, selected: selected)
+    }
+    @objc func findFriendsButtonPressed() {
+        print("findFriendsButtonPressed")
+        //TODO: open new tableviewcontroller
+    }
+    
+    func selectButton(button: UIButton, selected: Bool) {
+        if selected {
+            button.backgroundColor      = .clear
+            button.setTitleColor(LebensfitSettings.Colors.basicTintColor, for: .normal)
+            button.isSelected           = true
+        } else {
+            button.backgroundColor      = LebensfitSettings.Colors.basicTintColor
+            button.setTitleColor(LebensfitSettings.Colors.basicBackColor, for: .normal)
+            button.isSelected           = false
+        }
     }
     
     //MARK: - Do not change Methods

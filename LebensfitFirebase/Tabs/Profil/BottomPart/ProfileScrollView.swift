@@ -187,7 +187,7 @@ class ProfileScrollView: UIScrollView {
     func calculateHeightOfAllObjects() -> CGFloat{
         let uiArray: [UIView] = [profileImageView, usernameLabel, followButton, controlStackView, dividerView, segmentedController, steckbriefView, pinnwandView]
         let sum = uiArray.reduce(0, {$0 + $1.frame.height})
-        return sum + heightOfAllPaddings + 50
+        return sum + heightOfAllPaddings
     }
     
     

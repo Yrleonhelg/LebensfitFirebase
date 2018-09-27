@@ -104,7 +104,6 @@ class TerminController: UIViewController {
         DispatchQueue.main.async( execute: {
             self.calendarView.calendarCollectionView.reloadData()
         })
-        
     }
     
     @objc func handleAddEvent() {

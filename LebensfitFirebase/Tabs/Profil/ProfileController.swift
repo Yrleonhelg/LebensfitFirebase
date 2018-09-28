@@ -36,7 +36,7 @@ class ProfileController: UIViewController {
     //MARK: - GUI Objects
     lazy var rectForBackView = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width+100)
     lazy var backView: BackView = {
-        let view    = BackView(frame: rectForBackView, white: 0.2, black: 0, layerColor: LebensfitSettings.Colors.basicBackColor)
+        let view = BackView(frame: rectForBackView, white: 0.2, black: 0, layerColor: LebensfitSettings.Colors.basicBackColor)
         return view
     }()
     
@@ -45,12 +45,12 @@ class ProfileController: UIViewController {
         return view
     }()
     
-    
+    //MARK: -
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
-        scrollView.parentVC = self
+        scrollView.delegateVC = self
         scrollView.delegate = self
         self.navbarHeight = self.navigationController?.navigationBar.frame.height ?? 44
         self.tabbarHeight = self.tabBarController?.tabBar.frame.height ?? 49
@@ -60,7 +60,6 @@ class ProfileController: UIViewController {
         super.viewWillAppear(animated)
         view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
-        confBounds()
         scrollView.confBounds()
     }
     
@@ -102,16 +101,11 @@ class ProfileController: UIViewController {
     func setupViews() {
         view.addSubview(backView)
         view.addSubview(scrollView)
-    }
-    
-    func confBounds(){
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     //MARK: - Methods
     @objc func handleLogOut() {
-        scrollView.pinnwandStackView.pinnwandTableView.reloadData()
-        return
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {
@@ -127,13 +121,11 @@ class ProfileController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-    //MARK: - Do not change Methods
 }
 
 extension ProfileController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        
+                
         //Put the username of the profile in the navigationbar, as soon as the "Big" username isn't fully visible anymore.
         let statusbarHeight = UIApplication.shared.statusBarFrame.height
         let contentOffset = scrollView.contentOffset.y
@@ -161,9 +153,14 @@ extension ProfileController: UIScrollViewDelegate {
 }
 
 extension ProfileController: profileSVToParentVC {
+    func isCurrentUser() -> Bool {
+        return (user?.uid == Auth.auth().currentUser?.uid)
+    }
+    
     override func viewDidLayoutSubviews() {
         let heightOfAllObjects: CGFloat = scrollView.calculateHeightOfAllObjects()
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects)
         scrollView.heightOfContent.constant = heightOfAllObjects
     }
+    
 }

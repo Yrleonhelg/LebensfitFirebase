@@ -53,12 +53,11 @@ class WeekOverView: UIView {
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
         confBounds()
-        
         previousWeekButton.isEnabled    = false
-        currentYear                     = Calendar.current.component(.year, from: Date())
-        currentWeek                     = Calendar.current.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
         
-        setValues(week: currentWeek, Year: currentYear)
+        currentYear                     = Calendar.current.component(.year, from: Date())
+        currentWeek                     = Calendar.current.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))   
+        setWeekAndYearValues(week: currentWeek, Year: currentYear)
     }
     
     //MARK: - Setup
@@ -76,7 +75,7 @@ class WeekOverView: UIView {
         nextWeekButton.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 150, height: 35)
     }
     
-    func setValues(week: Int, Year: Int) {
+    func setWeekAndYearValues(week: Int, Year: Int) {
         currentWeekLabel.text = "KW\(currentWeek) \(currentYear)"
     }
     

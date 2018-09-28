@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileHeader: BaseCell, ReusableView{
+class ProfileHeader: BaseCVCell, ReusableView{
     
     //MARK: - Properties
     var user: User? {

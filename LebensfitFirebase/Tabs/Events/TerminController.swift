@@ -51,7 +51,6 @@ class TerminController: UIViewController {
     func setupNavBar() {
         self.navigationController?.setNavigationBarDefault()
         self.navigationItem.title = "Kalender"
-        //self.navigationItem.titleView = segmentedController
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddEvent))
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -64,7 +63,7 @@ class TerminController: UIViewController {
         calendarView.delegate = self
         weekView.delegate = self
         weekView.parentVC = self
-        weekView.removeFromSuperview()
+        weekView.isHidden = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -75,36 +74,32 @@ class TerminController: UIViewController {
     func confBounds(){
         segmentedController.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 0)
         calendarView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
+        weekView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     //MARK: - Methods
     @objc func changeView(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            gotoMonthView()
+            changeViewTo(newView: calendarView, oldView: weekView)
         case 1:
-            gotoWeekView()
+            changeViewTo(newView: weekView, oldView: calendarView)
         default:
-            gotoMonthView()
+            changeViewTo(newView: calendarView, oldView: weekView)
         }
     }
     
-    func gotoWeekView() {
-        calendarView.removeFromSuperview()
-        view.addSubview(weekView)
-        weekView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        weekView.setupTheSetup()
+    func changeViewTo(newView: UIView, oldView: UIView) {
+        newView.isHidden = false
+        newView.alpha = 0
+        UIView.animate(withDuration:0.4, animations: {
+            oldView.alpha = 0
+            newView.alpha = 1
+        }) { (result: Bool) in
+            oldView.isHidden = true
+        }
     }
-    
-    func gotoMonthView() {
-        weekView.removeFromSuperview()
-        view.addSubview(calendarView)
-        calendarView.anchor(top: segmentedController.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 365)
-        
-        DispatchQueue.main.async( execute: {
-            self.calendarView.calendarCollectionView.reloadData()
-        })
-    }
+
     
     @objc func handleAddEvent() {
         let createEventController = CreateEventController()
@@ -116,7 +111,7 @@ class TerminController: UIViewController {
 extension TerminController: cellClickedDelegate {
     //Opens the weekview and expands the selcted day
     func gotoDay(date: Date) {
-        gotoWeekView()
+        changeViewTo(newView: weekView, oldView: calendarView)
         segmentedController.selectedSegmentIndex = 1
         
         let weekOfDate = Calendar.current.component(.weekOfYear, from: date)
@@ -136,7 +131,11 @@ extension TerminController: cellClickedDelegate {
     }
 }
 
-extension TerminController: eventClickedDelegate {
+extension TerminController: weekViewToTerminController {
+    func getEventArray() -> [Event] {
+        return eventArray
+    }
+    
     //Goes directly to an event
     func gotoEvent(eventID: Int32) {
         let event = eventArray[Int(eventID)]
@@ -145,4 +144,5 @@ extension TerminController: eventClickedDelegate {
             self.navigationController?.pushViewController(eventVC, animated: true)
         })
     }
+    
 }

@@ -128,6 +128,7 @@ class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
     func getFirstWeekDay() -> Int {
         let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday)!
         //return day == 7 ? 1 : day
+        print("getFirstWeekDay: \(day)")
         return day
     }
 
@@ -187,6 +188,8 @@ extension CalendarView: MonthViewDelegate {
 
 //MARK: - CVDataSource
 extension CalendarView: UICollectionViewDataSource {
+    
+    //TODO: Obviously refactoring....
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DateCell.reuseIdentifier, for: indexPath) as! DateCell
         //reset indicators

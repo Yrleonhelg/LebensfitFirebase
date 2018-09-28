@@ -8,15 +8,14 @@
 
 import UIKit
 
-class DateCell: BaseCell, ReusableView {
+class DateCell: BaseCVCell, ReusableView {
     
     //MARK: - Properties & Variables
     var cellSelected: Bool      = false
     var myDate:     Date        = Date()
     
-    
     //MARK: - GUI Objects
-    let dayLabel: UILabel = {
+    let dayLabel: UILabel   = {
         let label           = UILabel()
         label.text          = "00"
         label.textAlignment = .center

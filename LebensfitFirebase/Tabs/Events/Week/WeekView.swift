@@ -13,8 +13,9 @@ struct expandableEvent {
     let events: [Event]
 }
 
-protocol eventClickedDelegate: Any {
+protocol weekViewToTerminController: Any {
     func gotoEvent(eventID: Int32)
+    func getEventArray() -> [Event]
 }
 
 class WeekView: UIView {
@@ -36,7 +37,7 @@ class WeekView: UIView {
     
     var twoDimensionalEventArray    = [expandableEvent]()
     var parentVC: TerminController?
-    var delegate: eventClickedDelegate?
+    var delegate: weekViewToTerminController?
     
     //MARK: - GUI Objects
     let calendarTableView: UITableView = {
@@ -112,12 +113,13 @@ class WeekView: UIView {
     @objc func reloadData() {
         DispatchQueue.main.async( execute: {
             self.calendarTableView.reloadData()
-            self.weekOverView.setValues(week: self.currentWeek, Year: self.currentYear)
+            self.weekOverView.setWeekAndYearValues(week: self.currentWeek, Year: self.currentYear)
         })
     }
     
     
     //MARK: Header
+    //TODO: re write this complicated methods
     func isExpandedOrNot(view: WeekDayHeader) {
         if view.tag < twoDimensionalEventArray.count {
             let isExpanded = twoDimensionalEventArray[view.tag].isExpanded
@@ -189,16 +191,15 @@ class WeekView: UIView {
     //Loops trough the parents array of events and puts the ones that are in the displayed week in an array (sorted by day).
     func setupArray() {
         twoDimensionalEventArray.removeAll()
-        guard let parent        = parentVC else { return }
+        let eventArray          = (delegate?.getEventArray()) ?? [Event]()
         let numberOfWeekdays    = 7
-        let lengthOfArray       = parent.eventArray.count
         
         for x in 0..<numberOfWeekdays {
             let currentDay              = mondayOfPresentWeek.addDaysToToday(amount: x)
             var eventsToAddForThatDay   = [Event]()
             
-            for i in 0..<lengthOfArray {
-                let event                   = parent.eventArray[i]
+            for i in 0..<eventArray.count {
+                let event                   = eventArray[i]
                 guard let eventStartTime    = event.eventStartingDate else { return }
                 let isSameDay               = Calendar.current.isDate(currentDay, inSameDayAs: eventStartTime as Date)
                 if isSameDay {

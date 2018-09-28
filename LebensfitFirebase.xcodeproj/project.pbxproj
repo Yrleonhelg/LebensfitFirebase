@@ -14,7 +14,7 @@
 		010BC277213D920900530B2D /* TerminController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC273213D920800530B2D /* TerminController.swift */; };
 		010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC278213D924A00530B2D /* LebensfitSettings.swift */; };
 		010BC27C213D926800530B2D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27A213D926800530B2D /* ActivityCell.swift */; };
-		010BC27D213D926800530B2D /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27B213D926800530B2D /* BaseCell.swift */; };
+		010BC27D213D926800530B2D /* BaseCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27B213D926800530B2D /* BaseCVCell.swift */; };
 		010BC280213D928E00530B2D /* ReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27E213D928E00530B2D /* ReuseableView.swift */; };
 		010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */; };
 		010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC282213D92C600530B2D /* HELG+UIColor.swift */; };
@@ -95,7 +95,7 @@
 		010BC273213D920800530B2D /* TerminController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminController.swift; sourceTree = "<group>"; };
 		010BC278213D924A00530B2D /* LebensfitSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitSettings.swift; sourceTree = "<group>"; };
 		010BC27A213D926800530B2D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
-		010BC27B213D926800530B2D /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		010BC27B213D926800530B2D /* BaseCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCVCell.swift; sourceTree = "<group>"; };
 		010BC27E213D928E00530B2D /* ReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseableView.swift; sourceTree = "<group>"; };
 		010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseableViewCtr.swift; sourceTree = "<group>"; };
 		010BC282213D92C600530B2D /* HELG+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HELG+UIColor.swift"; sourceTree = "<group>"; };
@@ -212,7 +212,6 @@
 				0186103C213E6A250037DADB /* Home */,
 				0186103D213E6A2D0037DADB /* Karte */,
 				01F44A85214AA9CD006723ED /* Profil */,
-				0186103E213E6A340037DADB /* Profil_old */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -307,6 +306,7 @@
 		016BA89A213D777500ADAA65 /* LebensfitFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				FE75A149215EB1820036BE8D /* Old but not ready to delete */,
 				0186103F213E6A8D0037DADB /* SystemFiles */,
 				0186104A213EA5480037DADB /* Login */,
 				0120D634213D97A000B007E7 /* Navigation */,
@@ -400,7 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
-				FEA8AB7A214FDFC9001E1E7E /* PinnwandViewold.swift */,
 				0171A778215E2CEF00C3ABC2 /* PinnwandStackView.swift */,
 				0171A77A215E5F1300C3ABC2 /* PinnCell.swift */,
 				01D72BBC215E6E8A00C9F953 /* LastCell.swift */,
@@ -447,11 +446,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FE75A149215EB1820036BE8D /* Old but not ready to delete */ = {
+			isa = PBXGroup;
+			children = (
+				0186103E213E6A340037DADB /* Profil_old */,
+				FEA8AB7A214FDFC9001E1E7E /* PinnwandViewold.swift */,
+			);
+			path = "Old but not ready to delete";
+			sourceTree = "<group>";
+		};
 		FEA8AB77214EA194001E1E7E /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
 				01F44A7E214A8191006723ED /* CustomImageView.swift */,
-				010BC27B213D926800530B2D /* BaseCell.swift */,
+				010BC27B213D926800530B2D /* BaseCVCell.swift */,
 			);
 			path = BaseClasses;
 			sourceTree = "<group>";
@@ -600,7 +608,7 @@
 				017FE89B2152833700B75330 /* MaybePeople.swift in Sources */,
 				017FE8992152832C00B75330 /* SurePeople.swift in Sources */,
 				010BC275213D920900530B2D /* MapController.swift in Sources */,
-				010BC27D213D926800530B2D /* BaseCell.swift in Sources */,
+				010BC27D213D926800530B2D /* BaseCVCell.swift in Sources */,
 				014CF79521513EFE006E17A6 /* User+CoreDataClass.swift in Sources */,
 				016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */,
 				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,

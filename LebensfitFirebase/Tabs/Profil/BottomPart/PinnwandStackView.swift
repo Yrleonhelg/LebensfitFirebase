@@ -18,17 +18,8 @@ struct Pin {
 class PinnwandStackView: UIStackView {
     
     //MARK: - Properties & Variables
-    var heightOftextField = NSLayoutConstraint()
-    var textFieldBottomConstraint = NSLayoutConstraint()
-    var tabbarHeight: CGFloat?
-    let padding: CGFloat = 20
-    let textfieldHeight: CGFloat = 40
-    var delegate: pinnwandToSV?
-    
-    
     var user: User?
     var Pins: [Pin] = [Pin]()
-    
     
     //MARK: - GUI Objects
     let ueberMich: UILabel = {
@@ -48,7 +39,7 @@ class PinnwandStackView: UIStackView {
         return tableview
     }()
     
-    
+    //MARK: -
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,25 +50,8 @@ class PinnwandStackView: UIStackView {
         setupViews()
     }
     
-    func setupTheSetup() {
-        
-    }
-    
-    //TODO: API call
-    func fillMessages() {
-        guard let user = user else { return }
-        let message = "Hallo Welt, ich bin ein Nutzer, ich finde diesen Nutzer sehr interessant. Seine Pilatische Haltung gefällt mir super."
-        let message2 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit"
-        
-        let pin = Pin(forUser: user, fromUser: user, message: message, time: Date())
-        let pin2 = Pin(forUser: user, fromUser: user, message: message2, time: Date())
-        Pins = [pin, pin2, pin, pin2, pin]
-    }
-    
     //MARK: - Setup Methods
     func setupStackView() {
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.red.cgColor
         self.axis           = .vertical
         self.spacing        = 10
         self.alignment      = .fill
@@ -89,7 +63,7 @@ class PinnwandStackView: UIStackView {
         pinnwandTableView.dataSource          = self
         pinnwandTableView.register(PinnCell.self, forCellReuseIdentifier: PinnCell.reuseIdentifier)
         pinnwandTableView.register(LastCell.self, forCellReuseIdentifier: LastCell.reuseIdentifier)
-        pinnwandTableView.tintColor           = .black
+        pinnwandTableView.tintColor           = .red
         pinnwandTableView.isScrollEnabled     = false
     }
    
@@ -98,10 +72,22 @@ class PinnwandStackView: UIStackView {
         self.addArrangedSubview(pinnwandTableView)
     }
     
+    //MARK: - Methods
     func calculate() -> CGFloat {
         let labelHeight = ueberMich.frame.height
         let tableviewHeight = 60 * CGFloat(pinnwandTableView.numberOfRows(inSection: 0))
         return labelHeight + tableviewHeight + 10
+    }
+    
+    //TODO: API call
+    func fillMessages() {
+        guard let user = user else { return }
+        let message = "Hallo Welt, ich bin ein Nutzer, ich finde diesen Nutzer sehr interessant. Seine Pilatische Haltung gefällt mir super."
+        let message2 = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit"
+        
+        let pin = Pin(forUser: user, fromUser: user, message: message, time: Date())
+        let pin2 = Pin(forUser: user, fromUser: user, message: message2, time: Date())
+        Pins = [pin, pin2, pin, pin2, pin]
     }
     
     //MARK: - Do not change Methods

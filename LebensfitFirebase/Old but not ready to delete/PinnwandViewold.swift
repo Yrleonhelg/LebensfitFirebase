@@ -8,11 +8,6 @@
 
 import UIKit
 
-@objc protocol pinnwandToSV: Any {
-    //@objc func handleKeyboardNotification(notification: NSNotification)
-    //func scrollViewUp()
-}
-
 class PinnwandView: UIView {
     var heightOfLabelIsZero = NSLayoutConstraint()
     var heightOfPinnwandIsZero = NSLayoutConstraint()
@@ -24,7 +19,7 @@ class PinnwandView: UIView {
     let padding: CGFloat = 20
     
     let textfieldHeight: CGFloat = 40
-    var delegate: pinnwandToSV?
+    //var delegate: pinnwandToSV?
     
     //MARK: - GUI Objects
     let ueberMich: UILabel = {

@@ -11,10 +11,10 @@ import UIKit
 class WeekdayView: UIView {
     
     //MARK: - GUI Objects
-    let stackView: UIStackView = {
-        let sv          = UIStackView()
-        sv.distribution = .fillEqually
-        return sv
+    let dayOfTheWeekStackView: UIStackView = {
+        let stackview          = UIStackView()
+        stackview.distribution = .fillEqually
+        return stackview
     }()
     
     //MARK: - Init & View Loading
@@ -28,11 +28,11 @@ class WeekdayView: UIView {
     
     //MARK: - Setup
     func setupViews() {
-        addSubview(stackView)
+        addSubview(dayOfTheWeekStackView)
     }
     
     func confBounds(){
-        stackView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        dayOfTheWeekStackView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     func setupValues() {
@@ -42,7 +42,7 @@ class WeekdayView: UIView {
             lbl.text            = daysArr[i]
             lbl.textAlignment   = .center
             lbl.textColor       = LebensfitSettings.Calendar.Style.weekdaysLblColor
-            stackView.addArrangedSubview(lbl)
+            dayOfTheWeekStackView.addArrangedSubview(lbl)
         }
     }
     

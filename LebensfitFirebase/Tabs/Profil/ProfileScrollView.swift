@@ -11,16 +11,17 @@ import Firebase
 
 protocol profileSVToParentVC: Any {
     func viewDidLayoutSubviews()
+    func isCurrentUser() -> Bool
 }
 
 class ProfileScrollView: UIScrollView {
-    //MARK: - Properties & Variables
-    var parentVC: ProfileController?
-    var safeArea: CGFloat = 623.0
-    var displayFittingHeightForInteractionViews = true
     
+    //MARK: - Properties & Variables
+    var delegateVC: profileSVToParentVC?
+    var displayFittingHeightForInteractionViews = true
+    var safeArea: CGFloat = 623.0
     var navbarHeight: CGFloat = 44
-    var tabbarHeight: CGFloat = 44
+    var tabbarHeight: CGFloat = 49
     
     var heightOfContent = NSLayoutConstraint()
     var heightOfPinnwandStackView = NSLayoutConstraint()
@@ -32,10 +33,9 @@ class ProfileScrollView: UIScrollView {
         didSet{
             guard let user = user else { return }
             if let name = user.username {
-                pinnwandStackView.ueberMich.text = "Über \(name)"
+                pinnwandStackView.ueberMich.text = "\(name)'s Pins:"
             }
             isCurrentUser()
-            
         }
     }
     
@@ -141,6 +141,7 @@ class ProfileScrollView: UIScrollView {
         return view
     }()
     
+    //MARK: -
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -164,9 +165,6 @@ class ProfileScrollView: UIScrollView {
         contentView.addSubview(steckbriefView)
         contentView.addSubview(pinnwandStackView)
         pinnwandStackView.isHidden = true
-        
-        pinnwandStackView.delegate = self
-        pinnwandStackView.tabbarHeight = tabbarHeight
     }
     
     func confBounds(){
@@ -193,7 +191,7 @@ class ProfileScrollView: UIScrollView {
         heightOfAllPaddings -= 10
         
         segmentedController.anchor(top: dividerView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
-        //heightOfAllPaddings += 10
+        heightOfAllPaddings += 10
         
         steckbriefView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 10, paddingRight: 0, width: 0, height: 0)
         heightOfSteckbriefView = steckbriefView.heightAnchor.constraint(equalToConstant: safeArea)
@@ -202,6 +200,8 @@ class ProfileScrollView: UIScrollView {
         pinnwandStackView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 10, paddingRight: 20, width: 0, height: 0)
         heightOfPinnwandStackView = pinnwandStackView.heightAnchor.constraint(equalToConstant: safeArea)
         heightOfPinnwandStackView.isActive = true
+        
+        heightOfAllPaddings += 10
     }
     
     //MARK: - Methods
@@ -210,10 +210,10 @@ class ProfileScrollView: UIScrollView {
         let uiArray: [UIView]   = [profileImageView, usernameLabel, followButton, controlStackView, dividerView]
         let sum                 = uiArray.reduce(0, {$0 + $1.frame.height})
         let heightOfPinnwand    = pinnwandStackView.calculate()
-        let heightOfSegController = segmentedController.frame.height + 20
+        let heightOfSegController = segmentedController.frame.height
         safeArea                = self.safeAreaLayoutGuide.layoutFrame.height
         
-        matchingHeightForFullPinnwand = safeArea - segmentedController.frame.height - 10
+        matchingHeightForFullPinnwand = safeArea - segmentedController.frame.height - 10 //TODO: added 20 to heightofallpaddings so this might not be true anymore
         heightOfPinnwandStackView.constant = heightOfPinnwand
         
         return (displayFittingHeightForInteractionViews ? sum + heightOfAllPaddings + heightOfPinnwand + heightOfSegController : sum + heightOfAllPaddings + safeArea)
@@ -221,8 +221,8 @@ class ProfileScrollView: UIScrollView {
     
     //sets different button propertys based if the displaying user is the current user
     func isCurrentUser() {
-        guard let user = user else { return }
-        if user.uid == Auth.auth().currentUser?.uid {
+        
+        if delegateVC?.isCurrentUser() ?? true {
             followButton.setTitle("Freunde finden", for: .normal)
             followButton.addTarget(self, action: #selector(findFriendsButtonPressed), for: .touchUpInside)
         } else {
@@ -235,9 +235,9 @@ class ProfileScrollView: UIScrollView {
     @objc func changeView(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
-            changeView(newView: pinnwandStackView, oldView: steckbriefView)
+            changeViewTo(newView: pinnwandStackView, oldView: steckbriefView)
         default:
-            changeView(newView: steckbriefView, oldView: pinnwandStackView)
+            changeViewTo(newView: steckbriefView, oldView: pinnwandStackView)
             break
         }
         scrollToInteractionViews()
@@ -247,15 +247,15 @@ class ProfileScrollView: UIScrollView {
     func scrollToInteractionViews() {
         displayFittingHeightForInteractionViews = false
         let dividerMinY             = dividerView.frame.minY
-        let navbarHeight            = self.navbarHeight ?? 44
+        let navbarHeight            = self.navbarHeight
         let statusbarHeight         = UIApplication.shared.statusBarFrame.height
         
         let point = dividerMinY - navbarHeight - statusbarHeight
         self.scrollToPoint(pointY: point)
-        parentVC?.viewDidLayoutSubviews()
+        delegateVC?.viewDidLayoutSubviews()
     }
     
-    func changeView(newView: UIView, oldView: UIView) {
+    func changeViewTo(newView: UIView, oldView: UIView) {
         newView.isHidden = false
         newView.alpha = 0
         UIView.animate(withDuration:0.4, animations: {
@@ -293,6 +293,3 @@ class ProfileScrollView: UIScrollView {
     }
 }
 
-extension ProfileScrollView: pinnwandToSV {
-
-}

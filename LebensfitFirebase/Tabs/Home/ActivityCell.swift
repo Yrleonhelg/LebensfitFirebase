@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityCell: BaseCell, ReusableView {
+class ActivityCell: BaseCVCell, ReusableView {
     
     //MARK: - GUI Objects
     let colorView: UIImageView = {

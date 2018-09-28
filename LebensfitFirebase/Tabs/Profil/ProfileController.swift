@@ -24,13 +24,11 @@ class ProfileController: UIViewController {
     }
     var navbarHeight: CGFloat = 44 {
         didSet {
-            print("Navbar: ",navbarHeight)
             scrollView.navbarHeight = navbarHeight
         }
     }
     var tabbarHeight: CGFloat = 49 {
         didSet {
-            print("Tabbar: ", tabbarHeight)
             scrollView.tabbarHeight = tabbarHeight
         }
     }
@@ -49,20 +47,18 @@ class ProfileController: UIViewController {
     
     
     //MARK: - Init & View Loading
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavBar()
+        scrollView.parentVC = self
+        scrollView.delegate = self
+        self.navbarHeight = self.navigationController?.navigationBar.frame.height ?? 44
+        self.tabbarHeight = self.tabBarController?.tabBar.frame.height ?? 49
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = LebensfitSettings.Colors.basicBackColor
-        scrollView.parentVC = self
-        scrollView.delegate = self
-        self.navbarHeight = self.navigationController?.navigationBar.frame.height ?? 44
-        self.tabbarHeight = self.tabBarController?.tabBar.frame.height ?? 49
         setupViews()
         confBounds()
         scrollView.confBounds()
@@ -96,10 +92,10 @@ class ProfileController: UIViewController {
             backView.drawHierarchy(in: backView.bounds, afterScreenUpdates: true)
         }
         
-        self.navigationController?.navigationBar.isTranslucent  = true
+        self.navigationController?.navigationBar.isTranslucent      = true
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        self.navigationController?.navigationBar.shadowImage    = image
-        self.navigationController?.navigationBar.backgroundColor = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.7)
+        self.navigationController?.navigationBar.shadowImage        = image
+        self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.7)
         extendedLayoutIncludesOpaqueBars = true
     }
     
@@ -110,12 +106,6 @@ class ProfileController: UIViewController {
     
     func confBounds(){
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        let heightOfAllObjects: CGFloat = scrollView.calculateHeightOfAllObjects()
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects)
-        scrollView.heightOfContent.constant = heightOfAllObjects
     }
     
     //MARK: - Methods
@@ -142,6 +132,9 @@ class ProfileController: UIViewController {
 
 extension ProfileController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
+        //Put the username of the profile in the navigationbar, as soon as the "Big" username isn't fully visible anymore.
         let statusbarHeight = UIApplication.shared.statusBarFrame.height
         let contentOffset = scrollView.contentOffset.y
         let usernameY = self.scrollView.usernameLabel.frame.minY
@@ -152,15 +145,11 @@ extension ProfileController: UIScrollViewDelegate {
         } else {
             self.navigationItem.title = ""
             self.navigationController?.navigationBar.isTranslucent  = true
-            
         }
         
+        //make the interactionviews shrink to the fitting size when the user scrolled up far enough
         let pinnwandY = self.scrollView.pinnwandStackView.frame.maxY
-        let value = contentOffset + self.scrollView.safeArea + statusbarHeight + tabbarHeight
-        
-        print("_____")
-        print(pinnwandY)
-        print(value)
+        let value = contentOffset + self.scrollView.safeArea + statusbarHeight + tabbarHeight //Actually this is not quite correct but the closest dynamic value I could imagine
         
         if value < pinnwandY {
             if self.scrollView.displayFittingHeightForInteractionViews == false {
@@ -168,5 +157,13 @@ extension ProfileController: UIScrollViewDelegate {
                 viewDidLayoutSubviews()
             }
         } 
+    }
+}
+
+extension ProfileController: profileSVToParentVC {
+    override func viewDidLayoutSubviews() {
+        let heightOfAllObjects: CGFloat = scrollView.calculateHeightOfAllObjects()
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects)
+        scrollView.heightOfContent.constant = heightOfAllObjects
     }
 }

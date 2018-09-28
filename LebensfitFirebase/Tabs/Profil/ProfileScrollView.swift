@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 
+protocol profileSVToParentVC: Any {
+    func viewDidLayoutSubviews()
+}
+
 class ProfileScrollView: UIScrollView {
     //MARK: - Properties & Variables
     var parentVC: ProfileController?
@@ -31,6 +35,7 @@ class ProfileScrollView: UIScrollView {
                 pinnwandStackView.ueberMich.text = "Über \(name)"
             }
             isCurrentUser()
+            
         }
     }
     
@@ -156,14 +161,12 @@ class ProfileScrollView: UIScrollView {
         contentView.addSubview(segmentedController)
         segmentedController.addTarget(self, action: #selector(changeView(sender:)), for: .valueChanged)
         
-        contentView.addSubview(pinnwandStackView)
         contentView.addSubview(steckbriefView)
+        contentView.addSubview(pinnwandStackView)
         pinnwandStackView.isHidden = true
         
-        
-        
         pinnwandStackView.delegate = self
-        pinnwandStackView.tabbarHeight = parentVC?.tabBarController?.tabBar.frame.height
+        pinnwandStackView.tabbarHeight = tabbarHeight
     }
     
     func confBounds(){
@@ -244,7 +247,7 @@ class ProfileScrollView: UIScrollView {
     func scrollToInteractionViews() {
         displayFittingHeightForInteractionViews = false
         let dividerMinY             = dividerView.frame.minY
-        let navbarHeight            = parentVC?.navigationController?.navigationBar.frame.height ?? 44
+        let navbarHeight            = self.navbarHeight ?? 44
         let statusbarHeight         = UIApplication.shared.statusBarFrame.height
         
         let point = dividerMinY - navbarHeight - statusbarHeight

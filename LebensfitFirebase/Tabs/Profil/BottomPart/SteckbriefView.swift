@@ -9,8 +9,6 @@
 import UIKit
 
 class SteckbriefView: UIView {
-    var heightOfLabelIsZero = NSLayoutConstraint()
-    var heightOfSteckbriefIsZero = NSLayoutConstraint()
     
     //MARK: - GUI Objects
     let ueberMich: UILabel = {
@@ -35,11 +33,8 @@ class SteckbriefView: UIView {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
-        heightOfLabelIsZero = ueberMich.heightAnchor.constraint(equalToConstant: 0)
-        heightOfSteckbriefIsZero = steckbriefLabel.heightAnchor.constraint(equalToConstant: 0)
         setupViews()
         confBounds()
-
     }
     
     //MARK: - Setup Methods
@@ -51,16 +46,6 @@ class SteckbriefView: UIView {
     func confBounds() {
         ueberMich.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
         steckbriefLabel.anchor(top: ueberMich.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
-    }
-    
-    func setHeightToZero() {
-        heightOfLabelIsZero.isActive = true
-        heightOfSteckbriefIsZero.isActive = true
-    }
-    
-    func resetHeight() {
-        heightOfLabelIsZero.isActive = false
-        heightOfSteckbriefIsZero.isActive = false
     }
     
     //MARK: - Do not change Methods

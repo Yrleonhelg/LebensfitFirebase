@@ -422,8 +422,8 @@
 			children = (
 				01F44A86214AABED006723ED /* ProfileController.swift */,
 				01C706E4215A298C0065643F /* ProfileScrollView.swift */,
-				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01C706E3215A296B0065643F /* BottomPart */,
+				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
 				017FE89E2152842200B75330 /* APIEventOld.swift */,
 			);

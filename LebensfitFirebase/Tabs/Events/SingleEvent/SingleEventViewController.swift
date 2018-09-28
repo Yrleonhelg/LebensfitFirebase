@@ -25,7 +25,7 @@ class SingleEventViewController: UIViewController {
     var buttons: [UIButton]!
     
     //MARK: - GUI Objects
-    let scrollView: EventScrollView!
+    var scrollView: EventScrollView?
     
     //divides the buttons from the rest of the view
     let dividerButtonsView: UIView = {
@@ -87,7 +87,6 @@ class SingleEventViewController: UIViewController {
     //MARK: - Init & View Loading
     init(event: Event) {
         thisEvent = event
-        self.scrollView = EventScrollView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), event: thisEvent)
         super.init(nibName: nil, bundle: nil)
         setupDefaultValues()
         self.view.backgroundColor = LebensfitSettings.Colors.basicBackColor
@@ -97,9 +96,9 @@ class SingleEventViewController: UIViewController {
         super.viewDidLoad()
         buttons = [nopeButton, maybeButton, participateButton]
         fillProvisorischeNutzer()
+        setupScrollView()
         setupViews()
-        scrollView.delegateSVToSingleEvent = self
-        scrollView.setupTheSetup()
+        
         getSnapshotForLocation()
     }
     
@@ -107,7 +106,7 @@ class SingleEventViewController: UIViewController {
         super.viewDidAppear(animated)
         confBounds()
         setupNavBar()
-        scrollView.viewDidAppear()
+        scrollView?.viewDidAppear()
     }
     
     //MARK: - Setup
@@ -125,8 +124,14 @@ class SingleEventViewController: UIViewController {
         self.navigationItem.title = "Event"
     }
     
+    func setupScrollView() {
+        self.scrollView = EventScrollView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), event: thisEvent)
+        guard let scrollView = scrollView else { return }
+        scrollView.delegateSVToSingleEvent = self
+        scrollView.setupTheSetup()
+    }
+    
     func setupViews() {
-        view.addSubview(scrollView)
         view.addSubview(maybeButton)
         view.addSubview(nopeButton)
         view.addSubview(participateButton)
@@ -137,6 +142,9 @@ class SingleEventViewController: UIViewController {
         participateButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
         maybeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
         nopeButton.addTarget(self, action: #selector (buttonClick(sender:)), for: .touchUpInside)
+        
+        guard let scrollView = scrollView else { return }
+        view.addSubview(scrollView)
     }
     
     func confBounds(){
@@ -145,6 +153,7 @@ class SingleEventViewController: UIViewController {
         let buttonDividerWidth  = view.frame.width / 3
         print(UIApplication.shared.statusBarFrame.height)
         
+        //TODO: Put buttons into stackview..
         //buttons first because they not in the scrollview and the scrollview uses it's anchor
         nopeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)
         nopeButton.imageView!.layer.cornerRadius = maybeButton.imageView!.layer.frame.height / 2
@@ -160,7 +169,7 @@ class SingleEventViewController: UIViewController {
         
         dividerButtonsTabbar.anchor(top: participateButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         dividerButtonsView.anchor(top: nil, left: view.leftAnchor, bottom: participateButton.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
-        
+        guard let scrollView = scrollView else { return }
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: dividerButtonsView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
@@ -174,7 +183,7 @@ class SingleEventViewController: UIViewController {
         if selected {
             addUserToList(sender: sender)
         }
-        scrollView.reloadAllTableViews()
+        scrollView?.reloadAllTableViews()
     }
     
     func addUserToList(sender: UIButton) {
@@ -238,7 +247,7 @@ class SingleEventViewController: UIViewController {
         mapSnapshotOptions.showsPointsOfInterest = true
         snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
         snapShotter.start { (snapshot:MKMapSnapshotter.Snapshot?, error:Error?) in
-            self.scrollView.mapView.image = snapshot?.image
+            self.scrollView?.mapView.image = snapshot?.image
         }
     }
     
@@ -251,6 +260,7 @@ class SingleEventViewController: UIViewController {
 extension SingleEventViewController: scrollViewToSingleEvent {
     
     override func viewDidLayoutSubviews() {
+        guard let scrollView = scrollView else { return }
         var heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
         heightOfAllObjects -= participateButton.frame.height
         if heightOfAllObjects != 0 {

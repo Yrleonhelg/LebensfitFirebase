@@ -51,6 +51,8 @@
 		016DA58021425ABE00B07F69 /* WeekDayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */; };
 		016DA582214272B100B07F69 /* POPShakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA581214272B100B07F69 /* POPShakeable.swift */; };
 		016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DA583214275B700B07F69 /* WeekOverVIew.swift */; };
+		0171A779215E2CEF00C3ABC2 /* PinnwandStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171A778215E2CEF00C3ABC2 /* PinnwandStackView.swift */; };
+		0171A77B215E5F1300C3ABC2 /* PinnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171A77A215E5F1300C3ABC2 /* PinnCell.swift */; };
 		0179697F215A6D7700B652C4 /* HELG+UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */; };
 		017FE8992152832C00B75330 /* SurePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE8982152832C00B75330 /* SurePeople.swift */; };
 		017FE89B2152833700B75330 /* MaybePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE89A2152833700B75330 /* MaybePeople.swift */; };
@@ -65,6 +67,7 @@
 		018631A02146BA3700E5A9C2 /* SingleEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */; };
 		018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018631A12146C67E00E5A9C2 /* EventStruct.swift */; };
 		01C706E5215A298C0065643F /* ProfileScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C706E4215A298C0065643F /* ProfileScrollView.swift */; };
+		01D72BBD215E6E8A00C9F953 /* LastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D72BBC215E6E8A00C9F953 /* LastCell.swift */; };
 		01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE9C18214BB7CF0014E1CB /* BackView.swift */; };
 		01EEF39D21554A7C008BA0C4 /* EventScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */; };
 		01F44A7D214A80DE006723ED /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A7C214A80DE006723ED /* UserSearchCell.swift */; };
@@ -78,7 +81,7 @@
 		FE75A146215AB7A40036BE8D /* HELG+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A145215AB7A40036BE8D /* HELG+Int.swift */; };
 		FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A147215AB8160036BE8D /* HELG+String.swift */; };
 		FEA8AB79214FDAD2001E1E7E /* SteckbriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */; };
-		FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */; };
+		FEA8AB7B214FDFC9001E1E7E /* PinnwandViewold.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA8AB7A214FDFC9001E1E7E /* PinnwandViewold.swift */; };
 		FEC1CD6687B7221AD4A604A4 /* Pods_LebensfitFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */; };
 		FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB421455430007F3F3F /* HELG+Date.swift */; };
 		FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECC8FB621455C46007F3F3F /* EventTableCell.swift */; };
@@ -131,6 +134,8 @@
 		016DA57F21425ABE00B07F69 /* WeekDayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayHeader.swift; sourceTree = "<group>"; };
 		016DA581214272B100B07F69 /* POPShakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPShakeable.swift; sourceTree = "<group>"; };
 		016DA583214275B700B07F69 /* WeekOverVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekOverVIew.swift; sourceTree = "<group>"; };
+		0171A778215E2CEF00C3ABC2 /* PinnwandStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandStackView.swift; sourceTree = "<group>"; };
+		0171A77A215E5F1300C3ABC2 /* PinnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnCell.swift; sourceTree = "<group>"; };
 		0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIScrollView.swift"; sourceTree = "<group>"; };
 		017FE8982152832C00B75330 /* SurePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurePeople.swift; sourceTree = "<group>"; };
 		017FE89A2152833700B75330 /* MaybePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybePeople.swift; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventViewController.swift; sourceTree = "<group>"; };
 		018631A12146C67E00E5A9C2 /* EventStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStruct.swift; sourceTree = "<group>"; };
 		01C706E4215A298C0065643F /* ProfileScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScrollView.swift; sourceTree = "<group>"; };
+		01D72BBC215E6E8A00C9F953 /* LastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastCell.swift; sourceTree = "<group>"; };
 		01EE9C18214BB7CF0014E1CB /* BackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScrollView.swift; sourceTree = "<group>"; };
 		01F44A7C214A80DE006723ED /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
@@ -161,7 +167,7 @@
 		FE75A145215AB7A40036BE8D /* HELG+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Int.swift"; sourceTree = "<group>"; };
 		FE75A147215AB8160036BE8D /* HELG+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+String.swift"; sourceTree = "<group>"; };
 		FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteckbriefView.swift; sourceTree = "<group>"; };
-		FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandView.swift; sourceTree = "<group>"; };
+		FEA8AB7A214FDFC9001E1E7E /* PinnwandViewold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandViewold.swift; sourceTree = "<group>"; };
 		FECC8FB421455430007F3F3F /* HELG+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Date.swift"; sourceTree = "<group>"; };
 		FECC8FB621455C46007F3F3F /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -393,9 +399,11 @@
 		01C706E3215A296B0065643F /* BottomPart */ = {
 			isa = PBXGroup;
 			children = (
-				01C706E4215A298C0065643F /* ProfileScrollView.swift */,
 				FEA8AB78214FDAD2001E1E7E /* SteckbriefView.swift */,
-				FEA8AB7A214FDFC9001E1E7E /* PinnwandView.swift */,
+				FEA8AB7A214FDFC9001E1E7E /* PinnwandViewold.swift */,
+				0171A778215E2CEF00C3ABC2 /* PinnwandStackView.swift */,
+				0171A77A215E5F1300C3ABC2 /* PinnCell.swift */,
+				01D72BBC215E6E8A00C9F953 /* LastCell.swift */,
 			);
 			path = BottomPart;
 			sourceTree = "<group>";
@@ -413,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				01F44A86214AABED006723ED /* ProfileController.swift */,
+				01C706E4215A298C0065643F /* ProfileScrollView.swift */,
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01C706E3215A296B0065643F /* BottomPart */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
@@ -603,14 +612,17 @@
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
 				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
 				017FE89D2152834200B75330 /* NopePeople.swift in Sources */,
+				0171A77B215E5F1300C3ABC2 /* PinnCell.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
 				01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */,
 				01F44A83214A8757006723ED /* APIEvent.swift in Sources */,
 				014CF79C2151441F006E17A6 /* CDEvent.swift in Sources */,
 				FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */,
+				0171A779215E2CEF00C3ABC2 /* PinnwandStackView.swift in Sources */,
 				FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */,
 				014CF79E2151469C006E17A6 /* APILogin.swift in Sources */,
-				FEA8AB7B214FDFC9001E1E7E /* PinnwandView.swift in Sources */,
+				FEA8AB7B214FDFC9001E1E7E /* PinnwandViewold.swift in Sources */,
+				01D72BBD215E6E8A00C9F953 /* LastCell.swift in Sources */,
 				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* ShopController.swift in Sources */,

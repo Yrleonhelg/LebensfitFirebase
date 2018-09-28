@@ -39,7 +39,7 @@ class SteckbriefView: UIView {
         heightOfSteckbriefIsZero = steckbriefLabel.heightAnchor.constraint(equalToConstant: 0)
         setupViews()
         confBounds()
-        setHeightToZero()
+
     }
     
     //MARK: - Setup Methods

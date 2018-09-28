@@ -22,6 +22,18 @@ class ProfileController: UIViewController {
             scrollView.user = user
         }
     }
+    var navbarHeight: CGFloat = 44 {
+        didSet {
+            print("Navbar: ",navbarHeight)
+            scrollView.navbarHeight = navbarHeight
+        }
+    }
+    var tabbarHeight: CGFloat = 49 {
+        didSet {
+            print("Tabbar: ", tabbarHeight)
+            scrollView.tabbarHeight = tabbarHeight
+        }
+    }
     
     //MARK: - GUI Objects
     lazy var rectForBackView = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width+100)
@@ -30,23 +42,27 @@ class ProfileController: UIViewController {
         return view
     }()
     
-    let scrollView: ProfileScrollView = {
+    lazy var scrollView: ProfileScrollView = {
         let view = ProfileScrollView()
         return view
     }()
     
     
     //MARK: - Init & View Loading
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.parentVC = self
-        scrollView.delegate = self
+        
         setupNavBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = LebensfitSettings.Colors.basicBackColor
+        scrollView.parentVC = self
+        scrollView.delegate = self
+        self.navbarHeight = self.navigationController?.navigationBar.frame.height ?? 44
+        self.tabbarHeight = self.tabBarController?.tabBar.frame.height ?? 49
         setupViews()
         confBounds()
         scrollView.confBounds()
@@ -62,7 +78,6 @@ class ProfileController: UIViewController {
             print("notself")
             fetchUser()
         }
-        scrollView.presentSteckbriefView()
         scrollView.scrollToTop()
     }
     
@@ -105,6 +120,8 @@ class ProfileController: UIViewController {
     
     //MARK: - Methods
     @objc func handleLogOut() {
+        scrollView.pinnwandStackView.pinnwandTableView.reloadData()
+        return
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {
@@ -135,6 +152,21 @@ extension ProfileController: UIScrollViewDelegate {
         } else {
             self.navigationItem.title = ""
             self.navigationController?.navigationBar.isTranslucent  = true
+            
         }
+        
+        let pinnwandY = self.scrollView.pinnwandStackView.frame.maxY
+        let value = contentOffset + self.scrollView.safeArea + statusbarHeight + tabbarHeight
+        
+        print("_____")
+        print(pinnwandY)
+        print(value)
+        
+        if value < pinnwandY {
+            if self.scrollView.displayFittingHeightForInteractionViews == false {
+                self.scrollView.displayFittingHeightForInteractionViews = true
+                viewDidLayoutSubviews()
+            }
+        } 
     }
 }

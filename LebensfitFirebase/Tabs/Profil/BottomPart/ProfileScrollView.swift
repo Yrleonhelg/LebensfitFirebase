@@ -18,6 +18,7 @@ class ProfileScrollView: UIScrollView {
     var heightOfSteckbriefView = NSLayoutConstraint()
     
     var heightOfAllPaddings: CGFloat    = 0
+    var heightInteractionViewsCanBe: CGFloat = 0
     var user: User? {
         didSet{
             guard let user = user else { return }
@@ -153,9 +154,11 @@ class ProfileScrollView: UIScrollView {
         contentView.addSubview(pinnwandView)
         contentView.addSubview(steckbriefView)
         heightOfPinnwandView = pinnwandView.heightAnchor.constraint(equalToConstant: 0)
-        heightOfSteckbriefView = steckbriefView.heightAnchor.constraint(equalToConstant: 0)
+        heightOfSteckbriefView = steckbriefView.heightAnchor.constraint(equalToConstant: heightInteractionViewsCanBe)
         heightOfPinnwandView.isActive = true
         heightOfSteckbriefView.isActive = true
+        pinnwandView.delegate = self
+        pinnwandView.tabbarHeight = parentVC?.tabBarController?.tabBar.frame.height
     }
     
     func confBounds(){
@@ -182,21 +185,23 @@ class ProfileScrollView: UIScrollView {
         heightOfAllPaddings -= 10
         
         segmentedController.anchor(top: dividerView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
-        heightOfAllPaddings += 10
+        //heightOfAllPaddings += 10
         
         steckbriefView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         pinnwandView.anchor(top: segmentedController.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        heightOfSteckbriefView.constant = 300
-        heightOfPinnwandView.constant = 0
     }
     
     //MARK: - Methods
+    //calculates the height of all UI Object to then set the contentsize of the scrollview
     func calculateHeightOfAllObjects() -> CGFloat{
-        let uiArray: [UIView] = [profileImageView, usernameLabel, followButton, controlStackView, dividerView, segmentedController, steckbriefView, pinnwandView]
+        let uiArray: [UIView] = [profileImageView, usernameLabel, followButton, controlStackView, dividerView]
         let sum = uiArray.reduce(0, {$0 + $1.frame.height})
-        return sum + heightOfAllPaddings
+        let safeArea = self.safeAreaLayoutGuide.layoutFrame.height
+        heightInteractionViewsCanBe = safeArea - segmentedController.frame.height - 10
+        return sum + heightOfAllPaddings + safeArea
     }
     
+    //sets different button propertys based if the displaying user is the current user
     func isCurrentUser() {
         guard let user = user else { return }
         if user.uid == Auth.auth().currentUser?.uid {
@@ -210,6 +215,7 @@ class ProfileScrollView: UIScrollView {
     }
     
     @objc func changeView(sender: UISegmentedControl) {
+        scrollToInteractionViews()
         switch sender.selectedSegmentIndex {
         case 1:
             presentPinnwandView()
@@ -218,17 +224,27 @@ class ProfileScrollView: UIScrollView {
         }
     }
     
+    //Scrolls down so that the divider between the info labels and the segmented Controller is at the bottom of the tabbar
+    func scrollToInteractionViews() {
+        let dividerMinY             = dividerView.frame.minY
+        let navbarHeight            = parentVC?.navigationController?.navigationBar.frame.height ?? 44
+        let statusbarHeight         = UIApplication.shared.statusBarFrame.height
+        
+        let point = dividerMinY - navbarHeight - statusbarHeight
+        self.scrollToPoint(pointY: point)
+    }
+    
     func presentSteckbriefView() {
         pinnwandView.setHeightToZero()
         heightOfPinnwandView.constant = 0
-        heightOfSteckbriefView.constant = 300
+        heightOfSteckbriefView.constant = heightInteractionViewsCanBe
         steckbriefView.resetHeight()
     }
     
     func presentPinnwandView() {
         steckbriefView.setHeightToZero()
         heightOfSteckbriefView.constant = 0
-        heightOfPinnwandView.constant = 300
+        heightOfPinnwandView.constant = heightInteractionViewsCanBe
         pinnwandView.resetHeight()
     }
     
@@ -257,4 +273,8 @@ class ProfileScrollView: UIScrollView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension ProfileScrollView: pinnwandToSV {
+
 }

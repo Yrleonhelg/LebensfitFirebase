@@ -10,10 +10,26 @@ import UIKit
 
 extension UIScrollView {
     func scrollToTop() {
-        
         //let desiredOffset = CGPoint(x: 0, y: -contentInset.top)
         let desiredOffset = CGPoint(x: 0, y: -adjustedContentInset.top)
         setContentOffset(desiredOffset, animated: true)
-        
     }
+    
+    func scrollToPoint(pointY: CGFloat) {
+        let desiredOffset = CGPoint(x: 0, y: pointY)
+        setContentOffset(desiredOffset, animated: true)
+    }
+    
+//    func scrollToBottom() {
+//        print("safe: ",self.safeAreaLayoutGuide.layoutFrame)
+//        print("frame: ",self.frame)
+//        print("contentsize: ",self.contentSize.height)
+//        print("bounds: ",self.bounds.size.height)
+//        print("contentinset: ",self.contentInset.bottom)
+//        
+//        let safe = self.frame.height - self.safeAreaLayoutGuide.layoutFrame.height
+//        //let desiredOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height + self.contentInset.bottom + safe)
+//        let desiredOffset = CGPoint(x: 0, y: 356)
+//        setContentOffset(desiredOffset, animated: true)
+//    }
 }

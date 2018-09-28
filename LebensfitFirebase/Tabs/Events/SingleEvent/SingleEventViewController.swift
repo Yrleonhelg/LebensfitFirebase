@@ -141,7 +141,9 @@ class SingleEventViewController: UIViewController {
     
     func confBounds(){
         let tabbarHeight        = self.tabBarController?.tabBar.frame.height ?? 0
+        print(tabbarHeight)
         let buttonDividerWidth  = view.frame.width / 3
+        print(UIApplication.shared.statusBarFrame.height)
         
         //buttons first because they not in the scrollview and the scrollview uses it's anchor
         nopeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: tabbarHeight, paddingRight: 0, width: buttonDividerWidth, height: 50)

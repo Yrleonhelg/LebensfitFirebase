@@ -40,6 +40,7 @@ class ProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.parentVC = self
+        scrollView.delegate = self
         setupNavBar()
     }
     
@@ -82,8 +83,9 @@ class ProfileController: UIViewController {
         
         self.navigationController?.navigationBar.isTranslucent  = true
         self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        //self.navigationController?.navigationBar.shadowImage    = image
+        self.navigationController?.navigationBar.shadowImage    = image
         self.navigationController?.navigationBar.backgroundColor = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.7)
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     func setupViews() {
@@ -103,8 +105,6 @@ class ProfileController: UIViewController {
     
     //MARK: - Methods
     @objc func handleLogOut() {
-        scrollView.scrollToTop()
-        return
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {
@@ -120,6 +120,21 @@ class ProfileController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-    
     //MARK: - Do not change Methods
+}
+
+extension ProfileController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let statusbarHeight = UIApplication.shared.statusBarFrame.height
+        let contentOffset = scrollView.contentOffset.y
+        let usernameY = self.scrollView.usernameLabel.frame.minY
+   
+        if statusbarHeight + contentOffset >= usernameY {
+            self.navigationItem.title = self.user?.username
+            self.navigationController?.navigationBar.isTranslucent  = false
+        } else {
+            self.navigationItem.title = ""
+            self.navigationController?.navigationBar.isTranslucent  = true
+        }
+    }
 }

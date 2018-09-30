@@ -55,10 +55,7 @@ class WeekView: UIView {
         super.init(frame: frame)
         self.backgroundColor    = LebensfitSettings.Colors.basicBackColor
         presentDate             = Date()
-        setupTheSetup()
-    }
-    
-    func setupTheSetup() {
+        
         setupTableView()
         setupViews()
         confBounds()

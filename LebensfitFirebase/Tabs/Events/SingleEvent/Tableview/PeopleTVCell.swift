@@ -9,13 +9,13 @@
 import UIKit
 import Firebase
 
-class TeilnehmerTVCell: UITableViewCell, ReusableView {
+class UserTVCell: UITableViewCell, ReusableView {
     //MARK: - Properties & Variables
     var user: User? {
         didSet {
             usernameLabel.text          = user?.username
             guard let profileImageUrl   = user?.profileImageUrl else { return }
-            profileImageView.loadImage(urlString: profileImageUrl)
+            profileImageView.loadImage(urlString: profileImageUrl, nil)
             if user?.uid == Auth.auth().currentUser?.uid {
                 isCurrentUser()
             }
@@ -61,17 +61,17 @@ class TeilnehmerTVCell: UITableViewCell, ReusableView {
     func confBounds(){
         let frameHeight = self.frame.height
         let pictureHeight = frameHeight - 10
-        profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pictureHeight, height: pictureHeight)
+        profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 20, paddingBottom: 0, paddingRight: 0, width: pictureHeight, height: pictureHeight)
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         profileImageView.layer.cornerRadius = pictureHeight / 2
-        usernameLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        usernameLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 20, width: 0, height: 0)
     }
     
     func isCurrentUser() {
         profileImageView.layer.borderColor = LebensfitSettings.Colors.basicTintColor.cgColor
         profileImageView.layer.borderWidth = 2
         addSubview(selectionDot)
-        selectionDot.anchor(top: nil, left: nil, bottom: nil, right: usernameLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 10, width: 15, height: 15)
+        selectionDot.anchor(top: nil, left: nil, bottom: nil, right: usernameLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 30, width: 15, height: 15)
         selectionDot.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor).isActive = true
     }
     

@@ -8,6 +8,7 @@
 
 import Firebase
 import CoreData
+import Firebase
 
 class loadEverything {
     static let managedContext = PersistenceService.context
@@ -19,7 +20,12 @@ class loadEverything {
             
             dictionaries.forEach({ (key, value) in
                 guard let userDictionary = value as? [String: Any] else { return }
-                _ = User(uid: key, dictionary: userDictionary, context: managedContext)
+                let user = User(uid: key, dictionary: userDictionary, context: managedContext)
+                
+                if user.uid == Auth.auth().currentUser?.uid {
+                    guard let profileImageUrl = user.profileImageUrl else { return }
+                    defaultBackImage.loadImage(urlString: profileImageUrl)
+                }
             })
         }
         )}

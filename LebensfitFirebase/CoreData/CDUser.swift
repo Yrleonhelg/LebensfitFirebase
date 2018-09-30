@@ -25,6 +25,7 @@ class CDUser: NSObject {
         } catch {
             print("Error beim erstellen eines neuen Benutzers: ",error)
         }
+        
     }
     
     func createUserWithID(userId: String) {

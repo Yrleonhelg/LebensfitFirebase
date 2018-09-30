@@ -15,12 +15,11 @@
 		010BC279213D924A00530B2D /* LebensfitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC278213D924A00530B2D /* LebensfitSettings.swift */; };
 		010BC27C213D926800530B2D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27A213D926800530B2D /* ActivityCell.swift */; };
 		010BC27D213D926800530B2D /* BaseCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27B213D926800530B2D /* BaseCVCell.swift */; };
-		010BC280213D928E00530B2D /* ReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27E213D928E00530B2D /* ReuseableView.swift */; };
-		010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */; };
+		010BC280213D928E00530B2D /* POPReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27E213D928E00530B2D /* POPReuseableView.swift */; };
+		010BC281213D928E00530B2D /* POPReuseableViewCtr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC27F213D928E00530B2D /* POPReuseableViewCtr.swift */; };
 		010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC282213D92C600530B2D /* HELG+UIColor.swift */; };
 		010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC284213D92F100530B2D /* LebensfitNavigation.swift */; };
 		010CF67F2158E42900C0B9F0 /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010CF67E2158E42900C0B9F0 /* CreateEventController.swift */; };
-		0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0120D635213D982300B007E7 /* CustomAnchor.swift */; };
 		01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E48213FDE2E00D4144B /* MonthOverView.swift */; };
 		01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4A213FF03000D4144B /* WeekdayView.swift */; };
 		01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4E213FF1E100D4144B /* CalendarView.swift */; };
@@ -79,6 +78,8 @@
 		01F44A8B214AB250006723ED /* HELG+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A8A214AB250006723ED /* HELG+Firebase.swift */; };
 		FE2229A72160D7250028E5DB /* ParticipateButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */; };
 		FE2229A92160F0ED0028E5DB /* HELG+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2229A82160F0ED0028E5DB /* HELG+UIStackView.swift */; };
+		FE2229AC216102E30028E5DB /* SearchUserProfilesTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2229AB216102E30028E5DB /* SearchUserProfilesTV.swift */; };
+		FE2229AE216106B70028E5DB /* APISearchUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2229AD216106B70028E5DB /* APISearchUsers.swift */; };
 		FE75A144215AB75D0036BE8D /* HELG+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */; };
 		FE75A146215AB7A40036BE8D /* HELG+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A145215AB7A40036BE8D /* HELG+Int.swift */; };
 		FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A147215AB8160036BE8D /* HELG+String.swift */; };
@@ -98,12 +99,11 @@
 		010BC278213D924A00530B2D /* LebensfitSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitSettings.swift; sourceTree = "<group>"; };
 		010BC27A213D926800530B2D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		010BC27B213D926800530B2D /* BaseCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCVCell.swift; sourceTree = "<group>"; };
-		010BC27E213D928E00530B2D /* ReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseableView.swift; sourceTree = "<group>"; };
-		010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseableViewCtr.swift; sourceTree = "<group>"; };
+		010BC27E213D928E00530B2D /* POPReuseableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POPReuseableView.swift; sourceTree = "<group>"; };
+		010BC27F213D928E00530B2D /* POPReuseableViewCtr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POPReuseableViewCtr.swift; sourceTree = "<group>"; };
 		010BC282213D92C600530B2D /* HELG+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HELG+UIColor.swift"; sourceTree = "<group>"; };
 		010BC284213D92F100530B2D /* LebensfitNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitNavigation.swift; sourceTree = "<group>"; };
 		010CF67E2158E42900C0B9F0 /* CreateEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
-		0120D635213D982300B007E7 /* CustomAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnchor.swift; sourceTree = "<group>"; };
 		01462E48213FDE2E00D4144B /* MonthOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthOverView.swift; sourceTree = "<group>"; };
 		01462E4A213FF03000D4144B /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
 		01462E4E213FF1E100D4144B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -167,6 +167,8 @@
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipateButtonStackView.swift; sourceTree = "<group>"; };
 		FE2229A82160F0ED0028E5DB /* HELG+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIStackView.swift"; sourceTree = "<group>"; };
+		FE2229AB216102E30028E5DB /* SearchUserProfilesTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserProfilesTV.swift; sourceTree = "<group>"; };
+		FE2229AD216106B70028E5DB /* APISearchUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISearchUsers.swift; sourceTree = "<group>"; };
 		FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+NSDate.swift"; sourceTree = "<group>"; };
 		FE75A145215AB7A40036BE8D /* HELG+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Int.swift"; sourceTree = "<group>"; };
 		FE75A147215AB8160036BE8D /* HELG+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+String.swift"; sourceTree = "<group>"; };
@@ -202,10 +204,9 @@
 				0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */,
 				FE2229A82160F0ED0028E5DB /* HELG+UIStackView.swift */,
 				016DA581214272B100B07F69 /* POPShakeable.swift */,
-				010BC27E213D928E00530B2D /* ReuseableView.swift */,
-				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
+				010BC27E213D928E00530B2D /* POPReuseableView.swift */,
+				010BC27F213D928E00530B2D /* POPReuseableViewCtr.swift */,
 				010BC278213D924A00530B2D /* LebensfitSettings.swift */,
-				0120D635213D982300B007E7 /* CustomAnchor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -431,6 +432,7 @@
 				01EE9C18214BB7CF0014E1CB /* BackView.swift */,
 				01F44A88214AB0AC006723ED /* APIProfile.swift */,
 				017FE89E2152842200B75330 /* APIEventOld.swift */,
+				FE2229AA2160FF3A0028E5DB /* Find Friends */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -450,6 +452,15 @@
 				5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FE2229AA2160FF3A0028E5DB /* Find Friends */ = {
+			isa = PBXGroup;
+			children = (
+				FE2229AB216102E30028E5DB /* SearchUserProfilesTV.swift */,
+				FE2229AD216106B70028E5DB /* APISearchUsers.swift */,
+			);
+			path = "Find Friends";
 			sourceTree = "<group>";
 		};
 		FE75A149215EB1820036BE8D /* Old but not ready to delete */ = {
@@ -610,21 +621,21 @@
 				01861043213E6E170037DADB /* UserStruct.swift in Sources */,
 				01F44A7D214A80DE006723ED /* UserSearchCell.swift in Sources */,
 				016DA582214272B100B07F69 /* POPShakeable.swift in Sources */,
-				0120D636213D982300B007E7 /* CustomAnchor.swift in Sources */,
 				017FE89B2152833700B75330 /* MaybePeople.swift in Sources */,
 				017FE8992152832C00B75330 /* SurePeople.swift in Sources */,
 				010BC275213D920900530B2D /* MapController.swift in Sources */,
 				010BC27D213D926800530B2D /* BaseCVCell.swift in Sources */,
 				014CF79521513EFE006E17A6 /* User+CoreDataClass.swift in Sources */,
 				016DA584214275B700B07F69 /* WeekOverVIew.swift in Sources */,
-				010BC281213D928E00530B2D /* ReuseableViewCtr.swift in Sources */,
+				010BC281213D928E00530B2D /* POPReuseableViewCtr.swift in Sources */,
+				FE2229AC216102E30028E5DB /* SearchUserProfilesTV.swift in Sources */,
 				01EE9C19214BB7CF0014E1CB /* BackView.swift in Sources */,
 				016BA89C213D777500ADAA65 /* AppDelegate.swift in Sources */,
 				010CF67F2158E42900C0B9F0 /* CreateEventController.swift in Sources */,
 				0153FAD92141781A00D1B5BB /* WeekView.swift in Sources */,
 				0159AA2C2147B0C7005134A3 /* APITermin.swift in Sources */,
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
-				010BC280213D928E00530B2D /* ReuseableView.swift in Sources */,
+				010BC280213D928E00530B2D /* POPReuseableView.swift in Sources */,
 				017FE89D2152834200B75330 /* NopePeople.swift in Sources */,
 				0171A77B215E5F1300C3ABC2 /* PinnCell.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
@@ -645,6 +656,7 @@
 				018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */,
 				015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */,
 				014CF79121513EFE006E17A6 /* Event+CoreDataClass.swift in Sources */,
+				FE2229AE216106B70028E5DB /* APISearchUsers.swift in Sources */,
 				01F44A89214AB0AC006723ED /* APIProfile.swift in Sources */,
 				010BC283213D92C600530B2D /* HELG+UIColor.swift in Sources */,
 				015416BD21495C35006A1A02 /* PeopleTV.swift in Sources */,

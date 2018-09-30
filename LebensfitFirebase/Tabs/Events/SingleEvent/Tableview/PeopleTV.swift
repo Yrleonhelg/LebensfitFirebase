@@ -53,7 +53,7 @@ class PeopleTableView: UIView, ReusableView {
     func setupTableView() {
         peopleTableView.delegate            = self
         peopleTableView.dataSource          = self
-        peopleTableView.register(TeilnehmerTVCell.self, forCellReuseIdentifier: TeilnehmerTVCell.reuseIdentifier)
+        peopleTableView.register(UserTVCell.self, forCellReuseIdentifier: UserTVCell.reuseIdentifier)
         peopleTableView.tintColor           = .white
         peopleTableView.isScrollEnabled     = false
     }
@@ -69,7 +69,7 @@ class PeopleTableView: UIView, ReusableView {
     }
     
     func confBounds(){
-        peopleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 25)
+        peopleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 15, paddingLeft: 20, paddingBottom: 0, paddingRight: 0, width: 0, height: 25)
         peopleTableView.anchor(top: peopleLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
@@ -98,7 +98,7 @@ class PeopleTableView: UIView, ReusableView {
 //MARK: - TVDataSource
 extension PeopleTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row     = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
+        let row     = tableView.dequeueReusableCell(withIdentifier: UserTVCell.reuseIdentifier, for: indexPath) as! UserTVCell
         //TODO: don't just pass the user.. fill the rows elements from here
         row.isUserInteractionEnabled = true
         row.user    = users[indexPath.row]

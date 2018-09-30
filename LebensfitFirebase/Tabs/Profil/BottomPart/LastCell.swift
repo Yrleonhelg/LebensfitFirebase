@@ -42,7 +42,7 @@ class LastCell: UITableViewCell, ReusableView {
         chevronLabel.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         chevronLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        createNewPinLabel.anchor(top: nil, left: leftAnchor, bottom: nil, right: chevronLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        createNewPinLabel.anchor(top: nil, left: leftAnchor, bottom: nil, right: chevronLabel.leftAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         createNewPinLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     

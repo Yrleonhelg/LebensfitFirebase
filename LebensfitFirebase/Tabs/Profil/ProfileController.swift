@@ -9,17 +9,35 @@
 import UIKit
 import Firebase
 
+var defaultBackImage = CustomImageView()
+
 class ProfileController: UIViewController {
     //MARK: - Properties & Variables
     var userId: String?
     var user: User? {
         didSet {
-            scrollView.usernameLabel.text = user?.username
+            print("user didset")
             guard let profileImageUrl = user?.profileImageUrl else { return }
-            scrollView.profileImageView.loadImage(urlString: profileImageUrl)
-            backView.loadImage(urlString: profileImageUrl)
-            setupNavBar()
-            scrollView.user = user
+            backView.loadImage(urlString: profileImageUrl, { (completed) in
+                if completed {
+                    self.scrollView.usernameLabel.text = self.user?.username
+                    
+                    self.setupNavBar()
+                    if self.user?.uid == Auth.auth().currentUser?.uid {
+                        self.scrollView.isCurrentUserVar = true
+                    } else {
+                        self.scrollView.isCurrentUserVar = false
+                    }
+                    self.scrollView.user = self.user
+                    self.scrollView.profileImageView.loadImage(urlString: profileImageUrl)
+                    self.scrollView.isHidden = false
+                    self.scrollView.scrollToTop(false)
+                    self.scrollView.alpha = 0
+                    UIView.animate(withDuration:0.4, animations: {
+                        self.scrollView.alpha = 1
+                    })
+                }
+            })
         }
     }
     var navbarHeight: CGFloat = 44 {
@@ -49,6 +67,7 @@ class ProfileController: UIViewController {
     //MARK: - Init & View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
+        backView.image = defaultBackImage.image
         setupNavBar()
         scrollView.delegateVC = self
         scrollView.delegate = self
@@ -58,6 +77,7 @@ class ProfileController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollView.isHidden = true
         view.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupViews()
         scrollView.confBounds()
@@ -73,7 +93,6 @@ class ProfileController: UIViewController {
             print("notself")
             fetchUser()
         }
-        scrollView.scrollToTop()
     }
     
     //MARK: - Setup
@@ -110,27 +129,27 @@ class ProfileController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
             do {
                 try Auth.auth().signOut()
-
+                
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)
                 self.present(navController, animated: true, completion: nil)
-
+                
             } catch let signOutErr { print("Failed to sign out:", signOutErr) }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+        
         present(alertController, animated: true, completion: nil)
     }
 }
 
 extension ProfileController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-                
+        
         //Put the username of the profile in the navigationbar, as soon as the "Big" username isn't fully visible anymore.
         let statusbarHeight = UIApplication.shared.statusBarFrame.height
         let contentOffset = scrollView.contentOffset.y
         let usernameY = self.scrollView.usernameLabel.frame.minY
-   
+        
         if statusbarHeight + contentOffset >= usernameY {
             self.navigationItem.title = self.user?.username
             self.navigationController?.navigationBar.isTranslucent  = false
@@ -153,8 +172,11 @@ extension ProfileController: UIScrollViewDelegate {
 }
 
 extension ProfileController: profileSVToParentVC {
-    func isCurrentUser() -> Bool {
-        return (user?.uid == Auth.auth().currentUser?.uid)
+    func openSearchUsersVC() {
+        let sarchAllUsersVC = SearchUserProfileTableViewController()
+        DispatchQueue.main.async( execute: {
+            self.navigationController?.pushViewController(sarchAllUsersVC, animated: true)
+        })
     }
     
     override func viewDidLayoutSubviews() {

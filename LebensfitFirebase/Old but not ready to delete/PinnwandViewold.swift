@@ -94,7 +94,7 @@ class PinnwandView: UIView {
     func setupTableView() {
         pinnwandTableView.delegate            = self
         pinnwandTableView.dataSource          = self
-        pinnwandTableView.register(TeilnehmerTVCell.self, forCellReuseIdentifier: TeilnehmerTVCell.reuseIdentifier)
+        pinnwandTableView.register(UserTVCell.self, forCellReuseIdentifier: UserTVCell.reuseIdentifier)
         pinnwandTableView.tintColor           = .black
         pinnwandTableView.isScrollEnabled     = false
     }
@@ -177,7 +177,7 @@ extension PinnwandView: UITableViewDelegate {
 extension PinnwandView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row     = tableView.dequeueReusableCell(withIdentifier: TeilnehmerTVCell.reuseIdentifier, for: indexPath) as! TeilnehmerTVCell
+        let row     = tableView.dequeueReusableCell(withIdentifier: UserTVCell.reuseIdentifier, for: indexPath) as! UserTVCell
         row.usernameLabel.text = "Hallo Welt, ich bin ein Nutzer"
         row.confBounds()
         return row

@@ -11,7 +11,7 @@ import Firebase
 
 protocol profileSVToParentVC: Any {
     func viewDidLayoutSubviews()
-    func isCurrentUser() -> Bool
+    func openSearchUsersVC()
 }
 
 class ProfileScrollView: UIScrollView {
@@ -29,6 +29,7 @@ class ProfileScrollView: UIScrollView {
     
     var heightOfAllPaddings: CGFloat    = 0
     var matchingHeightForFullPinnwand: CGFloat = 0
+    var isCurrentUserVar = true
     var user: User? {
         didSet{
             guard let user = user else { return }
@@ -221,8 +222,7 @@ class ProfileScrollView: UIScrollView {
     
     //sets different button propertys based if the displaying user is the current user
     func isCurrentUser() {
-        
-        if delegateVC?.isCurrentUser() ?? true {
+        if isCurrentUserVar {
             followButton.setTitle("Freunde finden", for: .normal)
             followButton.addTarget(self, action: #selector(findFriendsButtonPressed), for: .touchUpInside)
         } else {
@@ -271,8 +271,7 @@ class ProfileScrollView: UIScrollView {
         selectButton(button: followButton, selected: selected)
     }
     @objc func findFriendsButtonPressed() {
-        print("findFriendsButtonPressed")
-        //TODO: open new tableviewcontroller
+        delegateVC?.openSearchUsersVC()
     }
     
     func selectButton(button: UIButton, selected: Bool) {

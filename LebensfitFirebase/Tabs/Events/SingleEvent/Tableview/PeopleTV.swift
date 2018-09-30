@@ -9,18 +9,15 @@
 import UIKit
 import Firebase
 
-protocol tableViewToSingleEvent: Any {
+protocol peopleTableViewDelegate: Any {
     func gotoProfile(clickedUID: String)
-}
-protocol tableViewToScrollView: Any {
     func finishedLoadingParticipants()
 }
 
 class PeopleTableView: UIView, ReusableView {
     
     //MARK: - Properties & Variables
-    var delegateTVToSingleEvent: tableViewToSingleEvent?
-    var delegateTVToScrollView: tableViewToScrollView?
+    var delegate: peopleTableViewDelegate?
     var myEvent: Event
     
     var users: [User]! = [User]()
@@ -87,7 +84,7 @@ class PeopleTableView: UIView, ReusableView {
             padding = 15+25+5
         }
         self.updateConstraints()
-        delegateTVToScrollView?.finishedLoadingParticipants()
+        delegate?.finishedLoadingParticipants()
     }
     
     //MARK: - Do not change Methods
@@ -124,7 +121,7 @@ extension PeopleTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let id = users[indexPath.row].uid else { return }
-        delegateTVToSingleEvent?.gotoProfile(clickedUID: id)
+        delegate?.gotoProfile(clickedUID: id)
     }
     
 }

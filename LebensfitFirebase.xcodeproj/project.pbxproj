@@ -77,6 +77,8 @@
 		01F44A87214AABED006723ED /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A86214AABED006723ED /* ProfileController.swift */; };
 		01F44A89214AB0AC006723ED /* APIProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A88214AB0AC006723ED /* APIProfile.swift */; };
 		01F44A8B214AB250006723ED /* HELG+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F44A8A214AB250006723ED /* HELG+Firebase.swift */; };
+		FE2229A72160D7250028E5DB /* ParticipateButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */; };
+		FE2229A92160F0ED0028E5DB /* HELG+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2229A82160F0ED0028E5DB /* HELG+UIStackView.swift */; };
 		FE75A144215AB75D0036BE8D /* HELG+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */; };
 		FE75A146215AB7A40036BE8D /* HELG+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A145215AB7A40036BE8D /* HELG+Int.swift */; };
 		FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A147215AB8160036BE8D /* HELG+String.swift */; };
@@ -163,6 +165,8 @@
 		2CC9A73F3DA6AA3C374BD2FB /* Pods-LebensfitFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC62E27B26362BB6A9BEDCE /* Pods-LebensfitFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LebensfitFirebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-LebensfitFirebase/Pods-LebensfitFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		D943DEA390B7685A33F6345E /* Pods_LebensfitFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LebensfitFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipateButtonStackView.swift; sourceTree = "<group>"; };
+		FE2229A82160F0ED0028E5DB /* HELG+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIStackView.swift"; sourceTree = "<group>"; };
 		FE75A143215AB75D0036BE8D /* HELG+NSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+NSDate.swift"; sourceTree = "<group>"; };
 		FE75A145215AB7A40036BE8D /* HELG+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+Int.swift"; sourceTree = "<group>"; };
 		FE75A147215AB8160036BE8D /* HELG+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+String.swift"; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				FE75A145215AB7A40036BE8D /* HELG+Int.swift */,
 				FE75A147215AB8160036BE8D /* HELG+String.swift */,
 				0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */,
+				FE2229A82160F0ED0028E5DB /* HELG+UIStackView.swift */,
 				016DA581214272B100B07F69 /* POPShakeable.swift */,
 				010BC27E213D928E00530B2D /* ReuseableView.swift */,
 				010BC27F213D928E00530B2D /* ReuseableViewCtr.swift */,
@@ -389,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */,
+				FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */,
 				01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */,
 				01F44A82214A8757006723ED /* APIEvent.swift */,
 				015F8CBE2153A3A90090EC2C /* Tableview */,
@@ -627,6 +633,7 @@
 				014CF79C2151441F006E17A6 /* CDEvent.swift in Sources */,
 				FE75A148215AB8160036BE8D /* HELG+String.swift in Sources */,
 				0171A779215E2CEF00C3ABC2 /* PinnwandStackView.swift in Sources */,
+				FE2229A72160D7250028E5DB /* ParticipateButtonStackView.swift in Sources */,
 				FECC8FB521455430007F3F3F /* HELG+Date.swift in Sources */,
 				014CF79E2151469C006E17A6 /* APILogin.swift in Sources */,
 				FEA8AB7B214FDFC9001E1E7E /* PinnwandViewold.swift in Sources */,
@@ -634,6 +641,7 @@
 				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
 				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
 				010BC276213D920900530B2D /* ShopController.swift in Sources */,
+				FE2229A92160F0ED0028E5DB /* HELG+UIStackView.swift in Sources */,
 				018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */,
 				015416B92148E7E7006A1A02 /* WeekViewExtensionMethods.swift in Sources */,
 				014CF79121513EFE006E17A6 /* Event+CoreDataClass.swift in Sources */,

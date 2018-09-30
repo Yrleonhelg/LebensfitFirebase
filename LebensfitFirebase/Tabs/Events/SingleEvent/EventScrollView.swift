@@ -9,17 +9,17 @@
 import UIKit
 import MapKit
 
-@objc protocol scrollViewToSingleEvent: Any {
+@objc protocol eventScrollViewDelegate: Any {
     func getStringFromLocation(location: CLLocationCoordinate2D) -> String
     @objc func openInGoogleMaps()
     func viewDidLayoutSubviews()
-    func getSingleEventVC() -> SingleEventViewController
+    func gotoProfile(clickedUID: String)
 }
 
 class EventScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
-    var delegateSVToSingleEvent: scrollViewToSingleEvent?
+    var delegateSV: eventScrollViewDelegate?
     let thisEvent:              Event
     var tableViewControllers:   [PeopleTableView]!
     var tableViews:             [UITableView]!
@@ -132,7 +132,7 @@ class EventScrollView: UIScrollView {
             timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
         }
         if let location = thisEvent.eventLocation {
-            locationLabel.text  = delegateSVToSingleEvent?.getStringFromLocation(location: location as! CLLocationCoordinate2D)
+            locationLabel.text  = delegateSV?.getStringFromLocation(location: location as! CLLocationCoordinate2D)
         }
         if let date = thisEvent.eventStartingDate {
             dateLabel.text = (date as Date).formatDateEEEEddMMMyyyy()
@@ -140,7 +140,7 @@ class EventScrollView: UIScrollView {
     }
     
     func setupViews() {
-        let locationTap = UITapGestureRecognizer(target: delegateSVToSingleEvent, action: #selector(delegateSVToSingleEvent?.openInGoogleMaps))
+        let locationTap = UITapGestureRecognizer(target: delegate, action: #selector(delegateSV?.openInGoogleMaps))
         locationTap.cancelsTouchesInView = false
         locationTap.numberOfTapsRequired = 1
         
@@ -160,8 +160,7 @@ class EventScrollView: UIScrollView {
         
         for controller in tableViewControllers {
             contentView.addSubview(controller)
-            controller.delegateTVToSingleEvent = delegateSVToSingleEvent?.getSingleEventVC()
-            controller.delegateTVToScrollView = self
+            controller.delegate = self
             let heightCon = controller.heightAnchor.constraint(equalToConstant: 0)
             heightCon.isActive = true
             heightCons.append(heightCon)
@@ -217,7 +216,8 @@ class EventScrollView: UIScrollView {
     }
 }
 
-extension EventScrollView: tableViewToScrollView {
+extension EventScrollView: peopleTableViewDelegate {
+    
     func finishedLoadingParticipants() {
         if surePeopleTV.finishedLoading == true && maybePeopleTV.finishedLoading == true && nopePeopleTV.finishedLoading == true {
             for (index, controller) in tableViewControllers.enumerated() {
@@ -232,8 +232,12 @@ extension EventScrollView: tableViewToScrollView {
                 }
                 controller.finishedLoading = false
                 layoutIfNeeded()
-                delegateSVToSingleEvent?.viewDidLayoutSubviews()
+                delegateSV?.viewDidLayoutSubviews()
             }
         }
+    }
+    
+    func gotoProfile(clickedUID: String) {
+        delegateSV?.gotoProfile(clickedUID: clickedUID)
     }
 }

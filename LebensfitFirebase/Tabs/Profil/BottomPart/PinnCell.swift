@@ -63,7 +63,9 @@ class PinnCell: UITableViewCell, ReusableView {
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: pictureHeight, height: pictureHeight)
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         profileImageView.layer.cornerRadius = pictureHeight / 2
-        chevronLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
+        
+        chevronLabel.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        chevronLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         messagePreview.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: bottomAnchor, right: chevronLabel.leftAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 15, width: 0, height: 0)
     }
     

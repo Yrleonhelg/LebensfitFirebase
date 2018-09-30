@@ -12,31 +12,38 @@ import Firebase
 class LastCell: UITableViewCell, ReusableView {
     //MARK: - Properties & Variables
     //MARK: - GUI Objects
-    
-    let plusImageView: UIImageView = {
-        let view              = UIImageView()
-        view.contentMode      = .scaleAspectFit
-        view.clipsToBounds    = true
-        view.image            = UIImage(named: "plus_glow")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    let createNewPinLabel: UILabel = {
+        let label   = UILabel()
+        label.text  = "Neuen Pin erstellen"
+        label.font  = UIFont.systemFont(ofSize: 25)
+        label.numberOfLines = 2
+        return label
     }()
     
+    let chevronLabel: UILabel = {
+        let label       = UILabel()
+        label.textColor = .black
+        label.text      = "›"
+        label.font      = UIFont.boldSystemFont(ofSize: 25)
+        return label
+    }()
 
     //MARK: - Init & View Loading
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
-        self.layer.borderWidth = 2
         setupViews()
     }
     
     //MARK: - Setup
     func setupViews() {
-        addSubview(plusImageView)
-        plusImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        plusImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        plusImageView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        addSubview(createNewPinLabel)
+        addSubview(chevronLabel)
+        chevronLabel.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        chevronLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        createNewPinLabel.anchor(top: nil, left: leftAnchor, bottom: nil, right: chevronLabel.leftAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        createNewPinLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     

@@ -32,8 +32,6 @@ class PinnwandStackView: UIStackView {
     
     let pinnwandTableView: UITableView = {
         let tableview = UITableView()
-        tableview.layer.borderColor = UIColor.red.cgColor
-        tableview.layer.borderWidth = 1
         tableview.backgroundColor = .clear
         tableview.sizeToFit()
         return tableview

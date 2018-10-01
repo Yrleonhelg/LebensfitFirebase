@@ -18,7 +18,7 @@ extension WeekView: WeekViewDelegate {
         //Make all headers unexpand and in its default state
         unexpandAllHeaders()
         setupValues()
-        setupArray()
+        delegate?.weekChanged()
         setnewWeekValues(week: week, year: year)
         
         //Block user from going to the past months

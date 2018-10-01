@@ -11,16 +11,19 @@ import EventKit
 import Firebase
 
 extension TerminController {
+    //TODO: manage with core data
     func fillArray() {
         var startDate   = Date()
         var finDate     = Date()
+        var newArray    = [Event]()
         for i in 0..<10 {
             finDate     = Calendar.current.date(byAdding: .minute, value: 50, to: startDate)!
             let event   = Event(id: Int32(i), type: .pilatesChair, start: startDate as NSDate, finish: finDate as NSDate, needsApplication: nil)
-            self.eventArray.append(event)
+            newArray.append(event)
             startDate   = Calendar.current.date(byAdding: .minute, value: 60*6, to: startDate)!
             
         }
+        self.eventArray = newArray
     }
     
     func addEventToCalendar() {

@@ -13,9 +13,9 @@ struct expandableEvent {
     let events: [Event]
 }
 
-protocol weekViewToTerminController: Any {
+protocol weekViewDelegate: Any {
     func gotoEvent(eventID: Int32)
-    func getEventArray() -> [Event]
+    func weekChanged()
 }
 
 class WeekView: UIView {
@@ -33,12 +33,11 @@ class WeekView: UIView {
     var presentDate                 = Date()
     var presentYear                 = 0
     var mondayOfPresentWeek         = Date()
-    var lastExpandedHeader: WeekDayHeader?
     var lastExpandedSection: Int?
     
+    var delegate: weekViewDelegate?
     var twoDimensionalEventArray    = [expandableEvent]()
-    var parentVC: TerminController?
-    var delegate: weekViewToTerminController?
+    
     
     //MARK: - GUI Objects
     let calendarTableView: UITableView = {
@@ -61,7 +60,6 @@ class WeekView: UIView {
         setupViews()
         confBounds()
         setupValues()
-        setupArray()
     }
     
     //MARK: - Setup
@@ -96,10 +94,9 @@ class WeekView: UIView {
     }
     
     //Loops trough the parents array of events and puts the ones that are in the displayed week in an array (sorted by day).
-    func setupArray() {
+    func fillTwoDimensionalEventArray(eventArray: [Event]) {
         twoDimensionalEventArray.removeAll()
-        let eventArray          = (delegate?.getEventArray()) ?? [Event]()
-        let numberOfWeekdays    = 7
+        let numberOfWeekdays    = WeekDays.count
         
         for x in 0..<numberOfWeekdays {
             let currentDay              = mondayOfPresentWeek.addDaysToToday(amount: x)

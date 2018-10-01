@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-protocol profileSVToParentVC: Any {
+protocol profileScrollViewDelegate: Any {
     func viewDidLayoutSubviews()
     func openSearchUsersVC()
 }
@@ -17,7 +17,7 @@ protocol profileSVToParentVC: Any {
 class ProfileScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
-    var delegateVC: profileSVToParentVC?
+    var delegateVC: profileScrollViewDelegate?
     var displayFittingHeightForInteractionViews = true
     var safeArea: CGFloat = 623.0
     var navbarHeight: CGFloat = 44

@@ -12,6 +12,12 @@ protocol cellClickedDelegate: Any {
     func gotoDay(date: Date)
 }
 
+enum dayProperty {
+    case before
+    case today
+    case after
+}
+
 class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Properties & Variables
@@ -25,14 +31,14 @@ class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
     var presentDate             = Date()
     var firstWeekDayOfMonth     = 0   //(Sunday-Saturday 1-7
     var currentWeekDay          = Calendar.current.component(.weekday, from: Date())
-    var parentVC: TerminController?
     var delegate: cellClickedDelegate?
     
-    enum dayProperty {
-        case before
-        case today
-        case after
+    var eventArray = [Event]() {
+        didSet {
+            calendarCollectionView.reloadData()
+        }
     }
+
     
     //MARK: - GUI Objects
     let calendarCollectionView: UICollectionView = {
@@ -114,8 +120,7 @@ class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
     }
     
     func isAnEventThisDay(date: Date) -> Bool {
-        guard let parent        = parentVC else { return false }
-        for event in parent.eventArray {
+        for event in eventArray {
             if let eventStartTime = event.eventStartingDate {
                 if (Calendar.current.isDate(date, inSameDayAs: eventStartTime as Date)) {
                     return true

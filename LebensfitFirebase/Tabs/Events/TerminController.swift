@@ -11,7 +11,12 @@ import EventKit
 
 class TerminController: UIViewController {
     //MARK: - Properties & Variables
-    var eventArray  = [Event]()
+    var eventArray  = [Event]() {
+        didSet {
+            calendarView.eventArray = eventArray
+            weekView.fillTwoDimensionalEventArray(eventArray: eventArray)
+        }
+    }
     
     //MARK: - GUI Objects
     let segmentedController: UISegmentedControl = {
@@ -59,10 +64,8 @@ class TerminController: UIViewController {
         view.addSubview(segmentedController)
         view.addSubview(calendarView)
         view.addSubview(weekView)
-        calendarView.parentVC = self
         calendarView.delegate = self
         weekView.delegate = self
-        weekView.parentVC = self
         weekView.isHidden = true
     }
     
@@ -120,7 +123,7 @@ extension TerminController: cellClickedDelegate {
         weekView.presentDate = date
         weekView.setnewWeekValues(week: weekOfDate, year: yearOfDate)
         weekView.setupValues()
-        weekView.setupArray()
+        weekView.fillTwoDimensionalEventArray(eventArray: eventArray)
         
         //Make Header automaticly expand (with deadline that it appears after view is there
         let formattedWeekDay = date.weekday.formatedWeekDay
@@ -132,9 +135,9 @@ extension TerminController: cellClickedDelegate {
     }
 }
 
-extension TerminController: weekViewToTerminController {
-    func getEventArray() -> [Event] {
-        return eventArray
+extension TerminController: weekViewDelegate {
+    func weekChanged() {
+        weekView.fillTwoDimensionalEventArray(eventArray: eventArray)
     }
     
     //Goes directly to an event
@@ -145,5 +148,4 @@ extension TerminController: weekViewToTerminController {
             self.navigationController?.pushViewController(eventVC, animated: true)
         })
     }
-    
 }

@@ -185,7 +185,7 @@ extension ProfileController: UIScrollViewDelegate {
     }
 }
 
-extension ProfileController: profileSVToParentVC {
+extension ProfileController: profileScrollViewDelegate {
     func openSearchUsersVC() {
         let sarchAllUsersVC = SearchUserProfileTableViewController()
         DispatchQueue.main.async( execute: {

@@ -16,40 +16,18 @@ extension WeekView: WeekViewDelegate {
         presentDate = presentDate.addDaysToToday(amount: valuue)
         
         //Make all headers unexpand and in its default state
-        for var i in 0..<twoDimensionalEventArray.count {
-            twoDimensionalEventArray[i].isExpanded = false
-            i += 1
-        }
         unexpandAllHeaders()
         setupValues()
         setupArray()
         setnewWeekValues(week: week, year: year)
         
         //Block user from going to the past months
-        let calendar = Calendar.current
-        let thisWeek = calendar.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
+        let thisWeek = Calendar.current.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
         weekOverView.previousWeekButton.isEnabled = !(currentWeek == thisWeek && currentYear == presentYear)
     }
 }
 
-//MARK: - Gesture Recognizer
-extension WeekView: UIGestureRecognizerDelegate {
-    @objc func handleHeaderTap(sender: UITapGestureRecognizer) {
-        let selectedView = sender.view as! WeekDayHeader
-        let section = selectedView.tag
-        
-        if section < twoDimensionalEventArray.count && !twoDimensionalEventArray[section].events.isEmpty {
-            manageLastHeader(selectedView: selectedView, completion: { isLast in
-                if isLast {
-                    self.twoDimensionalEventArray[section].isExpanded = !self.twoDimensionalEventArray[section].isExpanded
-                    self.isExpandedOrNot(view: selectedView)
-                }
-            })
-        } else {
-            selectedView.shake()
-        }
-    }
-}
+
 
 //MARK: - TVDelegate
 extension WeekView: UITableViewDelegate {
@@ -90,31 +68,32 @@ extension WeekView: UITableViewDelegate {
 extension WeekView: UITableViewDataSource {
     //Header / Accordion
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view            = tableView.dequeueReusableHeaderFooterView(withIdentifier: WeekDayHeader.reuseIdentifier) as! WeekDayHeader
-        let headerTap       = UITapGestureRecognizer(target: self, action: #selector(self.handleHeaderTap(sender:)))
-        headerTap.delegate  = self
-        
-        view.addGestureRecognizer(headerTap)
-        view.tag            = section
-        view.isSelected     = false
-        view.dayLabel.text  = WeekDays[section]
+        let header            = tableView.dequeueReusableHeaderFooterView(withIdentifier: WeekDayHeader.reuseIdentifier) as! WeekDayHeader
+        setDefaultValuesForHeader(header: header, section: section)
         
         //Calculate Date and Highlight if today
-        let valuee = -(currentWeekDayIndex - (section))
-        view.confBounds()
+        let dayDifference = -(currentWeekDayIndex - (section))
         if section == currentWeekDayIndex && presentDate.noon == todaysDate.noon {
-            view.myDate         = todaysDate
-            view.addDot()
+            header.myDate         = todaysDate
+            header.addDot()
         } else {
-            view.myDate         = presentDate.addDaysToToday(amount: valuee)
-            view.removeDot()
+            header.myDate         = presentDate.addDaysToToday(amount: dayDifference)
         }
+        header.dateLabel.text = header.myDate.formatDateddMMMyyyy()
+        return header
+    }
+    
+    func setDefaultValuesForHeader(header: WeekDayHeader, section: Int) {
+        //Click Recognizer
+        let headerTap       = UITapGestureRecognizer(target: self, action: #selector(self.handleHeaderTap(sender:)))
+        headerTap.delegate  = self
+        header.addGestureRecognizer(headerTap)
         
-        //Set the date and check if the Header is expanded and should display content
-        view.dateLabel.text = view.myDate.formatDateddMMMyyyy()
-        isExpandedOrNot(view: view)
-        
-        return view
+        //Default Values
+        header.tag            = section
+        header.isSelected     = false
+        header.dayLabel.text  = WeekDays[section]
+        header.removeDot()
     }
     
     //Rows

@@ -71,7 +71,7 @@ class ParticipateButtonStackView: UIStackView {
     //MARK: - Setup
     func setupStackView() {
         self.axis           = .horizontal
-        self.spacing        = 1
+        self.spacing        = 0
         self.alignment      = .leading
         self.distribution   = .fillEqually
     }

@@ -395,8 +395,8 @@
 			isa = PBXGroup;
 			children = (
 				0186319F2146BA3700E5A9C2 /* SingleEventViewController.swift */,
-				FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */,
 				01EEF39C21554A7C008BA0C4 /* EventScrollView.swift */,
+				FE2229A62160D7250028E5DB /* ParticipateButtonStackView.swift */,
 				01F44A82214A8757006723ED /* APIEvent.swift */,
 				015F8CBE2153A3A90090EC2C /* Tableview */,
 			);

@@ -123,11 +123,12 @@ extension TerminController: cellClickedDelegate {
         weekView.setupArray()
         
         //Make Header automaticly expand (with deadline that it appears after view is there
-        if weekView.twoDimensionalEventArray.count > date.weekday.formatedWeekDay {
+        let formattedWeekDay = date.weekday.formatedWeekDay
+        //if weekView.twoDimensionalEventArray.count > formattedWeekDay {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.weekView.expandHeader(section: date.weekday.formatedWeekDay)
+                self.weekView.startSequenceOfEventsToExpandHeader(section: formattedWeekDay, header: nil)
             }
-        }
+        //}
     }
 }
 

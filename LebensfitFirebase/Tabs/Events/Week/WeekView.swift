@@ -34,6 +34,7 @@ class WeekView: UIView {
     var presentYear                 = 0
     var mondayOfPresentWeek         = Date()
     var lastExpandedHeader: WeekDayHeader?
+    var lastExpandedSection: Int?
     
     var twoDimensionalEventArray    = [expandableEvent]()
     var parentVC: TerminController?
@@ -94,97 +95,6 @@ class WeekView: UIView {
         calendarTableView.anchor(top: weekOverView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
-
-    //MARK: - Methods
-    //MARK: Reload
-    func setnewWeekValues(week: Int, year: Int) {
-        currentWeek = week
-        currentYear = year
-        
-        //If method is called from parent it secures that the week on weekoverview is correct
-        weekOverView.currentWeek = week
-        weekOverView.currentYear = year
-        reloadData()
-    }
-    
-    @objc func reloadData() {
-        DispatchQueue.main.async( execute: {
-            self.calendarTableView.reloadData()
-            self.weekOverView.setWeekAndYearValues(week: self.currentWeek, Year: self.currentYear)
-        })
-    }
-    
-    
-    //MARK: Header
-    //TODO: re write this complicated methods
-    func isExpandedOrNot(view: WeekDayHeader) {
-        if view.tag < twoDimensionalEventArray.count {
-            let isExpanded = twoDimensionalEventArray[view.tag].isExpanded
-            setValuesOfHeader(isExpanded: isExpanded, section: view.tag, headerView: view)
-        } else {
-            view.chevronLabel.textColor = LebensfitSettings.Colors.disabled
-        }
-    }
-    
-    func unexpandAllHeaders() {
-        let numb = numberOfSections(in: calendarTableView)
-        var i = 0
-        while i < numb && i < twoDimensionalEventArray.count {
-            setValuesOfHeader(isExpanded: false, section: i, headerView: nil)
-            i += 1
-        }
-    }
-    
-    func expandHeader(section: Int) {
-        twoDimensionalEventArray[section].isExpanded = true
-        setValuesOfHeader(isExpanded: true, section: section, headerView: nil)
-    }
-    
-    //Changes the appearance of the header, based on the property if it should show it child views
-    func setValuesOfHeader(isExpanded: Bool, section: Int, headerView: WeekDayHeader?) {
-        let indexPaths = makeIndexPathArray(section: section)
-        let numberOfRows = calendarTableView.numberOfRows(inSection: section)
-        
-        //If a header value is passed it takes it and else it creares it with the section
-        let newHeaderView: WeekDayHeader
-        if let header = headerView {
-            newHeaderView = header
-        } else {
-            newHeaderView = calendarTableView.headerView(forSection: section) as! WeekDayHeader
-        }
-        
-        if isExpanded {
-            if numberOfRows == 0 {
-                calendarTableView.insertRows(at: indexPaths, with: .fade)
-            }
-            newHeaderView.chevronLabel.text         = "⌄"
-            newHeaderView.dayLabel.textColor        = LebensfitSettings.Colors.basicTintColor
-            newHeaderView.chevronLabel.textColor    = LebensfitSettings.Colors.basicTintColor
-            newHeaderView.isSelected                = true
-            lastExpandedHeader                      = newHeaderView
-            
-        } else {
-            if numberOfRows != 0 {
-                calendarTableView.deleteRows(at: indexPaths, with: .fade)
-            }
-            newHeaderView.chevronLabel.text         = "›"
-            newHeaderView.dayLabel.textColor        = .black
-            newHeaderView.chevronLabel.textColor    = .black
-            newHeaderView.isSelected                = false
-        }
-    }
-    
-    //MARK: - Helper
-    //creates the index paths out of our array. passed is the section
-    func makeIndexPathArray(section: Int) -> [IndexPath] {
-        var indexPaths = [IndexPath]()
-        for row in twoDimensionalEventArray[section].events.indices {
-            let indexPath = IndexPath(row: row, section: section)
-            indexPaths.append(indexPath)
-        }
-        return indexPaths
-    }
-    
     //Loops trough the parents array of events and puts the ones that are in the displayed week in an array (sorted by day).
     func setupArray() {
         twoDimensionalEventArray.removeAll()
@@ -207,21 +117,21 @@ class WeekView: UIView {
         }
     }
     
-    func manageLastHeader(selectedView: WeekDayHeader, completion: @escaping (Bool) -> ()) {
-        if let lh = lastExpandedHeader {
-            twoDimensionalEventArray[lh.tag].isExpanded = false
-            isExpandedOrNot(view: lh)
-            lastExpandedHeader = nil
-            
-            if selectedView == lh {
-                completion(false)
-                return
-            }
-            completion(true)
-            return
-        }
-        completion(true)
-        return
+    func setnewWeekValues(week: Int, year: Int) {
+        currentWeek = week
+        currentYear = year
+        
+        //If method is called from parent it secures that the week on weekoverview is correct
+        weekOverView.currentWeek = week
+        weekOverView.currentYear = year
+        reloadData()
+    }
+    
+    @objc func reloadData() {
+        DispatchQueue.main.async( execute: {
+            self.calendarTableView.reloadData()
+            self.weekOverView.setWeekAndYearValues(week: self.currentWeek, Year: self.currentYear)
+        })
     }
     
     //MARK: - Do not change Methods
@@ -230,3 +140,151 @@ class WeekView: UIView {
     }
 }
 
+//MARK: - Gesture Recognizer
+extension WeekView: UIGestureRecognizerDelegate {
+    @objc func handleHeaderTap(sender: UITapGestureRecognizer) {
+        //1. Get header and section of the tapped Header
+        let selectedHeader = sender.view as! WeekDayHeader
+        guard let section = sender.view?.tag else { return }
+        
+        startSequenceOfEventsToExpandHeader(section: section, header: selectedHeader)
+    }
+}
+
+
+//MARK: - Accordion
+//This Extension handles everything that belongs to the functionality of expanding and unexpanding the headers.
+extension WeekView {
+    
+    func startSequenceOfEventsToExpandHeader(section: Int, header: WeekDayHeader?) {
+        //2. check if the array has data and can expand without an error.. else -> shake and return
+        if checkIfSectionCanBeExpanded(section: section) {
+            //3. unexpand all headers and hide their rows
+            unexpandAllHeaders()
+            //4. check if clicked section was the last opened section.. yes -> return
+            if sectionWasLastOpenedSection(section: section) {
+                lastExpandedSection = nil
+                return
+            } else {
+                //5. Expand clicked header and show it's rows.
+                expandHeaderForSection(section: section)
+                showRowsForSection(section: section)
+                return
+            }
+        } else {
+            if let selectedHeader = header {
+                selectedHeader.shake()
+            }
+            return
+        }
+    }
+    
+    /**
+     First call before headers (un)expand.
+     - returns: Boolean if the appropriate array has data at the section it should expand
+     - parameter section: Section of the clicked Header (0-6)
+     */
+    func checkIfSectionCanBeExpanded(section: Int) -> Bool {
+        if section < twoDimensionalEventArray.count && !twoDimensionalEventArray[section].events.isEmpty {
+            return true
+        }
+        return false
+    }
+    
+    /**
+     Unexpands all Headers and hides the belonging rows.
+     */
+    func unexpandAllHeaders() {
+        let numberOfSections = calendarTableView.numberOfSections
+        for i in 0..<numberOfSections {
+            hideRowsForSection(section: i)
+            unexpandHeaderForSection(section: i)
+        }
+    }
+    
+    /**
+     Unexpands a Header
+     - parameter section: Section of the Header which will unexpand (0-6)
+     */
+    func unexpandHeaderForSection(section: Int) {
+        twoDimensionalEventArray[section].isExpanded = false
+        let header = calendarTableView.headerView(forSection: section) as! WeekDayHeader
+        header.chevronLabel.text         = "›"
+        header.dayLabel.textColor        = .black
+        header.chevronLabel.textColor    = .black
+        header.isSelected                = false
+    }
+    
+    /**
+     Expands a Header
+     - parameter section: Section of the Header which will expand (0-6)
+     */
+    func expandHeaderForSection(section: Int) {
+        let header = calendarTableView.headerView(forSection: section) as! WeekDayHeader
+        header.chevronLabel.text         = "⌄"
+        header.dayLabel.textColor        = LebensfitSettings.Colors.basicTintColor
+        header.chevronLabel.textColor    = LebensfitSettings.Colors.basicTintColor
+        header.isSelected                = true
+        lastExpandedSection              = section
+    }    
+    
+    /**
+     Helper method which gives the index Path of all rows for a section
+     - returns: Array of Indexpaths for the rows in the section
+     - parameter section: Section of the rows we need (0-6)
+     */
+    func getRowsForSection(section: Int) -> [IndexPath] {
+        var indexPaths = [IndexPath]()
+        for row in twoDimensionalEventArray[section].events.indices {
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+        }
+        return indexPaths
+    }
+    
+    /**
+     Helper method which shows if the clicked section parameter is the last expanded section
+     - returns: Boolean if the clicked and last Expanded Section are equal
+     - parameter section: Section of the clicked Header (0-6)
+     */
+    func sectionWasLastOpenedSection(section: Int) -> Bool {
+        guard let lastSection = lastExpandedSection else { return false }
+        if section == lastSection {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    /**
+     Hides rows of a section
+     - parameter section: Section of the Rows which will hide (0-6)
+     */
+    func hideRowsForSection(section: Int) {
+        let indexPaths = getRowsForSection(section: section)
+        let numberOfRows = calendarTableView.numberOfRows(inSection: section)
+        
+        if numberOfRows != 0 {
+            twoDimensionalEventArray[section].isExpanded = false
+            calendarTableView.beginUpdates()
+            calendarTableView.deleteRows(at: indexPaths, with: .fade)
+            calendarTableView.endUpdates()
+        }
+    }
+    
+    /**
+     Shows rows of a section
+     - parameter section: Section of the Rows which will appear (0-6)
+     */
+    func showRowsForSection(section: Int) {
+        let indexPaths = getRowsForSection(section: section)
+        let numberOfRows = calendarTableView.numberOfRows(inSection: section)
+        
+        if numberOfRows == 0 {
+            twoDimensionalEventArray[section].isExpanded = true
+            calendarTableView.beginUpdates()
+            calendarTableView.insertRows(at: indexPaths, with: .fade)
+            calendarTableView.endUpdates()
+        }
+    }
+}

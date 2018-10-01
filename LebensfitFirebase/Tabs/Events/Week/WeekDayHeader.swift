@@ -63,6 +63,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
         setupViews()
         dayLeftAnchor = dayLabel.leftAnchor.constraint(equalTo: leftAnchor)
         dayLeftAnchor.isActive = true
+        confBounds()
     }
     
     //MARK: - Setup
@@ -91,7 +92,7 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     
     func removeDot() {
         selectionDot.removeFromSuperview()
-       // confBounds()
+        dayLeftAnchor.constant = padding
     }
 
     //MARK: - Do not change Methods

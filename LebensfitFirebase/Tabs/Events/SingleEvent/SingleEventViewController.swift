@@ -31,7 +31,7 @@ class SingleEventViewController: UIViewController {
     
     
     //MARK: - GUI Objects
-    var scrollView: EventScrollView?
+    var scrollView = EventScrollView()
     var participateButtonStackView: ParticipateButtonStackView?
     
     //divides the buttons from the rest of the view
@@ -59,7 +59,6 @@ class SingleEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView = EventScrollView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), event: thisEvent)
         participateButtonStackView = ParticipateButtonStackView()
         
         fillProvisorischeNutzer()
@@ -71,7 +70,7 @@ class SingleEventViewController: UIViewController {
         super.viewDidAppear(animated)
         confBounds()
         setupNavBar()
-        scrollView?.viewDidAppear()
+        setupScrollView()
     }
     
     //MARK: - Setup
@@ -96,10 +95,14 @@ class SingleEventViewController: UIViewController {
         view.addSubview(dividerButtonsView)
         view.addSubview(dividerButtonsTabbar)
 
-        guard let scrollView = scrollView else { return }
         view.addSubview(scrollView)
-        scrollView.delegateSV = self
+    }
+    
+    func setupScrollView() {
+        scrollView.delegateESV = self
         scrollView.setupTheSetup()
+        applyScrollViewValues()
+        scrollView.setupPeopleTableViewsContentForEvent(event: thisEvent)
     }
     
     func confBounds(){
@@ -110,7 +113,6 @@ class SingleEventViewController: UIViewController {
         dividerButtonsTabbar.anchor(top: buttonStackView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: -0.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         dividerButtonsView.anchor(top: nil, left: view.leftAnchor, bottom: buttonStackView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
-        guard let scrollView = scrollView else { return }
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: dividerButtonsView.topAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
@@ -128,7 +130,33 @@ class SingleEventViewController: UIViewController {
         mapSnapshotOptions.showsPointsOfInterest = true
         snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
         snapShotter.start { (snapshot:MKMapSnapshotter.Snapshot?, error:Error?) in
-            self.scrollView?.mapView.image = snapshot?.image
+            self.scrollView.mapView.image = snapshot?.image
+        }
+    }
+    
+    //hardcoded method to set a string for the location //TODO: make smooth
+    func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
+        if location.latitude == EventLocationStruct.turnhalleEisenwerk.latitude && location.longitude == EventLocationStruct.turnhalleEisenwerk.longitude {
+            return "Turnhalle Eisenwerk, Frauenfeld"
+        }
+        else if location.latitude == EventLocationStruct.zuercherStrasse.latitude && location.longitude == EventLocationStruct.zuercherStrasse.longitude {
+            return "Zürcherstrasse, Frauenfeld"
+        }
+        return "Unbekannt"
+    }
+    
+    func applyScrollViewValues() {
+        let locationString = getStringFromLocation(location: thisEvent.eventLocation as! CLLocationCoordinate2D)
+        
+        scrollView.titleLabel.text = thisEvent.eventName
+        scrollView.notesContentLabel.text  = thisEvent.eventDescription
+        scrollView.locationLabel.text = locationString
+        
+        if let start = thisEvent.eventStartingDate, let finish = thisEvent.eventFinishingDate {
+            scrollView.timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
+        }
+        if let date = thisEvent.eventStartingDate {
+            scrollView.dateLabel.text = (date as Date).formatDateEEEEddMMMyyyy()
         }
     }
     
@@ -149,7 +177,7 @@ extension SingleEventViewController: participateButtonStackViewDelegate {
         case .nope:
             thisEvent.addToEventNopeParticipants(currentUser)
         }
-        scrollView?.reloadAllTableViews()
+        scrollView.setupPeopleTableViewsContentForEvent(event: thisEvent)
     }
     
     
@@ -175,7 +203,6 @@ extension SingleEventViewController: participateButtonStackViewDelegate {
 extension SingleEventViewController: eventScrollViewDelegate {
     
     override func viewDidLayoutSubviews() {
-        guard let scrollView = scrollView else { return }
         var heightOfAllObjects = scrollView.calculateHeightOfAllObjects()
         heightOfAllObjects -= participateButtonStackView?.frame.height ?? 50
         if heightOfAllObjects != 0 {
@@ -183,17 +210,6 @@ extension SingleEventViewController: eventScrollViewDelegate {
         }
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: heightOfAllObjects)
         scrollView.heightOfContent.constant = heightOfAllObjects
-    }
-    
-    //hardcoded method to set a string for the location //TODO: make smooth
-    func getStringFromLocation(location: CLLocationCoordinate2D) -> String{
-        if location.latitude == EventLocationStruct.turnhalleEisenwerk.latitude && location.longitude == EventLocationStruct.turnhalleEisenwerk.longitude {
-            return "Turnhalle Eisenwerk, Frauenfeld"
-        }
-        else if location.latitude == EventLocationStruct.zuercherStrasse.latitude && location.longitude == EventLocationStruct.zuercherStrasse.longitude {
-            return "Zürcherstrasse, Frauenfeld"
-        }
-        return "Unbekannt"
     }
     
     @objc func openInGoogleMaps() {

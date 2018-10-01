@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 
 @objc protocol eventScrollViewDelegate: Any {
-    func getStringFromLocation(location: CLLocationCoordinate2D) -> String
     @objc func openInGoogleMaps()
     func viewDidLayoutSubviews()
     func gotoProfile(clickedUID: String)
@@ -19,8 +18,7 @@ import MapKit
 class EventScrollView: UIScrollView {
     
     //MARK: - Properties & Variables
-    var delegateSV: eventScrollViewDelegate?
-    let thisEvent:              Event
+    var delegateESV:            eventScrollViewDelegate?
     var tableViewControllers:   [PeopleTableView]!
     var tableViews:             [UITableView]!
     
@@ -96,16 +94,12 @@ class EventScrollView: UIScrollView {
         return label
     }()
     
-    let surePeopleTV: SurePeople!
-    let maybePeopleTV: MaybePeople!
-    let nopePeopleTV: NopePeople!
+    let surePeopleTV = PeopleTableView()
+    let maybePeopleTV = PeopleTableView()
+    let nopePeopleTV = PeopleTableView()
     
     //MARK: - Init & View Loading
-    init(frame: CGRect, event: Event) {
-        self.thisEvent = event
-        surePeopleTV = SurePeople(frame: frame, event: event)
-        maybePeopleTV = MaybePeople(frame: frame, event: event)
-        nopePeopleTV = NopePeople(frame: frame, event: event)
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
     }
@@ -113,34 +107,13 @@ class EventScrollView: UIScrollView {
     func setupTheSetup() {
         tableViewControllers    = [surePeopleTV, maybePeopleTV, nopePeopleTV]
         tableViews              = [surePeopleTV.peopleTableView, maybePeopleTV.peopleTableView, nopePeopleTV.peopleTableView]
-        applyDefaultValues()
         setupViews()
-    }
-    
-    func viewDidAppear() {
         confBounds()
-        for controller in tableViewControllers {
-            controller.loadUsers()
-        }
     }
     
     //MARK: - Setup
-    func applyDefaultValues() {
-        titleLabel.text = thisEvent.eventName
-        notesContentLabel.text  = thisEvent.eventDescription
-        if let start = thisEvent.eventStartingDate, let finish = thisEvent.eventFinishingDate {
-            timeLabel.text = "Von \(start.getHourAndMinuteAsStringFromDate()) bis \(finish.getHourAndMinuteAsStringFromDate())"
-        }
-        if let location = thisEvent.eventLocation {
-            locationLabel.text  = delegateSV?.getStringFromLocation(location: location as! CLLocationCoordinate2D)
-        }
-        if let date = thisEvent.eventStartingDate {
-            dateLabel.text = (date as Date).formatDateEEEEddMMMyyyy()
-        }
-    }
-    
     func setupViews() {
-        let locationTap = UITapGestureRecognizer(target: delegate, action: #selector(delegateSV?.openInGoogleMaps))
+        let locationTap = UITapGestureRecognizer(target: delegate, action: #selector(delegateESV?.openInGoogleMaps))
         locationTap.cancelsTouchesInView = false
         locationTap.numberOfTapsRequired = 1
         
@@ -192,6 +165,17 @@ class EventScrollView: UIScrollView {
         nopePeopleTV.anchor(top: maybePeopleTV.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
+    func setupPeopleTableViewsContentForEvent(event: Event) {
+        surePeopleTV.peopleLabel.text = "Teilnehmer:"
+        maybePeopleTV.peopleLabel.text = "Interessenten:"
+        nopePeopleTV.peopleLabel.text = "Absagen:"
+        
+        surePeopleTV.users = event.eventSureParticipants?.allObjects as? [User] ?? [User]()
+        maybePeopleTV.users = event.eventMaybeParticipants?.allObjects as? [User] ?? [User]()
+        nopePeopleTV.users = event.eventNopeParticipants?.allObjects as? [User] ?? [User]()
+        reloadAllTableViews()
+    }
+    
     //MARK: - Methods
     func calculateHeightOfAllObjects() -> CGFloat{
         let uiArray: [UIView] = [titleLabel, locationLabel, dateLabel, timeLabel, mapView, notesHeaderLabel, notesContentLabel, surePeopleTV, maybePeopleTV, nopePeopleTV]
@@ -232,12 +216,12 @@ extension EventScrollView: peopleTableViewDelegate {
                 }
                 controller.finishedLoading = false
                 layoutIfNeeded()
-                delegateSV?.viewDidLayoutSubviews()
+                delegateESV?.viewDidLayoutSubviews()
             }
         }
     }
     
     func gotoProfile(clickedUID: String) {
-        delegateSV?.gotoProfile(clickedUID: clickedUID)
+        delegateESV?.gotoProfile(clickedUID: clickedUID)
     }
 }

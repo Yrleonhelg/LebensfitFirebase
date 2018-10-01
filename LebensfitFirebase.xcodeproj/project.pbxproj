@@ -53,9 +53,6 @@
 		0171A779215E2CEF00C3ABC2 /* PinnwandStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171A778215E2CEF00C3ABC2 /* PinnwandStackView.swift */; };
 		0171A77B215E5F1300C3ABC2 /* PinnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171A77A215E5F1300C3ABC2 /* PinnCell.swift */; };
 		0179697F215A6D7700B652C4 /* HELG+UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */; };
-		017FE8992152832C00B75330 /* SurePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE8982152832C00B75330 /* SurePeople.swift */; };
-		017FE89B2152833700B75330 /* MaybePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE89A2152833700B75330 /* MaybePeople.swift */; };
-		017FE89D2152834200B75330 /* NopePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE89C2152834200B75330 /* NopePeople.swift */; };
 		017FE89F2152842200B75330 /* APIEventOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017FE89E2152842200B75330 /* APIEventOld.swift */; };
 		01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861040213E6AFE0037DADB /* ProfileHeader.swift */; };
 		01861043213E6E170037DADB /* UserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01861042213E6E170037DADB /* UserStruct.swift */; };
@@ -139,9 +136,6 @@
 		0171A778215E2CEF00C3ABC2 /* PinnwandStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnwandStackView.swift; sourceTree = "<group>"; };
 		0171A77A215E5F1300C3ABC2 /* PinnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnCell.swift; sourceTree = "<group>"; };
 		0179697E215A6D7700B652C4 /* HELG+UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HELG+UIScrollView.swift"; sourceTree = "<group>"; };
-		017FE8982152832C00B75330 /* SurePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurePeople.swift; sourceTree = "<group>"; };
-		017FE89A2152833700B75330 /* MaybePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybePeople.swift; sourceTree = "<group>"; };
-		017FE89C2152834200B75330 /* NopePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NopePeople.swift; sourceTree = "<group>"; };
 		017FE89E2152842200B75330 /* APIEventOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEventOld.swift; sourceTree = "<group>"; };
 		01861040213E6AFE0037DADB /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		01861042213E6E170037DADB /* UserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStruct.swift; sourceTree = "<group>"; };
@@ -283,9 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				015416BC21495C35006A1A02 /* PeopleTV.swift */,
-				017FE8982152832C00B75330 /* SurePeople.swift */,
-				017FE89A2152833700B75330 /* MaybePeople.swift */,
-				017FE89C2152834200B75330 /* NopePeople.swift */,
 				01F44A80214A83BB006723ED /* PeopleTVCell.swift */,
 			);
 			path = Tableview;
@@ -621,8 +612,6 @@
 				01861043213E6E170037DADB /* UserStruct.swift in Sources */,
 				01F44A7D214A80DE006723ED /* UserSearchCell.swift in Sources */,
 				016DA582214272B100B07F69 /* POPShakeable.swift in Sources */,
-				017FE89B2152833700B75330 /* MaybePeople.swift in Sources */,
-				017FE8992152832C00B75330 /* SurePeople.swift in Sources */,
 				010BC275213D920900530B2D /* MapController.swift in Sources */,
 				010BC27D213D926800530B2D /* BaseCVCell.swift in Sources */,
 				014CF79521513EFE006E17A6 /* User+CoreDataClass.swift in Sources */,
@@ -636,7 +625,6 @@
 				0159AA2C2147B0C7005134A3 /* APITermin.swift in Sources */,
 				010BC26E213D914900530B2D /* LebensfitTabBarController.swift in Sources */,
 				010BC280213D928E00530B2D /* POPReuseableView.swift in Sources */,
-				017FE89D2152834200B75330 /* NopePeople.swift in Sources */,
 				0171A77B215E5F1300C3ABC2 /* PinnCell.swift in Sources */,
 				01861041213E6AFE0037DADB /* ProfileHeader.swift in Sources */,
 				01F44A7F214A8191006723ED /* CustomImageView.swift in Sources */,

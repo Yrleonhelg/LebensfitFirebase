@@ -18,9 +18,7 @@ class PeopleTableView: UIView, ReusableView {
     
     //MARK: - Properties & Variables
     var delegate: peopleTableViewDelegate?
-    var myEvent: Event
-    
-    var users: [User]! = [User]()
+    var users = [User]()
 
     var finishedLoading: Bool = false
     var padding: CGFloat = 15+25+5
@@ -41,8 +39,7 @@ class PeopleTableView: UIView, ReusableView {
     }()
     
     //MARK: - Init & View Loading
-    init(frame: CGRect, event: Event) {
-        self.myEvent = event
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = LebensfitSettings.Colors.basicBackColor
         setupTableView()
@@ -84,6 +81,7 @@ class PeopleTableView: UIView, ReusableView {
             padding = 15+25+5
         }
         self.updateConstraints()
+        finishedLoading = true
         delegate?.finishedLoadingParticipants()
     }
     

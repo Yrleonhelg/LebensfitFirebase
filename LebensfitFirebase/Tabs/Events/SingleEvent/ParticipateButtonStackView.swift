@@ -13,41 +13,43 @@ protocol participateButtonStackViewDelegate {
     func addUserToList(list: participateLists)
 }
 
-    class ParticipateButton: UIButton {
-        
-        var typeOfButton: participateLists!
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            self.backgroundColor  = LebensfitSettings.Colors.buttonBG
-            self.tintColor        = LebensfitSettings.Colors.basicTintColor
-            self.imageView?.contentMode = .scaleAspectFit
-            self.contentEdgeInsets = UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0)
-        }
+//MARK: FOR_STACKOVERFLOW
 
-        convenience init(type: participateLists) {
-            self.init()
-            self.typeOfButton = type
-            setImage(type: type)
-        }
-        
-        func setImage(type: participateLists) {
-            var buttonImage: UIImage?
-            switch type {
-            case .sure:
-                buttonImage = UIImage(named: "pb_sure")?.withRenderingMode(.alwaysTemplate)
-            case .maybe:
-                buttonImage = UIImage(named: "pb_maybe")?.withRenderingMode(.alwaysTemplate)
-            case .nope:
-                buttonImage = UIImage(named: "pb_nope")?.withRenderingMode(.alwaysTemplate)
-            }
-            self.setImage(buttonImage, for: .normal)
-        }
-
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+class ParticipateButton: UIButton {
+    
+    var typeOfButton: participateLists!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor  = LebensfitSettings.Colors.buttonBG
+        self.tintColor        = LebensfitSettings.Colors.basicTintColor
+        self.imageView?.contentMode = .scaleAspectFit
+        self.contentEdgeInsets = UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0)
     }
+    
+    convenience init(type: participateLists) {
+        self.init()
+        self.typeOfButton = type
+        setImage(type: type)
+    }
+    
+    func setImage(type: participateLists) {
+        var buttonImage: UIImage?
+        switch type {
+        case .sure:
+            buttonImage = UIImage(named: "pb_sure")?.withRenderingMode(.alwaysTemplate)
+        case .maybe:
+            buttonImage = UIImage(named: "pb_maybe")?.withRenderingMode(.alwaysTemplate)
+        case .nope:
+            buttonImage = UIImage(named: "pb_nope")?.withRenderingMode(.alwaysTemplate)
+        }
+        self.setImage(buttonImage, for: .normal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 class ParticipateButtonStackView: UIStackView {
     //MARK: - Properties & Variables

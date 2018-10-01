@@ -21,7 +21,7 @@
 		010BC285213D92F100530B2D /* LebensfitNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010BC284213D92F100530B2D /* LebensfitNavigation.swift */; };
 		010CF67F2158E42900C0B9F0 /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010CF67E2158E42900C0B9F0 /* CreateEventController.swift */; };
 		01462E49213FDE2E00D4144B /* MonthOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E48213FDE2E00D4144B /* MonthOverView.swift */; };
-		01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4A213FF03000D4144B /* WeekdayView.swift */; };
+		01462E4B213FF03000D4144B /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4A213FF03000D4144B /* WeekdaysView.swift */; };
 		01462E4F213FF1E100D4144B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E4E213FF1E100D4144B /* CalendarView.swift */; };
 		01462E51213FF50300D4144B /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01462E50213FF50300D4144B /* DateCell.swift */; };
 		014CF79121513EFE006E17A6 /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CF78B21513EFE006E17A6 /* Event+CoreDataClass.swift */; };
@@ -105,7 +105,7 @@
 		010BC284213D92F100530B2D /* LebensfitNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LebensfitNavigation.swift; sourceTree = "<group>"; };
 		010CF67E2158E42900C0B9F0 /* CreateEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		01462E48213FDE2E00D4144B /* MonthOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthOverView.swift; sourceTree = "<group>"; };
-		01462E4A213FF03000D4144B /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
+		01462E4A213FF03000D4144B /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		01462E4E213FF1E100D4144B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		01462E50213FF50300D4144B /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		014CF78B21513EFE006E17A6 /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				01462E48213FDE2E00D4144B /* MonthOverView.swift */,
-				01462E4A213FF03000D4144B /* WeekdayView.swift */,
+				01462E4A213FF03000D4144B /* WeekdaysView.swift */,
 				01462E4E213FF1E100D4144B /* CalendarView.swift */,
 				01462E50213FF50300D4144B /* DateCell.swift */,
 			);
@@ -650,7 +650,7 @@
 				FEA8AB7B214FDFC9001E1E7E /* PinnwandViewold.swift in Sources */,
 				01D72BBD215E6E8A00C9F953 /* LastCell.swift in Sources */,
 				FECC8FB721455C46007F3F3F /* EventTableCell.swift in Sources */,
-				01462E4B213FF03000D4144B /* WeekdayView.swift in Sources */,
+				01462E4B213FF03000D4144B /* WeekdaysView.swift in Sources */,
 				010BC276213D920900530B2D /* ShopController.swift in Sources */,
 				FE2229A92160F0ED0028E5DB /* HELG+UIStackView.swift in Sources */,
 				018631A22146C67E00E5A9C2 /* EventStruct.swift in Sources */,

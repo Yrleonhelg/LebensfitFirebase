@@ -1,5 +1,5 @@
 //
-//  WeekdayView.swift
+//  WeekdaysView.swift
 //  LebensfitFirebase
 //
 //  Created by Leon on 05.09.18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeekdayView: UIView {
+class WeekdaysView: UIView {
     
     //MARK: - GUI Objects
     let dayOfTheWeekStackView: UIStackView = {

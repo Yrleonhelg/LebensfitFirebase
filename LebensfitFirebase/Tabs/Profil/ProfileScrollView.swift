@@ -46,6 +46,8 @@ class ProfileScrollView: UIScrollView {
         return view
     }()
     
+    var upperUIElements: [UIView]?
+    
     let profileImageView: CustomImageView = {
         let iv              = CustomImageView()
         iv.clipsToBounds    = true
@@ -146,6 +148,7 @@ class ProfileScrollView: UIScrollView {
     //MARK: - Init & View Loading
     override init(frame: CGRect) {
         super.init(frame: frame)
+        upperUIElements = [profileImageView, usernameLabel, followButton, controlStackView, dividerView]
         setupViews()
     }
     
@@ -208,11 +211,10 @@ class ProfileScrollView: UIScrollView {
     //MARK: - Methods
     //calculates the height of all UI Object to then set the contentsize of the scrollview
     func calculateHeightOfAllObjects() -> CGFloat{
-        let uiArray: [UIView]   = [profileImageView, usernameLabel, followButton, controlStackView, dividerView]
-        let sum                 = uiArray.reduce(0, {$0 + $1.frame.height})
-        let heightOfPinnwand    = pinnwandStackView.calculate()
-        let heightOfSegController = segmentedController.frame.height
-        safeArea                = self.safeAreaLayoutGuide.layoutFrame.height
+        guard let sum               = upperUIElements?.reduce(0, {$0 + $1.frame.height}) else { return 0}
+        let heightOfPinnwand        = pinnwandStackView.calculate()
+        let heightOfSegController   = segmentedController.frame.height
+        safeArea                    = self.safeAreaLayoutGuide.layoutFrame.height
         
         matchingHeightForFullPinnwand = safeArea - segmentedController.frame.height - 10 //TODO: added 20 to heightofallpaddings so this might not be true anymore
         heightOfPinnwandStackView.constant = heightOfPinnwand
@@ -241,6 +243,7 @@ class ProfileScrollView: UIScrollView {
             break
         }
         scrollToInteractionViews()
+        
     }
     
     //Scrolls down so that the divider between the info labels and the segmented Controller is at the bottom of the tabbar
@@ -253,6 +256,8 @@ class ProfileScrollView: UIScrollView {
         let point = dividerMinY - navbarHeight - statusbarHeight
         self.scrollToPoint(pointY: point)
         delegateVC?.viewDidLayoutSubviews()
+        
+        
     }
     
     func changeViewTo(newView: UIView, oldView: UIView) {

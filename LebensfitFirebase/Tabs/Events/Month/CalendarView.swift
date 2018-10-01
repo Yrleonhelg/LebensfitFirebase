@@ -51,8 +51,8 @@ class CalendarView: UIView, UICollectionViewDelegateFlowLayout {
         return mv
     }()
     
-    let weekdayView: WeekdayView = {
-        let wv = WeekdayView()
+    let weekdayView: WeekdaysView = {
+        let wv = WeekdaysView()
         return wv
     }()
     

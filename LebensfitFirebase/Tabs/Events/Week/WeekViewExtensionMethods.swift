@@ -39,8 +39,7 @@ extension WeekView: UIGestureRecognizerDelegate {
         let section = selectedView.tag
         
         if section < twoDimensionalEventArray.count && !twoDimensionalEventArray[section].events.isEmpty {
-            manageLastHeader(selectedView: selectedView, completion: {
-                isLast in
+            manageLastHeader(selectedView: selectedView, completion: { isLast in
                 if isLast {
                     self.twoDimensionalEventArray[section].isExpanded = !self.twoDimensionalEventArray[section].isExpanded
                     self.isExpandedOrNot(view: selectedView)

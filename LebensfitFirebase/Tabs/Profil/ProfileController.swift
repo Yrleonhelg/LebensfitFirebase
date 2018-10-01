@@ -145,6 +145,12 @@ class ProfileController: UIViewController {
 extension ProfileController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        if self.scrollView.upperUIElements?.first?.isHidden == true {
+            for element in self.scrollView.upperUIElements! {
+                element.isHidden = false
+            }
+        }
+        
         //Put the username of the profile in the navigationbar, as soon as the "Big" username isn't fully visible anymore.
         let statusbarHeight = UIApplication.shared.statusBarFrame.height
         let contentOffset = scrollView.contentOffset.y
@@ -152,10 +158,12 @@ extension ProfileController: UIScrollViewDelegate {
         
         if statusbarHeight + contentOffset >= usernameY {
             self.navigationItem.title = self.user?.username
-            self.navigationController?.navigationBar.isTranslucent  = false
+            //self.navigationController?.navigationBar.isTranslucent  = false
+            //self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(1)
         } else {
             self.navigationItem.title = ""
-            self.navigationController?.navigationBar.isTranslucent  = true
+            //self.navigationController?.navigationBar.isTranslucent  = true
+            //self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.7)
         }
         
         //make the interactionviews shrink to the fitting size when the user scrolled up far enough
@@ -168,6 +176,12 @@ extension ProfileController: UIScrollViewDelegate {
                 viewDidLayoutSubviews()
             }
         } 
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        for element in self.scrollView.upperUIElements! {
+            element.isHidden = true
+        }
     }
 }
 

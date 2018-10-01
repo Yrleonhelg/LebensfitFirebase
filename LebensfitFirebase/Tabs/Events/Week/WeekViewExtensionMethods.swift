@@ -9,17 +9,23 @@
 import UIKit
 
 //MARK: Protokol
-extension WeekView: WeekViewDelegate {
-    func didChangeWeek(week: Int, year: Int) {
+extension WeekView: WeekOverViewDelegate {
+    /**
+     Called when the user changes the week via the weekOverView
+     1. change the presentData and re-calculate all the values based on that
+     2. Unexpand all headers
+     3. Tell TerminController to refill the twoDimensionalEventArray
+     3. set the new values
+     */
+    func didChangeWeek(newWeek: Int, newYear: Int) {
         //calculates the new dates based on old and new week
-        let valuue = (week-currentWeek)*7
+        let valuue = (newWeek-currentWeek)*7
         presentDate = presentDate.addDaysToToday(amount: valuue)
-        
-        //Make all headers unexpand and in its default state
-        unexpandAllHeaders()
         setupValues()
+        setnewWeekValues(week: newWeek, year: newYear)
+        
+        unexpandAllHeaders()
         delegate?.weekChanged()
-        setnewWeekValues(week: week, year: year)
         
         //Block user from going to the past months
         let thisWeek = Calendar.current.component(.weekOfYear, from: Date.init(timeIntervalSinceNow: 0))
@@ -31,7 +37,7 @@ extension WeekView: WeekViewDelegate {
 
 //MARK: - TVDelegate
 extension WeekView: UITableViewDelegate {
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return WeekDays.count
     }
@@ -50,7 +56,6 @@ extension WeekView: UITableViewDelegate {
         return 0
     }
     
-    //height for rows
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
@@ -102,9 +107,7 @@ extension WeekView: UITableViewDataSource {
         if let name = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventName {
             cell.titleLabel.text = name
         }
-        let id = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventID
-        cell.eventId = id
-        
+
         if let start = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventStartingDate {
             if let finish = twoDimensionalEventArray[indexPath.section].events[indexPath.row].eventFinishingDate {
                 cell.timeLabel.text = "\(start.getHourAndMinuteAsStringFromDate() ) bis \(finish.getHourAndMinuteAsStringFromDate() )"

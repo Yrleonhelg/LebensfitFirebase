@@ -145,6 +145,7 @@ class ProfileController: UIViewController {
 extension ProfileController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        //upperUIElements get hidden when the user clicks on the segment of the interactionviews. This undoes this when the user scrolls.
         if self.scrollView.upperUIElements?.first?.isHidden == true {
             for element in self.scrollView.upperUIElements! {
                 element.isHidden = false
@@ -158,12 +159,8 @@ extension ProfileController: UIScrollViewDelegate {
         
         if statusbarHeight + contentOffset >= usernameY {
             self.navigationItem.title = self.user?.username
-            //self.navigationController?.navigationBar.isTranslucent  = false
-            //self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(1)
         } else {
             self.navigationItem.title = ""
-            //self.navigationController?.navigationBar.isTranslucent  = true
-            //self.navigationController?.navigationBar.backgroundColor    = LebensfitSettings.Colors.basicBackColor.withAlphaComponent(0.7)
         }
         
         //make the interactionviews shrink to the fitting size when the user scrolled up far enough
@@ -178,6 +175,7 @@ extension ProfileController: UIScrollViewDelegate {
         } 
     }
     
+    //hides upperuielements when the user clicks on the segment of he interactionviews.
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         for element in self.scrollView.upperUIElements! {
             element.isHidden = true

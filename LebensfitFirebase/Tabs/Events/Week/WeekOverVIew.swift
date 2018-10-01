@@ -9,8 +9,8 @@
 
 import UIKit
 
-protocol WeekViewDelegate: Any {
-    func didChangeWeek(week: Int, year: Int)
+protocol WeekOverViewDelegate: Any {
+    func didChangeWeek(newWeek: Int, newYear: Int)
 }
 
 class WeekOverView: UIView {
@@ -18,7 +18,7 @@ class WeekOverView: UIView {
     //MARK: - Properties & Variables
     var currentYear: Int = 0
     var currentWeek: Int = 0
-    var delegate: WeekViewDelegate?
+    var delegate: WeekOverViewDelegate?
     
     //MARK: - GUI Objects
     let currentWeekLabel: UILabel = {
@@ -97,7 +97,7 @@ class WeekOverView: UIView {
         }
         
         currentWeekLabel.text = "KW\(currentWeek) \(currentYear)"
-        delegate?.didChangeWeek(week: currentWeek, year: currentYear)
+        delegate?.didChangeWeek(newWeek: currentWeek, newYear: currentYear)
     }
     
     

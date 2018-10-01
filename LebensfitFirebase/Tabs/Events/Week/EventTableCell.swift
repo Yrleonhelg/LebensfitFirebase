@@ -9,7 +9,6 @@
 import UIKit
 
 class EventTableCell: UITableViewCell, ReusableView {
-    var eventId: Int32?
     let padding: CGFloat = 20
     
     //MARK: - GUI Objects
@@ -29,6 +28,11 @@ class EventTableCell: UITableViewCell, ReusableView {
         return label
     }()
     
+    let bottomDividerView: UIView = {
+        let view             = UIView()
+        view.backgroundColor = LebensfitSettings.Colors.basicBackColor
+        return view
+    }()
     
     //MARK: - Init & View Loading
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,11 +46,13 @@ class EventTableCell: UITableViewCell, ReusableView {
     func setupViews() {
         addSubview(titleLabel)
         addSubview(timeLabel)
+        addSubview(bottomDividerView)
     }
     
     func confBounds(){
         titleLabel.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         timeLabel.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: padding, width: 0, height: 0)
+        bottomDividerView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: padding, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
     }
 
     //MARK: - Do not change Methods

@@ -42,7 +42,6 @@ class WeekDayHeader: UITableViewHeaderFooterView, ReusableView, Shakeable {
     
     let selectionDot: UIView = {
         let sv                  = UIView()
-        //sv.frame              = CGRect(x: 0, y: 0, width: 20, height: 20)
         sv.backgroundColor      = LebensfitSettings.Colors.basicTintColor
         sv.layer.cornerRadius   = 7.5
         return sv
